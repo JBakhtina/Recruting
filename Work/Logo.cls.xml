@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Work.Logo">
+<Description>
+Логотип или изображение с описание</Description>
+<Super>%SerialObject,%XML.Adaptor</Super>
+<TimeCreated>63001,36754.642094</TimeCreated>
+
+<Property name="ImageDescription">
+<Description>
+Описание изображения</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="ImageUrl">
+<Description>
+Ссылка на изображение</Description>
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// не знаю есть ли аналог blob для хранения изображения в БД
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// это делать здесь или где то ещё?
+
+]]></Content>
+</UDLText>
+
+<Method name="ShowImage">
+<Description>
+Отрисовка картинки с получением инфы о том кто её вызвал</Description>
+<ClassMethod>1</ClassMethod>
+</Method>
+</Class>
+</Export>

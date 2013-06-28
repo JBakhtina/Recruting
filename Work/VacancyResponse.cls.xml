@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Work.VacancyResponse">
+<Description>
+Класс вместо FeedBack - Отклик на вакансию</Description>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeCreated>63001,43592.55778</TimeCreated>
+
+<Property name="From">
+<Description>
+От кого произошел отклик</Description>
+<Type>Work.Address</Type>
+</Property>
+
+<Property name="ResponseDate">
+<Description>
+Дата отклика</Description>
+<Type>%Date</Type>
+</Property>
+
+<Property name="ResponseText">
+<Description>
+Текст отзыва ... хорошо бы в формате HTML</Description>
+<Type>%Text</Type>
+</Property>
+</Class>
+</Export>

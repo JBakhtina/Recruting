@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Work.Vacancy">
+<Description>
+Собственно то ради чего всё затевалось :)
+размещаемые вакансии
+Обилие свойств при выводе на страницу </Description>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeCreated>63001,36500.714728</TimeCreated>
+
+<Property name="Name">
+<Description>
+Наименование вакансии - то что будет выводиться списком</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="30"/>
+</Property>
+
+<Property name="Image">
+<Description>
+Логотип вакансии</Description>
+<Type>Work.Logo</Type>
+</Property>
+
+<Property name="RegDate">
+<Description>
+Дата выставления</Description>
+<Type>%Date</Type>
+</Property>
+
+<Property name="Skills">
+<Description>
+Требуемые умения
+кажется DCrusher хотел сюда добавить сущность WorkType</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="Seats">
+<Description>
+Должности
+и сюда DCrusher тоже хотел добавить сущность Seats</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="EduLevel">
+<Description>
+Требуемое образование
+и даже здесь DCrusher планировал добавить сущность EducationLevel</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="StartSalary">
+<Description>
+Начальная зарплата :)</Description>
+<Type>%Currency</Type>
+</Property>
+
+<Property name="EndSalary">
+<Description>
+Конечная зарплата :(</Description>
+<Type>%Currency</Type>
+</Property>
+
+<Property name="Links">
+<Description>
+Ссылки на размещённые ресурсы</Description>
+<Type>Work.Links</Type>
+</Property>
+
+<Property name="Company">
+<Description>
+Связь компаний и вакансий</Description>
+<Type>Work.Company</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>Vacancies</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// этот метод вместо IsApproved, думаю для перевыставления будем менять Vacancy.RegDate или добавим DateOfUpdate
+
+]]></Content>
+</UDLText>
+
+<Method name="IsAlive">
+<Description>
+Возвращает 1 если прошло менее 2-х месяцев со дня опубликования вакансии
+0 в противном случае</Description>
+<ClassMethod>1</ClassMethod>
+</Method>
+</Class>
+</Export>

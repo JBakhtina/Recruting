@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Work.User">
+<Description>
+Сотрудник компании размещающей вакансии
+а заодно и пользователи админки портала
+в последствии м.б. используем и для соискателей</Description>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeCreated>63001,33945.945109</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// раздел ОБЯЗАТЕЛЬНЫХ параметров
+
+]]></Content>
+</UDLText>
+
+<Property name="FirstName">
+<Description>
+Имя</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<Property name="Login">
+<Description>
+Логин</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<Property name="Password">
+<Description>
+Пароль</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// раздел НЕ ОБЯЗАТЕЛЬНЫХ параметров
+
+]]></Content>
+</UDLText>
+
+<Property name="LastName">
+<Description>
+Фамилия</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<Property name="Age">
+<Description>
+Возраст</Description>
+<Type>%Integer</Type>
+</Property>
+
+<Property name="Sex">
+<Description>
+Пол</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// адреса в последствии м. использовать для геопозиционирования
+
+]]></Content>
+</UDLText>
+
+<Property name="HomeAdress">
+<Description>
+домашний адресс</Description>
+<Type>Work.Address</Type>
+</Property>
+
+<Property name="WorkAdress">
+<Description>
+рабочий адресс</Description>
+<Type>Work.Address</Type>
+</Property>
+
+<Property name="UserType">
+<Description>
+права пользователя</Description>
+<Type>Work.UserLevel</Type>
+</Property>
+
+<Property name="Company">
+<Description>
+Связь компании и пользователей</Description>
+<Type>Work.Company</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>Users</Inverse>
+<Relationship>1</Relationship>
+</Property>
+</Class>
+</Export>

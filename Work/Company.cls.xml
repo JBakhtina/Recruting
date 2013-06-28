@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Work.Company">
+<Description>
+Компания размещающая вакансии</Description>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeCreated>63001,36754.270716</TimeCreated>
+
+<Property name="Name">
+<Description>
+Название  компании</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="10"/>
+</Property>
+
+<Property name="Adress">
+<Description>
+Где находится офис компании</Description>
+<Type>Work.Address</Type>
+</Property>
+
+<Property name="Image">
+<Description>
+Лого компании</Description>
+<Type>Work.Logo</Type>
+</Property>
+
+<Property name="Users">
+<Description>
+Связь компании и пользователей</Description>
+<Type>Work.User</Type>
+<Cardinality>children</Cardinality>
+<Inverse>Company</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="Vacancies">
+<Description>
+Связь компаний и вакансий</Description>
+<Type>Work.Vacancy</Type>
+<Cardinality>children</Cardinality>
+<Inverse>Company</Inverse>
+<Relationship>1</Relationship>
+</Property>
+</Class>
+</Export>
