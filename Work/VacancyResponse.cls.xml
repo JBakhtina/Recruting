@@ -27,6 +27,15 @@
 <Parameter name="MAXLEN" value="1000"/>
 </Property>
 
+<Property name="Vacancy">
+<Description>
+Свзяь с вакасией на которую идёт октлик</Description>
+<Type>Work.Vacancy</Type>
+<Cardinality>one</Cardinality>
+<Inverse>VacancyResponses</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
 <DataLocation>^Work.VacancyResponseD</DataLocation>

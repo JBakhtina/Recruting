@@ -53,10 +53,10 @@
 <Parameter name="MAXLEN" value="20"/>
 </Property>
 
-<Property name="Age">
+<Property name="DOB">
 <Description>
-Возраст</Description>
-<Type>%Integer</Type>
+Дата рождения</Description>
+<Type>%Date</Type>
 </Property>
 
 <Property name="Sex">

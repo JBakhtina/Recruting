@@ -88,6 +88,15 @@
 <Relationship>1</Relationship>
 </Property>
 
+<Property name="VacancyResponses">
+<Description>
+Связь с откликами на данную вакансию</Description>
+<Type>Work.VacancyResponse</Type>
+<Cardinality>many</Cardinality>
+<Inverse>Vacancy</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
 <UDLText name="T">
 <Content><![CDATA[
 // этот метод вместо IsApproved, думаю для перевыставления будем менять Vacancy.RegDate или добавим DateOfUpdate
