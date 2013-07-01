@@ -30,22 +30,34 @@
 
 <Property name="Skills">
 <Description>
-Требуемые умения
-кажется DCrusher хотел сюда добавить сущность WorkType</Description>
+Требуемые умения</Description>
 <Type>%String</Type>
+</Property>
+
+<Property name="WorkTypes">
+<Description>
+Должности подходящие для данной вакансии</Description>
+<Type>%String</Type>
+<Collection>array</Collection>
 </Property>
 
 <Property name="Seats">
 <Description>
-Должности
-и сюда DCrusher тоже хотел добавить сущность Seats</Description>
+Должности подходящие для данной вакансии</Description>
 <Type>%String</Type>
+<Collection>array</Collection>
 </Property>
 
 <Property name="EduLevel">
 <Description>
-Требуемое образование
-и даже здесь DCrusher планировал добавить сущность EducationLevel</Description>
+Требуемое образование со списком возможных значений</Description>
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Среднее,Неоконченное высшее,Высшее - бакалавр,Высшее - специалист,Аспирант,Магистр,Кандидат наук,Доктор наук,Два высших,Другое"/>
+</Property>
+
+<Property name="Institution">
+<Description>
+Учебное зеведение - пока просто текст</Description>
 <Type>%String</Type>
 </Property>
 
@@ -89,5 +101,53 @@
 0 в противном случае</Description>
 <ClassMethod>1</ClassMethod>
 </Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>{%%PARENT}("Vacancies")</DataLocation>
+<DefaultData>VacancyDefaultData</DefaultData>
+<IdLocation>^Work.CompanyC("Vacancies")</IdLocation>
+<IndexLocation>^Work.VacancyI</IndexLocation>
+<StreamLocation>^Work.VacancyS</StreamLocation>
+<ExtentSize>100000</ExtentSize>
+<Data name="VacancyDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Name</Value>
+</Value>
+<Value name="3">
+<Value>Image</Value>
+</Value>
+<Value name="4">
+<Value>RegDate</Value>
+</Value>
+<Value name="5">
+<Value>Skills</Value>
+</Value>
+<Value name="6">
+<Value>Seats</Value>
+</Value>
+<Value name="7">
+<Value>EduLevel</Value>
+</Value>
+<Value name="8">
+<Value>StartSalary</Value>
+</Value>
+<Value name="9">
+<Value>EndSalary</Value>
+</Value>
+<Value name="10">
+<Value>Links</Value>
+</Value>
+<Value name="11">
+<Value>WorkTypes</Value>
+</Value>
+<Value name="12">
+<Value>Institution</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 </Export>
