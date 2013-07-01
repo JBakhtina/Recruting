@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="WEB.Broker">
+<Description>
+Обработка веб запросов и их 
+распределение по соответствующим классам и методам</Description>
+<Super>%CSP.REST</Super>
+<TimeCreated>63004,63366.300975</TimeCreated>
+
+<XData name="UrlMap">
+<Data><![CDATA[
+<Routes>
+   <Route Url="/temp" Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
+ </Routes>
+]]></Data>
+</XData>
+
+<Method name="Http404">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	&html<<font size = "20pt">404</font><h1>Работает?!</h1>>
+	&html<<h1>А НЕФИГА не Работает!!! :P </h1>>
+	&html<<h1>(всё нормуль просто данный адресс не существует)</h1>>
+	quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+</Export>

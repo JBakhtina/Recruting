@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="WEB.JSON">
+<Description>
+Обработка запросов к/от базы</Description>
+<Super>%Base,%RegisteredObject</Super>
+<TimeCreated>63004,63548.548932</TimeCreated>
+
+<Method name="DefaultTemplate">
+<Description>
+Шаблон административной страницы</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set st=$$$OK
+   &html<<h1>Empty page <b> block </b></h1>>  
+   
+  quit st
+]]></Implementation>
+</Method>
+
+<Method name="UpdateCompany">
+<Description>
+Методы - шаблоны для функций работающих с базой
+Думаю стоит написать методы с 2-мя параметрами
+один из которых - таблица в которой происходят изменения</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+   set st=$$$OK
+   try{
+   } catch ex{
+	  &html<<h1>entering <b>CATCH</b> block</h1>>  
+	  set st=ex.AsStatus()
+    }
+    quit st
+]]></Implementation>
+</Method>
+</Class>
+</Export>

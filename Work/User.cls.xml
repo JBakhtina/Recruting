@@ -68,7 +68,7 @@
 
 <UDLText name="T">
 <Content><![CDATA[
-// адреса в последствии м. использовать для геопозиционирования
+// все адреса в последствии м. использовать для геопозиционирования
 
 ]]></Content>
 </UDLText>
@@ -99,5 +99,47 @@
 <Inverse>Users</Inverse>
 <Relationship>1</Relationship>
 </Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>{%%PARENT}("Users")</DataLocation>
+<DefaultData>UserDefaultData</DefaultData>
+<IdLocation>^Work.CompanyC("Users")</IdLocation>
+<IndexLocation>^Work.UserI</IndexLocation>
+<StreamLocation>^Work.UserS</StreamLocation>
+<ExtentSize>100000</ExtentSize>
+<Data name="UserDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>FirstName</Value>
+</Value>
+<Value name="3">
+<Value>Login</Value>
+</Value>
+<Value name="4">
+<Value>Password</Value>
+</Value>
+<Value name="5">
+<Value>LastName</Value>
+</Value>
+<Value name="6">
+<Value>Age</Value>
+</Value>
+<Value name="7">
+<Value>Sex</Value>
+</Value>
+<Value name="8">
+<Value>HomeAdress</Value>
+</Value>
+<Value name="9">
+<Value>WorkAdress</Value>
+</Value>
+<Value name="10">
+<Value>UserType</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 </Export>
