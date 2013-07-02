@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="DefaultTemplate.CSP" application="/csp/recruting/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	ТЕST Cache Server Page </title>
+
+</head>
+
+<body>
+
+		<!-- Put your page code here -->
+		My page body
+</body>
+</html>
+]]></CSP>
+</Export>
