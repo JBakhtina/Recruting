@@ -11,9 +11,21 @@
 <Data><![CDATA[
 <Routes>
    <Route Url="/temp" Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
+   <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
+   <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/> 
  </Routes>
 ]]></Data>
 </XData>
+
+<Method name="Test">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	&html<<h1>Работает?!</h1>>
+	&html<<h1>Работает!!!</h1>>
+	quit $$$OK
+]]></Implementation>
+</Method>
 
 <Method name="Http404">
 <ClassMethod>1</ClassMethod>

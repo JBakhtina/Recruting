@@ -19,6 +19,25 @@
 ]]></Implementation>
 </Method>
 
+<Method name="GetVacancies">
+<Description>
+тут будем получать список вакансий</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set st=$$$OK
+   try{
+
+	   do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select *from Work.Vacancy")
+ 
+   } catch ex{
+	  &html<<h1>entering <b>CATCH</b> block</h1>>  
+	  set st=ex.AsStatus()
+    }
+  quit st
+]]></Implementation>
+</Method>
+
 <Method name="UpdateCompany">
 <Description>
 Методы - шаблоны для функций работающих с базой

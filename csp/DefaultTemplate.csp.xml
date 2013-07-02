@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="DefaultTemplate.CSP" application="/csp/recruting/" default="1"><![CDATA[
-<html>
+<CSP name="DefaultTemplate.CSP" application="/csp/vacancy/"><![CDATA[
+<!-- 
+использованы материалы с мероприятия
+some part of this source code getting from
+InterSystems Global Summit 2013 
+"Building Mobile Applications with RESTful Interfaces" by Chris Carmichael and Oliver Caudron
+-->
+<!doctype html>
+<html ng-app>
 <head>
-
-<!-- Put your page Title here -->
-<title>	ТЕST Cache Server Page </title>
-
+	<title>Vacancy</title>
+	<!-- Ангуляр на гугле
+	использую абсолютную ссылку т.к. предложенная невидит, почему не разбирался -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script language ="javascript"> 
+	// здесь обработчики будут
+function control ($scope,$http){
+	// после переустановки каше порт стал 57773, а не 57772 как во всех примерах
+	// получаем данные в формате json и засовываем их в $scope.companies
+	// опять же абсолютная ссылка что бы не разбираться
+		$scope.getVacancies=function(){
+		// надо будет какую то универсальную относительную ссылку - у меня
+		// он только абсолютная работает
+		$http.get("http://localhost:57773/v/json/vacancies").success(function(data){
+			$scope.vacancies=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+			
+		    }
+	 //тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
+		$scope.getVacancies();
+ }//control
+	</script>
 </head>
+	<!-- Назначаем контроллером страницы созданную выше функцию-->
+<body ng-controller="control">
+<!-- тут после десиаризации надо обернуть чем то бутсраповым -->
+ <h3 ng-repeat="vacancy in vacancies">
+ИД - <b>{{vacancy.ID}}</b> Наименование <b>{{vacancy.Name}}</b>
+</h3>
 
-<body>
-
-		<!-- Put your page code here -->
-		My page body
 </body>
 </html>
 ]]></CSP>
