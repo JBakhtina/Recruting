@@ -13,6 +13,7 @@
    <Route Url="/temp" Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
    <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
    <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/> 
+   <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
  </Routes>
 ]]></Data>
 </XData>
