@@ -115,6 +115,11 @@
 <ClassMethod>1</ClassMethod>
 </Method>
 
+<Query name="getVacancies">
+<Type>%SQLQuery</Type>
+<SqlQuery>SELECT Name,EduLevel,EndSalary,Institution,Skills,RegDate,StartSalary FROM Vacancy</SqlQuery>
+</Query>
+
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
 <DataLocation>^Vacancy.VacancyD</DataLocation>
@@ -122,7 +127,7 @@
 <IdLocation>^Vacancy.VacancyD</IdLocation>
 <IndexLocation>^Vacancy.VacancyI</IndexLocation>
 <StreamLocation>^Vacancy.VacancyS</StreamLocation>
-<ExtentSize>5</ExtentSize>
+<ExtentSize>50</ExtentSize>
 <Data name="Seats">
 <Attribute>Seats</Attribute>
 <Structure>subnode</Structure>
@@ -169,34 +174,34 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EndSalary">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>2.0000%</Selectivity>
 </Property>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
 <Property name="Institution">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>2.0000%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>20.0000%,URL:20.0000%,hhPortal:50.0000%</Selectivity>
+<Selectivity>2.0000%,URL:2.0000%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>50.0000%</Selectivity>
+<Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>2.0000%</Selectivity>
 </Property>
 <Property name="Skills">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>2.0000%</Selectivity>
 </Property>
 <Property name="StartSalary">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>2.0000%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-4</BlockCount>
+<BlockCount>-12</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

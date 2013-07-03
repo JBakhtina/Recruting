@@ -12,7 +12,7 @@
 <style>
 	.block1 {
 			height:50px;
-			background:#333;
+			background:magenta;
 	       }
 	
 </style>
@@ -44,14 +44,27 @@
 		<div class="row">
 			<article class="span12">
 				<p>
-					Найдите нужное вам решение, которое использует нашу систему управления базами данных или платформу для интеграции, найдите инструментальные средства, которые помогут вам в использовании наших продуктов - среди решений Партнеров InterSystems:
-					в России, странах СНГ и Балтии в мире.
+						<script language="cache" runat="server">
+							set rs = ##class(%Library.ResultSet).%New("Vacancy.Vacancy:getVacancies")
+							do rs.Execute()
+					
+							write "<ul class='nav nav-tabs nav-stacked'>"
+							while(rs.Next() '= 0)
+							{
+															
+								write "<li>"
+								write " <a class='' href='#'><H2>", rs.Get("Name"),"</h2>   Зарплата от ", rs.Get("StartSalary"),"до ",  rs.Get("EndSalary"),"</a>"
+								write " <font size='1px'>Дата регистрации ",rs.Get("RegDate"),"</font>"
+								write "</li>"
+							}
+							write "</ul>"
+						</script>
 				</p>
 			</article>
 		</div>
 		
 		<div id="footer">
-			<div class="block1"></div>
+			<div class=""></div>
 			
 		</div>
 		
