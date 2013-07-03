@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Vacancy.SystemUser">
+<Description>
+Сотрудник компании размещающей вакансии
+а заодно и пользователи админки портала
+в последствии м.б. используем и для соискателей
+User - зарезирвированное в ODBC</Description>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeCreated>63006,71347.626255</TimeCreated>
+
+<Parameter name="POPSPEC">
+<Default>FirstName:FirstName(),Login:##class(Vacancy.PopUtils).Login("Log"),Password:##class(Vacancy.PopUtils).Pass(),LastName:LastName()</Default>
+</Parameter>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Parameter POPSPEC = "FirstName:FirstName()";
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// ,Login:##class(Vacancy.PopUtils).Login(""Log""),Password:##class(Vacancy.PopUtils).Pass(),LastName:LastName()";
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// раздел ОБЯЗАТЕЛЬНЫХ параметров
+
+]]></Content>
+</UDLText>
+
+<Property name="FirstName">
+<Description>
+Имя</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<Property name="Login">
+<Description>
+Логин</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<Property name="Password">
+<Description>
+Пароль</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// раздел НЕ ОБЯЗАТЕЛЬНЫХ параметров
+
+]]></Content>
+</UDLText>
+
+<Property name="LastName">
+<Description>
+Фамилия</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="20"/>
+</Property>
+
+<Property name="DOB">
+<Description>
+Дата рождения</Description>
+<Type>%Date</Type>
+</Property>
+
+<Property name="Sex">
+<Description>
+Пол</Description>
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// все адреса в последствии м. использовать для геопозиционирования
+
+]]></Content>
+</UDLText>
+
+<Property name="HomeAdress">
+<Description>
+домашний адресс</Description>
+<Type>Vacancy.Address</Type>
+</Property>
+
+<Property name="VacancyAdress">
+<Description>
+рабочий адресс</Description>
+<Type>Vacancy.Address</Type>
+</Property>
+
+<Property name="UserType">
+<Description>
+права пользователя</Description>
+<Type>Vacancy.UserLevel</Type>
+</Property>
+
+<Property name="Company">
+<Description>
+Связь компании и пользователей</Description>
+<Type>Vacancy.Company</Type>
+<Cardinality>many</Cardinality>
+<Inverse>Users</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^Vacancy.SystemUserD</DataLocation>
+<DefaultData>SystemUserDefaultData</DefaultData>
+<IdLocation>^Vacancy.SystemUserD</IdLocation>
+<IndexLocation>^Vacancy.SystemUserI</IndexLocation>
+<StreamLocation>^Vacancy.SystemUserS</StreamLocation>
+<ExtentSize>5</ExtentSize>
+<Data name="SystemUserDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>FirstName</Value>
+</Value>
+<Value name="3">
+<Value>Login</Value>
+</Value>
+<Value name="4">
+<Value>Password</Value>
+</Value>
+<Value name="5">
+<Value>LastName</Value>
+</Value>
+<Value name="6">
+<Value>DOB</Value>
+</Value>
+<Value name="7">
+<Value>Sex</Value>
+</Value>
+<Value name="8">
+<Value>HomeAdress</Value>
+</Value>
+<Value name="9">
+<Value>VacancyAdress</Value>
+</Value>
+<Value name="10">
+<Value>UserType</Value>
+</Value>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="DOB">
+<Selectivity>20.0000%</Selectivity>
+</Property>
+<Property name="FirstName">
+<Selectivity>20.0000%</Selectivity>
+</Property>
+<Property name="HomeAdress">
+<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:20.0000%,Country:25.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
+</Property>
+<Property name="LastName">
+<Selectivity>20.0000%</Selectivity>
+</Property>
+<Property name="Login">
+<Selectivity>20.0000%</Selectivity>
+</Property>
+<Property name="Password">
+<Selectivity>20.0000%</Selectivity>
+</Property>
+<Property name="Sex">
+<Selectivity>20.0000%</Selectivity>
+</Property>
+<Property name="UserType">
+<Selectivity>20.0000%,Level:20.0000%</Selectivity>
+</Property>
+<Property name="VacancyAdress">
+<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:25.0000%,Country:25.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+</Storage>
+</Class>
+</Export>

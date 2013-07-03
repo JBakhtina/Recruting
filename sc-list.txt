@@ -1,4 +1,5 @@
 <cspapp>
+Vacancy.PKG
 WEB.PKG
 Work.PKG
 mdg_vacancy

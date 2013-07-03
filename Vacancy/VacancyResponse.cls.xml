@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Vacancy.VacancyResponse">
+<Description>
+Класс вместо FeedBack - Отклик на вакансию</Description>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeCreated>63006,71348.449412</TimeCreated>
+
+<Property name="From">
+<Description>
+От кого произошел отклик</Description>
+<Type>Vacancy.Address</Type>
+</Property>
+
+<Property name="ResponseDate">
+<Description>
+Дата отклика</Description>
+<Type>%Date</Type>
+</Property>
+
+<Property name="ResponseText">
+<Description>
+Текст отзыва ... хорошо бы в формате HTML
+"макс лен" должно быть "позитив интейджер", а то ругается :)
+со временем, возможно, поменяем на иной - более подходящий тип</Description>
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="1000"/>
+</Property>
+
+<Property name="Vacancy">
+<Description>
+Свзяь с вакасией на которую идёт октлик</Description>
+<Type>Vacancy.Vacancy</Type>
+<Cardinality>one</Cardinality>
+<Inverse>VacancyResponses</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^Vacancy.VacancyResponseD</DataLocation>
+<DefaultData>VacancyResponseDefaultData</DefaultData>
+<IdLocation>^Vacancy.VacancyResponseD</IdLocation>
+<IndexLocation>^Vacancy.VacancyResponseI</IndexLocation>
+<StreamLocation>^Vacancy.VacancyResponseS</StreamLocation>
+<ExtentSize>100000</ExtentSize>
+<Data name="VacancyResponseDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>From</Value>
+</Value>
+<Value name="3">
+<Value>ResponseDate</Value>
+</Value>
+<Value name="4">
+<Value>ResponseText</Value>
+</Value>
+<Value name="5">
+<Value>Vacancy</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+</Export>
