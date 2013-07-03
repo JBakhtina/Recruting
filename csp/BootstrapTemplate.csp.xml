@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="BootstrapTemplate.CSP" application="/csp/vacancy/"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	
+   	
+   		
+   <script src="bootstrap/js/bootstrap.min.js"></script>
+   <script src="http://code.jquery/jquery-latest.js"></script>	
+</body>
+</html>
+]]></CSP>
+</Export>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="index.CSP" application="/csp/vacancy/"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<style>
+	.block1 {
+			height:50px;
+			background:#333;
+	       }
+	
+</style>
+
+<body>
+
+	<div class="container">
+		<head>
+			<img src="img/intersystems-header.gif">		
+		</head>
+		
+		<div class="navbar">
+		  <nav class="navbar-inner">	
+			<a class="brand" href="#">&nbsp Вакансии</a>
+			<ul class="nav">
+				<li class="divider-vertical"></li>
+				<li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
+				<li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
+			</ul>
+			
+			<form class="navbar-form pull-right" >
+				<input name="login" type="text" class="span2" placeholder="логин">
+				<input name="pass" type="password" class="span2" placeholder="пароль">
+				<button type="submit" class="btn btn-mini" >Войти</button>
+			</form>
+		   </nav>	 
+		</div>
+		
+		<div class="row">
+			<article class="span12">
+				<p>
+					Найдите нужное вам решение, которое использует нашу систему управления базами данных или платформу для интеграции, найдите инструментальные средства, которые помогут вам в использовании наших продуктов - среди решений Партнеров InterSystems:
+					в России, странах СНГ и Балтии в мире.
+				</p>
+			</article>
+		</div>
+		
+		<div id="footer">
+			<div class="block1"></div>
+			
+		</div>
+		
+		
+	</div>
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery/jquery-latest.js"></script>	
+</body>
+</html>
+]]></CSP>
+</Export>

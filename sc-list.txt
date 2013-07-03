@@ -1,4 +1,5 @@
 <cspapp>
+/csp/vacancy
 Vacancy.PKG
 WEB.PKG
 Work.PKG
