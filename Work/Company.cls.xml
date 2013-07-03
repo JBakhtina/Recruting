@@ -10,12 +10,19 @@
 <Default>Name:Company()</Default>
 </Parameter>
 
+<UDLText name="T">
+<Content><![CDATA[
+// c маленьким maxlen не работает
+
+]]></Content>
+</UDLText>
+
 <Property name="Name">
 <Description>
 Название  компании</Description>
 <Type>%String</Type>
 <Required>1</Required>
-<Parameter name="MAXLEN" value="10"/>
+<Parameter name="MAXLEN" value="30"/>
 </Property>
 
 <Property name="Adress">
@@ -34,7 +41,7 @@
 <Description>
 Связь компании и пользователей</Description>
 <Type>Work.User</Type>
-<Cardinality>children</Cardinality>
+<Cardinality>one</Cardinality>
 <Inverse>Company</Inverse>
 <Relationship>1</Relationship>
 </Property>
@@ -43,7 +50,7 @@
 <Description>
 Связь компаний и вакансий</Description>
 <Type>Work.Vacancy</Type>
-<Cardinality>children</Cardinality>
+<Cardinality>one</Cardinality>
 <Inverse>Company</Inverse>
 <Relationship>1</Relationship>
 </Property>
@@ -55,7 +62,7 @@
 <IdLocation>^Work.CompanyD</IdLocation>
 <IndexLocation>^Work.CompanyI</IndexLocation>
 <StreamLocation>^Work.CompanyS</StreamLocation>
-<ExtentSize>100000</ExtentSize>
+<ExtentSize>10</ExtentSize>
 <Data name="CompanyDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -67,9 +74,36 @@
 <Value>Adress</Value>
 </Value>
 <Value name="4">
+<Value>Users</Value>
+</Value>
+<Value name="5">
+<Value>Vacancies</Value>
+</Value>
+<Value name="6">
 <Value>Image</Value>
 </Value>
 </Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="Adress">
+<Selectivity>10.0000%,Apartament:10.0000%,Building:10.0000%,City:12.5000%,Country:20.0000%,Email:10.0000%,State:11.1111%,Telephone:10.0000%,URL:10.0000%</Selectivity>
+</Property>
+<Property name="Image">
+<Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
+</Property>
+<Property name="Name">
+<Selectivity>10.0000%</Selectivity>
+</Property>
+<Property name="Users">
+<Selectivity>11.1111%</Selectivity>
+</Property>
+<Property name="Vacancies">
+<Selectivity>12.5000%</Selectivity>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
 </Storage>
 </Class>
 </Export>

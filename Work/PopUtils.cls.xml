@@ -56,7 +56,7 @@
 	do ##class(Work.User).Populate(count,1)
 	do ##class(Work.Vacancy).Populate(count,1)
 	do ##class(Work.Company).Populate(count,1)
-	Quit 1
+	Quit $$$OK
 ]]></Implementation>
 </Method>
 </Class>

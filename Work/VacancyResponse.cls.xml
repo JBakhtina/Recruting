@@ -57,6 +57,9 @@
 <Value name="4">
 <Value>ResponseText</Value>
 </Value>
+<Value name="5">
+<Value>Vacancy</Value>
+</Value>
 </Data>
 </Storage>
 </Class>

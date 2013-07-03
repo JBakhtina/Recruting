@@ -14,6 +14,20 @@
 
 <UDLText name="T">
 <Content><![CDATA[
+// Parameter POPSPEC = "FirstName:FirstName()";
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// ,Login:##class(Work.PopUtils).Login(""Log""),Password:##class(Work.PopUtils).Pass(),LastName:LastName()";
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
 // раздел ОБЯЗАТЕЛЬНЫХ параметров
 
 ]]></Content>
@@ -99,19 +113,19 @@
 <Description>
 Связь компании и пользователей</Description>
 <Type>Work.Company</Type>
-<Cardinality>parent</Cardinality>
+<Cardinality>many</Cardinality>
 <Inverse>Users</Inverse>
 <Relationship>1</Relationship>
 </Property>
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
-<DataLocation>{%%PARENT}("Users")</DataLocation>
+<DataLocation>^Work.UserD</DataLocation>
 <DefaultData>UserDefaultData</DefaultData>
-<IdLocation>^Work.CompanyC("Users")</IdLocation>
+<IdLocation>^Work.UserD</IdLocation>
 <IndexLocation>^Work.UserI</IndexLocation>
 <StreamLocation>^Work.UserS</StreamLocation>
-<ExtentSize>100000</ExtentSize>
+<ExtentSize>25</ExtentSize>
 <Data name="UserDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -129,7 +143,7 @@
 <Value>LastName</Value>
 </Value>
 <Value name="6">
-<Value>Age</Value>
+<Value>DOB</Value>
 </Value>
 <Value name="7">
 <Value>Sex</Value>
@@ -143,10 +157,42 @@
 <Value name="10">
 <Value>UserType</Value>
 </Value>
-<Value name="11">
-<Value>DOB</Value>
-</Value>
 </Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="DOB">
+<Selectivity>4.0000%</Selectivity>
+</Property>
+<Property name="FirstName">
+<Selectivity>4.1667%</Selectivity>
+</Property>
+<Property name="HomeAdress">
+<Selectivity>6.2500%,Apartament:6.2500%,Building:6.2500%,City:8.3333%,Country:11.1111%,Email:6.2500%,State:6.6667%,Telephone:6.2500%,URL:6.2500%</Selectivity>
+</Property>
+<Property name="LastName">
+<Selectivity>4.0000%</Selectivity>
+</Property>
+<Property name="Login">
+<Selectivity>4.0000%</Selectivity>
+</Property>
+<Property name="Password">
+<Selectivity>4.0000%</Selectivity>
+</Property>
+<Property name="Sex">
+<Selectivity>5.8824%</Selectivity>
+</Property>
+<Property name="UserType">
+<Selectivity>4.0000%,Level:4.0000%</Selectivity>
+<OutlierSelectivity>.8:,Level:.8:</OutlierSelectivity>
+</Property>
+<Property name="WorkAdress">
+<Selectivity>4.0000%,Apartament:4.0000%,Building:4.0000%,City:5.0000%,Country:4.0000%,Email:4.0000%,State:4.0000%,Telephone:4.0000%,URL:4.0000%</Selectivity>
+<OutlierSelectivity>.8:,Apartament:.8:,Building:.8:,City:.8:,Country:.8:,Email:.8:,State:.8:,Telephone:.8:,URL:.8:</OutlierSelectivity>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
 </Storage>
 </Class>
 </Export>

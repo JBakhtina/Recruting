@@ -87,7 +87,7 @@
 <Description>
 Связь компаний и вакансий</Description>
 <Type>Work.Company</Type>
-<Cardinality>parent</Cardinality>
+<Cardinality>many</Cardinality>
 <Inverse>Vacancies</Inverse>
 <Relationship>1</Relationship>
 </Property>
@@ -117,12 +117,17 @@
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
-<DataLocation>{%%PARENT}("Vacancies")</DataLocation>
+<DataLocation>^Work.VacancyD</DataLocation>
 <DefaultData>VacancyDefaultData</DefaultData>
-<IdLocation>^Work.CompanyC("Vacancies")</IdLocation>
+<IdLocation>^Work.VacancyD</IdLocation>
 <IndexLocation>^Work.VacancyI</IndexLocation>
 <StreamLocation>^Work.VacancyS</StreamLocation>
-<ExtentSize>100000</ExtentSize>
+<ExtentSize>10</ExtentSize>
+<Data name="Seats">
+<Attribute>Seats</Attribute>
+<Structure>subnode</Structure>
+<Subscript>"Seats"</Subscript>
+</Data>
 <Data name="VacancyDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -140,10 +145,10 @@
 <Value>Skills</Value>
 </Value>
 <Value name="6">
-<Value>Seats</Value>
+<Value>EduLevel</Value>
 </Value>
 <Value name="7">
-<Value>EduLevel</Value>
+<Value>Institution</Value>
 </Value>
 <Value name="8">
 <Value>StartSalary</Value>
@@ -154,13 +159,45 @@
 <Value name="10">
 <Value>Links</Value>
 </Value>
-<Value name="11">
-<Value>WorkTypes</Value>
-</Value>
-<Value name="12">
-<Value>Institution</Value>
-</Value>
 </Data>
+<Data name="WorkTypes">
+<Attribute>WorkTypes</Attribute>
+<Structure>subnode</Structure>
+<Subscript>"WorkTypes"</Subscript>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="EduLevel">
+<Selectivity>16.6667%</Selectivity>
+</Property>
+<Property name="EndSalary">
+<Selectivity>10.0000%</Selectivity>
+</Property>
+<Property name="Image">
+<Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
+</Property>
+<Property name="Institution">
+<Selectivity>10.0000%</Selectivity>
+</Property>
+<Property name="Links">
+<Selectivity>10.0000%,URL:10.0000%</Selectivity>
+</Property>
+<Property name="Name">
+<Selectivity>20.0000%</Selectivity>
+</Property>
+<Property name="RegDate">
+<Selectivity>10.0000%</Selectivity>
+</Property>
+<Property name="Skills">
+<Selectivity>10.0000%</Selectivity>
+</Property>
+<Property name="StartSalary">
+<Selectivity>10.0000%</Selectivity>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
 </Storage>
 </Class>
 </Export>

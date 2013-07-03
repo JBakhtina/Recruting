@@ -19,17 +19,23 @@
 <Parameter name="MAXLEN" value="80"/>
 </Property>
 
-<Property name="ZIP">
-<Description>
-Почтовый код</Description>
-<Type>%String</Type>
-<Parameter name="MAXLEN" value="6"/>
-<Parameter name="MINLEN" value="6"/>
-<Parameter name="PATTERN" value="6n"/>
-</Property>
+<UDLText name="T">
+<Content><![CDATA[
+// c таким зипом популайтъ не работаеть
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Property ZIP As %String(MAXLEN = 6, MINLEN = 6, PATTERN = "6n");
+
+]]></Content>
+</UDLText>
 
 <Property name="State">
 <Description>
+Почтовый код
 Штат/Область/Край/Республика
 {MDG}.CTP может ещё и КЛАДР присобачить ? :)</Description>
 <Type>%String</Type>
