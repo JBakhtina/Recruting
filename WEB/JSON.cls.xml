@@ -13,7 +13,7 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
   set st=$$$OK
-   &html<<h1>Empty page <b> block </b></h1>>  
+   &html<<h1>DefaultTemplate() Empty page <b> block </b></h1>>  
    
   quit st
 ]]></Implementation>

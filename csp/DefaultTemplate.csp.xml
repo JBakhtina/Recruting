@@ -22,7 +22,7 @@ function control ($scope,$http){
 	// опять же абсолютная ссылка что бы не разбираться
 		$scope.getVacancies=function(){
 		// надо будет какую то универсальную относительную ссылку - у меня
-		// он только абсолютная работает
+		// только абсолютная работает
 		$http.get("http://localhost:57773/v/json/vacancies").success(function(data){
 			$scope.vacancies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
