@@ -47,7 +47,7 @@
   set st=$$$OK
    try{
 
-	   do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select *from Vacancy.SystemUsers")
+	   do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select *from Vacancy.SystemUser")
  
    } catch ex{
 	  &html<<h1>entering <b>CATCH</b> block</h1>>  

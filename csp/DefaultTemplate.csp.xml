@@ -37,7 +37,7 @@ function control ($scope,$http){
 <body ng-controller="control">
 <!-- тут после десиаризации надо обернуть чем то бутсраповым -->
  <h3 ng-repeat="vacancy in vacancies">
-ИД - <b>{{vacancy.ID}}</b> Наименование <b>{{vacancy.Name}}</b>
+ИД - <b>{{vacancy.ID}}</b> Наименование <b>{{vacancy.Name}}</b> Описание {{vacancy.RegDate}} {{VacancyEduLevel}}
 </h3>
 
 </body>
