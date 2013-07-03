@@ -6,6 +6,10 @@
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
 <TimeCreated>63001,36754.270716</TimeCreated>
 
+<Parameter name="POPSPEC">
+<Default>Name:Company()</Default>
+</Parameter>
+
 <Property name="Name">
 <Description>
 Название  компании</Description>

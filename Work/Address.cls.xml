@@ -7,6 +7,10 @@
 <Super>%SerialObject,%Populate,%XML.Adaptor</Super>
 <TimeCreated>62998,79929.43794</TimeCreated>
 
+<Parameter name="POPSPEC">
+<Default>Country:##class(Work.PopUtils).Country(),State:USState(),City:City(),Email:Company(),Telephone:USPhone()</Default>
+</Parameter>
+
 <Property name="Country">
 <Description>
 Город</Description>
@@ -70,7 +74,37 @@
 
 <Storage name="Default">
 <Type>%Library.CacheSerialState</Type>
+<State>AddressState</State>
 <StreamLocation>^Work.AddressS</StreamLocation>
+<Data name="AddressState">
+<Value name="1">
+<Value>Country</Value>
+</Value>
+<Value name="2">
+<Value>ZIP</Value>
+</Value>
+<Value name="3">
+<Value>State</Value>
+</Value>
+<Value name="4">
+<Value>City</Value>
+</Value>
+<Value name="5">
+<Value>Building</Value>
+</Value>
+<Value name="6">
+<Value>Apartament</Value>
+</Value>
+<Value name="7">
+<Value>Email</Value>
+</Value>
+<Value name="8">
+<Value>URL</Value>
+</Value>
+<Value name="9">
+<Value>Telephone</Value>
+</Value>
+</Data>
 </Storage>
 </Class>
 </Export>

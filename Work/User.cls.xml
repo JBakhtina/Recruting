@@ -8,6 +8,10 @@
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
 <TimeCreated>63001,33945.945109</TimeCreated>
 
+<Parameter name="POPSPEC">
+<Default>FirstName:FirstName(),Login:##class(Work.PopUtils).Login("Log"),Password:##class(Work.PopUtils).Pass(),LastName:LastName()</Default>
+</Parameter>
+
 <UDLText name="T">
 <Content><![CDATA[
 // раздел ОБЯЗАТЕЛЬНЫХ параметров
@@ -138,6 +142,9 @@
 </Value>
 <Value name="10">
 <Value>UserType</Value>
+</Value>
+<Value name="11">
+<Value>DOB</Value>
 </Value>
 </Data>
 </Storage>

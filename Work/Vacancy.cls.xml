@@ -8,6 +8,10 @@
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
 <TimeCreated>63001,36500.714728</TimeCreated>
 
+<Parameter name="POPSPEC">
+<Default>Name:##class(Work.PopUtils).VacancyName()</Default>
+</Parameter>
+
 <Property name="Name">
 <Description>
 Наименование вакансии - то что будет выводиться списком</Description>
