@@ -14,14 +14,14 @@ function control ($scope,$http){
 		$scope.getVacancies=function(){
 		// надо будет какую то универсальную относительную ссылку - у меня
 		// только абсолютная работает
-		$http.get("http://localhost:57773/v/json/vacancies").success(function(data){
+		$http.get("/v/json/vacancies").success(function(data){
 			$scope.vacancies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 			
 		    }
 	 //тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
 		$scope.getCompanyByID=function(compid){
-		$http.get("http://localhost:57773/v/json/company/"+compid).success(function(data){
+		$http.get("/v/json/company/"+compid).success(function(data){
 			$scope.companies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 			
@@ -41,6 +41,7 @@ function control ($scope,$http){
 </style>
 
 <body  ng-controller="control">
+<h1 ng-model="alertzone" ng-hide="true"><font color=red>ИДЁТ ЗАГРУЗКА ДАННЫХ. Пожалуйста ПОДОЖДИТЕ</font></h1>
 
 	<div class="container">
 		<head>
