@@ -87,7 +87,7 @@
 <Description>
 Связь компаний и вакансий</Description>
 <Type>Vacancy.Company</Type>
-<Cardinality>many</Cardinality>
+<Cardinality>one</Cardinality>
 <Inverse>Vacancies</Inverse>
 <Relationship>1</Relationship>
 </Property>
@@ -127,7 +127,7 @@
 <IdLocation>^Vacancy.VacancyD</IdLocation>
 <IndexLocation>^Vacancy.VacancyI</IndexLocation>
 <StreamLocation>^Vacancy.VacancyS</StreamLocation>
-<ExtentSize>50</ExtentSize>
+<ExtentSize>15</ExtentSize>
 <Data name="Seats">
 <Attribute>Seats</Attribute>
 <Structure>subnode</Structure>
@@ -174,34 +174,34 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>11.1111%</Selectivity>
 </Property>
 <Property name="EndSalary">
-<Selectivity>2.0000%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
 <Property name="Institution">
-<Selectivity>2.0000%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>2.0000%,URL:2.0000%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
+<Selectivity>6.6667%,URL:6.6667%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
 </Property>
 <Property name="Name">
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
-<Selectivity>2.0000%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Skills">
-<Selectivity>2.0000%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="StartSalary">
-<Selectivity>2.0000%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-12</BlockCount>
+<BlockCount>-4</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

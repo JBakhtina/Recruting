@@ -114,7 +114,7 @@ User - зарезирвированное в ODBC</Description>
 <Description>
 Связь компании и пользователей</Description>
 <Type>Vacancy.Company</Type>
-<Cardinality>many</Cardinality>
+<Cardinality>one</Cardinality>
 <Inverse>Users</Inverse>
 <Relationship>1</Relationship>
 </Property>
@@ -128,8 +128,6 @@ User - зарезирвированное в ODBC</Description>
 <StreamLocation>^Vacancy.SystemUserS</StreamLocation>
 <ExtentSize>5</ExtentSize>
 <Data name="SystemUserDefaultData">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
@@ -160,8 +158,14 @@ User - зарезирвированное в ODBC</Description>
 <Value name="10">
 <Value>UserType</Value>
 </Value>
+<Value name="11">
+<Value>Company</Value>
+</Value>
 </Data>
 <Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="Company">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="DOB">
@@ -171,7 +175,7 @@ User - зарезирвированное в ODBC</Description>
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="HomeAdress">
-<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:20.0000%,Country:25.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
+<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:20.0000%,Country:20.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
 </Property>
 <Property name="LastName">
 <Selectivity>20.0000%</Selectivity>
@@ -189,7 +193,7 @@ User - зарезирвированное в ODBC</Description>
 <Selectivity>20.0000%,Level:20.0000%</Selectivity>
 </Property>
 <Property name="VacancyAdress">
-<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:25.0000%,Country:25.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
+<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:20.0000%,Country:25.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
 <BlockCount>-4</BlockCount>

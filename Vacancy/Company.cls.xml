@@ -41,7 +41,7 @@
 <Description>
 Связь компании и пользователей</Description>
 <Type>Vacancy.SystemUser</Type>
-<Cardinality>one</Cardinality>
+<Cardinality>many</Cardinality>
 <Inverse>Company</Inverse>
 <Relationship>1</Relationship>
 </Property>
@@ -50,7 +50,7 @@
 <Description>
 Связь компаний и вакансий</Description>
 <Type>Vacancy.Vacancy</Type>
-<Cardinality>one</Cardinality>
+<Cardinality>many</Cardinality>
 <Inverse>Company</Inverse>
 <Relationship>1</Relationship>
 </Property>
@@ -96,12 +96,15 @@
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="Users">
-<Selectivity>33.3333%</Selectivity>
+<Selectivity>25.0000%</Selectivity>
 </Property>
 <Property name="Vacancies">
-<Selectivity>33.3333%</Selectivity>
+<Selectivity>25.0000%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+<SQLMap name="UsersIndex">
 <BlockCount>-4</BlockCount>
 </SQLMap>
 </Storage>
