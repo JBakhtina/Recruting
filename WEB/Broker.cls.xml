@@ -14,6 +14,7 @@
    <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
    <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/> 
    <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
+   <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompanyByID"/> 
  </Routes>
 ]]></Data>
 </XData>

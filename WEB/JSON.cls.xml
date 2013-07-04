@@ -40,14 +40,46 @@
 
 <Method name="GetUsers">
 <Description>
-тут будем получать список вакансий</Description>
+тут будем получать список Пользователей</Description>
 <ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+ 
+  do ##class(WEB.JSON).GetJSONData("select *from Vacancy.SystemUser")
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="GetCompanyByID">
+<Description>
+Получаем одну конкретную компанию по ID
+по хорошему compid надо проверять, т.к. 
+переменная приходит снаружи</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+ 
+  do ##class(WEB.JSON).GetJSONData("select *from Vacancy.Company where ID="_compid)
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="GetJSONData">
+<Description>
+тут будем получать список Чего Попросят
+SqlRequest - текстовый SQL запрос
+Param1 - необязательный параметр - пока даже думаю 
+нужен ли - потому и не объявил
+такой винигрет - что бы обработчик ошибок каждый раз новый не писать</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>SQLRequest:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
   set st=$$$OK
    try{
 
-	   do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,"select *from Vacancy.SystemUser")
+	   do ##class(%ZEN.Auxiliary.jsonSQLProvider).%WriteJSONFromSQL(,SQLRequest)
  
    } catch ex{
 	  &html<<h1>entering <b>CATCH</b> block</h1>>  
