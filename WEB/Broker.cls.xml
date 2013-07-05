@@ -7,6 +7,13 @@
 <Super>%CSP.REST</Super>
 <TimeCreated>63004,63366.300975</TimeCreated>
 
+<UDLText name="T">
+<Content><![CDATA[
+// необходимо настроить роутинг на изменения таким образом что бы он вызывал универсальные методы
+
+]]></Content>
+</UDLText>
+
 <XData name="UrlMap">
 <Data><![CDATA[
 <Routes>
@@ -14,7 +21,9 @@
    <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
    <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/> 
    <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
-   <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompanyByID"/> 
+   <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompany"/> 
+   <Route Url="/json/companies/" Method="GET" Call="WEB.JSON:GetAllCompanies"/> 
+   <Route Url="/json/vacancy/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
  </Routes>
 ]]></Data>
 </XData>

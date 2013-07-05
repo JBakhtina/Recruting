@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="index.CSP" application="/csp/vacancy/"><![CDATA[
-<html>
+<CSP name="index.csp" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+<html ng-app>
 <head>
-
-<!-- Put your page Title here -->
-<title>	Cache Server Page </title>
+	<title>Vacancy</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
-
 <style>
 	.block1 {
 			height:50px;
@@ -17,48 +15,21 @@
 	
 </style>
 
-<body>
+<body  ng-controller="control">
+<div class="container">
+<CSP:INCLUDE PAGE="menu.csp">
+		Фильтр <input ng-model="filterVacancy">
 
-	<div class="container">
-		<head>
-			<img src="img/intersystems-header.gif">		
-		</head>
-		
-		<div class="navbar">
-		  <nav class="navbar-inner">	
-			<a class="brand" href="#">&nbsp Вакансии</a>
-			<ul class="nav">
-				<li class="divider-vertical"></li>
-				<li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
-				<li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
-			</ul>
-			
-			<form class="navbar-form pull-right" >
-				<input name="login" type="text" class="span2" placeholder="логин">
-				<input name="pass" type="password" class="span2" placeholder="пароль">
-				<button type="submit" class="btn btn-mini" >Войти</button>
-			</form>
-		   </nav>	 
-		</div>
-		
 		<div class="row">
 			<article class="span12">
 				<p>
-						<script language="cache" runat="server">
-							set rs = ##class(%Library.ResultSet).%New("Vacancy.Vacancy:getVacancies")
-							do rs.Execute()
-					
-							write "<ul class='nav nav-tabs nav-stacked'>"
-							while(rs.Next() '= 0)
-							{
-															
-								write "<li>"
-								write " <a class='' href='#'><H2>", rs.Get("Name"),"</h2>   Зарплата от ", rs.Get("StartSalary"),"до ",  rs.Get("EndSalary"),"</a>"
-								write " <font size='1px'>Дата регистрации ",rs.Get("RegDate"),"</font>"
-								write "</li>"
-							}
-							write "</ul>"
-						</script>
+				<ul class='nav nav-tabs nav-stacked'>
+				<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
+				<a class='' href='showvacancy.CSP?id={{vacancy.ID}}'><H2>{{vacancy.Name}}</h2>
+				Зарплата от {{vacancy.StartSalary}} до {{vacancy.EndSalary}}</a>
+				<font size='1px'>Дата регистрации {{vacancy.RegDate}}</font>
+				</li>
+				</ul>
 				</p>
 			</article>
 		</div>
@@ -72,8 +43,11 @@
 	</div>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery/jquery-latest.js"></script>	
+    <script src="bootstrap/js/mdg_lib.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <!-- ОООЧЕНЬ медленно
+    <script src="http://code.jquery/jquery-latest.js"></script>	-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 </body>
-</html>
-]]></CSP>
+</html>]]></CSP>
 </Export>

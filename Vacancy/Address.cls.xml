@@ -83,8 +83,6 @@
 <State>AddressState</State>
 <StreamLocation>^Vacancy.AddressS</StreamLocation>
 <Data name="AddressState">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>Country</Value>
 </Value>

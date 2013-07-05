@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="bootstrap/js/mdg_lib.js" application="/csp/vacancy/"><![CDATA[
+	// здесь обработчики будут
+function control ($scope,$http){
+	// после переустановки каше порт стал 57773, а не 57772 как во всех примерах
+	// получаем данные в формате json и засовываем их в $scope.companies
+	// опять же абсолютная ссылка что бы не разбираться
+		$scope.getVacancies=function(){
+		// надо будет какую то универсальную относительную ссылку - у меня
+		// только абсолютная работает
+		$http.get("/v/json/vacancies").success(function(data){
+			$scope.vacancies=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки списка вакансий :( ["+data+"]"; });
+			
+		    }
+	 //тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
+		$scope.getCompany=function(compid){
+		$http.get("/v/json/company/"+compid).success(function(data){
+			$scope.company=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки компании :( ["+data+"]"; });
+			
+		    }
+		 $scope.getVacancy=function(compid){
+		$http.get("/v/json/vacancy/"+compid).success(function(data){
+			$scope.vacancy=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки вакансии :( ["+data+"]"; });
+			
+		    }   
+		$scope.getVacancies();
+		
+		//$scope.getCompany("1");
+ }//control
+]]></CSP>
+</Export>

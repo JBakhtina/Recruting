@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="showvacancy.CSP" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+<html ng-app>
+<head>
+	<title>Vacancy</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+	.block1 {
+			height:50px;
+			background:magenta;
+	       }
+	
+</style>
+<script language ="javascript"> 
+	// здесь обработчики будут
+function control ($scope,$http){
+	// после переустановки каше порт стал 57773, а не 57772 как во всех примерах
+	// получаем данные в формате json и засовываем их в $scope.companies
+	// опять же абсолютная ссылка что бы не разбираться
+		$scope.getVacancies=function(){
+		// надо будет какую то универсальную относительную ссылку - у меня
+		// только абсолютная работает
+		$http.get("/v/json/vacancies").success(function(data){
+			$scope.vacancies=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки списка вакансий :( ["+data+"]"; });
+			
+		    }
+	 //тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
+		$scope.getCompany=function(compid){
+		$http.get("/v/json/company/"+compid).success(function(data){
+			$scope.company=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки компании :( ["+data+"]"; });
+			
+		    }
+		 $scope.getVacancy=function(compid){
+		$http.get("/v/json/vacancy/"+compid).success(function(data){
+			$scope.vacancy=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки вакансии :( ["+data+"]"; });
+			
+		    }   
+		//$scope.getVacancy();
+		
+		//$scope.getCompany("1");
+
+$scope.getVacancy(#($Get(%request.Data("id",1),1))#);
+$scope.alertzone ='#($Get(%request.Data("id",1),1))#'; 
+ }//control
+
+</script>
+<body  ng-controller="control">
+<div class="container">
+<CSP:INCLUDE PAGE="menu.csp">
+		<!-- пока не понял как выдернуть данные из объекта без цикла -->
+	    <div ng-repeat="v in vacancy" class="row">
+	    <article class="span12">
+				<p>
+				<ul class='nav nav-tabs nav-stacked'>
+				<li>
+				<H2>{{v.Name}}</h2>
+				Зарплата от {{v.StartSalary}} до {{v.EndSalary}}
+				<font size='1px'><br>Дата регистрации {{v.RegDate}}</font>
+				</li>
+				</ul>
+				</p>
+			</article>
+	    </div>
+		
+		<div id="footer">
+			<div class=""></div>
+			
+		</div>
+		
+		
+	</div>
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <!-- ОООЧЕНЬ медленно
+    <script src="http://code.jquery/jquery-latest.js"></script>	-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+</body>
+</html>]]></CSP>
+</Export>
