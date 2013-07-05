@@ -19,13 +19,22 @@ function control ($scope,$http){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 			
 		    }
-	 //тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
+	 ///тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
 		$scope.getCompanyByID=function(compid){
 		$http.get("/v/json/company/"+compid).success(function(data){
 			$scope.companies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 			
 		    }
+		
+		
+		$scope.authVerify=function(){
+	
+			$http.get("/v/json/authVerify/"+$scope.authLogin).success(function(data){
+				$scope.log =data.children["FirstName"];}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
+		}
+		
 		$scope.getVacancies();
 		//$scope.getCompanyByID("1");
  }//control
@@ -57,13 +66,18 @@ function control ($scope,$http){
 				<li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
 			</ul>
 			
-			<form class="navbar-form pull-right" >
-				<input name="login" type="text" class="span2" placeholder="логин">
-				<input name="pass" type="password" class="span2" placeholder="пароль">
-				<button type="submit" class="btn btn-mini" >Войти</button>
-			</form>
+			  <div >
+				<form ng-submit="authVerify()" class="navbar-form pull-right" >
+					<P>{{log}}</P>
+					<input ng-model="authLogin" type="text" class="span2" placeholder="логин">
+					<input ng-model="authPassword" type="password" class="span2" placeholder="пароль">
+					<button type="submit" class="btn" >Войти</button>
+				</form>
+			  </div>
+			  
 		   </nav>	 
 		</div>
+		
 		Фильтр <input ng-model="filterVacancy">
 
 		<div class="row">
@@ -89,8 +103,9 @@ function control ($scope,$http){
 	</div>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery/jquery-latest.js"></script>	
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="http://code.jquery/jquery-latest.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 </body>
 </html>
 ]]></CSP>
