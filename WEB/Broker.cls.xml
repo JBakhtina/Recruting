@@ -20,10 +20,11 @@
    <Route Url="/temp" Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
    <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
    <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/> 
+   <Route Url="/json/vacancy/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
    <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
    <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompany"/> 
-   <Route Url="/json/companies/" Method="GET" Call="WEB.JSON:GetAllCompanies"/> 
-   <Route Url="/json/vacancy/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
+   <Route Url="/json/companies" Method="GET" Call="WEB.JSON:GetAllCompanies"/> 
+   
  </Routes>
 ]]></Data>
 </XData>
