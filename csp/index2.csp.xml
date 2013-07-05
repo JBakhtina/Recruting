@@ -30,8 +30,8 @@ function control ($scope,$http){
 		
 		$scope.authVerify=function(){
 	
-			$http.get("/v/json/authVerify/"+$scope.authLogin).success(function(data){
-				$scope.log =data.children["FirstName"];}).error(function(data,status){
+			$http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
+				$scope.log =data.children[0]["FirstName"];}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
 		}
 		
@@ -69,6 +69,7 @@ function control ($scope,$http){
 			  <div >
 				<form ng-submit="authVerify()" class="navbar-form pull-right" >
 					<P>{{log}}</P>
+					<P>{{data.children}}</P>
 					<input ng-model="authLogin" type="text" class="span2" placeholder="логин">
 					<input ng-model="authPassword" type="password" class="span2" placeholder="пароль">
 					<button type="submit" class="btn" >Войти</button>
