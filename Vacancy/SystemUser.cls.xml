@@ -10,22 +10,8 @@ User - зарезирвированное в ODBC</Description>
 <TimeCreated>63006,71347.626255</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>FirstName:FirstName(),Login:##class(Vacancy.PopUtils).Login("Log"),Password:##class(Vacancy.PopUtils).Pass(),LastName:LastName()</Default>
+<Default>FirstName:FirstName(),Login:##class(Vacancy.PopUtils).Login("Log"),Password:##class(Vacancy.PopUtils).Pass(),LastName:LastName(),Sex:##class(Vacancy.PopUtils).Sex()</Default>
 </Parameter>
-
-<UDLText name="T">
-<Content><![CDATA[
-// Parameter POPSPEC = "FirstName:FirstName()";
-
-]]></Content>
-</UDLText>
-
-<UDLText name="T">
-<Content><![CDATA[
-// ,Login:##class(Vacancy.PopUtils).Login(""Log""),Password:##class(Vacancy.PopUtils).Pass(),LastName:LastName()";
-
-]]></Content>
-</UDLText>
 
 <UDLText name="T">
 <Content><![CDATA[
@@ -126,7 +112,7 @@ User - зарезирвированное в ODBC</Description>
 <IdLocation>^Vacancy.SystemUserD</IdLocation>
 <IndexLocation>^Vacancy.SystemUserI</IndexLocation>
 <StreamLocation>^Vacancy.SystemUserS</StreamLocation>
-<ExtentSize>5</ExtentSize>
+<ExtentSize>30</ExtentSize>
 <Data name="SystemUserDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -166,37 +152,37 @@ User - зарезирвированное в ODBC</Description>
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>100.0000%</Selectivity>
+<Selectivity>4.1667%</Selectivity>
 </Property>
 <Property name="DOB">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="FirstName">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>3.4483%</Selectivity>
 </Property>
 <Property name="HomeAdress">
-<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:20.0000%,Country:20.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
+<Selectivity>3.3333%,Apartament:3.5714%,Building:4.0000%,City:8.3333%,Country:10.0000%,Email:3.3333%,State:8.3333%,Street:7.1429%,Telephone:3.3333%,URL:11.1111%</Selectivity>
 </Property>
 <Property name="LastName">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>3.7037%</Selectivity>
 </Property>
 <Property name="Login">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Password">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Sex">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>50.0000%</Selectivity>
 </Property>
 <Property name="UserType">
-<Selectivity>20.0000%,Level:20.0000%</Selectivity>
+<Selectivity>3.3333%,Level:3.3333%</Selectivity>
 </Property>
 <Property name="VacancyAdress">
-<Selectivity>20.0000%,Apartament:20.0000%,Building:20.0000%,City:20.0000%,Country:25.0000%,Email:20.0000%,State:20.0000%,Telephone:20.0000%,URL:20.0000%</Selectivity>
+<Selectivity>3.3333%,Apartament:3.5714%,Building:3.8462%,City:9.0909%,Country:10.0000%,Email:3.3333%,State:8.3333%,Street:6.2500%,Telephone:3.3333%,URL:11.1111%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-4</BlockCount>
+<BlockCount>-8</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

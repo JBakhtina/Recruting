@@ -8,7 +8,7 @@
 <TimeCreated>63006,70425.58203</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Country:##class(Vacancy.PopUtils).Country(),State:USState(),City:City(),Email:Company(),Telephone:USPhone()</Default>
+<Default>Country:##class(Vacancy.PopUtils).Country(),State:##class(Vacancy.PopUtils).State(),City:##class(Vacancy.PopUtils).City(),Email:Company(),Telephone:USPhone(),Street:##class(Vacancy.PopUtils).Street(),Apartament:##class(Vacancy.PopUtils).Apartament(),Building:##class(Vacancy.PopUtils).Building(),URL:##class(Vacancy.PopUtils).URL()</Default>
 </Parameter>
 
 <Property name="Country">
@@ -16,7 +16,6 @@
 Город</Description>
 <Type>%String</Type>
 <Required>1</Required>
-<Parameter name="MAXLEN" value="80"/>
 </Property>
 
 <UDLText name="T">
@@ -44,6 +43,12 @@
 <Property name="City">
 <Description>
 Город</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="Street">
+<Description>
+Улица</Description>
 <Type>%String</Type>
 </Property>
 
@@ -83,8 +88,6 @@
 <State>AddressState</State>
 <StreamLocation>^Vacancy.AddressS</StreamLocation>
 <Data name="AddressState">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>Country</Value>
 </Value>
@@ -108,6 +111,9 @@
 </Value>
 <Value name="8">
 <Value>Telephone</Value>
+</Value>
+<Value name="9">
+<Value>Street</Value>
 </Value>
 </Data>
 </Storage>
