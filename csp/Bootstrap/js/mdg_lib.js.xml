@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/js/mdg_lib.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/js/mdg_lib.js" application="/csp/vacancy/"><![CDATA[
 function control ($scope,$http){
 			$scope.getVacancies=function(){
 		// надо будет какую то универсальную относительную ссылку - у меня

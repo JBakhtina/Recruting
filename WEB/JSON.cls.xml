@@ -74,6 +74,20 @@
 ]]></Implementation>
 </Method>
 
+<Method name="AuthVerify">
+<Description>
+метод аутентификации</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>login</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+ // set phash = $system.Encryption.MD5Hash(pwd)
+  set str = "SELECT FirstName FROM Vacancy.SystemUser WHERE Login = '"_login_"'" //_" AND PASSWORD = "_pwd
+  do ##class(WEB.JSON).GetJSONData(str)
+  quit $$$OK
+]]></Implementation>
+</Method>
+
 <UDLText name="T">
 <Content><![CDATA[
 // -------------SYSTEMUSER END----------------------
