@@ -31,7 +31,7 @@ function control ($scope,$http){
 		$scope.authVerify=function(){
 	
 			$http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
-			$scope.log =data.children[0]["FirstName"]; $scope.authForm.show("slow");}).error(function(data,status){
+			$scope.log =data.children[0]["FirstName"]; }).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
 		}
 		
