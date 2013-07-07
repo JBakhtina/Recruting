@@ -31,7 +31,7 @@ function control ($scope,$http){
 		$scope.authVerify=function(){
 	
 			$http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
-				$scope.log =data.children[0]["FirstName"];}).error(function(data,status){
+			$scope.log =data.children[0]["FirstName"]; $scope.authForm.show("slow");}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
 		}
 		
@@ -68,10 +68,9 @@ function control ($scope,$http){
 			
 			  <div >
 				<form ng-submit="authVerify()" class="navbar-form pull-right" >
-					<P>{{log}}</P>
-					<P>{{data.children}}</P>
-					<input ng-model="authLogin" type="text" class="span2" placeholder="логин">
-					<input ng-model="authPassword" type="password" class="span2" placeholder="пароль">
+					<pre ng-model="authForm" ng-hide="true">{{log}}</pre>
+					<input ng-model="authLogin" type="text" class="span2" placeholder="логин" required>
+					<input ng-model="authPassword" type="password" class="span2" placeholder="пароль" required>
 					<button type="submit" class="btn" >Войти</button>
 				</form>
 			  </div>
@@ -88,7 +87,7 @@ function control ($scope,$http){
 				<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
 				<a class='' href=''><H2>{{vacancy.Name}}</h2>
 				Зарплата от {{vacancy.StartSalary}} до {{vacancy.EndSalary}}</a>
-				<font size='1px'>Дата регистрации {{vacancy.RegDate</font>
+				<font size='1px'>Дата регистрации {{vacancy.RegDate}}</font>
 				</li>
 				</ul>
 				</p>
