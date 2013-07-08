@@ -78,7 +78,13 @@ function control ($scope,$http){
 		   </nav>	 
 		</div>
 		
-		Фильтр <input ng-model="filterVacancy">
+		<div class="row ">
+		  <div class="input-append span5">
+			<input type="text" size="100" id="appendedInput"  ng-model="filterVacancy" placeholder="Введите слово для поиска">
+			<span class="add-on"><i class="icon-filter"></i></span>
+		  </div>	 
+		  <div class="span7"></div>			
+		</div>
 
 		<div class="row">
 			<article class="span12">
