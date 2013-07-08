@@ -24,20 +24,40 @@ function control ($scope,$http){
 		$http.get("/v/json/company/"+compid).success(function(data){
 			$scope.companies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+		}
 			
-		    }
-		
-		
-		$scope.authVerify=function(){
+	    $scope.authVerify=function(){
 	
 			$http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
-				$scope.log =data.children[0]["FirstName"];}).error(function(data,status){
+				try{ 
+					var fName = data.children[0]["FirstName"];
+					$scope.name =fName;
+					authConstruct(fName);
+				} catch(err){
+					alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
+					$scope.authLogin = "";
+					$scope.authPassword = "";
+				}
+				}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
 		}
 		
+		$scope.authLogout = function (){
+			document.getElementById("authOut").style.display='none';
+			document.getElementById("authIN").style.display='';
+		}
+		
+		
+		function authConstruct(fName){
+			document.getElementById("authIN").style.display='none';
+			document.getElementById("authOut").style.display='';
+		}
+		
+		
 		$scope.getVacancies();
 		//$scope.getCompanyByID("1");
- }//control
+		
+	} //control
 	</script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -66,16 +86,28 @@ function control ($scope,$http){
 				<li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
 			</ul>
 			
-			  <div >
+			  <div>
 				<form ng-submit="authVerify()" class="navbar-form pull-right" >
-					<P>{{log}}</P>
-					<P>{{data.children}}</P>
-					<input ng-model="authLogin" type="text" class="span2" placeholder="логин">
-					<input ng-model="authPassword" type="password" class="span2" placeholder="пароль">
-					<button type="submit" class="btn" >Войти</button>
-				</form>
+					<div ID="authIN">
+						<input ng-model="authLogin" type="text" class="span2" placeholder="логин" required>
+						<input ng-model="authPassword" type="password" class="span2" placeholder="пароль" required>
+						<button type="submit" class="btn" >Войти</button>
+					</div>
+				</form>	
+				
+				<form ng-submit="authLogout()" class="navbar-form pull-right" >
+					<div ID="authOut" style="display:none;" class="navbar-for pull-right" >
+						<div class = "span3">
+							<p class="text-info" style="margin:0px">Добрый день, {{name}}</br>
+							<i class="icon-user"></i>&nbsp
+							<small><a href="" >Личный кабинет</a></small></p>
+						</div>
+						<div class = "span1">	 
+							<button type="submit" class="btn" >Выйти</button>
+						</div>
+					</div>	
+				 </form>	
 			  </div>
-			  
 		   </nav>	 
 		</div>
 		
