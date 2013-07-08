@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="WEB.TestJSON">
+<Super>%CSP.Page</Super>
+<TimeCreated>63011,63909.575187</TimeCreated>
+
+<Method name="OnPage">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	s ^test($this,$i(^test($this)))="ok"
+	// здесь можно переназначить вызов функции?
+	#; никто не запретит
+	d ##class(My.SomeClass).Method(compid)
+	Q $$$OK
+]]></Implementation>
+</Method>
+</Class>
+</Export>

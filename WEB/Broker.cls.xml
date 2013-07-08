@@ -27,13 +27,17 @@
    <Route Url="/temp" Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
    <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
    <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/> 
-   <Route Url="/json/vacancy/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
+   <!--"КАшэ не принимает? "-->
+   <Route Url="/json/vacancy2/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
+   
    <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
    <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompany"/> 
    <Route Url="/json/companies" Method="GET" Call="WEB.JSON:GetAllCompanies"/>
    <Route Url="/json/authVerify/:authLogin/:authPassword" Method="GET" Call="WEB.JSON:AuthVerify"/> 
-   <Route Url="/json/vacancy/:compid" Method="PUT" Call="WEB.JSON:UpdateVacancy"/>
-      <Route Url="/json/candv/:compid" Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
+   
+   <Route Url="/json/v/:compid" Method="PUT" Call="WEB.JSON:UpdateVacancy"/>
+   <!--Route Url="/json/v/:compid" Method="PUT" Call="WEB.TestJSON:OnPage"/-->
+   <Route Url="/json/candv/:compid" Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
 
    
  </Routes>

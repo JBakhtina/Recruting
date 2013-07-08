@@ -38,13 +38,24 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+   k ^TEST
+   s ^TEST="here"
    set st=$$$OK
-    &html<<h1>entering <b>UPDATE</b> block</h1>>  
+    /// может из за него?! &html<<h1>entering <b>UPDATE</b> block</h1>>  
+		
    try{
-	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,Vacancy.Vacancy,.obj,1))
+	   // ошибка во втором параметре - д.б. строка
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,"Vacancy.Vacancy",.obj,1))
+       /*zw obj
+       s i=$i(^TEST($J))
+       s ^TEST($J,i)="I was here"
+       m ^TEST($J,i)=%request.Data*/
+       #;s ^TEST="DEMO"
+		//s stream=%request.Content
+		//s ^AAA($J,"stream")=stream
+
 	   // пытаемся сделать обратное преобразование - из формата json в объект
        set comp=##class(Vacancy.Vacancy).%OpenId(compid)
-       w "sdfsddsffdssdf"
        throw:comp=$$$NULLOREF ##class(%Exception.StatusException).CreateFromStatus($$$ERROR(5001,"Нэ нашёль вакансию :("))
        set comp.Name=obj.Name/*
        set comp.Image=obj.Name
