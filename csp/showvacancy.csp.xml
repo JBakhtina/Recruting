@@ -86,7 +86,8 @@ $scope.alertzone=angular.isUndefined($scope.vacancy);
 				<br> Образование {{vacancy[0].EduLevel}}<hr>
 				
 				<font size='1px'><br>Дата регистрации {{vacancy[0].RegDate}}</font>
-				
+				<br>
+				<a href='third.CSP?id={{vacancy[0].ID}}'> редактировать / добавить</a>
 				</li>
 				</ul>
 				</p>
