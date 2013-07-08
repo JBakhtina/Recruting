@@ -1,18 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="Third.CSP" application="/csp/vacancy/"><![CDATA[
-<html>
+<CSP name="third.CSP" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+<html ng-app>
 <head>
-
-<!-- Put your page Title here -->
-<title>	Страница </title>
-
+	<title>Vacancy</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
+<style>
+	.block1 {
+			height:50px;
+			background:magenta;
+	       }
+	
+</style>
+<script language ="javascript"> 
 
-<body>
-
+	// здесь обработчики будут
+function control ($scope,$http){
+	// после переустановки каше порт стал 57773, а не 57772 как во всех примерах
+	// получаем данные в формате json и засовываем их в $scope.companies
+	// опять же абсолютная ссылка что бы не разбираться
+		$scope.getVacancies=function(){
+		// надо будет какую то универсальную относительную ссылку - у меня
+		// только абсолютная работает
+		$http.get("/v/json/vacancies").success(function(data){
+			$scope.vacancies=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки списка вакансий :( ["+data+"]"; });
+			
+		    }
+	 
+	 $scope.getCompanies=function(){
+		$http.get("/v/json/companies").success(function(data){
+			$scope.companies=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки списка компаний :( ["+data+"]"; });
+			
+		    }
+		$scope.getCompany=function(compid){
+		$http.get("/v/json/company/"+compid).success(function(data){
+			$scope.company=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки компании :( ["+data+"]"; });
+			
+		    }
+		 
+		 $scope.getVacancy=function(compid){
+		$http.get("/v/json/vacancy/"+compid).success(function(data){
+			$scope.vacancy=data.children;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки вакансии :( ["+data+"]"; });
+//			$scope.alertzone==data.children[0].Name;
+		    }   
+		    
+		    
+		    // добавляем обновление
+		 $scope.update = function (vacancy){ 
+		      $scope.alert2="I am ТУТА!";
+		 $http.put("http://localhost:57772/v/json/vacancy/"+vacancy[0].ID,vacancy)
+		     .success(function(data){$scope.alert2="Обновили"+vacancy[0].ID;}).error(function(data,status){ // поменял alert(....); на alertzone
+			 $scope.alert2="["+status+"] Ошибка обновления имени компании :( ["+data+"]"; });
+			 //$scope.alert2="/v/json/vacancy/"+vacancy[0].ID;
+		     }
+		    
+		 
+		    
+		    
+		//$scope.getVacancy();
 		
+$scope.getCompanies();
+
+$scope.getVacancy(#($Get(%request.Data("id",1),1))#);
+
+
+$scope.alertzone=angular.isUndefined($scope.vacancy);
+// var commits = $resource('https://api.github.com/repos/:user/:project/commits').get({user: 'mkotsur', project: 'gitoscop'})
+
+//$scope.alertzone=commits;
+ }//control
+
+</script>
+
+
+
+<body  ng-controller="control">
+<div class="container">
+<CSP:INCLUDE PAGE="menu.csp">
+<h1 ng-hide="true">
+ {{company=companies[vacancy[0].Company]}}
+ {{company.Adress_City}}
+ </h1>
+ {{alert2}}
+
+		<!-- пока не понял как выдернуть данные из объекта без цикла -->
+		
+		
+	    <div class="row">
+	    <article class="span12">
+				<p>
+				<ul class='nav nav-tabs nav-stacked'>
+				<li>
+				<form name="myForm" ng-submit="update(vacancy[0]); myForm.$setPristine();">
+				
+				Должность <input type="text" ng-model="vacancy[0].Name"/> <li>
+				<!--Требуемые умения <input type="text" ng-model="vacancy[0].Skills"/><li>
+				Подходящие должности <input type="text" ng-model="vacancy[0].VacancyTypes"/><li>
+				Требуемое образование <input type="text" ng-model="vacancy[0].EduLevel"/><li>
+				Учебное зеведение <input type="text" ng-model="vacancy[0].Institution"/><li>
+				Начальная зарплата <input type="text" ng-model="vacancy[0].StartSalary"/><li>
+				Конечная зарплата  <input type="text" ng-model="vacancy[0].EndSalary"/><li>
+				Ссылки на размещённые ресурсы  <input type="text" ng-model="vacancy[0].Links"/><li>
+				-->
+				<input type="submit" value="Сохранить" ng-show="myForm.$dirty"/>
+               
+                </form>
+			
+				
+				<H2> в компанию 
+				<a href='{{company.Adress_URL}}'>{{company.Name}}</a></h2>
+				Зарплата от {{vacancy[0].StartSalary}} до {{vacancy[0].EndSalary}}
+				<br> Образование {{vacancy[0].EduLevel}}<hr>
+				
+				<font size='1px'><br>Дата регистрации {{vacancy[0].RegDate}}</font>
+				
+				</li>
+				</ul>
+				</p>
+			</article>
+	    </div>
+		
+		<div id="footer">
+			<div class=""></div>
+			
+		</div>
+		
+		
+	</div>
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <!-- ОООЧЕНЬ медленно
+    <script src="http://code.jquery/jquery-latest.js"></script>	-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="bootstrap/js/angular-cookies.min.js"></script>
+    <script src="bootstrap/js/angular-loader.min.js"></script>
+    <script src="bootstrap/js/angular-bootstrap-prettify.min.js"></script>
+    <script src="bootstrap/js/angular-bootstrap.min.js"></script>
+    <script src="bootstrap/js/angular-cookies.min.js"></script>
+    <script src="bootstrap/js/angular-loader.min.js"></script>
+    <script src="bootstrap/js/angular-resource.min.js"></script>
+    <script src="bootstrap/js/angular-sanitize.min.js"></script>
+    
 </body>
 </html>
+
 ]]></CSP>
 </Export>
