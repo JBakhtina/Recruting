@@ -51,7 +51,8 @@ function control ($scope,$http){
 		//$scope.getVacancy();
 		
 $scope.getCompanies();
-
+// почему то так не работает:
+//$scope.getCompany($scope.vacancy[0].Company);
 $scope.getVacancy(#($Get(%request.Data("id",1),1))#);
 
 
@@ -65,8 +66,13 @@ $scope.alertzone=angular.isUndefined($scope.vacancy);
 <body  ng-controller="control">
 <div class="container">
 <CSP:INCLUDE PAGE="menu.csp">
+<h1 ng-hide="true">
+т.к. мы пока не поняли как работать с типами данных
+на ангуляре приходится прибегать к таким вот 
+"фокусам":  
 {{company=companies[vacancy[0].Company]}}
 {{company.Adress_City}}
+</h1>
 
 		<!-- пока не понял как выдернуть данные из объекта без цикла -->
 	    <div class="row">
@@ -80,7 +86,8 @@ $scope.alertzone=angular.isUndefined($scope.vacancy);
 				<br> Образование {{vacancy[0].EduLevel}}<hr>
 				
 				<font size='1px'><br>Дата регистрации {{vacancy[0].RegDate}}</font>
-				
+				<br>
+				<a href='third.CSP?id={{vacancy[0].ID}}'> редактировать / добавить</a>
 				</li>
 				</ul>
 				</p>

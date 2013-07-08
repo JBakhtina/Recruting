@@ -41,9 +41,10 @@ function control ($scope,$http){
 <body ng-controller="control">
 <!-- тут после десиаризации надо обернуть чем то бутсраповым-->
 Фильтр <input ng-model="filterVacancy">
+<h2>Вакансии InterSystems</h2>
  <h3 ng-repeat="vacancy in vacancies | filter:filterVacancy">
-ИД - <b>{{vacancy.ID}}</b> Наименование <b>{{vacancy.Name}}</b> Описание {{vacancy.RegDate}} {{VacancyEduLevel}}
-<a href="/json/company/" ng-click ="ng-click=getCompanyByID({{vacancy.Company}})">подробнее{{vacancy.Company}}</a>
+<b>{{vacancy.Name}}</b> от {{vacancy.StartSalary}} рублей
+<a href="showvacancy.CSP?id={{vacancy.ID}}" >подробнее (IS)</a>
 
   </h3>
 <!--   <div ng-repeat="company in companies">{{company.Name}}</div>

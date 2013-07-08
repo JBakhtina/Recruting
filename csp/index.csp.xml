@@ -25,7 +25,7 @@
 				<p>
 				<ul class='nav nav-tabs nav-stacked'>
 				<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
-				<a class='' href='showvacancy.CSP?id={{vacancy.ID}}'><H2>{{vacancy.Name}}</h2>
+				<a class='' href='showvacancy.CSP?id={{vacancy.ID}}'><H2>{{vacancy.Name}}</h2> 
 				Зарплата от {{vacancy.StartSalary}} до {{vacancy.EndSalary}}</a>
 				<font size='1px'>Дата регистрации {{vacancy.RegDate}}</font>
 				</li>
