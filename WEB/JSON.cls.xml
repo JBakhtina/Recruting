@@ -26,6 +26,38 @@
 ]]></Content>
 </UDLText>
 
+<Method name="CreateVacancy">
+<Description>
+Добавить вакансию</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+   set st=$$$OK
+   try{
+	   //опять же преобраразуем переданный JSON в объект
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,"Vacancy.Vacancy",.obj,1))
+	   $$$THROWONERROR(st,obj.%Save())
+   } catch ex{
+	  set st=ex.AsStatus()
+    }
+    quit st
+]]></Implementation>
+</Method>
+
+<Method name="DeleteVacancy">
+<Description>
+Удалить вакансию</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+   set st=$$$OK
+   try{$$$THROWONERROR(st,##class(Vacancy.Vacancy).%DeleteId(compid))} 
+   catch ex{set st=ex.AsStatus()}
+   quit st
+]]></Implementation>
+</Method>
+
 <UDLText name="T">
 <Content><![CDATA[
 // Обновить вакансию
@@ -57,17 +89,17 @@
 	   // пытаемся сделать обратное преобразование - из формата json в объект
        set comp=##class(Vacancy.Vacancy).%OpenId(compid)
        throw:comp=$$$NULLOREF ##class(%Exception.StatusException).CreateFromStatus($$$ERROR(5001,"Нэ нашёль вакансию :("))
-       set comp.Name=obj.Name/*
-       set comp.Image=obj.Name
-       set comp.RegDate=obj.Name
-       set comp.Skills=obj.Name
-       set comp.VacancyTypes=obj.Name
-       set comp.Seats=obj.Name
-       set comp.EduLevel=obj.Name
-       set comp.Institution=obj.Name
-       set comp.StartSalary=obj.Name
-       set comp.EndSalary=obj.Name
-       set comp.Links=obj.Name*/
+       set comp.Name=obj.Name
+       set comp.Image=obj.Image
+       //set comp.RegDate=obj.RegDate
+       set comp.Skills=obj.Skills
+       set comp.VacancyTypes=obj.VacancyTypes
+       set comp.Seats=obj.Seats
+       //set comp.EduLevel=obj.EduLevel
+       //set comp.Institution=obj.Institution
+       set comp.StartSalary=obj.StartSalary
+       set comp.EndSalary=obj.EndSalary
+       set comp.Links=obj.Links
        $$$THROWONERROR(st,comp.%Save())
  
    } catch ex{

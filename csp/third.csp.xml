@@ -44,7 +44,7 @@ function control ($scope,$http){
 		    }
 		 
 		 $scope.getVacancy=function(compid){
-		$http.get("/v/json/vacancy2/"+compid).success(function(data){
+		$http.get("/v/json/vacancy/"+compid).success(function(data){
 			$scope.vacancy=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки вакансии :( ["+data+"]"; });
 //			$scope.alertzone==data.children[0].Name;
@@ -55,17 +55,28 @@ function control ($scope,$http){
 		 $scope.update = function (compid){ 
 		      //$scope.alert2=vacancy[0].ID;
 		      //$scope.alert2=compid[0].ID;
-		      var url = "http://localhost:57772/v/json/v/"+compid[0].ID;
+		      var url = "/v/json/v/"+compid[0].ID;
 		     // console.log(url);
 		 $http.put(url ,compid[0])
 		     .success(function(data){$scope.alertzone="Обновили "+compid[0].Name;}).error(function(data,status){
 			 $scope.alertzone="["+status+"] Ошибка обновления имени компании :( ["+data+"]"; });
 			 //$scope.alert2="/v/json/vacancy/"+vacancy[0].ID;
 		     }
-		    
-		 
-		    
-		    
+		 // удаление вакансии
+	    $scope.deletevacancy = function (v){
+		    $http.delete("/v/json/vacancy/"+v[0].ID)
+		    .success(function(data){
+			    document.location.href = "/csp/vacancy/index.csp";
+			    }).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка удаления компании :( ["+data+"]"; });
+		    }    
+$scope.createvacancy = function (v){
+		    // что б кашэ был в курсе что мы ему предлагаем
+		    // company. class="Data.Company";
+		    $http.post("/v/json/vacancy",v)
+		    .success(function(data){document.location.href = "/csp/vacancy/index.csp";}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления вакансии :( ["+data+"]"; });
+		    }		    
 		//$scope.getVacancy();
 		
 $scope.getCompanies();
@@ -90,11 +101,12 @@ $scope.alertzone=angular.isUndefined($scope.vacancy);
  {{company=companies[vacancy[0].Company]}}
  {{company.Adress_City}}
  </h1>
+<h1>
+Добавление/Удаление/Изменение Вакансии
+</h1>
  {{alert2}}
 
 		<!-- пока не понял как выдернуть данные из объекта без цикла -->
-		
-		
 	    <div class="row">
 	    <article class="span12">
 				<p>
@@ -104,13 +116,15 @@ $scope.alertzone=angular.isUndefined($scope.vacancy);
 				Должность <input type="text" ng-model="vacancy[0].Name"/> <li>
 				Требуемые умения <input type="text" ng-model="vacancy[0].Skills"/><li>
 				Подходящие должности <input type="text" ng-model="vacancy[0].VacancyTypes"/><li>
+				<!--
 				Требуемое образование <input type="text" ng-model="vacancy[0].EduLevel"/><li>
 				Учебное зеведение <input type="text" ng-model="vacancy[0].Institution"/><li>
+				-->
 				Начальная зарплата <input type="text" ng-model="vacancy[0].StartSalary"/><li>
 				Конечная зарплата  <input type="text" ng-model="vacancy[0].EndSalary"/><li>
 				Ссылки на размещённые ресурсы  <input type="text" ng-model="vacancy[0].Links"/><li>
 				<input type="submit" value="Сохранить" ng-show="myForm.$dirty"/>
-               
+                <input type="button" value="Удалить" ng-click="deletevacancy(vacancy);"/>
                 </form>
 			
 				<H2> в компанию 
@@ -125,6 +139,11 @@ $scope.alertzone=angular.isUndefined($scope.vacancy);
 				</p>
 			</article>
 	    </div>
+	    <form name="vCreateForm" ng-model="newvacancy" ng-submit="createvacancy(newvacancy); newvacancy.Name='';">
+новая компания <input type="text" ng-model="newvacancy.Name"/>
+<input type="submit" value="Сохранить"/>
+</form>
+
 		
 		<div id="footer">
 			<div class=""></div>
