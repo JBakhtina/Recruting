@@ -108,23 +108,37 @@ function control ($scope,$http){
 					</div>	
 				 </form>	
 			  </div>
+			  
 		   </nav>	 
 		</div>
 		
-		Фильтр <input ng-model="filterVacancy">
+		<div class="row ">
+		  <div class="input-append span5">
+			<input type="text" size="100" id="appendedInput"  ng-model="filterVacancy" placeholder="Введите слово для поиска">
+			<span class="add-on"><i class="icon-filter"></i></span>
+		  </div>	 
+		  <div class="span7"></div>			
+		</div>
 
-		<div class="row">
-			<article class="span12">
-				<p>
-				<ul class='nav nav-tabs nav-stacked'>
-				<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
-				<a class='' href=''><H2>{{vacancy.Name}}</h2>
-				Зарплата от {{vacancy.StartSalary}} до {{vacancy.EndSalary}}</a>
-				<font size='1px'>Дата регистрации {{vacancy.RegDate</font>
-				</li>
-				</ul>
-				</p>
-			</article>
+		<div>
+			<nav class='navbar-inner reverse'>
+				<ul class='nav nav-pills nav-stacked'>
+					<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
+						
+						<a class='text-info' href=''>
+							<i class="icon-hand-right"></i>&nbsp&nbsp
+							<b>{{vacancy.VacancyName}}</b>
+						</a>
+						
+						<small ><a href='' class="text-success">{{vacancy.CompanyName}}</a></small>
+						<small>, <a href=''>{{vacancy.Adress_City}}</a></small>
+						<small class="text-error">, {{vacancy.StartSalary}} до {{vacancy.EndSalary}} руб.</small>
+						</br>
+						<font size='1px'>{{vacancy.RegDate}}</font>
+						<hr>
+					</li>
+				 </ul>
+			 </nav>
 		</div>
 		
 		<div id="footer">
