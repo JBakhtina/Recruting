@@ -117,7 +117,7 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 	set vacQuery = "SELECT C.Name AS CompanyName, C.Adress_City, "_ 
-					      "V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
+					      "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
 				   "FROM Vacancy.Vacancy AS V "_
 				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
 				   "ORDER BY V.Company"
@@ -133,7 +133,7 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-  do ##class(WEB.JSON).GetJSONData("select * AS from Vacancy.Vacancy where ID="_compid)
+  do ##class(WEB.JSON).GetJSONData("select * from Vacancy.Vacancy where ID="_compid)
   quit $$$OK
 ]]></Implementation>
 </Method>
