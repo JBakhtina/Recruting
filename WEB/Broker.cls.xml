@@ -32,6 +32,8 @@
    <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompany"/> 
    <Route Url="/json/companies" Method="GET" Call="WEB.JSON:GetAllCompanies"/>
    <Route Url="/json/authVerify/:authLogin/:authPassword" Method="GET" Call="WEB.JSON:AuthVerify"/> 
+   <Route Url="/json/vacancy/:compid" Method="PUT" Call="WEB.JSON:UpdateVacancy"/>
+   
    
  </Routes>
 ]]></Data>

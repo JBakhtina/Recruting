@@ -40,7 +40,8 @@
 
 <Property name="VacancyTypes">
 <Description>
-Должности подходящие для данной вакансии</Description>
+Должности подходящие для данной вакансии
+непонятно victor77</Description>
 <Type>%String</Type>
 <Collection>array</Collection>
 </Property>
@@ -127,7 +128,7 @@
 <IdLocation>^Vacancy.VacancyD</IdLocation>
 <IndexLocation>^Vacancy.VacancyI</IndexLocation>
 <StreamLocation>^Vacancy.VacancyS</StreamLocation>
-<ExtentSize>15</ExtentSize>
+<ExtentSize>90</ExtentSize>
 <Data name="Seats">
 <Attribute>Seats</Attribute>
 <Structure>subnode</Structure>
@@ -164,6 +165,9 @@
 <Value name="10">
 <Value>Links</Value>
 </Value>
+<Value name="11">
+<Value>Company</Value>
+</Value>
 </Data>
 <Data name="VacancyTypes">
 <Attribute>VacancyTypes</Attribute>
@@ -173,35 +177,38 @@
 <Property name="%%CLASSNAME">
 <Selectivity>100.0000%</Selectivity>
 </Property>
+<Property name="Company">
+<Selectivity>3.3333%</Selectivity>
+</Property>
 <Property name="EduLevel">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EndSalary">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>1.1111%</Selectivity>
 </Property>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
 <Property name="Institution">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>1.1111%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>6.6667%,URL:6.6667%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
+<Selectivity>1.1111%,URL:1.1111%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
 </Property>
 <Property name="Name">
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>1.1111%</Selectivity>
 </Property>
 <Property name="Skills">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>1.1111%</Selectivity>
 </Property>
 <Property name="StartSalary">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>1.1111%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-4</BlockCount>
+<BlockCount>-16</BlockCount>
 </SQLMap>
 </Storage>
 </Class>
