@@ -24,7 +24,8 @@
    <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
    <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompany"/> 
    <Route Url="/json/companies" Method="GET" Call="WEB.JSON:GetAllCompanies"/> 
-   
+      <Route Url="/json/candv/:compid" Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
+
  </Routes>
 ]]></Data>
 </XData>

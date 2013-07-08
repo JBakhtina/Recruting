@@ -49,6 +49,20 @@
 ]]></Implementation>
 </Method>
 
+<Method name="GetVacancyAndCompany">
+<Description>
+список вакансий 
+Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C ON V.Company = C.ID</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  do ##class(WEB.JSON).GetJSONData("Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C ON V.Company = C.ID")
+  // WHERE V.ID ="_compid)
+  quit $$$OK
+]]></Implementation>
+</Method>
+
 <UDLText name="T">
 <Content><![CDATA[
 // -------------VACANCY END-------------------------
