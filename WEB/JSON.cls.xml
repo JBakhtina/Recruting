@@ -251,6 +251,21 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 ]]></Implementation>
 </Method>
 
+<Method name="GetCompaniesVacancies">
+<Description>
+Получить компании с кол-вом вакансий</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set cvQuery = "SELECT C.Name AS CVName, COUNT(V.ID) AS VCOUNT "_
+				  "FROM Vacancy.Company AS C "_
+				  "INNER JOIN Vacancy.Vacancy AS V ON C.ID=V.Company "_
+				  "GROUP BY C.ID ORDER BY VCOUNT DESC"
+	do ##class(WEB.JSON).GetJSONData(cvQuery)
+  	quit $$$OK
+]]></Implementation>
+</Method>
+
 <Method name="UpdateCompany">
 <Description>
 Обновить компанию</Description>
