@@ -61,22 +61,37 @@ function control ($scope,$http){
       // функция показа вакансии
        $scope.showVacancy = function(vacID){
 	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
-			alert(data)
-			// передаем массив полученных данных в функцию формирования текста
-			// выведем результат в соотвествующие поля
-			$scope.txtVacancyName = data.children[0]["VacancyName"]
-			$scope.txtVacancyCompany = data.children[0]["CompanyName"]
-			$scope.txtVacancyCity = data.children[0]["CityVacancy"]
-			$scope.txtRegDate = data.children[0]["RegDate"]
-			$scope.txtEduLevel = data.children[0]["EduLevel"]
-			$scope.txtStartSalary = data.children[0]["StartSalary"]
-			$scope.txtEndSalary = data.children[0]["EndSalary"]
-			$scope.txtAddInfo = data.children[0]["AddInfo"]
-			$scope.txtMainInfo = data.children[0]["MainInfo"]
+			try	{
+				// передаем массив полученных данных в функцию формирования текста
+				// выведем результат в соотвествующие поля
+				$scope.txtVacancyName = data.children[0]["VacancyName"]
+				$scope.txtVacancyCompany = data.children[0]["CompanyName"]
+				$scope.txtVacancyCity = data.children[0]["CityVacancy"]
+				$scope.txtRegDate = data.children[0]["RegDate"]
+				$scope.txtEduLevel = data.children[0]["EduLevel"]
+				$scope.txtStartSalary = data.children[0]["StartSalary"]
+				$scope.txtEndSalary = data.children[0]["EndSalary"]
+				$scope.txtAddInfo = data.children[0]["AddInfo"]
+				$scope.txtMainInfo = data.children[0]["MainInfo"]
+				vacancyConstruct();
+			} catch(err){	
+			}
 			}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 			
 	   }
+	   
+	   // функия отображения слоя с выбранной вакансией
+       function vacancyConstruct(){
+     		document.getElementById("vacancyShow").style.display='';
+      		document.getElementById("vacanciesShow").style.display='none';
+       }
+	   
+	   // функия отображения слоя со списком вакансий
+       $scope.vacanciesConstruct = function (){
+     		document.getElementById("vacancyShow").style.display='none';
+      		document.getElementById("vacanciesShow").style.display='';
+       }
 	   
 	   $scope.getVacancies();
 		//$scope.getCompanyByID("1");
@@ -102,9 +117,9 @@ function control ($scope,$http){
 		</head>
 		
  <!---НАВИГАЦИОННАЯ ПАНЕЛЬ--->  	
-		<div class="navbar">
+		<div class="navbar" style="margin-bottom:10px;">
 		  <nav class="navbar-inner">	
-			<a class="brand" href="#">&nbsp Вакансии</a>
+			<a class="brand" href="/csp/vacancy/index2.CSP">&nbsp Вакансии</a>
 			<ul class="nav">
 				<li class="divider-vertical"></li>
 				<li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
@@ -148,55 +163,60 @@ function control ($scope,$http){
 	
 	
 <!---ОТОБРАЖЕНИЕ ВАКАНСИИ---> 
-		<div class="container">
+		<div ID="vacancyShow" class="container" style="display:none;">
+  				<form ng-submit="vacanciesConstruct()" style="margin-bottom:10px">
+  					<button type="submit" class="btn" ><i class="icon-list"></i> Список вакансий</button>
+  				</form>
   				<div class="well">
-		 			<H3>{{txtVacancyName}}</h3>
-		 			<h6>{{txtVacancyCompany}}</h6>
-		 			<h7>{{txtVacancyCity}}</h7>
-		 			<p>Зарплата от {{txtStartSalary}}} до {{txtEndSalary}} </p>
+		 			<H3 class="text-info">{{txtVacancyName}}</h3>
+		 			<h6 class="text">{{txtVacancyCompany}}</h6>
+		 			<h7 class="text-info">{{txtVacancyCity}}</h7>
+		 			<p>Зарплата от {{txtStartSalary}} до {{txtEndSalary}} </p>
 		 			<p>{{txtMainInfo}}</p>
 		 			<p>{{txtEduLevel}}</p>
 		 			<p>{{txtAddInfo}}</p>
 		 			<div>
-       					<span class="label label-success">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
+       					<span class="label label-success">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">Актуально</span></div>
     				</div> 
 		 		</div>
 	     </div>
 <!---/ОТОБРАЖЕНИЕ ВАКАНСИИ--->
 
 <!---ВЫВОД ВАКАНСИЙ--->		
+	   <div ID="vacanciesShow">
 	<!---ФИЛЬТР--->	
-		<div class="row ">
-		  <div class="input-append span5">
-			<input type="text" size="100" id="appendedInput"  ng-model="filterVacancy" placeholder="Введите слово для поиска">
-			<span class="add-on"><i class="icon-filter"></i></span>
-		  </div>	 
-		  <div class="span7"></div>			
-		</div>
+			<div class="row ">
+		  		<div class="input-append span5">
+					<input type="text" size="100" id="appendedInput"  ng-model="filterVacancy" placeholder="Введите слово для поиска">
+					<span class="add-on"><i class="icon-filter"></i></span>
+		  		</div>	 
+		  		<div class="span7"></div>			
+			</div>
     <!---/ФИЛЬТР--->
     
-		<div>
-	      <nav class='navbar-inner reverse'>
-	        <ul class='nav nav-pills nav-stacked'>
-	          <li ng-repeat="vacancy in vacancies | filter:filterVacancy">
+			<div>
+	     	  <nav class='navbar-inner reverse'>
+	        	<ul class='nav nav-pills nav-stacked'>
+	         		<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
  	            
-	            	<a  ng-click="showVacancy(vacancy.IDVac);" class='text-info' href=''>
-	              		<i class="icon-hand-right"></i>&nbsp&nbsp
-	              		<input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
+	            		<a  ng-click="showVacancy(vacancy.IDVac);" class='text-info' href=''>
+	              			<i class="icon-hand-right"></i>&nbsp&nbsp
+	              			<input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
 	              	
-	              		<b>{{vacancy.VacancyName}}</b>
-	            	</a>
+	              			<b>{{vacancy.VacancyName}}</b>
+	            		</a>
 		
-	            <small ><a href='' class="text-success">{{vacancy.CompanyName}}</a></small>
-	            <small>, <a href=''>{{vacancy.CityVacancy}}</a></small>
-	            <small class="text-error">, {{vacancy.StartSalary}} до {{vacancy.EndSalary}} руб.</small>
+	            		<small ><a href='' class="text-success">{{vacancy.CompanyName}}</a></small>
+	            		<small>, <a href=''>{{vacancy.CityVacancy}}</a></small>
+	            		<small class="text-error">, {{vacancy.StartSalary}} до {{vacancy.EndSalary}} руб.</small>
 	           
-	            <font size='1px'>{{vacancy.RegDate}}</font>
-	            <hr style='margin-bottom:0px;'>
-	          </li>
-	         </ul>
-	       </nav>
-	     </div>	     
+	            		<font size='1px'>{{vacancy.RegDate}}</font>
+	            		<hr style='margin-bottom:0px;'>
+	          		</li>
+	        	 </ul>
+	       	   </nav>
+	        </div>	
+	      </div>       
 <!---/ВЫВОД ВАКАНСИЙ--->	   
 		
 		
