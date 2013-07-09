@@ -9,7 +9,7 @@
 <TimeCreated>63006,71348.086892</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Name:##class(Vacancy.PopUtils).VacancyName()</Default>
+<Default>Name:##class(Vacancy.PopUtils).VacancyName(),CityVacancy:##class(Vacancy.PopUtils).City(),AddInfo:##class(Vacancy.PopUtils).AddInfo()</Default>
 </Parameter>
 
 <Property name="Name">
@@ -66,6 +66,12 @@
 <Type>%String</Type>
 </Property>
 
+<Property name="CityVacancy">
+<Description>
+Город вакансии</Description>
+<Type>%String</Type>
+</Property>
+
 <Property name="StartSalary">
 <Description>
 Начальная зарплата :)</Description>
@@ -82,6 +88,13 @@
 <Description>
 Ссылки на размещённые ресурсы</Description>
 <Type>Vacancy.Links</Type>
+</Property>
+
+<Property name="AddInfo">
+<Description>
+Дополнительно описание</Description>
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="500"/>
 </Property>
 
 <Property name="Company">
@@ -120,10 +133,6 @@
 <Type>%SQLQuery</Type>
 <SqlQuery>SELECT Name,EduLevel,EndSalary,Institution,Skills,RegDate,StartSalary FROM Vacancy</SqlQuery>
 </Query>
-
-<Property name="Img">
-<Type>%FileBinaryStream</Type>
-</Property>
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
@@ -173,7 +182,10 @@
 <Value>Company</Value>
 </Value>
 <Value name="12">
-<Value>Img</Value>
+<Value>CityVacancy</Value>
+</Value>
+<Value name="13">
+<Value>AddInfo</Value>
 </Value>
 </Data>
 <Data name="VacancyTypes">
@@ -183,6 +195,12 @@
 </Data>
 <Property name="%%CLASSNAME">
 <Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="AddInfo">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="CityVacancy">
+<Selectivity>7.6923%</Selectivity>
 </Property>
 <Property name="Company">
 <Selectivity>10.0000%</Selectivity>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="indexAdmin.CSP" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+<html ng-app>
+<head>
+	<title>Vacancy</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+	.block1 {
+			height:50px;
+			background:magenta;
+	       }
+	
+</style>
+
+<body  ng-controller="control">
+<div class="container">
+<CSP:INCLUDE PAGE="menu.csp">
+		Фильтр <input ng-model="filterVacancy">
+
+		<div class="row">
+			<article class="span12">
+				<p>
+				<ul class='nav nav-tabs nav-stacked'>
+				<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
+				<a class='' href='showvacancy.CSP?id={{vacancy.ID}}'><H2>{{vacancy.Name}}</h2>
+				Зарплата от {{vacancy.StartSalary}} до {{vacancy.EndSalary}}</a>
+				<font size='1px'>Дата регистрации {{vacancy.RegDate}}</font>
+				</li>
+				</ul>
+				</p>
+			</article>
+		</div>
+		
+		<div id="footer">
+			<div class=""></div>
+			
+		</div>
+		
+		
+	</div>
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/mdg_lib.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <!-- ОООЧЕНЬ медленно
+    <script src="http://code.jquery/jquery-latest.js"></script>	-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+</body>
+</html>]]></CSP>
+</Export>
