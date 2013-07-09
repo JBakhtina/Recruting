@@ -9,7 +9,7 @@
 <TimeCreated>63006,71348.086892</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Name:##class(Vacancy.PopUtils).VacancyName()</Default>
+<Default>Name:##class(Vacancy.PopUtils).VacancyName(),CityVacancy:##class(Vacancy.PopUtils).City(),AddInfo:##class(Vacancy.PopUtils).AddInfo()</Default>
 </Parameter>
 
 <Property name="Name">
@@ -66,6 +66,12 @@
 <Type>%String</Type>
 </Property>
 
+<Property name="CityVacancy">
+<Description>
+Город вакансии</Description>
+<Type>%String</Type>
+</Property>
+
 <Property name="StartSalary">
 <Description>
 Начальная зарплата :)</Description>
@@ -82,6 +88,13 @@
 <Description>
 Ссылки на размещённые ресурсы</Description>
 <Type>Vacancy.Links</Type>
+</Property>
+
+<Property name="AddInfo">
+<Description>
+Дополнительно описание</Description>
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="500"/>
 </Property>
 
 <Property name="Company">
@@ -128,7 +141,7 @@
 <IdLocation>^Vacancy.VacancyD</IdLocation>
 <IndexLocation>^Vacancy.VacancyI</IndexLocation>
 <StreamLocation>^Vacancy.VacancyS</StreamLocation>
-<ExtentSize>90</ExtentSize>
+<ExtentSize>30</ExtentSize>
 <Data name="Seats">
 <Attribute>Seats</Attribute>
 <Structure>subnode</Structure>
@@ -168,6 +181,12 @@
 <Value name="11">
 <Value>Company</Value>
 </Value>
+<Value name="12">
+<Value>CityVacancy</Value>
+</Value>
+<Value name="13">
+<Value>AddInfo</Value>
+</Value>
 </Data>
 <Data name="VacancyTypes">
 <Attribute>VacancyTypes</Attribute>
@@ -177,38 +196,44 @@
 <Property name="%%CLASSNAME">
 <Selectivity>100.0000%</Selectivity>
 </Property>
+<Property name="AddInfo">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="CityVacancy">
+<Selectivity>7.6923%</Selectivity>
+</Property>
 <Property name="Company">
-<Selectivity>3.3333%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EndSalary">
-<Selectivity>1.1111%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
 <Property name="Institution">
-<Selectivity>1.1111%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>1.1111%,URL:1.1111%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
+<Selectivity>3.3333%,URL:3.3333%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
 </Property>
 <Property name="Name">
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
-<Selectivity>1.1111%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Skills">
-<Selectivity>1.1111%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="StartSalary">
-<Selectivity>1.1111%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-16</BlockCount>
+<BlockCount>-8</BlockCount>
 </SQLMap>
 </Storage>
 </Class>
