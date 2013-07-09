@@ -9,7 +9,7 @@
 <TimeCreated>63006,71348.086892</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Name:##class(Vacancy.PopUtils).VacancyName()</Default>
+<Default>Name:##class(Vacancy.PopUtils).VacancyName(),CityVacancy:##class(Vacancy.PopUtils).City(),AddInfo:##class(Vacancy.PopUtils).VacAddInfo(),MainInfo:##class(Vacancy.PopUtils).VacMainInfo()</Default>
 </Parameter>
 
 <Property name="Name">
@@ -82,6 +82,26 @@
 <Description>
 Ссылки на размещённые ресурсы</Description>
 <Type>Vacancy.Links</Type>
+</Property>
+
+<Property name="CityVacancy">
+<Description>
+Город вакансии</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="MainInfo">
+<Description>
+Основное описание</Description>
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="500"/>
+</Property>
+
+<Property name="AddInfo">
+<Description>
+Дополнительное описание</Description>
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="500"/>
 </Property>
 
 <Property name="Company">
