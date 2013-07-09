@@ -216,6 +216,13 @@
 ]]></Implementation>
 </Method>
 
+<Method name="AddInfo">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	return "Дополнительное описание вакансии. Бонусы... Соц пакет... Клёвые плюшки... Горы злата  и т.д."
+]]></Implementation>
+</Method>
+
 <Method name="Rebuild">
 <Description>
 Удаляем существующие данные и добавляем новые тестовые

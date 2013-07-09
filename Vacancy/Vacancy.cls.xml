@@ -121,10 +121,6 @@
 <SqlQuery>SELECT Name,EduLevel,EndSalary,Institution,Skills,RegDate,StartSalary FROM Vacancy</SqlQuery>
 </Query>
 
-<Property name="Img">
-<Type>%FileBinaryStream</Type>
-</Property>
-
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
 <DataLocation>^Vacancy.VacancyD</DataLocation>
