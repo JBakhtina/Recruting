@@ -26,13 +26,15 @@ URLы для ссылок на HH ресурсы
 <Type>%String</Type>
 </Property>
 
+<Parameter name="POPSPEC">
+<Default>URL:##class(Vacancy.PopUtils).URLlinks()</Default>
+</Parameter>
+
 <Storage name="Default">
 <Type>%Library.CacheSerialState</Type>
 <State>LinksState</State>
 <StreamLocation>^Vacancy.LinksS</StreamLocation>
 <Data name="LinksState">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>hhPortal</Value>
 </Value>

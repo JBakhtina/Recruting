@@ -113,6 +113,16 @@
 ]]></Implementation>
 </Method>
 
+<Method name="URLlinks">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	set prefix ="http://hh.ru/vacancy/"
+	set num = $r(9999999)
+	return prefix_num
+]]></Implementation>
+</Method>
+
 <UDLText name="T">
 <Content><![CDATA[
 // Генерация Сайта/ссылки на ресурс
@@ -125,10 +135,12 @@
 <ReturnType>%String</ReturnType>
 <Implementation><![CDATA[
     s t1=$lb(
-    /*"http://hantim.ru/jobs/20190-sistemnyy-administrator",
-    "http://hantim.ru/jobs/18590-javascript-razrabotchik",
+    /*  "http://hantim.ru/jobs/20190"+$ASCII("-")+"45sistemnyy_administrator",
+   
+   "http://hantim.ru/jobs/18590-javascript-razrabotchik",
     "http://hantim.ru/jobs/15268-php-razrabotchik-senior-developer",
     "http://hantim.ru/jobs/14210-imperskiy-kreyser-php", */
+    
     "http://www.job.ru/students/4316514",
     "http://www.job.ru/guards/4487639",
     "http://www.job.ru/sport/4680359",
@@ -201,6 +213,13 @@
 <Implementation><![CDATA[
     s t1=$lb("Программист", "Администратор", "Проектировщик БД", "Мэнеджер", "Аналитик")
     Quit $li(t1,$r($ll(t1))+1)
+]]></Implementation>
+</Method>
+
+<Method name="AddInfo">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	return "Дополнительное описание вакансии. Бонусы... Соц пакет... Клёвые плюшки... Горы злата  и т.д."
 ]]></Implementation>
 </Method>
 

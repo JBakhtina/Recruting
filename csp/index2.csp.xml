@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="index2.csp" application="/csp/vacancy/"><![CDATA[
+<CSP name="index2.CSP" application="/csp/vacancy/"><![CDATA[
 <!doctype html>
 <html ng-app>
 <head>
-    <meta charset="utf-8">
 	<title>Vacancy</title>
 	<script language ="javascript"> 
 	// здесь обработчики будут
@@ -28,15 +27,17 @@ function control ($scope,$http){
 			
 		    }
 		
-		
+		// функция аутентификации - считываем данные из БД - возвращаем результат
 		$scope.authVerify=function(){
 	
 			$http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
 				try{ 
+          			// пробуем считать результат
           			var fName = data.children[0]["FirstName"];
          		 	$scope.name =fName;
           			authConstruct(fName);
         		} catch(err){
+	        		// если не удалось считать - значит ошибка входа
           			alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
           			$scope.authLogin = "";
          			$scope.authPassword = "";
@@ -45,25 +46,35 @@ function control ($scope,$http){
        $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
        }
      
+       // функция скрытия формы входа
        $scope.authLogout = function (){
       		document.getElementById("authOut").style.display='none';
       		document.getElementById("authIN").style.display='';
        }
        
+       // функия отображения слоя с персональной информацией
        function authConstruct(fName){
      		document.getElementById("authIN").style.display='none';
       		document.getElementById("authOut").style.display='';
        }
        
-       $scope.getVacancies();
-       
-       $scope.showVacancy = function(str){
-	      $scope.alertzone="sdfsdfsdf"; 
-	      alert(str);
+       // функция показа вакансии
+       $scope.showVacancy = function(vacID){
+	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
+			
+			// передаем массив полученных данных в функию формирования текста
+			// выведем результат в VacancyText
+			$scope.VacancyText = data
+			
+			}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+			
 	   }
+	   
+	   $scope.getVacancies();
 		//$scope.getCompanyByID("1");
-		$scope.alertzone="test";
  }//control
+  		
 	</script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -77,12 +88,13 @@ function control ($scope,$http){
 
 <body  ng-controller="control">
 <h1 ng-model="alertzone" ng-hide="true"><font color=red>ИДЁТ ЗАГРУЗКА ДАННЫХ. Пожалуйста ПОДОЖДИТЕ</font></h1>
-{{alertzone}}
+
 	<div class="container">
 		<head>
 			<img src="img/intersystems-header.gif">		
 		</head>
 		
+ <!---НАВИГАЦИОННАЯ ПАНЕЛЬ--->  	
 		<div class="navbar">
 		  <nav class="navbar-inner">	
 			<a class="brand" href="#">&nbsp Вакансии</a>
@@ -92,7 +104,11 @@ function control ($scope,$http){
 				<li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
 			</ul>
 			
+			
+		<!---АУТЕНТИФИКАЦИЯ--->  	
 			  <div>
+			  
+			  <!---АУТЕНТИФИКАЦИЯ_ФОРМА ВХОДА--->
 				<form ng-submit="authVerify()" class="navbar-form pull-right" >
 					<div ID="authIN">
             			<input ng-model="authLogin" type="text" class="span2" placeholder="логин" required>
@@ -100,7 +116,9 @@ function control ($scope,$http){
             			<button type="submit" class="btn" >Войти</button>
           			</div>
         		</form>  
-        
+              <!---/АУТЕНТИФИКАЦИЯ_ФОРМА ВХОДА--->
+             
+              <!---АУТЕНТИФИКАЦИЯ_ЗАЛОГИНИЛСЯ---> 
         		<form ng-submit="authLogout()" class="navbar-form pull-right" >
           		  <div ID="authOut" style="display:none;" class="navbar-for pull-right" >
            			<div class = "span3">
@@ -112,12 +130,17 @@ function control ($scope,$http){
              			 <button type="submit" class="btn" >Выйти</button>
             	    </div>
           		  </div>  
-         		</form>  
+         		</form> 
+         	   <!---/АУТЕНТИФИКАЦИЯ_ЗАЛОГИНИЛСЯ--->  
          	 </div>
+        <!---/АУТЕНТИФИКАЦИЯ--->  	 
         
         </nav>   
      </div>
-		
+<!---/НАВИГАЦИОННАЯ ПАНЕЛЬ---> 	
+	
+<!---ВЫВОД ВАКАНСИЙ--->		
+	<!---ФИЛЬТР--->	
 		<div class="row ">
 		  <div class="input-append span5">
 			<input type="text" size="100" id="appendedInput"  ng-model="filterVacancy" placeholder="Введите слово для поиска">
@@ -125,13 +148,14 @@ function control ($scope,$http){
 		  </div>	 
 		  <div class="span7"></div>			
 		</div>
-
+    <!---/ФИЛЬТР--->
+    
 		<div>
 	      <nav class='navbar-inner reverse'>
 	        <ul class='nav nav-pills nav-stacked'>
 	          <li ng-repeat="vacancy in vacancies | filter:filterVacancy">
  	            
-	            	<a  ng-click="showVacancy(vacancy.IDVac)" class='text-info' href=''>
+	            	<a  ng-click="showVacancy(vacancy.IDVac);" class='text-info' href=''>
 	              		<i class="icon-hand-right"></i>&nbsp&nbsp
 	              		<input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
 	              	
@@ -139,7 +163,7 @@ function control ($scope,$http){
 	            	</a>
 		
 	            <small ><a href='' class="text-success">{{vacancy.CompanyName}}</a></small>
-	            <small>, <a href=''>{{vacancy.Adress_City}}</a></small>
+	            <small>, <a href=''>{{vacancy.CityVacancy}}</a></small>
 	            <small class="text-error">, {{vacancy.StartSalary}} до {{vacancy.EndSalary}} руб.</small>
 	           
 	            <font size='1px'>{{vacancy.RegDate}}</font>
@@ -147,8 +171,18 @@ function control ($scope,$http){
 	          </li>
 	         </ul>
 	       </nav>
-	     </div>
-	
+	     </div>	     
+<!---/ВЫВОД ВАКАНСИЙ--->	   
+
+<!---ОТОБРАЖЕНИЕ ВАКАНСИИ---> 
+		 <div class="row" style="display:">
+		 	<H3>{{txtVacancyText}}</h3>
+		 	<h6>{{txtVacancyCompany}}<h6>
+		 	
+		 </div>
+<!---/ОТОБРАЖЕНИЕ ВАКАНСИИ---> 
+		
+		
 		<div id="footer">
 			<div class=""></div>
 			
@@ -158,9 +192,8 @@ function control ($scope,$http){
 	</div>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/jquery.js"></script>
-    <!-- ОООЧЕНЬ медленно
-    <script src="http://code.jquery/jquery-latest.js"></script>	-->
+    <script src="http://code.jquery/jquery-latest.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 </body>
 </html>
