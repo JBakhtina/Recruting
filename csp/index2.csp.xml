@@ -58,14 +58,21 @@ function control ($scope,$http){
       		document.getElementById("authOut").style.display='';
        }
        
-       // функция показа вакансии
+      // функция показа вакансии
        $scope.showVacancy = function(vacID){
 	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
-			
-			// передаем массив полученных данных в функию формирования текста
-			// выведем результат в VacancyText
-			$scope.VacancyText = data
-			
+			alert(data)
+			// передаем массив полученных данных в функцию формирования текста
+			// выведем результат в соотвествующие поля
+			$scope.txtVacancyName = data.children[0]["VacancyName"]
+			$scope.txtVacancyCompany = data.children[0]["CompanyName"]
+			$scope.txtVacancyCity = data.children[0]["CityVacancy"]
+			$scope.txtRegDate = data.children[0]["RegDate"]
+			$scope.txtEduLevel = data.children[0]["EduLevel"]
+			$scope.txtStartSalary = data.children[0]["StartSalary"]
+			$scope.txtEndSalary = data.children[0]["EndSalary"]
+			$scope.txtAddInfo = data.children[0]["AddInfo"]
+			$scope.txtMainInfo = data.children[0]["MainInfo"]
 			}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 			
@@ -139,6 +146,24 @@ function control ($scope,$http){
      </div>
 <!---/НАВИГАЦИОННАЯ ПАНЕЛЬ---> 	
 	
+	
+<!---ОТОБРАЖЕНИЕ ВАКАНСИИ---> 
+		<div class="container">
+  				<div class="well">
+		 			<H3>{{txtVacancyName}}</h3>
+		 			<h6>{{txtVacancyCompany}}</h6>
+		 			<h7>{{txtVacancyCity}}</h7>
+		 			<p>Зарплата от {{txtStartSalary}}} до {{txtEndSalary}} </p>
+		 			<p>{{txtMainInfo}}</p>
+		 			<p>{{txtEduLevel}}</p>
+		 			<p>{{txtAddInfo}}</p>
+		 			<div>
+       					<span class="label label-success">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
+    				</div> 
+		 		</div>
+	     </div>
+<!---/ОТОБРАЖЕНИЕ ВАКАНСИИ--->
+
 <!---ВЫВОД ВАКАНСИЙ--->		
 	<!---ФИЛЬТР--->	
 		<div class="row ">
@@ -173,14 +198,6 @@ function control ($scope,$http){
 	       </nav>
 	     </div>	     
 <!---/ВЫВОД ВАКАНСИЙ--->	   
-
-<!---ОТОБРАЖЕНИЕ ВАКАНСИИ---> 
-		 <div class="row" style="display:">
-		 	<H3>{{txtVacancyText}}</h3>
-		 	<h6>{{txtVacancyCompany}}<h6>
-		 	
-		 </div>
-<!---/ОТОБРАЖЕНИЕ ВАКАНСИИ---> 
 		
 		
 		<div id="footer">

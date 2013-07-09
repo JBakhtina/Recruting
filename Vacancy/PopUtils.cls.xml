@@ -216,10 +216,17 @@
 ]]></Implementation>
 </Method>
 
-<Method name="AddInfo">
+<Method name="VacAddInfo">
 <ClassMethod>1</ClassMethod>
 <ReturnType>%String</ReturnType>
 <Implementation><![CDATA[	return "Дополнительное описание вакансии. Бонусы... Соц пакет... Клёвые плюшки... Горы злата  и т.д."
+]]></Implementation>
+</Method>
+
+<Method name="VacMainInfo">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	return "Основное описание вакансии. Очень классная вакансия. Работа в комманде профессионалов, когда мы их соберем. Конкурентная зп(зелёная пуговица)! Тесный, но уютный офис. Ламповый телевизор. Неудобное кресло."
 ]]></Implementation>
 </Method>
 
