@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="index2.CSP" application="/csp/vacancy/"><![CDATA[
+<CSP name="index2.csp" application="/csp/vacancy/"><![CDATA[
 <!doctype html>
 <html ng-app>
 <head>
+    <meta charset="utf-8">
 	<title>Vacancy</title>
 	<script language ="javascript"> 
 	// здесь обработчики будут
@@ -57,9 +58,11 @@ function control ($scope,$http){
        $scope.getVacancies();
        
        $scope.showVacancy = function(str){
+	      $scope.alertzone="sdfsdfsdf"; 
 	      alert(str);
 	   }
 		//$scope.getCompanyByID("1");
+		$scope.alertzone="test";
  }//control
 	</script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -74,7 +77,7 @@ function control ($scope,$http){
 
 <body  ng-controller="control">
 <h1 ng-model="alertzone" ng-hide="true"><font color=red>ИДЁТ ЗАГРУЗКА ДАННЫХ. Пожалуйста ПОДОЖДИТЕ</font></h1>
-
+{{alertzone}}
 	<div class="container">
 		<head>
 			<img src="img/intersystems-header.gif">		
@@ -128,7 +131,7 @@ function control ($scope,$http){
 	        <ul class='nav nav-pills nav-stacked'>
 	          <li ng-repeat="vacancy in vacancies | filter:filterVacancy">
  	            
-	            	<a  ng-click="showVacancy({{vacancy.IDVac}});" class='text-info' href=''>
+	            	<a  ng-click="showVacancy(vacancy.IDVac)" class='text-info' href=''>
 	              		<i class="icon-hand-right"></i>&nbsp&nbsp
 	              		<input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
 	              	
@@ -155,8 +158,9 @@ function control ($scope,$http){
 	</div>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery/jquery-latest.js"></script>
-    
+    <script src="bootstrap/js/jquery.js"></script>
+    <!-- ОООЧЕНЬ медленно
+    <script src="http://code.jquery/jquery-latest.js"></script>	-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 </body>
 </html>

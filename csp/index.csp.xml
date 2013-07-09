@@ -4,6 +4,7 @@
 <!doctype html>
 <html ng-app>
 <head>
+    <meta charset="utf-8">
 	<title>Vacancy</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -41,13 +42,12 @@
 		
 		
 	</div>
-
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/mdg_lib.js"></script>
-    <script src="bootstrap/js/jquery.js"></script>
-    <!-- ОООЧЕНЬ медленно
-    <script src="http://code.jquery/jquery-latest.js"></script>	-->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    
+    <CSP:INCLUDE PAGE="bootstrap/js/mdg_lib.js">
+ 	  $scope.getVacancies();
+  	  $scope.getCompanies();
+      }//control
+	</script>
 </body>
 </html>]]></CSP>
 </Export>

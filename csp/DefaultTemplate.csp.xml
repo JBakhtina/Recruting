@@ -10,6 +10,7 @@ InterSystems Global Summit 2013
 <!doctype html>
 <html ng-app>
 <head>
+    <meta charset="utf-8">
 	<title>Vacancy</title>
 	<script language ="javascript"> 
 	// здесь обработчики будут
@@ -20,7 +21,7 @@ function control ($scope,$http){
 		$scope.getVacancies=function(){
 		// надо будет какую то универсальную относительную ссылку - у меня
 		// только абсолютная работает
-		$http.get("/v/json/vacancies").success(function(data){
+		$http.get("/v/json/vacanciesold").success(function(data){
 			$scope.vacancies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 			

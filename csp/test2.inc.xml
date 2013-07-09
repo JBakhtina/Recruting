@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="test2.inc" application="/csp/vacancy/"><![CDATA[
+<script language ="javascript"> 
+//Test CSP include script
+</script>]]></CSP>
+</Export>

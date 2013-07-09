@@ -73,12 +73,12 @@
    k ^TEST
    s ^TEST="here"
    set st=$$$OK
-    /// может из за него?! &html<<h1>entering <b>UPDATE</b> block</h1>>  
+   &html<<h1>entering <b>UPDATE</b> block</h1>>  
 		
    try{
 	   // ошибка во втором параметре - д.б. строка
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,"Vacancy.Vacancy",.obj,1))
-       /*zw obj
+       zw obj/*
        s i=$i(^TEST($J))
        s ^TEST($J,i)="I was here"
        m ^TEST($J,i)=%request.Data*/
@@ -107,6 +107,17 @@
 	  set st=ex.AsStatus()
     }
     quit st
+]]></Implementation>
+</Method>
+
+<Method name="GetVacanciesOld">
+<Description>
+список вакансий старый</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	do ##class(WEB.JSON).GetJSONData("select *from Vacancy.Vacancy")
+	quit $$$OK
 ]]></Implementation>
 </Method>
 

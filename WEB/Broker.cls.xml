@@ -27,6 +27,7 @@
    <Route Url="/temp" Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
    <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
    <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/> 
+   <Route Url="/json/vacanciesold" Method="GET" Call="WEB.JSON:GetVacanciesOld"/> 
    <!--"КАшэ не принимает? "-->
    <Route Url="/json/vacancy/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
    
