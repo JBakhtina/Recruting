@@ -117,7 +117,7 @@ function control ($scope,$http){
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 
-<body  ng-controller=" vacancyCtrl">
+<body  ng-controller="vacancyCtrl">
 <h1 ng-model="alertzone" ng-hide="true"><font color=red>ИДЁТ ЗАГРУЗКА ДАННЫХ. Пожалуйста ПОДОЖДИТЕ</font></h1>
 
 	<div class="container">
