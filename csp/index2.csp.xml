@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="index2.csp" application="/csp/vacancy/"><![CDATA[
-<!-- blocked by {MDG.CTP} -->
+<CSP name="index2.CSP" application="/csp/vacancy/"><![CDATA[
 <!doctype html>
 <html ng-app>
 <head>
@@ -273,5 +272,6 @@ function control ($scope,$http){
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 </body>
-</html>]]></CSP>
+</html>
+]]></CSP>
 </Export>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/js/app.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/js/app.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
 
 angular.module('admin', ['admin.services','admin.filters'])

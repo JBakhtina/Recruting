@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/css/vacancy.css" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/css/vacancy.css" application="/csp/vacancy/"><![CDATA[
 <style>
 	.block1 {
 			height:50px;

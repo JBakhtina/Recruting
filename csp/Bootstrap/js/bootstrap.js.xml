@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/js/bootstrap.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/js/bootstrap.js" application="/csp/vacancy/"><![CDATA[
 /* ===================================================
  * bootstrap-transition.js v2.3.2
  * http://twitter.github.com/bootstrap/javascript.html#transitions

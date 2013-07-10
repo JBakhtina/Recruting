@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/js/services.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/js/services.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
 
 angular.module('admin.services', ['ngResource'])

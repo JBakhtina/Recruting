@@ -50,7 +50,7 @@ or any other type of stream.
 <p align=center>
 
 <!-- The trick is the use the encrpyted oid of the stream as the parameter to the stream server -->
-<IMAGE SRC=%24CSP.StreamServer.cls?STREAMOID=#(..Encrypt(oid))#>
+<IMAGE SRC=%25CSP.StreamServer.cls?STREAMOID=#(..Encrypt(oid))#>
 
 </p>
 <br>
