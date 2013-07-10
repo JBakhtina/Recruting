@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <Class name="WEB.JSON">
-<Description>
-Обработка запросов к/от базы</Description>
+<Description><![CDATA[
+<!-- blocked by {MDG.CTP} -->
+Обработка запросов к/от базы]]></Description>
 <Super>%Base,%RegisteredObject</Super>
 <TimeCreated>63004,63548.548932</TimeCreated>
 
@@ -46,7 +47,7 @@
 
 <UDLText name="T">
 <Content><![CDATA[
-// <!-- blocked by {MDG.CTP} BEGIN -->
+// <MDG.CTP>
 
 ]]></Content>
 </UDLText>
@@ -67,7 +68,7 @@
 
 <UDLText name="T">
 <Content><![CDATA[
-// <!-- blocked by {MDG.CTP} END -->
+// </MDG.CTP>
 
 ]]></Content>
 </UDLText>
