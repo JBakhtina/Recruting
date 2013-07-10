@@ -44,6 +44,13 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// <!-- blocked by {MDG.CTP} BEGIN -->
+
+]]></Content>
+</UDLText>
+
 <Method name="DeleteVacancy">
 <Description>
 Удалить вакансию</Description>
@@ -57,6 +64,13 @@
    quit st
 ]]></Implementation>
 </Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// <!-- blocked by {MDG.CTP} END -->
+
+]]></Content>
+</UDLText>
 
 <UDLText name="T">
 <Content><![CDATA[
