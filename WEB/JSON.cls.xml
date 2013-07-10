@@ -3,6 +3,7 @@
 <Class name="WEB.JSON">
 <Description><![CDATA[
 <!-- blocked by {MDG.CTP} -->
+<!-- blocked by {MDG.Vivtor} -->
 Обработка запросов к/от базы]]></Description>
 <Super>%Base,%RegisteredObject</Super>
 <TimeCreated>63004,63548.548932</TimeCreated>
