@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <Class name="WEB.JSON">
-<Description>
-Обработка запросов к/от базы</Description>
+<Description><![CDATA[
+<!-- blocked by {MDG.CTP} -->
+Обработка запросов к/от базы]]></Description>
 <Super>%Base,%RegisteredObject</Super>
 <TimeCreated>63004,63548.548932</TimeCreated>
 
@@ -44,6 +45,13 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// <MDG.CTP>
+
+]]></Content>
+</UDLText>
+
 <Method name="DeleteVacancy">
 <Description>
 Удалить вакансию</Description>
@@ -57,6 +65,13 @@
    quit st
 ]]></Implementation>
 </Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// </MDG.CTP>
+
+]]></Content>
+</UDLText>
 
 <UDLText name="T">
 <Content><![CDATA[
