@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="TestImage.CSP" application="/csp/vacancy/"><![CDATA[
+// <!-- blocked by {MDG.Victor} BEGIN -->
+
 <!-- Copyright (c) 2001 InterSystems Inc. ALL RIGHTS RESERVED. -->
 <csp:class description="Demo of serving a stream with the <b>%CSP.StreamServer</b>.">
 
@@ -19,6 +21,9 @@ from the documentation directory, but this can be a file stream, global stream
 or any other type of stream.
 </isc:SAMPLE>
 -->
+
+<input type="file" multiple="multiple" name="files[]" accept="image" />
+
 <script language=Cache runat=Server>
     // This code is just to get the oref of a stream. Normally you would have
     // one as a property of the object you are interested in, however for this
@@ -36,8 +41,8 @@ or any other type of stream.
     // Now get the id of the stream which is the piece we really want
     Set oid=stream.GetStreamId()
     set a= ##class(Vacancy.Vacancy).%OpenId(1)
-    //set a.Img=stream
-    do a.Img.FilenameSet(filename)
+    set a.Img=stream
+   
          
     
 </script>
@@ -45,7 +50,7 @@ or any other type of stream.
 <p align=center>
 
 <!-- The trick is the use the encrpyted oid of the stream as the parameter to the stream server -->
-<IMAGE SRC=%25CSP.StreamServer.cls?STREAMOID=#(..Encrypt(oid))#>
+<IMAGE SRC=%24CSP.StreamServer.cls?STREAMOID=#(..Encrypt(oid))#>
 
 </p>
 <br>
