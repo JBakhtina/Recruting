@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="index2.CSP" application="/csp/vacancy/"><![CDATA[
+<CSP name="index2.csp" application="/csp/vacancy/"><![CDATA[
 <!doctype html>
 <html ng-app>
 <head>
@@ -266,7 +266,9 @@ function control ($scope,$http){
 	</div>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery/jquery-latest.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <!-- ОООЧЕНЬ медленно {MDG.CTP} - Семеро одного не ждут :)
+    <script src="http://code.jquery/jquery-latest.js"></script>	-->
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 </body>

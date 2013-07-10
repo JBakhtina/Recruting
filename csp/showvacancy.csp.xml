@@ -2,6 +2,7 @@
 <Export generator="Cache" version="25">
 <CSP name="showvacancy.CSP" application="/csp/vacancy/"><![CDATA[
 <!doctype html>
+<!-- blocked by {MDG.CTP} -->
 <html ng-app>
 <head>
     <meta charset="utf-8">

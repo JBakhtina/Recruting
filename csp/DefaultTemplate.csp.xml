@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="DefaultTemplate.CSP" application="/csp/vacancy/"><![CDATA[
-<!-- 
-использованы материалы с мероприятия
-some part of this source code getting from
-InterSystems Global Summit 2013 
-"Building Mobile Applications with RESTful Interfaces" by Chris Carmichael and Oliver Caudron
--->
+<!-- blocked by {MDG.CTP} -->
 <!doctype html>
 <html ng-app>
 <head>
