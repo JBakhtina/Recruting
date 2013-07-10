@@ -3,6 +3,26 @@
 <CSP name="third.CSP" application="/csp/vacancy/"><![CDATA[
 <!-- blocked by {MDG.CTP} -->
 <!doctype html>
+
+<script language="javascript">
+var items=1;
+function AddItem() {
+  div=document.getElementById("items");
+  button=document.getElementById("add");
+  items++;
+  newitem="<strong>URL: " + items + ": </strong>";
+  newitem+="<input type=\"text\" name=\"item" + items;
+  newitem+="\" size=\"45\"><br>";
+  newnode=document.createElement("span");
+  newnode.innerHTML=newitem;
+  div.insertBefore(newnode,button);
+}
+</script>
+
+
+
+
+
 <html ng-app>
 <head>
     <meta charset="utf-8">
@@ -35,8 +55,9 @@
 				<p>
 				<ul class='nav nav-tabs nav-stacked'>
 				<li>
-				<form name="myForm" ng-submit="update(vacancy); myForm.$setPristine();">
-				Должность <input type="text" ng-model="vacancy[0].Name"/> <li>
+				
+				<form name="myForm" ng-model="vacancy" ng-submit="update(vacancy); myForm.$setPristine();">
+				Должность <input type="text" ng-model="vacancy[0].VacancyName"/> <li>
 				Требуемые умения <input type="text" ng-model="vacancy[0].Skills"/><li>
 				Подходящие должности <input type="text" ng-model="vacancy[0].VacancyTypes"/><li>
 				<!--
@@ -45,13 +66,44 @@
 				-->
 				Начальная зарплата <input type="text" ng-model="vacancy[0].StartSalary"/><li>
 				Конечная зарплата  <input type="text" ng-model="vacancy[0].EndSalary"/><li>
-				Ссылки на размещённые ресурсы  <input type="text" ng-model="vacancy[0].Links"/><li>
+				Ссылки на размещённые ресурсы  <input type="text" ng-model="vacancy[0].Links"/>
+				<!--
+				<form name="myForm" >
+				<div ID="items">
+				       <input type="submit" value="+" onClick="AddItem();" ID="add" /><li>
+				 </div>
+				 </form>
+				
+				
+				<div ng-repeat="company in companies">
+                <form name="myForm" ng-submit="update(company); myForm.$setPristine();">
+                <input type="text" ng-model="company.Name"/>
+                <input type="submit" value="Сохранить" ng-show="myForm.$dirty"/>
+                <input type="button" value="X" ng-click="delete(company);"/>
+                </form>
+                </div>
+                  
+				   <form name="myForm" >
+				   <div ID="items">
+				       <input type="submit" value="+" onClick="AddItem();" ID="add" /><li>
+				  </div>
+				   </form>
+                   
+				<form name="CreateURL" ng-model="vacancy" ng-submit="create(vacancy.Links); vacancy.Links='';">
+				новый URL <input type="text" ng-model="vacancy.Links"/>
+				<input type="submit" value="+"/>
+				</form>
+				 -->
+				
+				
+				<li>
+				<li>
 				<input type="submit" value="Сохранить" ng-show="myForm.$dirty"/>
                 <input type="button" value="Удалить" ng-click="deletevacancy(vacancy);"/>
                 </form>
 			
 				<H2> в компанию 
-				<a href='{{company.Adress_URL}}'>{{company.Name}}</a></h2>
+				<a href='{{company.Adress_URL}}'>{{vacancy[0].CompanyName}}</a></h2>
 				Зарплата от {{vacancy[0].StartSalary}} до {{vacancy[0].EndSalary}}
 				<br> Образование {{vacancy[0].EduLevel}}<hr>
 				

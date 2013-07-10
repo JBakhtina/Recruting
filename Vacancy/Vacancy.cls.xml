@@ -142,7 +142,8 @@
 </Query>
 
 <Property name="Img">
-<Type>%FileBinaryStream</Type>
+<Type>%GlobalBinaryStream</Type>
+<Parameter name="LOCATION" value="C:/Images"/>
 </Property>
 
 <Storage name="Default">
@@ -194,6 +195,15 @@
 </Value>
 <Value name="12">
 <Value>Img</Value>
+</Value>
+<Value name="13">
+<Value>CityVacancy</Value>
+</Value>
+<Value name="14">
+<Value>MainInfo</Value>
+</Value>
+<Value name="15">
+<Value>AddInfo</Value>
 </Value>
 </Data>
 <Data name="VacancyTypes">
