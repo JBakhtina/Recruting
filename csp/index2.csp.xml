@@ -6,109 +6,6 @@
 <html ng-app>
 <head>
 	<title>Vacancy</title>
-	<script language ="javascript"> 
-	// здесь обработчики будут
-function control ($scope,$http){
-	// после переустановки каше порт стал 57773, а не 57772 как во всех примерах
-	// получаем данные в формате json и засовываем их в $scope.companies
-	// опять же абсолютная ссылка что бы не разбираться
-		$scope.getVacancies=function(){
-		// надо будет какую то универсальную относительную ссылку - у меня
-		// только абсолютная работает
-		$http.get("/v/json/vacancies").success(function(data){
-			$scope.vacancies=data.children;}).error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
-			
-		    }
-	 ///тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
-		$scope.getCompanyByID=function(compid){
-		$http.get("/v/json/company/"+compid).success(function(data){
-			$scope.companies=data.children;}).error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
-			
-		    }
-		
-		// функция аутентификации - считываем данные из БД - возвращаем результат
-		$scope.authVerify=function(){
-	
-			$http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
-				try{ 
-          			// пробуем считать результат
-          			var fName = data.children[0]["FirstName"];
-         		 	$scope.name =fName;
-          			authConstruct(fName);
-        		} catch(err){
-	        		// если не удалось считать - значит ошибка входа
-          			alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
-          			$scope.authLogin = "";
-         			$scope.authPassword = "";
-        		}
-        }).error(function(data,status){
-       $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
-       }
-     
-       // функция скрытия формы входа
-       $scope.authLogout = function (){
-      		document.getElementById("authOut").style.display='none';
-      		document.getElementById("authIN").style.display='';
-       }
-       
-       // функия отображения слоя с персональной информацией
-       function authConstruct(fName){
-     		document.getElementById("authIN").style.display='none';
-      		document.getElementById("authOut").style.display='';
-       }
-       
-      // функция показа вакансии
-       $scope.showVacancy = function(vacID){
-	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
-			try	{
-				// передаем массив полученных данных в функцию формирования текста
-				// выведем результат в соотвествующие поля
-				$scope.txtVacancyName = data.children[0]["VacancyName"]
-				$scope.txtVacancyCompany = data.children[0]["CompanyName"]
-				$scope.txtVacancyCity = data.children[0]["CityVacancy"]
-				$scope.txtRegDate = data.children[0]["RegDate"]
-				$scope.txtEduLevel = data.children[0]["EduLevel"]
-				$scope.txtStartSalary = data.children[0]["StartSalary"]
-				$scope.txtEndSalary = data.children[0]["EndSalary"]
-				$scope.txtAddInfo = data.children[0]["AddInfo"]
-				$scope.txtMainInfo = data.children[0]["MainInfo"]
-				vacancyConstruct();
-			} catch(err){	
-			}
-			}).error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
-			
-	   }
-	   
-	   // функия отображения слоя с выбранной вакансией
-       function vacancyConstruct(){
-     		document.getElementById("vacancyShow").style.display='';
-      		document.getElementById("vacanciesShow").style.display='none';
-       }
-	   
-	   // функия отображения слоя со списком вакансий
-       $scope.vacanciesConstruct = function (){
-     		document.getElementById("vacancyShow").style.display='none';
-      		document.getElementById("vacanciesShow").style.display='';
-       }
-	   
-	   // функция получения компаний с кол-вом вакансий
-		$scope.getCompaniesVacancies=function(){
-		$http.get("/v/json/comvac").success(function(data){
-			$scope.comvac=data.children;
-			}).error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
-			
-		    }
-	   
-	   $scope.getVacancies();
-	   $scope.getCompaniesVacancies();
-		//$scope.getCompanyByID("1");
- }//control
-  		
-	</script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <style>
@@ -266,12 +163,12 @@ function control ($scope,$http){
 		
 	</div>
 
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/jquery.js"></script>
-    <!-- ОООЧЕНЬ медленно {MDG.CTP} - Семеро одного не ждут :)
-    <script src="http://code.jquery/jquery-latest.js"></script>	-->
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <CSP:INCLUDE PAGE="test.inc">
+ 	  $scope.getVacancies();
+  	  $scope.getCompaniesVacancies();
+      }//control
+	</script>
 </body>
-</html>]]></CSP>
+</html>
+]]></CSP>
 </Export>
