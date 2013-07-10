@@ -2,8 +2,7 @@
 <Export generator="Cache" version="25">
 <Class name="WEB.JSON">
 <Description><![CDATA[
-<!-- blocked by {MDG.CTP} -->
-<!-- blocked by {MDG.Vivtor} -->
+<!-- blocked by {MDG.Victor77} -->
 Обработка запросов к/от базы]]></Description>
 <Super>%Base,%RegisteredObject</Super>
 <TimeCreated>63004,63548.548932</TimeCreated>
@@ -153,6 +152,13 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// <MDG.Victor77>
+
+]]></Content>
+</UDLText>
+
 <Method name="GetVacancy">
 <Description>
 список вакансий</Description>
@@ -160,7 +166,7 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-  set vacQuery = "SELECT C.Name AS CompanyName, V.CityVacancy, V.Links, "_ 
+  set vacQuery = "SELECT C.Name AS CompanyName, V.CityVacancy, V.Links_URL, V.Skills, "_ 
 					     "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, "_ 
 					     "V.MainInfo, V.AddInfo,V.EduLevel "_
 				   "FROM Vacancy.Vacancy AS V "_
@@ -171,6 +177,13 @@
   quit $$$OK
 ]]></Implementation>
 </Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// </MDG.Victor77>
+
+]]></Content>
+</UDLText>
 
 <Method name="GetVacancyAndCompany">
 <Description>

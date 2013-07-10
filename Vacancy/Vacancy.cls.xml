@@ -142,7 +142,8 @@
 </Query>
 
 <Property name="Img">
-<Type>%FileBinaryStream</Type>
+<Type>%GlobalBinaryStream</Type>
+<Parameter name="LOCATION" value="C:/Images"/>
 </Property>
 
 <Storage name="Default">
@@ -152,7 +153,7 @@
 <IdLocation>^Vacancy.VacancyD</IdLocation>
 <IndexLocation>^Vacancy.VacancyI</IndexLocation>
 <StreamLocation>^Vacancy.VacancyS</StreamLocation>
-<ExtentSize>18</ExtentSize>
+<ExtentSize>15</ExtentSize>
 <Data name="Seats">
 <Attribute>Seats</Attribute>
 <Structure>subnode</Structure>
@@ -217,16 +218,16 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>16.6667%</Selectivity>
+<Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>12.5000%</Selectivity>
 </Property>
 <Property name="EndSalary">
-<Selectivity>5.5556%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
@@ -235,28 +236,28 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Institution">
-<Selectivity>5.5556%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>5.5556%,URL:5.5556%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
+<Selectivity>6.6667%,URL:6.6667%,hhPortal:33.3333%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>25.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
-<Selectivity>5.5556%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Skills">
-<Selectivity>5.5556%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="StartSalary">
-<Selectivity>5.5556%</Selectivity>
+<Selectivity>6.6667%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-12</BlockCount>
+<BlockCount>-8</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

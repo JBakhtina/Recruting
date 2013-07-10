@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/views/list.html" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/views/list.html" application="/csp/vacancy/"><![CDATA[
 <div id="table-wrapper">
 <div class="filter tools pull-right">
 Фильтр <input ng-model="filter" class="search-query">

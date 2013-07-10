@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/js/controllers.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/js/controllers.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
 
 function ListCtrl($scope, Items, Data) {
