@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="Bootstrap/views/edit.html" application="/csp/vacancy/"><![CDATA[
+<CSP name="bootstrap/views/edit.html" application="/csp/vacancy/"><![CDATA[
 <form name="saveForm" class="form-horizontal">
 	<fieldset>
 		<div class="control-group">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="Bootstrap/js/angular.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="bootstrap/js/angular.js" application="/csp/vacancy/"><![CDATA[
 /**
  * @license AngularJS v1.0.7
  * (c) 2010-2012 Google, Inc. http://angularjs.org

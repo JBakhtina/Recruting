@@ -20,15 +20,15 @@ URLы для ссылок на HH ресурсы
 <Type>Vacancy.Logo</Type>
 </Property>
 
-<Parameter name="POPSPEC">
+<Property name="URL">
 <Description>
 Ссылка на конкретно размещённую вакансию</Description>
-<Default>URL:##class(Vacancy.PopUtils).URLlinks()</Default>
-</Parameter>
-
-<Property name="URL">
 <Type>%String</Type>
 </Property>
+
+<Parameter name="POPSPEC">
+<Default>URL:##class(Vacancy.PopUtils).URLlinks()</Default>
+</Parameter>
 
 <Storage name="Default">
 <Type>%Library.CacheSerialState</Type>

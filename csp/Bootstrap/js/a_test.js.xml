@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="Bootstrap/js/a_test.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="bootstrap/js/a_test.js" application="/csp/vacancy/"><![CDATA[
 
 var ngRepeatDirective = ngDirective({
   transclude: 'element',
