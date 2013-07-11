@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="test.inc" application="/csp/vacancy/"><![CDATA[
-<!-- blocked by {MDG.CTP} -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/js/jquery.js"></script>
     <!-- ОООЧЕНЬ медленно

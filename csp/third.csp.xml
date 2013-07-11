@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="third.CSP" application="/csp/vacancy/"><![CDATA[
-<!-- blocked by {MDG.CTP} -->
 <!doctype html>
 <html ng-app>
 <head>
