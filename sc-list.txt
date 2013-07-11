@@ -1,4 +1,3 @@
-<cspapp>
 /csp/vacancy
 /csp/vacancy/index2.CSP
 Vacancy.PKG

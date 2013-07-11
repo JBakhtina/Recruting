@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="js/app.js" application="/csp/vacancy/"><![CDATA[
+'use strict';
+
+angular.module('mdgVacancy',[]).
+
+
+    factory('vacanciesShow', function(){
+        return {
+               data: function(link) {
+                   $http.get(link);
+               }
+           };
+        });
+
+          /*
+        $http.get("/v/json/vacancies").success(function(data){
+        $scope.vacancies=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });       */
+]]></CSP>
+</Export>
