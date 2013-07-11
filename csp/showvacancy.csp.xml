@@ -3,6 +3,7 @@
 <CSP name="showvacancy.CSP" application="/csp/vacancy/"><![CDATA[
 <!doctype html>
 <!-- blocked by {MDG.CTP} -->
+<!-- {MDG.DCrusher}working with -->
 <html ng-app>
 <head>
     <meta charset="utf-8">
@@ -70,8 +71,9 @@
   				</form>
   				
   				
-  				<span ng-model="greeter">#($Get(%request.Data("id",1),1))#</span>
+  					<span ng-init="showVacancy(#($Get(%request.Data("id",1),1))#)"></span>
   				
+  		
   				
   				<div class="well">
 		 			<H3 class="text-info">{{txtVacancyName}}</h3>
@@ -93,7 +95,7 @@
    <script src="bootstrap/js/bootstrap.min.js"></script>
    <script src="bootstrap/js/jquery.js"></script>
 	
-  <!--<script language = "javascript" src="js/app.js"></script>-->
+   <!--<script language = "javascript" src="js/app.js"></script>-->
    <script language = "javascript" src="js/controllers.js"></script>
     
    <script language = "javascript" >
