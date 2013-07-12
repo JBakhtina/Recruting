@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <Class name="WEB.JSON">
-<Description><![CDATA[
-<!-- blocked by {MDG.Victor77} -->
-Обработка запросов к/от базы]]></Description>
+<Description>
+Обработка запросов к/от базы</Description>
 <Super>%Base,%RegisteredObject</Super>
 <TimeCreated>63004,63548.548932</TimeCreated>
 
