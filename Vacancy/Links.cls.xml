@@ -7,26 +7,16 @@ URLы для ссылок на HH ресурсы
 <Super>%SerialObject,%Populate,%XML.Adaptor</Super>
 <TimeCreated>63006,70618.682086</TimeCreated>
 
-<Property name="hhPortal">
-<Description>
-Список рекрутинговых порталов</Description>
-<Type>%String</Type>
-<Parameter name="VALUELIST" value=",hh.ru,huntim.ru,habrahabr.ru,job.ru"/>
-</Property>
-
-<Property name="hhPortalLogo">
-<Description>
-Изображение hh ресурса</Description>
-<Type>Vacancy.Logo</Type>
-</Property>
-
 <Parameter name="POPSPEC">
 <Description>
-Ссылка на конкретно размещённую вакансию</Description>
-<Default>URL:##class(Vacancy.PopUtils).URLlinks()</Default>
+Список рекрутинговых порталов
+Изображение hh ресурса</Description>
+<Default>URL:##class(Vacancy.PopUtils).URL()</Default>
 </Parameter>
 
 <Property name="URL">
+<Description>
+Ссылка на конкретно размещённую вакансию</Description>
 <Type>%String</Type>
 <Collection>array</Collection>
 </Property>

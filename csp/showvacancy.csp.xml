@@ -71,7 +71,7 @@
   				</form>
   				
   				
-  					<span ng-init="showVacancy(#($Get(%request.Data("id",1),1))#)"></span>
+  					<span ng-init="showVacancy(#($Get(%request.Data("id",1),1))#)">#($Get(%request.Data("id",1),1))#</span>
   				
   		
   				

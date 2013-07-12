@@ -82,6 +82,7 @@
 <Description>
 Ссылки на размещённые ресурсы</Description>
 <Type>Vacancy.Links</Type>
+<Collection>array</Collection>
 </Property>
 
 <Property name="CityVacancy">
@@ -153,7 +154,7 @@
 <IdLocation>^Vacancy.VacancyD</IdLocation>
 <IndexLocation>^Vacancy.VacancyI</IndexLocation>
 <StreamLocation>^Vacancy.VacancyS</StreamLocation>
-<ExtentSize>15</ExtentSize>
+<ExtentSize>30</ExtentSize>
 <Data name="Seats">
 <Attribute>Seats</Attribute>
 <Structure>subnode</Structure>
@@ -218,16 +219,16 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>8.3333%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>12.5000%</Selectivity>
+<Selectivity>11.1111%</Selectivity>
 </Property>
 <Property name="EndSalary">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
@@ -236,28 +237,28 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Institution">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>6.6667%,URL:6.6667%,hhPortal:33.3333%</Selectivity>
+<Selectivity>3.5714%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>25.0000%</Selectivity>
+<Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Skills">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="StartSalary">
-<Selectivity>6.6667%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-8</BlockCount>
+<BlockCount>-20</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

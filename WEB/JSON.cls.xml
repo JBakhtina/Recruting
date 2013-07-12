@@ -166,7 +166,7 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-  set vacQuery = "SELECT C.Name AS CompanyName, V.CityVacancy, V.Links_URL, V.Skills, "_ 
+  set vacQuery = "SELECT C.Name AS CompanyName, V.CityVacancy, V.Skills, "_ 
 					     "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, "_ 
 					     "V.MainInfo, V.AddInfo,V.EduLevel "_
 				   "FROM Vacancy.Vacancy AS V "_

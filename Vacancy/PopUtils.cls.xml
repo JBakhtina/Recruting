@@ -151,7 +151,7 @@
     "http://hh.ru/vacancy/5907197",
     "http://hh.ru/vacancy/7309127",
     "http://hh.ru/vacancy/8131823")
-    return $li(t1,$r($ll(t1))+1)
+     return $li(t1,$r($ll(t1))+1)
 ]]></Implementation>
 </Method>
 
