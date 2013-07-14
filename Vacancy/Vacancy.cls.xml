@@ -38,12 +38,11 @@
 <Type>%String</Type>
 </Property>
 
-<Property name="VacancyTypes">
+<Property name="VacancyType">
 <Description>
-Должности подходящие для данной вакансии
-непонятно victor77</Description>
+Должности подходящие для данной вакансии</Description>
 <Type>%String</Type>
-<Collection>array</Collection>
+<Parameter name="VALUELIST" value=",Полная занятость,договорная,подработка"/>
 </Property>
 
 <Property name="Seats">
@@ -219,7 +218,7 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>9.0909%</Selectivity>
+<Selectivity>7.6923%</Selectivity>
 </Property>
 <Property name="Company">
 <Selectivity>10.0000%</Selectivity>
@@ -240,7 +239,7 @@
 <Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>3.7037%</Selectivity>
+<Selectivity>3.7037%,URL:3.7037%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>
