@@ -9,7 +9,7 @@
 <TimeCreated>63006,71348.086892</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Name:##class(Vacancy.PopUtils).VacancyName(),CityVacancy:##class(Vacancy.PopUtils).City(),AddInfo:##class(Vacancy.PopUtils).VacAddInfo(),MainInfo:##class(Vacancy.PopUtils).VacMainInfo()</Default>
+<Default>Name:##class(Vacancy.PopUtils).VacancyName(),Seats:FirstName():3:Date(),CityVacancy:##class(Vacancy.PopUtils).City(),AddInfo:##class(Vacancy.PopUtils).VacAddInfo(),MainInfo:##class(Vacancy.PopUtils).VacMainInfo()</Default>
 </Parameter>
 
 <Property name="Name">
@@ -51,6 +51,7 @@
 Должности подходящие для данной вакансии</Description>
 <Type>%String</Type>
 <Collection>array</Collection>
+<Parameter name="MAXLEN" value="256"/>
 </Property>
 
 <Property name="EduLevel">
@@ -82,7 +83,6 @@
 <Description>
 Ссылки на размещённые ресурсы</Description>
 <Type>Vacancy.Links</Type>
-<Collection>array</Collection>
 </Property>
 
 <Property name="CityVacancy">
@@ -219,13 +219,13 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>8.3333%</Selectivity>
+<Selectivity>9.0909%</Selectivity>
 </Property>
 <Property name="Company">
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EndSalary">
 <Selectivity>3.3333%</Selectivity>
@@ -240,7 +240,7 @@
 <Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>3.5714%</Selectivity>
+<Selectivity>3.7037%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>

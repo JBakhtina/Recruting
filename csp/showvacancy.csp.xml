@@ -71,7 +71,7 @@
   				</form>
   				
   				
-  					<span ng-init="showVacancy(#($Get(%request.Data("id",1),1))#)">#($Get(%request.Data("id",1),1))#</span>
+  					<span ng-init="showVacancy(#($Get(%request.Data("id",1),1))#)"></span>
   				
   		
   				
@@ -83,6 +83,7 @@
 		 			<p>{{txtMainInfo}}</p>
 		 			<p>{{txtEduLevel}}</p>
 		 			<p>{{txtAddInfo}}</p>
+		 			<p>{{txtLinks}}</p>
 		 			<div>
        					<span class="label label-success">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">Актуально</span></div>
     				</div> 
