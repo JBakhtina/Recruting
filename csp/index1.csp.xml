@@ -184,9 +184,9 @@ function control ($scope,$http){
     <!---/ФИЛЬТР--->
           <div class="row">  
 			  <div class="span9">
-				 <div class="well">
+				 <div class="well" style="padding:1px">
 				
-					<ul class='nav nav-pills nav-stacked'>
+					<ul class='nav nav-pills nav-stacked'  >
 						<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
 						   <a  ng-click="showVacancy(vacancy.IDVac);" class='text-info' href='showvacancy.CSP?id={{vacancy.IDVac}}'>
            					  <div class="row">
@@ -194,13 +194,15 @@ function control ($scope,$http){
            						 <div class="span3">
            						 	<i class="icon-hand-right"></i>&nbsp
            						 	<input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
-           							<b>{{vacancy.VacancyName}}</b>
+           							<b>{{vacancy.VacancyName}}</b></br>
+           							<div class="text-success">{{vacancy.CompanyName}}</div>	
            						  </div>
-           						  <div class="span2 text-success">{{vacancy.CompanyName}}</div>
+           						  <div class="span2"><span class="label label-info">{{vacancy.VacancyType}}</span></div>
            						  <div class="span2 text-info"><i class="icon-globe"></i>&nbsp{{vacancy.CityVacancy}}</div>
            						  <!--<div class="span2">{{vacancy.StartSalary}}-{{vacancy.EndSalary}}</div>-->
-           						  <div class="span1"><span class="label label-success">{{vacancy.RegDate}}</span></div>
-           					  </div>		
+           						  <div class="span1"><span class="label label pull-right">{{vacancy.RegDate}}</span></div>
+           					  </div>
+           					  
            					</a>
            					<hr style="margin:0px;">	
            				</li>
@@ -235,15 +237,30 @@ function control ($scope,$http){
  	   
 	   
 		</div>
-		
-		<div id="footer">
-			<div class=""></div>
 			
-		</div>
-		
-		
 	</div>
-
+<!---ФУТЕР СТРАНИЦЫ--->	
+	<div class="container">	
+		<div class="row-fluid">
+				<div class="span12">
+					Работа продвижение развитие			
+				</div>
+			</div>
+			<hr>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span8">
+						<a href="#">Сервис</a>    
+						<a href="#">Ссылки</a>    
+						<a href="#">Безопасность</a>
+					</div>
+					<div class="span4">
+						<p class="muted pull-right">© 2013 InterSystem. All rights reserved</p>
+					</div>
+				</div>
+			</div>
+  	</div>
+<!---/ФУТЕР СТРАНИЦЫ--->	
     
     <!-- ОООЧЕНЬ медленно {MDG.CTP} - Семеро одного не ждут :)
     <script src="http://code.jquery/jquery-latest.js"></script>	-->

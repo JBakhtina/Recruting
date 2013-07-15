@@ -134,13 +134,7 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%String</ReturnType>
 <Implementation><![CDATA[
-    s t1=$lb(
-    /*  "http://hantim.ru/jobs/20190"+$ASCII("-")+"45sistemnyy_administrator",
-   
-   "http://hantim.ru/jobs/18590-javascript-razrabotchik",
-    "http://hantim.ru/jobs/15268-php-razrabotchik-senior-developer",
-    "http://hantim.ru/jobs/14210-imperskiy-kreyser-php", */
-    
+    s t1 =$lb(
     "http://www.job.ru/students/4316514",
     "http://www.job.ru/guards/4487639",
     "http://www.job.ru/sport/4680359",
@@ -151,6 +145,9 @@
     "http://hh.ru/vacancy/5907197",
     "http://hh.ru/vacancy/7309127",
     "http://hh.ru/vacancy/8131823")
+   // return $li(t1,$r($ll(t1))+1) 
+    
+    //set vac(1) = "http://www.job.ru/students/4316514"
     return $li(t1,$r($ll(t1))+1)
 ]]></Implementation>
 </Method>
@@ -169,6 +166,13 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// Страна
+
+]]></Content>
+</UDLText>
+
 <Method name="Country">
 <ClassMethod>1</ClassMethod>
 <ReturnType>%String</ReturnType>
@@ -180,6 +184,13 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// генерация логина
+
+]]></Content>
+</UDLText>
+
 <Method name="Login">
 <ClassMethod>1</ClassMethod>
 <FormalSpec>prefix:%String</FormalSpec>
@@ -187,6 +198,13 @@
 <Implementation><![CDATA[	Quit prefix_$r(5)
 ]]></Implementation>
 </Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// генерация пароля
+
+]]></Content>
+</UDLText>
 
 <Method name="Pass">
 <ClassMethod>1</ClassMethod>
@@ -197,8 +215,6 @@
 	set num2 = $tr( $j(num2,5), " ", "0") ; заменить пробелы на нули
 	
 	/// Переводим в md5
-	
-
    set b  = $system.Encryption.MD5Encode("pass")
   // set docFileName="" f i=1:1:$L(b) set docFileName=docFileName_$J($ZHEX($A(b,i)),2)
   // set docFileName=$TR(docFileName," ","0")
@@ -206,6 +222,13 @@
 	Quit b
 ]]></Implementation>
 </Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// наименование ваканисии
+
+]]></Content>
+</UDLText>
 
 <Method name="VacancyName">
 <ClassMethod>1</ClassMethod>
@@ -216,6 +239,13 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// дополнительная информация по вакансии
+
+]]></Content>
+</UDLText>
+
 <Method name="VacAddInfo">
 <ClassMethod>1</ClassMethod>
 <ReturnType>%String</ReturnType>
@@ -223,10 +253,31 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// основная информация о вакансии
+
+]]></Content>
+</UDLText>
+
 <Method name="VacMainInfo">
 <ClassMethod>1</ClassMethod>
 <ReturnType>%String</ReturnType>
 <Implementation><![CDATA[	return "Основное описание вакансии. Очень классная вакансия. Работа в комманде профессионалов, когда мы их соберем. Конкурентная зп(зелёная пуговица)! Тесный, но уютный офис. Ламповый телевизор. Неудобное кресло."
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Описание компании
+
+]]></Content>
+</UDLText>
+
+<Method name="CompMainInfo">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	return "Огромная компания!!! Наш офис занимает целую квартиру 33,5 кв. метра! И это ещё не всё! У нас есть чайник, печеньки и старая колбаса. Многовековой опыт в чём-то и многотомные мануалы по каким-то найкам... "
 ]]></Implementation>
 </Method>
 

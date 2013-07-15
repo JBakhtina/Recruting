@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="js/controllers.js" application="/csp/vacancy/"><![CDATA[
+'use strict';
+
+function vacancyCtrl($scope, $http){
+
+    // функция получения вакансий
+    $scope.getVacancies=function(){
+        $http.get("/v/json/vacancies").success(function(data){
+            $scope.vacancies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+
+    // функция аутентификации - считываем данные из БД - возвращаем результат
+    $scope.authVerify=function(){
+
+        $http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
+            try{
+                // пробуем считать результат
+				var fName = data.children[0]["FirstName"];
+                $scope.name =fName;
+                $scope.h=1;
+               //authConstruct(fName);
+            } catch(err){
+                // если не удалось считать - значит ошибка входа
+                alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
+                $scope.authLogin = "";
+                $scope.authPassword = "";
+            }
+        }).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
+    }
+
+    // функция получения компаний с кол-вом вакансий
+    $scope.getCompaniesVacancies=function(){
+        $http.get("/v/json/comvac").success(function(data){
+            $scope.comvac=data.children;
+        }).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+
+    }
+
+    $scope.getVacancies();
+    $scope.getCompaniesVacancies();
+}
+
+function vacancyShowCtrl($scope,$http){
+	   
+	   // функция показа вакансии
+       $scope.showVacancy = function(vacID){
+	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
+			try	{
+				// передаем массив полученных данных в функцию формирования текста
+				// выведем результат в соотвествующие поля
+				$scope.txtVacancyName = data.children[0]["VacancyName"]
+				$scope.txtVacancyCompany = data.children[0]["CompanyName"]
+				$scope.txtVacancyCity = data.children[0]["CityVacancy"]
+				$scope.txtRegDate = data.children[0]["RegDate"]
+				$scope.txtEduLevel = data.children[0]["EduLevel"]
+				$scope.txtStartSalary = data.children[0]["StartSalary"]
+				$scope.txtEndSalary = data.children[0]["EndSalary"]
+				$scope.txtAddInfo = data.children[0]["AddInfo"]
+				$scope.txtMainInfo = data.children[0]["MainInfo"]
+				vacancyConstruct();
+			} catch(err){	
+			}
+			}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+	   }
+
+
+}
+]]></CSP>
+</Export>

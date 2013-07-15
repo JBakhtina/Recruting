@@ -7,24 +7,13 @@ URLы для ссылок на HH ресурсы
 <Super>%SerialObject,%Populate,%XML.Adaptor</Super>
 <TimeCreated>63006,70618.682086</TimeCreated>
 
-<Property name="hhPortal">
-<Description>
-Список рекрутинговых порталов</Description>
-<Type>%String</Type>
-<Parameter name="VALUELIST" value=",hh.ru,huntim.ru,habrahabr.ru,job.ru"/>
-</Property>
-
-<Property name="hhPortalLogo">
-<Description>
-Изображение hh ресурса</Description>
-<Type>Vacancy.Logo</Type>
-</Property>
-
 <Property name="URL">
 <Description>
+Список рекрутинговых порталов
+Изображение hh ресурса
 Ссылка на конкретно размещённую вакансию</Description>
 <Type>%String</Type>
-<Collection>array</Collection>
+<Collection>list</Collection>
 </Property>
 
 <Parameter name="POPSPEC">
@@ -46,6 +35,15 @@ Property URL As %ArrayOfDataTypes;</Description>
 </Value>
 <Value name="3">
 <Value>URL</Value>
+</Value>
+<Value name="4">
+<Value>URL1</Value>
+</Value>
+<Value name="5">
+<Value>FirstN</Value>
+</Value>
+<Value name="6">
+<Value>URLName</Value>
 </Value>
 </Data>
 </Storage>
