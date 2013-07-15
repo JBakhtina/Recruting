@@ -68,10 +68,9 @@ function AddItem() {
 				Начальная зарплата <input type="text" ng-model="vacancy[0].StartSalary"/><li>
 				Конечная зарплата  <input type="text" ng-model="vacancy[0].EndSalary"/><li>
 				
-				
-				Ссылки на размещённые ресурсы  <input type="text" ng-model="arr2[1]"/>
-						
-				<!-- Ссылки на размещённые ресурсы {{vacancy[0].Links_URL}}
+				Ссылки на размещённые ресурсы  <input type="text" ng-model="vacancy[0].Links_URL"/>
+				<!--		
+				 Ссылки на размещённые ресурсы {{vacancy[0].Links_URL}}
 				<h3 ng-repeat="link in vacancy[0]">
 				</h3>
 				
@@ -135,10 +134,11 @@ function AddItem() {
     <CSP:INCLUDE PAGE="bootstrap/js/mdg_lib.js">
        $scope.getCompanies();
        $scope.getVacancy(#($Get(%request.Data("id",1),1))#);
-       var arr = $scope.vacancy[0].Links_URL;
-       //var $scope.arr2 = arr.split('');
+      
       }//control
 	</script>
+	
+	 
 </body>
 </html>
 

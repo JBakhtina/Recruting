@@ -142,8 +142,8 @@
 </Query>
 
 <Property name="Img">
-<Type>%GlobalBinaryStream</Type>
-<Parameter name="LOCATION" value="C:/Images"/>
+<Type>%Stream.GlobalBinary</Type>
+<Parameter name="LOCATION" value="^MyPics"/>
 </Property>
 
 <Storage name="Default">
@@ -218,13 +218,13 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>8.3333%</Selectivity>
 </Property>
 <Property name="Company">
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>12.5000%</Selectivity>
+<Selectivity>11.1111%</Selectivity>
 </Property>
 <Property name="EndSalary">
 <Selectivity>6.6667%</Selectivity>
@@ -239,13 +239,13 @@
 <Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>6.6667%,URL:6.6667%,hhPortal:33.3333%</Selectivity>
+<Selectivity>6.6667%,URL:6.6667%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>25.0000%</Selectivity>
+<Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
 <Selectivity>6.6667%</Selectivity>
@@ -257,7 +257,7 @@
 <Selectivity>6.6667%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-8</BlockCount>
+<BlockCount>-12</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

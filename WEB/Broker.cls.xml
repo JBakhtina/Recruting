@@ -43,6 +43,7 @@
    <Route Url="/json/vacancy/:compid" Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
    <Route Url="/json/vacancy" Method="POST" Call="WEB.JSON:CreateVacancy"/> 
    
+   <Route Url="/json/url/:compid" Method="GET" Call="WEB.TestJSON:GetLinksURL"/>
  </Routes>
 ]]></Data>
 </XData>

@@ -16,5 +16,16 @@
 	Q $$$OK
 ]]></Implementation>
 </Method>
+
+<Method name="GetLinksURL">
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set a =##class(Vacancy.Vacancy).%OpenId(1)
+	set b=a.Links.URL.NextGet(compid)
+	do ##class(WEB.JSON).GetJSONData(b)
+	Q $$$OK
+]]></Implementation>
+</Method>
 </Class>
 </Export>

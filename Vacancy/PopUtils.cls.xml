@@ -250,5 +250,20 @@ count - сколько записей в каждую таблицу добав�
 	Quit $$$OK
 ]]></Implementation>
 </Method>
+
+<Method name="CopyPersonPictureFile2Global">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>PicFilename:%String,GlobalName:%String="^zzzWasabiManPics"</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	s StreamFile=##class(%Stream.FileBinary).%New()
+	s StreamFile.Filename=$g(PicFilename)
+	s StreamGloBin=##class(%Stream.GlobalBinary).%New()
+	s StreamGloBin.%Location=GlobalName
+	s sc=StreamGloBin.CopyFromAndSave(StreamFile) 
+	//NOTE:  I'm getting a non-fatal error saying it can't delete a file in the temp dir.  
+	q sc
+]]></Implementation>
+</Method>
 </Class>
 </Export>

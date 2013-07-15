@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="TestImage.CSP" application="/csp/vacancy/"><![CDATA[
-// <!-- blocked by {MDG.Victor} BEGIN -->
 
 <!-- Copyright (c) 2001 InterSystems Inc. ALL RIGHTS RESERVED. -->
 <csp:class description="Demo of serving a stream with the <b>%CSP.StreamServer</b>.">
@@ -13,44 +12,7 @@
 
 <body bgcolor=#CCCCFF>
 
-<!-- display standard sample template using a custom tag 
-<isc:SAMPLE title="Serving a stream">
-This sample uses the <b>%CSP.StreamServer</b> class to server up a stream
-that is stored in Caché, for the example we use the ClassLogo.jpg
-from the documentation directory, but this can be a file stream, global stream
-or any other type of stream.
-</isc:SAMPLE>
--->
-
-<input type="file" multiple="multiple" name="files[]" accept="image" />
-
-<script language=Cache runat=Server>
-    // This code is just to get the oref of a stream. Normally you would have
-    // one as a property of the object you are interested in, however for this
-    // example I will create a stream that points to the ClassLogo.jpg file
-    // that is in the csp/samples directory, but normally you would do something
-    // like 'Set oref=##class(YourClass).%OpenId(id),stream=oref.Stream' to get
-    // the oref.
-    Set stream=##class(%FileBinaryStream).%New()
-    //
-    // The stream we wish to link to for this example is in the samples directory
-    Set filename=$$GetFilename^%apiCSP("c:/f_19198988.jpg")
-    
-    Do stream.LinkToFile(filename)
-    
-    // Now get the id of the stream which is the piece we really want
-    Set oid=stream.GetStreamId()
-    set a= ##class(Vacancy.Vacancy).%OpenId(1)
-    set a.Img=stream
-   
-         
-    
-</script>
-
-<p align=center>
-
-<!-- The trick is the use the encrpyted oid of the stream as the parameter to the stream server -->
-<IMAGE SRC=%25CSP.StreamServer.cls?STREAMOID=#(..Encrypt(oid))#>
+<img src="Image.CSP" contentType="content-type:image/jpg"/>
 
 </p>
 <br>
