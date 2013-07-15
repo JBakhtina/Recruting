@@ -146,6 +146,31 @@
 <Parameter name="LOCATION" value="^MyPics"/>
 </Property>
 
+<Method name="DeleteImg">
+<FormalSpec>Id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set a=##class(Vacancy.Vacancy).%OpenId(Id)
+	do a.Img.Clear()
+	do a.%Save()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="UpdateImg">
+<FormalSpec>Id:%String,PicFilename:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set a=##class(Vacancy.Vacancy).%OpenId(Id)
+	do a.Img.Clear()
+	set StreamFile=##class(%Stream.FileBinary).%New()
+	set StreamFile.Filename=$g(PicFilename)
+	s sc=a.Img.CopyFromAndSave(StreamFile)
+	do a.%Save()
+	Quit sc
+]]></Implementation>
+</Method>
+
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
 <DataLocation>^Vacancy.VacancyD</DataLocation>
@@ -218,13 +243,13 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>8.3333%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="Company">
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EndSalary">
 <Selectivity>6.6667%</Selectivity>
@@ -239,7 +264,7 @@
 <Selectivity>6.6667%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>6.6667%,URL:6.6667%</Selectivity>
+<Selectivity>6.6667%,URL:6.6667%,hhPortal:25.0000%,hhPortalLogo:100.0000%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>

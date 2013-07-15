@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="Image.CSP" application="/csp/vacancy/"><![CDATA[
+
+<script language="Cache" runat="Server">
+set a=##class(Vacancy.Vacancy).%OpenId(compid)
+set oid=a.Img.%Oid()
+ </script>
+ 
+<image src="%25CSP.StreamServer.cls?STREAMOID=#(..Encrypt(oid))#">
+
+]]></CSP>
+</Export>
