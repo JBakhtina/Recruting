@@ -158,7 +158,7 @@
 </Method>
 
 <Method name="UpdateImg">
-<FormalSpec>Id:%String,PicFilename:%String</FormalSpec>
+<FormalSpec>Id:%Integer,PicFilename:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 	set a=##class(Vacancy.Vacancy).%OpenId(Id)

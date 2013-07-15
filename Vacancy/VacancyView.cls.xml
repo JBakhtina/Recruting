@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="Vacancy.VacancyView">
+<Super>%Persistent,%Populate</Super>
+<TimeCreated>63018,39364.695614</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Ссылка по которой пришли
+
+]]></Content>
+</UDLText>
+
+<Property name="URL">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Используемый Browser
+
+]]></Content>
+</UDLText>
+
+<Property name="Browser">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// IP
+
+]]></Content>
+</UDLText>
+
+<Property name="IP">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Время посещения
+
+]]></Content>
+</UDLText>
+
+<Property name="TimeStamp">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Просмотренная вакансия
+
+]]></Content>
+</UDLText>
+
+<Property name="Vacancy">
+<Type>%String</Type>
+</Property>
+</Class>
+</Export>
