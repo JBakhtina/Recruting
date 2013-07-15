@@ -7,7 +7,7 @@
 <TimeCreated>63006,70543.55085</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Name:Company(), CompMainInfo:##class(Vacancy.PopUtils).CompMainInfo()</Default>
+<Default>Name:Company(),CompMainInfo:##class(Vacancy.PopUtils).CompMainInfo()</Default>
 </Parameter>
 
 <UDLText name="T">
@@ -37,15 +37,9 @@
 <Type>Vacancy.Logo</Type>
 </Property>
 
-<Property name="CompMainInfo">
-<Description>
-Информация о компании</Description>
-<Type>%Text</Type>
-<Parameter name="MAXLEN" value="500"/>
-</Property>
-
 <Property name="Users">
 <Description>
+Информация о компании
 Связь компании и пользователей</Description>
 <Type>Vacancy.SystemUser</Type>
 <Cardinality>many</Cardinality>
@@ -60,6 +54,13 @@
 <Cardinality>many</Cardinality>
 <Inverse>Company</Inverse>
 <Relationship>1</Relationship>
+</Property>
+
+<Property name="CompMainInfo">
+<Description>
+Описание компании</Description>
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="500"/>
 </Property>
 
 <Storage name="Default">
@@ -95,8 +96,8 @@
 <Value name="8">
 <Value>%Text</Value>
 </Value>
-<Value name="9">
-<Value>MainInfo</Value>
+<Value name="13">
+<Value>Description</Value>
 </Value>
 </Data>
 <Property name="%%CLASSNAME">
@@ -106,9 +107,18 @@
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="Adress">
-<Selectivity>10.0000%,Apartament:10.0000%,Building:11.1111%,City:12.5000%,Country:16.6667%,Email:10.0000%,State:16.6667%,Street:11.1111%,Telephone:10.0000%,URL:20.0000%</Selectivity>
+<Selectivity>10.0000%,Apartament:10.0000%,Building:11.1111%,City:20.0000%,Country:14.2857%,Email:10.0000%,State:16.6667%,Street:11.1111%,Telephone:10.0000%,URL:20.0000%</Selectivity>
 </Property>
 <Property name="CompMainInfo">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="CompanyDescription">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="CompanyMainInfo">
+<Selectivity>100.0000%</Selectivity>
+</Property>
+<Property name="Description">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Image">
@@ -118,7 +128,10 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>11.1111%</Selectivity>
+</Property>
+<Property name="NewProperty1">
+<Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Users">
 <Selectivity>100.0000%</Selectivity>

@@ -68,23 +68,50 @@
 		<div ID="vacancyShow" class="container" style="display:;">
   				<form ng-submit="vacanciesConstruct()" style="margin-bottom:10px">
   					<a class="btn" href="index1.csp"><i class="icon-list"></i> Список вакансий</a>
-  				</form>
+  				</form>	
 
   					<span ng-init="showVacancy(#($Get(%request.Data("id",1),1))#)"></span>
   				
   				<div class="row">  				
 	  				<div class="well span8">
-			 			<H3 class="text-info">{{txtVacancyName}}</h3>
-			 			<h6 class="text">{{txtVacancyCompany}}</h6>
-			 			<h7 class="text-info">{{txtVacancyCity}}</h7>
-			 			<span class="label label-info">{{txtVacancyType}}</span>
+			 			<H3 class="text-info">
+			 				{{txtVacancyName}} 
+			 				<span class="label label-info pull-right">{{txtVacancyType}}</span>
+			 			</h3>			 			
+			 			<h6 class="text">
+			 				{{txtVacancyCompany}} 
+			 				<h7 class="text-info pull-right">{{txtVacancyCity}}</h7>
+			 			</h6>
+			 			
 			 			<p>Зарплата от {{txtStartSalary}} до {{txtEndSalary}} </p>
 			 			<p>{{txtMainInfo}}</p>
 			 			<p>{{txtEduLevel}}</p>
 			 			<p>{{txtAddInfo}}</p>
+			 			
+			 			<hr>
+			 		
+			 		<!---КНОПКИ/ССЫЛКИ--->	
+			 			<div class="span7">
+			 				<a href="#" class="btn btn-large"><i class="icon-bullhorn"></i> <strong>Откликуться</strong></a>
+			 				<div class="pull-right">
+			 					<a href="#" class=""><img src='img\fb2.png'></a>
+						    <a href="#" class=""><img src='img\tw2.png'></a>
+						    <a href="http://vk.com/share.php?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class="">
+						    	<img src='img\vk2.png'>
+						    </a>
+						    <a href="" class="">
+						    	<img src='img\g+.png'>
+						    </a>
+			 				</div>
+						</div>
+					 <!---/КНОПКИ/ССЫЛКИ--->	
+						<br><br><hr>
+						
+						<h6 class="text muted">На других ресурсах<h6>
 			 			<p>{{txtLinks}}</p>
+						
 			 			<div>
-	       					<span class="label label-success">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">Актуально</span></div>
+	       					<span class="label">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">Актуально</span></div>
 	    				</div> 
 			 		</div>
 			 		<div class="well span3">
