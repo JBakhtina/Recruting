@@ -43,7 +43,7 @@
    <Route Url="/json/vacancy/:compid" Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
    <Route Url="/json/vacancy" Method="POST" Call="WEB.JSON:CreateVacancy"/> 
    
-   <Route Url="/json/vacancyresp/" Method="GET" Call="WEB.JSON:NewVacancyResponse"/>
+   <Route Url="/json/vacancyresp" Method="POST" Call="WEB.JSON:NewVacancyResponse"/>
    
  </Routes>
 ]]></Data>
