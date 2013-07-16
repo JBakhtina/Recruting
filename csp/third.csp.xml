@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="Third.CSP" application="/csp/vacancy/"><![CDATA[
+<CSP name="third.CSP" application="/csp/vacancy/"><![CDATA[
 <!-- blocked by {MDG.CTP} -->
 <!doctype html>
 
@@ -56,7 +56,6 @@ function AddItem() {
 				<p>
 				<ul class='nav nav-tabs nav-stacked'>
 				<li>
-				
 				<form name="myForm" ng-model="vacancy" ng-submit="update(vacancy); myForm.$setPristine();">
 				Должность <input type="text" ng-model="vacancy[0].VacancyName"/> <li>
 				Требуемые умения <input type="text" ng-model="vacancy[0].Skills"/><li>
@@ -121,6 +120,7 @@ function AddItem() {
 				</p>
 			</article>
 	    </div>
+	    
 	    <form name="vCreateForm" ng-model="newvacancy" ng-submit="createvacancy(newvacancy); newvacancy.Name='';">
 новая компания <input type="text" ng-model="newvacancy.Name"/>
 <input type="submit" value="Сохранить"/>

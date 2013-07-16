@@ -69,5 +69,8 @@ $scope.createvacancy = function (v){
 			$scope.alertzone="["+status+"] Ошибка добавления вакансии :( ["+data+"]"; });
 		    }		    
 
-]]></CSP>
+
+}
+
+		 ]]></CSP>
 </Export>

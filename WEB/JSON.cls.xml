@@ -21,6 +21,51 @@
 
 <UDLText name="T">
 <Content><![CDATA[
+// -------------VACANCY RESPONSE-----------------------
+
+]]></Content>
+</UDLText>
+
+<Method name="NewVacancyResponse">
+<Description>
+Добавить отзыв</Description>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+	   set st=$$$OK
+   try{
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
+       
+       set vr=##class(Vacancy.VacancyResponse).%New()
+            
+       set vr.FirstName=obj.FirstName
+       set vr.LastName=obj.LastName
+       set vr.From.Country=obj.Country
+       set vr.From.State=obj.State
+       set vr.From.City=obj.City
+       set vr.From.Street=obj.Street
+       set vr.From.Building=obj.Building
+       set vr.From.Apartament=obj.Apartament
+       set vr.From.Email=obj.Email
+       set vr.From.Telephone=obj.Telephone
+       set vr.ResponseDate=$h
+       set vr.ResponseText=obj.ResponseText
+       $$$THROWONERROR(st,vr.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
+    quit st
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// ------------- END VACANCY RESPONSE-----------------------
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
 // -------------VACANCY BEGIN-----------------------
 
 ]]></Content>
@@ -151,13 +196,6 @@
 ]]></Implementation>
 </Method>
 
-<UDLText name="T">
-<Content><![CDATA[
-// <MDG.Victor77>
-
-]]></Content>
-</UDLText>
-
 <Method name="GetVacancy">
 <Description>
 список вакансий</Description>
@@ -176,13 +214,6 @@
   quit $$$OK
 ]]></Implementation>
 </Method>
-
-<UDLText name="T">
-<Content><![CDATA[
-// </MDG.Victor77>
-
-]]></Content>
-</UDLText>
 
 <Method name="GetVacancyAndCompany">
 <Description>

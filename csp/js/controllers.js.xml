@@ -69,7 +69,12 @@ function vacancyShowCtrl($scope,$http){
 			}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 	   }
-
+	   
+	   $scope.newResponse = function (v){
+		    $http.get("/v/json/vacancyresp/",v)
+		    .success(function(data){}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления отзыва :( ["+data+"]"; });
+		    }
 
 }
 ]]></CSP>

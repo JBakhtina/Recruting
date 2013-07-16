@@ -89,6 +89,25 @@
 			 			<p>{{txtAddInfo}}</p>
 			 			
 			 			<hr>
+			 			
+			 		<V77>
+                    <div class="CreateResponse">
+			 		 <form name="Response" ng-model="vr"  ng-submit="newResponse(vr)">
+			 		   Имя:            <input type="text" value="test" ng-model="vr.FirstName" /><br>
+			 		   Фамилия:        <input type="text" ng-model="vr.LastName"/><br>
+			 		   E-mail:         <input type="text" ng-model="vr.Email" value="test"/><br> 
+			 		   Телефон:        <input type="text" ng-model="vr.Telephone" value="test"/><br>
+			 		   Страна:         <input type="text" ng-model="vr.Country" value="test"/><br>
+			 		   Республика:     <input type="text" ng-model="vr.State"/><br>
+			 		   Город:          <input type="text" ng-model="vr.City"/><br>
+			 		   Улица:          <input type="text" ng-model="vr.Street"/><br>	
+			 		   Номер дома:     <input type="text" ng-model="vr.Building"/><br>
+			 		   Номер квартиры: <input type="text" ng-model="vr.Apartament"/><br>	
+			 		   Добавте отзыв <br> <textarea rows="10" cols="45" ng-model="vr.ResponseText"> "test"</textarea><br>				
+			 	       <input type="submit" value="Сохранить"/>     
+			 		</form>
+			 		</div>
+                   </V77>
 			 		
 			 		<!---КНОПКИ/ССЫЛКИ--->	
 			 			<div class="span7">
@@ -153,7 +172,7 @@
 	
    <!--<script language = "javascript" src="js/app.js"></script>-->
    <script language = "javascript" src="js/controllers.js"></script>
-    
+     <script language = "javascript" src="test.js"></script>
    <script language = "javascript" >
    		//vacancyShowCtrl.$inject = ['$scope','$http', 'greeter'];
   </script>

@@ -6,6 +6,18 @@
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
 <TimeCreated>63006,71348.449412</TimeCreated>
 
+<Property name="FirstName">
+<Description>
+Имя</Description>
+<Type>%String</Type>
+</Property>
+
+<Property name="LastName">
+<Description>
+Фамилия	</Description>
+<Type>%String</Type>
+</Property>
+
 <Property name="From">
 <Description>
 От кого произошел отклик</Description>
@@ -104,6 +116,12 @@
 </Value>
 <Value name="5">
 <Value>Vacancy</Value>
+</Value>
+<Value name="6">
+<Value>FirstName</Value>
+</Value>
+<Value name="7">
+<Value>LastName</Value>
 </Value>
 </Data>
 </Storage>
