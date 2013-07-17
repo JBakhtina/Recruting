@@ -65,7 +65,7 @@
 <!---/НАВИГАЦИОННАЯ ПАНЕЛЬ---> 	
 
 		<!---ОТОБРАЖЕНИЕ 1 ВАКАНСИИ---> 
-		<div ID="vacancyShow" class="container" style="display:;">
+		<div ID="vacancyShow" class="container" ng-hide="showR" ng-show="showV" >
   				<form ng-submit="vacanciesConstruct()" style="margin-bottom:10px">
   					<a class="btn" href="index1.csp"><i class="icon-list"></i> Список вакансий</a>
   				</form>	
@@ -89,29 +89,12 @@
 			 			<p>{{txtAddInfo}}</p>
 			 			
 			 			<hr>
-			 		<V77>
-                    <div class="CreateResponse">
-                    
-			 		 <form name="Response" ng-model="vr"  ng-submit="newResponse(vr)">
-			 		   Имя:            <input type="text" ng-model="vr.FirstName"/><br>
-			 		   Фамилия:        <input type="text" ng-model="vr.LastName"/><br>
-			 		   E-mail:         <input type="text" ng-model="vr.Email"/><br> 
-			 		   Телефон:        <input type="text" ng-model="vr.Telephone"/><br>
-			 		   Страна:         <input type="text" ng-model="vr.Country"/><br>
-			 		   Республика:     <input type="text" ng-model="vr.State"/><br>
-			 		   Город:          <input type="text" ng-model="vr.City"/><br>
-			 		   Улица:          <input type="text" ng-model="vr.Street"/><br>	
-			 		   Номер дома:     <input type="text" ng-model="vr.Building"/><br>
-			 		   Номер квартиры: <input type="text" ng-model="vr.Apartament"/><br>
-			 		   Добавте отзыв <br> <textarea rows="10" cols="45" ng-model="vr.ResponseText"></textarea><br>				
-			 	       <input type="submit" value="Сохранить"/>     
-			 		</form>
-			 		</div>
-                   </V77>
+			 		
 			 		
 			 		<!---КНОПКИ/ССЫЛКИ--->	
 			 			<div class="span7">
-			 				<a href="#" class="btn btn-large"><i class="icon-bullhorn"></i> <strong>Откликуться</strong></a>
+			 				<a href="#" class="btn btn-large" ng-click="showResponseForm(true)"><i class="icon-bullhorn"></i> <strong>Откликуться</strong></a>
+			 				
 			 				<div class="pull-right">
 			 					<a href="#" class=""><img src='img\fb2.png'></a>
 						    <a href="#" class=""><img src='img\tw2.png'></a>
@@ -121,6 +104,7 @@
 						    <a href="" class="">
 						    	<img src='img\g+.png'>
 						    </a>
+						    
 			 				</div>
 						</div>
 					 <!---/КНОПКИ/ССЫЛКИ--->	
@@ -141,9 +125,77 @@
 			 	</div>	
 	     </div>
 <!---/ОТОБРАЖЕНИЕ 1 ВАКАНСИИ--->
+		  
+  <V77>          
+           <div class="well" ng-hide="showV" ng-show="showR">
+				<H3 align="center">Отклик на вакансию</h3>
+				
+				<form class="form-horizontal" name="Response" ng-model="vr"  ng-submit="newResponse(vr); showResponseForm(false); " accept-charset="utf-8">
+								
+					<div class="control-group">
+						<label for="FirstName" class="control-label">Имя:</label>
+						<div class="controls"><input name="FirstName" ng-model="vr.FirstName" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">	
+						<label for="LastName" class="control-label">Фамилия:</label>
+						<div class="controls"><input name="LastName" ng-bind="vr.FirstName" ng-model="vr.LastName" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="Email" class="control-label">E-mail:</label>
+						<div class="controls"><input name="Email" ng-model="vr.Email" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="Telephone" class="control-label">Телефон:</label>
+						<div class="controls"><input name="Telephone" ng-model="vr.Telephone" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">			
+						<label for="Country" class="control-label">Страна:</label>
+						<div class="controls"><input name="Country" ng-model="vr.Country" class="input-xlarge" required></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="State" class="control-label">Республика/Область</label>
+						<div class="controls"><input name="State" ng-model="vr.State" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="City" class="control-label">Город:</label>
+						<div class="controls"><input name="City" ng-model="vr.City" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="Street" class="control-label">Улица:</label>
+						<div class="controls"><input name="Street" ng-model="vr.Street" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="Building" class="control-label">Номер дома:</label>
+						<div class="controls"><input name="Building" ng-model="vr.Building" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="Apartament" class="control-label">Номер квартиры:</label>
+						<div class="controls"><input name="Apartament" ng-model="vr.Apartament" class="input-xlarge"></div>
+					</div>
+					
+					<div class="control-group">		
+						<label for="ResponseText" class="control-label">Добавте отзыв</label>
+						<div class="controls"><textarea name="ResponseText" rows="10" cols="45" ng-model="vr.ResponseText" class="input-xlarge"></textarea></div>
+					</div>
+						
+					<div class="form-actions">
+						<button type="submit" class="btn btn-large btn-primary">Оставить отклик</button>
+					</div>
+				</form>
+			</div>
+			</div>
+		</V77>
 		
-	</div>
-	
+		
 	<!---ФУТЕР СТРАНИЦЫ--->	
 	<div class="container ">	
 		<div class="row-fluid ">

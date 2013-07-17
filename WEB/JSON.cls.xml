@@ -39,6 +39,8 @@
        
        set vr=##class(Vacancy.VacancyResponse).%New()
        set vacancy=##class(Vacancy.Vacancy).%OpenId(obj.ID)
+       
+       // ИД не сохраняется
        set vr.Vacancy=vacancy
        set vr.FirstName=obj.FirstName
        set vr.LastName=obj.LastName
@@ -49,9 +51,11 @@
        set vr.From.Building=obj.Building
        set vr.From.Apartament=obj.Apartament
        set vr.From.Email=obj.Email
-       set vr.From.Telephone=obj.Telephone
+       set vr.From.Telephone=obj.Telephone 
+       
+       // из-за этой строчки не сохраняется - дату надо как-то по-другому передать 
        set vr.ResponseDate=$h
-       set vr.ResponseText=obj.ResponseText
+       set vr.ResponseText=obj.ResponseText 
        $$$THROWONERROR(st,vr.%Save())
  
    } catch ex{set st=ex.AsStatus()}
