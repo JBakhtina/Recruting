@@ -54,6 +54,7 @@ function vacancyShowCtrl($scope,$http){
 			try	{
 				// передаем массив полученных данных в функцию формирования текста
 				// выведем результат в соотвествующие поля
+				
 				$scope.txtVacancyName = data.children[0]["VacancyName"]
 				$scope.txtVacancyCompany = data.children[0]["CompanyName"]
 				$scope.txtVacancyCity = data.children[0]["CityVacancy"]
@@ -71,12 +72,13 @@ function vacancyShowCtrl($scope,$http){
 	   }
 	   
 	   $scope.newResponse = function (v){
-		   alert(v);
 		    $http.post("/v/json/vacancyresp/",v)
-		    .success(function(data){}).error(function(data,status){
+		    .success(function(data){ $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления отзыва :( ["+data+"]"; });
 		    }
-
+		    		    
 }
+
+
 ]]></CSP>
 </Export>

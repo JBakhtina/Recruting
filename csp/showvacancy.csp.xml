@@ -91,6 +91,7 @@
 			 			<hr>
 			 		<V77>
                     <div class="CreateResponse">
+                    
 			 		 <form name="Response" ng-model="vr"  ng-submit="newResponse(vr)">
 			 		   Имя:            <input type="text" ng-model="vr.FirstName"/><br>
 			 		   Фамилия:        <input type="text" ng-model="vr.LastName"/><br>
@@ -101,7 +102,7 @@
 			 		   Город:          <input type="text" ng-model="vr.City"/><br>
 			 		   Улица:          <input type="text" ng-model="vr.Street"/><br>	
 			 		   Номер дома:     <input type="text" ng-model="vr.Building"/><br>
-			 		   Номер квартиры: <input type="text" ng-model="vr.Apartament"/><br>	
+			 		   Номер квартиры: <input type="text" ng-model="vr.Apartament"/><br>
 			 		   Добавте отзыв <br> <textarea rows="10" cols="45" ng-model="vr.ResponseText"></textarea><br>				
 			 	       <input type="submit" value="Сохранить"/>     
 			 		</form>

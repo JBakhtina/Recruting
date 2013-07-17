@@ -121,12 +121,13 @@ function AddItem() {
 			</article>
 	    </div>
 	    
-	    <form name="vCreateForm" ng-model="newvacancy" ng-submit="createvacancy(newvacancy); newvacancy.Name='';newvacancy.MainInfo='';newvacancy.Company='';">
-новая компания <input type="text" ng-model="newvacancy.Name"/>
-ИД компания <input type="text" ng-model="newvacancy.Company"/>
-инфа <input type="text" ng-model="newvacancy.MainInfo"/>
-<input type="submit" value="Сохранить"/>
-</form>
+	    <form name="vCreateForm" ng-model="newvacancy" ng-submit="createvacancy(newvacancy); newvacancy.Name=''; newvacancy.Company='';newvacancy.MainInfo='';">
+           новая компания <input type="text" ng-model="newvacancy.Name"/><br>
+           ИД компания    <input type="text" ng-model="newvacancy.Company"/><br>
+           инфа           <input type="text" ng-model="newvacancy.MainInfo"/>
+                          <input type="submit" value="Сохранить"/>
+        </form>
+        
 		<div id="footer">
 			<div class=""></div>
 			

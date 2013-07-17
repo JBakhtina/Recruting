@@ -48,13 +48,12 @@
 <Relationship>1</Relationship>
 </Property>
 
-<Method name="%OnNew">
-<Description>
-Генерируется письмо при создании новой записи</Description>
-<Private>1</Private>
-<ReturnType>%Status</ReturnType>
-<ServerOnly>1</ServerOnly>
-<Implementation><![CDATA[
+<UDLText name="T">
+<Content><![CDATA[
+/*
+/// Генерируется письмо при создании новой записи
+Method %OnNew() As %Status [ Private, ServerOnly = 1 ]
+{
   #dim smtp As %Net.SMTP
   #dim mail As %Net.MailMessage
   
@@ -90,8 +89,10 @@
   s status= smtp.Send(mail)
 
 	Quit status
-]]></Implementation>
-</Method>
+}
+*/
+]]></Content>
+</UDLText>
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>

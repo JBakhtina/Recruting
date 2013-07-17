@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-<CSP name="bootstrap/js/mdg_lib.js" application="/csp/vacancy/"><![CDATA[
+<CSP name="Bootstrap/js/mdg_lib.js" application="/csp/vacancy/"><![CDATA[
 <!-- blocked by {MDG.CTP} -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/js/jquery.js"></script>
@@ -57,13 +57,13 @@ function control ($scope,$http){
 			    }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error delete vacancy :( ["+data+"]"; });
 		    }    
+		    
 $scope.createvacancy = function (v){
 		    // что б кашэ был в курсе что мы ему предлагаем
 		    // company. class="Data.Company";
-		    $http.post("/v/json/vacancy",v)
-		    .success(function(data){/*document.location.href = "/csp/vacancy/index1.csp";*/}).error(function(data,status){
+		    $http.put("/v/json/vacancy/",v)
+		    .success(function(data){ $scope.alertzone="V_Company:"+v.Company; /*document.location.href = "/csp/vacancy/index1.csp";*/ }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error creating new vacancy :( ["+data+"]"; });
 		    }		    
-
 ]]></CSP>
 </Export>
