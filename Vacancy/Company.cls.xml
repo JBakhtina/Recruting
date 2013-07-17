@@ -70,7 +70,7 @@
 <IdLocation>^Vacancy.CompanyD</IdLocation>
 <IndexLocation>^Vacancy.CompanyI</IndexLocation>
 <StreamLocation>^Vacancy.CompanyS</StreamLocation>
-<ExtentSize>10</ExtentSize>
+<ExtentSize>6</ExtentSize>
 <Data name="CompanyDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -107,7 +107,7 @@
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="Adress">
-<Selectivity>10.0000%,Apartament:10.0000%,Building:11.1111%,City:20.0000%,Country:14.2857%,Email:10.0000%,State:16.6667%,Street:11.1111%,Telephone:10.0000%,URL:20.0000%</Selectivity>
+<Selectivity>16.6667%,Apartament:16.6667%,Building:16.6667%,City:20.0000%,Country:20.0000%,Email:16.6667%,State:20.0000%,Street:20.0000%,Telephone:16.6667%,URL:16.6667%</Selectivity>
 </Property>
 <Property name="CompMainInfo">
 <Selectivity>100.0000%</Selectivity>
@@ -128,16 +128,16 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>16.6667%</Selectivity>
 </Property>
 <Property name="NewProperty1">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Users">
-<Selectivity>100.0000%</Selectivity>
+<Selectivity>25.0000%</Selectivity>
 </Property>
 <Property name="Vacancies">
-<Selectivity>100.0000%</Selectivity>
+<Selectivity>25.0000%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
 <BlockCount>-4</BlockCount>

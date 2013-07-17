@@ -77,11 +77,20 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+   set ^aaa= "qweqweqweqwe"
    set st=$$$OK
    try{
 	   //опять же преобраразуем переданный JSON в объект
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,"Vacancy.Vacancy",.obj,1))
-	   $$$THROWONERROR(st,obj.%Save())
+	   set v=##class(Vacancy.Vacancy).%New()
+       set v.Name=obj.Name
+       set v.MainInfo=obj.MainInfo
+       set id=##class(Vacancy.Company).%OpenId(obj.Company)
+       set v.Company=id.ID
+       set v.Company=3
+       set ^aaa= obj.Company
+       set v.CityVacancy="Киров"
+	   $$$THROWONERROR(st,v.%Save())
    } catch ex{
 	  set st=ex.AsStatus()
     }
