@@ -71,7 +71,8 @@ function vacancyShowCtrl($scope,$http){
 	   }
 	   
 	   $scope.newResponse = function (v){
-		    $http.get("/v/json/vacancyresp/",v)
+		   alert(v);
+		    $http.post("/v/json/vacancyresp/",v)
 		    .success(function(data){}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления отзыва :( ["+data+"]"; });
 		    }
