@@ -14,6 +14,7 @@ function vacancyCtrl($scope, $http){
 
 
     // функция аутентификации - считываем данные из БД - возвращаем результат
+
     $scope.authVerify=function(){
 
         $http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
@@ -54,17 +55,24 @@ function vacancyShowCtrl($scope,$http){
 			try	{
 				// передаем массив полученных данных в функцию формирования текста
 				// выведем результат в соотвествующие поля
-				
-				$scope.txtVacancyName = data.children[0]["VacancyName"]
-				$scope.txtVacancyCompany = data.children[0]["CompanyName"]
-				$scope.txtVacancyCity = data.children[0]["CityVacancy"]
-				$scope.txtRegDate = data.children[0]["RegDate"]
-				$scope.txtEduLevel = data.children[0]["EduLevel"]
-				$scope.txtStartSalary = data.children[0]["StartSalary"]
-				$scope.txtEndSalary = data.children[0]["EndSalary"]
-				$scope.txtAddInfo = data.children[0]["AddInfo"]
-				$scope.txtMainInfo = data.children[0]["MainInfo"]
-				vacancyConstruct();
+				var vac = data.children
+				$scope.txtVacancyName = vac[0]["VacancyName"]
+				$scope.txtVacancyCompany = vac[0]["CompanyName"]
+				$scope.txtVacancyCity = vac[0]["CityVacancy"]
+				$scope.txtRegDate = vac[0]["RegDate"]
+				$scope.txtEduLevel = vac[0]["EduLevel"]
+				$scope.txtStartSalary = vac[0]["StartSalary"]
+				$scope.txtEndSalary = vac[0]["EndSalary"]
+				$scope.txtAddInfo = vac[0]["AddInfo"]
+				$scope.txtMainInfo = vac[0]["MainInfo"]
+                $scope.txtCompMainInfo = vac[0]["CompMainInfo"]
+                $scope.txtLinks = vac[0]["Links_URL"]
+
+                // показываем слой с инфо о вакансии
+                $scope.showV=true;
+                // скрываем слой с формой ввода отклика
+                $scope.showR=false;
+
 			} catch(err){	
 			}
 			}).error(function(data,status){
@@ -73,9 +81,23 @@ function vacancyShowCtrl($scope,$http){
 	   
 	   $scope.newResponse = function (v){
 		    $http.post("/v/json/vacancyresp/",v)
-		    .success(function(data){ $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления отзыва :( ["+data+"]"; });
+
 		    }
+
+      // функция показа/скрытия слоёв с инфо о вакансии и с формой ввода отзыва
+       $scope.showResponseForm = function(sh){
+           if(sh){
+               $scope.showR = true;
+               $scope.showV = false;
+           } else {
+               $scope.showV = true;
+               $scope.showR = false;
+           }
+
+    }
 		    		    
 }
 
