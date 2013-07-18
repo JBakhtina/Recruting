@@ -44,7 +44,7 @@
 
        set vr.Vacancy=vacancy
        set vr.FirstName=obj.FirstName
-       set vr.FirstName=
+       
        set vr.LastName=obj.LastName
        set vr.From.Country=obj.Country
        set vr.From.State=obj.State
