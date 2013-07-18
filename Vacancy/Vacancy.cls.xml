@@ -230,6 +230,9 @@
 <Value name="15">
 <Value>AddInfo</Value>
 </Value>
+<Value name="16">
+<Value>VacancyType</Value>
+</Value>
 </Data>
 <Data name="VacancyTypes">
 <Attribute>VacancyTypes</Attribute>
@@ -243,13 +246,13 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>7.6923%</Selectivity>
+<Selectivity>7.1429%</Selectivity>
 </Property>
 <Property name="Company">
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>12.5000%</Selectivity>
 </Property>
 <Property name="EndSalary">
 <Selectivity>3.3333%</Selectivity>
@@ -264,7 +267,7 @@
 <Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>3.3333%,URL:3.3333%</Selectivity>
+<Selectivity>3.7037%,URL:3.7037%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>

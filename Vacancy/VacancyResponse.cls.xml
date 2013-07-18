@@ -27,7 +27,7 @@
 <Property name="ResponseDate">
 <Description>
 Дата отклика</Description>
-<Type>%String</Type>
+<Type>%Date</Type>
 </Property>
 
 <Property name="ResponseText">

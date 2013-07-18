@@ -4,7 +4,7 @@
 <!doctype html>
 <!-- blocked by {MDG.CTP} -->
 <!-- {MDG.DCrusher}working with -->
-<html ng-app>
+<html ng-app lang="ru">
 <head>
     <meta charset="utf-8">
 	<title>Vacancy</title>
