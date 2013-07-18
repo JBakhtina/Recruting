@@ -41,9 +41,10 @@
        set vr=##class(Vacancy.VacancyResponse).%New()
        set vacancy=##class(Vacancy.Vacancy).%OpenId(compid)
        //#dim a as %StringTimeStamp
-       // ИД не сохраняется
+
        set vr.Vacancy=vacancy
        set vr.FirstName=obj.FirstName
+       set vr.FirstName=
        set vr.LastName=obj.LastName
        set vr.From.Country=obj.Country
        set vr.From.State=obj.State

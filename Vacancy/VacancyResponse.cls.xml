@@ -48,51 +48,18 @@
 <Relationship>1</Relationship>
 </Property>
 
-<UDLText name="T">
-<Content><![CDATA[
-/*
-/// Генерируется письмо при создании новой записи
-Method %OnNew() As %Status [ Private, ServerOnly = 1 ]
-{
-  #dim smtp As %Net.SMTP
-  #dim mail As %Net.MailMessage
-  
-  set mail=##class(%Net.MailMessage).%New()
-  // Отправитель
-  set mail.From=""
-  // Тема письма
-  set mail.Subject="Новый отзыв"
-  // Кодировка
-  set mail.Charset="utf-8"
-  set mail.IsHTML=1
-  set mail.ContentType="text/html"
-  // Текст письма
-  do mail.TextData.Write("Добавлен новый отзыв на вакансию")
-  // Получатель
-  do mail.To.Insert("")
-  
-  
-  set smtp=##class(%Net.SMTP).%New()
-  
-  // Сервер исходящей почты, например smtp.mail.ru
-  set smtp.smtpserver=""
-  // Порт
-  set smtp.port=25
-  
-  Set auth=##class(%Net.Authenticator).%New()
-  // Имя пользователя, 123@mn.ru
-  set auth.UserName=""
-  // Пароль
-  set auth.Password=""
-  set smtp.authenticator=auth
-  
-  s status= smtp.Send(mail)
-
-	Quit status
-}
-*/
-]]></Content>
-</UDLText>
+<Method name="%OnAfterSave">
+<Description>
+Генерируется письмо при создании новой записи</Description>
+<FormalSpec>insert:%Boolean</FormalSpec>
+<Private>1</Private>
+<ReturnType>%Status</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+   //do ##class(Vacancy.CreateMail).NewMail(1)
+	Quit insert
+]]></Implementation>
+</Method>
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
