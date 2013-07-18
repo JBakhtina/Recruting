@@ -130,7 +130,7 @@
            <div class="well" ng-hide="showV" ng-show="showR">
 				<H3 align="center">Отклик на вакансию</h3>
 				
-				<form class="form-horizontal" name="Response" ng-model="vr"  ng-submit="newResponse(vr); showResponseForm(false); " accept-charset="windows1251">
+				<form class="form-horizontal" name="Response" ng-model="vr"  ng-submit="newResponse(#($Get(%request.Data("id",1),1))#,vr); showResponseForm(false); " accept-charset="windows1251">
 								
 					<div class="control-group">
 						<label for="FirstName" class="control-label">Имя:</label>

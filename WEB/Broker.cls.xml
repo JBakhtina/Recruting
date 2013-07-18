@@ -44,7 +44,7 @@
    <Route Url="/json/vacancy/" Method="PUT" Call="WEB.JSON:CreateVacancy"/>  
    
    
-  <Route Url="/json/vacancyresp/" Method="POST" Call="WEB.JSON:NVR"/>
+  <Route Url="/json/vacancyresp/:compid" Method="POST" Call="WEB.JSON:NVR"/>
    
  </Routes>
 ]]></Data>

@@ -30,6 +30,7 @@
 <Description>
 Добавить отзыв</Description>
 <ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 	
@@ -38,8 +39,8 @@
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
        set vr=##class(Vacancy.VacancyResponse).%New()
-       set vacancy=##class(Vacancy.Vacancy).%OpenId(obj.ID)
-       
+       set vacancy=##class(Vacancy.Vacancy).%OpenId(compid)
+       //#dim a as %StringTimeStamp
        // ИД не сохраняется
        set vr.Vacancy=vacancy
        set vr.FirstName=obj.FirstName
@@ -51,10 +52,8 @@
        set vr.From.Building=obj.Building
        set vr.From.Apartament=obj.Apartament
        set vr.From.Email=obj.Email
-       set vr.From.Telephone=obj.Telephone 
-       
-       // из-за этой строчки не сохраняется - дату надо как-то по-другому передать 
-       set vr.ResponseDate=$h
+       set vr.From.Telephone=obj.Telephone
+       set vr.ResponseDate=$zdt($H,4)
        set vr.ResponseText=obj.ResponseText 
        $$$THROWONERROR(st,vr.%Save())
  

@@ -79,8 +79,8 @@ function vacancyShowCtrl($scope,$http){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 	   }
 	   
-	   $scope.newResponse = function (v){
-		    $http.post("/v/json/vacancyresp/",v)
+	   $scope.newResponse = function (compid, v){
+		    $http.post("/v/json/vacancyresp/"+compid,v)
 		    .success(function(data){
                     $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления отзыва :( ["+data+"]"; });
