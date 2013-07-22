@@ -96,13 +96,13 @@
 			 				<a href="#" class="btn btn-large" ng-click="showResponseForm(true)"><i class="icon-bullhorn"></i> <strong>Откликуться</strong></a>
 			 				
 			 				<div class="pull-right">
-			 					<a href="#" class=""><img src='img\fb2.png'></a>
-						    <a href="#" class=""><img src='img\tw2.png'></a>
+			 					<a href="#" class=""><img src='img\sn_fb.png'></a>
+						    <a href="#" class=""><img src='img\sn_tw.png'></a>
 						    <a href="http://vk.com/share.php?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class="">
-						    	<img src='img\vk2.png'>
+						    	<img src='img\sn_vk.png'>
 						    </a>
 						    <a href="" class="">
-						    	<img src='img\g+.png'>
+						    	<img src='img\sn_g+.png'>
 						    </a>
 						    
 			 				</div>
@@ -113,6 +113,7 @@
 						<h6 class="text muted">На других ресурсах<h6>
 			 			<p>{{txtLinks}}</p>
 						
+						 <a rel="shortcut icon" href="http://hantim.ru/jobs/20028-javascript-razrabotchik-na-frontend"  type="image/x-icon">test</a>
 			 			<div>
 	       					<span class="label">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">Актуально</span></div>
 	    				</div> 

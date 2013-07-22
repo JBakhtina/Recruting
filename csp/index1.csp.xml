@@ -214,9 +214,13 @@ function control ($scope,$http){
 
 <!---БОКОВАЯ ПАНЕЛЬ--->     	   
 	       	   <div class="span3" >
-				 <div class="well"  >
-					<a class="btn btn-success btn" href="#"><i class="icon-ok"></i>&nbsp&nbsp<small>Разместить вакансию</small></a></p>
-					<hr>
+				 <div class="well">
+				 	<a class="btn btn-success" href="#" style="width:150px;"><i class="icon-ok"></i>&nbsp&nbsp<small>Разместить вакансию</small></a></p>
+				 	</hr>
+				 	<div class="btn-group pull-left" >
+            			<a class="" href="#"><img src='img\rss.png'></a>					
+					</div>		 	
+					
 					<h3 class="text-warning">Работодатели</h3>
 					
 					<ol class='nav nav-pills'>
