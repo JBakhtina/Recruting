@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="TestImage.CSP" application="/csp/vacancy/"><![CDATA[
+<script language="Cache" runat="Server">
 
-<!-- Copyright (c) 2001 InterSystems Inc. ALL RIGHTS RESERVED. -->
-<csp:class description="Demo of serving a stream with the <b>%CSP.StreamServer</b>.">
 
-<html>
+ </script>
 
-<head>
-</head>
 
-<body bgcolor=#CCCCFF>
+<img src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id=2"/>
 
-<img src="Image.CSP" contentType="content-type:image/jpg"/>
-
-</p>
-<br>
-
-</body>
-</html> ]]></CSP>
+]]></CSP>
 </Export>

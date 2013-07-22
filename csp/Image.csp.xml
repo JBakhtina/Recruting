@@ -13,7 +13,10 @@ set oid=a.Img.%Oid()
 // Добавляем новую запись о просмотре вакансии
 Set httpR=##class(Vacancy.VacancyView).%New()
 set httpR.Browser=%session.BrowserName
-set httpR.URL=%request.URL
+set httpRr=##class(%Net.HttpRequest).%New()
+set httpR.URL=httpRr.Referer
+
+
 set httpR.TimeStamp=$zdt($h,4)
 set httpR.IP=%request.GatewayConnectionName
 //w ##class(%SYSTEM.INetInfo).GetInterfacesInfo()

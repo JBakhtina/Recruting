@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="WEB.Image">
+<Super>%CSP.Page,%Net.HttpRequest</Super>
+<TimeCreated>63025,67400.421029</TimeCreated>
+
+<Parameter name="CONTENTTYPE">
+<Default>image/jpeg</Default>
+</Parameter>
+
+<Method name="OnPage">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+
+  set a=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
+ 
+  set oid=a.Img.%Oid()
+
+  d:$IsObject(a.Img) a.Img.OutputToDevice()
+  
+  
+  
+  // Добавляем новую запись о просмотре вакансии
+ Set httpR=##class(Vacancy.VacancyView).%New()
+ set httpR.Browser=%session.BrowserName
+ //TODO разобраться почему неотробатывает URL источник
+ set httpRr=##class(%Net.HttpRequest).%New()
+ set httpR.URL=httpRr.Referer
+ set httpR.TimeStamp=$zdt($h,4)
+ set httpR.IP=%request.GatewayConnectionName
+ //w ##class(%SYSTEM.INetInfo).GetInterfacesInfo()
+ set httpR.Vacancy=$Get(%request.Data("id",1),1)
+ do httpR.%Save()
+  
+  
+    
+  Q $$$OK
+]]></Implementation>
+</Method>
+</Class>
+</Export>

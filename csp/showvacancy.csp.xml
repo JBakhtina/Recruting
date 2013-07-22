@@ -125,7 +125,7 @@
 			 	</div>	
 	     </div>
 <!---/ОТОБРАЖЕНИЕ 1 ВАКАНСИИ--->
-		  
+		  <CSP:INCLUDE PAGE="Image.csp?id=1">
   <V77>          
            <div class="well" ng-hide="showV" ng-show="showR">
 				<H3 align="center">Отклик на вакансию</h3>

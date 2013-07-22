@@ -147,6 +147,7 @@
 </Property>
 
 <Method name="DeleteImg">
+<ClassMethod>1</ClassMethod>
 <FormalSpec>Id:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
@@ -158,6 +159,7 @@
 </Method>
 
 <Method name="UpdateImg">
+<ClassMethod>1</ClassMethod>
 <FormalSpec>Id:%Integer,PicFilename:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
