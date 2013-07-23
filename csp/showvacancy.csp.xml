@@ -8,6 +8,7 @@
 <head>
     <meta charset="utf-8">
 	<title>Vacancy</title>
+	<script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?9" charset="windows-1251"></script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -96,15 +97,27 @@
 			 				<a href="#" class="btn btn-large" ng-click="showResponseForm(true)"><i class="icon-bullhorn"></i> <strong>Откликуться</strong></a>
 			 				
 			 				<div class="pull-right">
-			 					<a href="#" class=""><img src='img\sn_fb.png'></a>
-						    <a href="#" class=""><img src='img\sn_tw.png'></a>
+			 				<br>
+			 				<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a>
+                            
+			 				
+			 				<div class="g-plus" data-action="share"></div>
+			 				
+			 				<script type="text/javascript">document.write(VK.Share.button());</script>
+			 				
+			 				<br><div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-send="true" data-width="450" data-show-faces="true"></div>
+			 				<br>
+			 				<!---
+			 					<a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class=""><img src='img\sn_fb.png'></a>
+						    <a href="https://twitter.com/share?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class=""><img src='img\sn_tw.png'></a>
 						    <a href="http://vk.com/share.php?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class="">
 						    	<img src='img\sn_vk.png'>
 						    </a>
-						    <a href="" class="">
+						    
+						    <a href="https://plus.google.com/share?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class="">
 						    	<img src='img\sn_g+.png'>
 						    </a>
-						    
+						    --->
 			 				</div>
 						</div>
 					 <!---/КНОПКИ/ССЫЛКИ--->	
@@ -230,7 +243,33 @@
    		//vacancyShowCtrl.$inject = ['$scope','$http', 'greeter'];
   </script>
     
+    
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    
+    
+    <!-- facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+   </script>
+    
+    <!-- google -->
+   <script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+  </script>
+
+     <!-- twitter -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    
     
 </body>
 </html>]]></CSP>

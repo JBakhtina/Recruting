@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="TestImage.CSP" application="/csp/vacancy/"><![CDATA[
-<script language="Cache" runat="Server">
+<img src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id=1"/>
 
 
- </script>
+<csp:class description="  ">
+<html>
+
+<head>
+</head>
+
+<body bgcolor=#CCCCFF>
 
 
-<img src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id=2"/>
 
-]]></CSP>
+<form action="" enctype="multipart/form-data" method=post>
+    
+    файл для загрузки
+    
+    <input name=FileStream size=30 type=file>
+    
+    <p>
+    <ul><input type=submit value="Upload file"></ul>
+    <p>
+</form>
+
+
+<csp:IF CONDITION=($data(%request.MimeData("FileStream",1)))>
+
+    <script language=Cache runat=server>
+         set a=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
+         set a.Img=%request.GetMimeData("FileStream",1)
+         do a.%Save()
+    </script>
+    </ul>
+</csp:IF>
+
+</body>
+</html>]]></CSP>
 </Export>

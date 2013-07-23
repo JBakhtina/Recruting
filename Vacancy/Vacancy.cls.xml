@@ -9,7 +9,7 @@
 <TimeCreated>63006,71348.086892</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Name:##class(Vacancy.PopUtils).VacancyName(),CityVacancy:##class(Vacancy.PopUtils).City(),AddInfo:##class(Vacancy.PopUtils).VacAddInfo(),MainInfo:##class(Vacancy.PopUtils).VacMainInfo()</Default>
+<Default>Name:##class(Vacancy.PopUtils).VacancyName(),CityVacancy:##class(Vacancy.PopUtils).City(),AddInfo:##class(Vacancy.PopUtils).VacAddInfo(),MainInfo:##class(Vacancy.PopUtils).VacMainInfo(),Img:##class(Vacancy.PopUtils).PopImage()</Default>
 </Parameter>
 
 <Property name="Name">
@@ -248,13 +248,13 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>7.1429%</Selectivity>
+<Selectivity>9.0909%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>11.1111%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>12.5000%</Selectivity>
+<Selectivity>11.1111%</Selectivity>
 </Property>
 <Property name="EndSalary">
 <Selectivity>3.3333%</Selectivity>
@@ -269,7 +269,7 @@
 <Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>3.7037%,URL:3.7037%</Selectivity>
+<Selectivity>3.3333%,URL:3.3333%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>
@@ -290,7 +290,7 @@
 <Selectivity>33.3333%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-24</BlockCount>
+<BlockCount>-20</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

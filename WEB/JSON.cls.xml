@@ -503,5 +503,31 @@ SqlRequest - текстовый SQL запрос</Description>
     ************/
 ]]></Content>
 </UDLText>
+
+<Method name="UpdateImage">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	   set st=$$$OK
+   try{
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
+	   
+       set vv=##class(Vacancy.Vacancy).%OpenId(compid)
+	   //set StreamFile=##class(%Stream.FileBinary).%New()
+	   //set StreamFile.Filename=$g(PicFilename)
+	  //set StreamFile=
+	  
+	  
+	 // set vv.Img=obj.Image
+	   //s sc=vv.Img.CopyFromAndSave(StreamFile)
+       // set a =%request.MimeData("FileStream",1).ContentType 
+       $$$THROWONERROR(st,vv.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
+   
+    quit st
+]]></Implementation>
+</Method>
 </Class>
 </Export>

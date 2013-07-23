@@ -7,6 +7,32 @@
 
 <UDLText name="T">
 <Content><![CDATA[
+// Заполняем картинками
+
+]]></Content>
+</UDLText>
+
+<Method name="PopImage">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%BinaryStream</ReturnType>
+<Implementation><![CDATA[
+	s t1=$lb("/csp/vacancy/img/comp1.png",
+	         "/csp/vacancy/img/comp2.png",
+	         "/csp/vacancy/img/comp3.png",
+	         "/csp/vacancy/img/comp4.png",
+	         "/csp/vacancy/img/comp5.png")
+    
+    //$$GetFilename^%apiCSP возврвщает путь к файлу находящегося в csp поддиректории
+    set PicFilename=$$GetFilename^%apiCSP($li(t1,$r($ll(t1))+1))
+    
+	set StreamFile=##class(%Stream.FileBinary).%New()
+	set StreamFile.Filename=$g(PicFilename)
+	return StreamFile
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
 // Пол
 
 ]]></Content>

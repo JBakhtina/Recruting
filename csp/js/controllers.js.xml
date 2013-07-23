@@ -79,6 +79,7 @@ function vacancyShowCtrl($scope,$http){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 	   }
 	   
+	   // добавляем новый отзыв о вакансии
 	   $scope.newResponse = function (compid, v){
 		    $http.post("/v/json/vacancyresp/"+compid,v)
 		    .success(function(data){
@@ -98,6 +99,15 @@ function vacancyShowCtrl($scope,$http){
            }
 
     }
+    
+           // картинка  
+    	   $scope.newImage= function (compid, v){
+		    $http.post("/v/json/vimage/"+compid,v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления  :( ["+data+"]"; });
+
+		    }
 		    		    
 }
 
