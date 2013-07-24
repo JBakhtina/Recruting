@@ -67,7 +67,7 @@ function vacancyShowCtrl($scope,$http){
 				$scope.txtMainInfo = vac[0]["MainInfo"]
                 $scope.txtCompMainInfo = vac[0]["CompMainInfo"]
                 $scope.txtLinks = vac[0]["Links_URL"]
-
+                       
                 // показываем слой с инфо о вакансии
                 $scope.showV=true;
                 // скрываем слой с формой ввода отклика

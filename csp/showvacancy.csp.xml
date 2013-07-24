@@ -7,7 +7,7 @@
 <html ng-app lang="ru">
 <head>
     <meta charset="utf-8">
-	<title>Vacancy</title>
+	<title>Вакансия: {{mdgtitle}}  </title>
 	<script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?9" charset="windows-1251"></script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -139,7 +139,9 @@
 			 	</div>	
 	     </div>
 <!---/ОТОБРАЖЕНИЕ 1 ВАКАНСИИ--->
-		  <CSP:INCLUDE PAGE="Image.csp?id=1">
+		  <img src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id=#($Get(%request.Data("id",1),1))#"/>
+		  
+		  
   <V77>          
            <div class="well" ng-hide="showV" ng-show="showR">
 				<H3 align="center">Отклик на вакансию</h3>

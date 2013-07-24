@@ -16,7 +16,6 @@
 <Description>
 Наименование вакансии - то что будет выводиться списком</Description>
 <Type>%String</Type>
-<Required>1</Required>
 <Parameter name="MAXLEN" value="30"/>
 </Property>
 
@@ -40,8 +39,7 @@
 
 <Property name="VacancyType">
 <Description>
-Должности подходящие для данной вакансии
-непонятно victor77</Description>
+Должности подходящие для данной вакансии</Description>
 <Type>%String</Type>
 <Parameter name="VALUELIST" value=",полная занятость, договорная, подработка"/>
 </Property>
@@ -248,13 +246,13 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>9.0909%</Selectivity>
+<Selectivity>8.3333%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EduLevel">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="EndSalary">
 <Selectivity>3.3333%</Selectivity>
@@ -263,13 +261,13 @@
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
 <Property name="Img">
-<Selectivity>100.0000%</Selectivity>
+<Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Institution">
 <Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>3.3333%,URL:3.3333%</Selectivity>
+<Selectivity>3.7037%,URL:3.7037%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>

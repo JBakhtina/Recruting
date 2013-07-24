@@ -37,11 +37,12 @@
    <Route Url="/json/comvac" Method="GET" Call="WEB.JSON:GetCompaniesVacancies"/>
    <Route Url="/json/authVerify/:authLogin/:authPassword" Method="GET" Call="WEB.JSON:AuthVerify"/> 
    
-   <Route Url="/json/v/:compid" Method="PUT" Call="WEB.JSON:UpdateVacancy"/>
+   <Route Url="/json/v/:compid" Method="POST" Call="WEB.JSON:UpdateVacancy"/>
    <!--Route Url="/json/v/:compid" Method="PUT" Call="WEB.TestJSON:OnPage"/-->
    <Route Url="/json/candv/:compid" Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
    <Route Url="/json/vacancy/:compid" Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
-   <Route Url="/json/vacancy/" Method="PUT" Call="WEB.JSON:CreateVacancy"/>  
+   
+   <Route Url="/json/vacancy/" Method="POST" Call="WEB.JSON:CreateVacancy"/>  
    
    
    <Route Url="/json/vacancyresp/:compid" Method="POST" Call="WEB.JSON:NVR"/>

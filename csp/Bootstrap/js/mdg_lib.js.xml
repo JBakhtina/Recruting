@@ -17,14 +17,14 @@
     <script src="bootstrap/js/angular-resource.min.js"></script>
     <script src="bootstrap/js/angular-sanitize.min.js"></script>
 <!-- Обработчик страницы -->
-<script language ="javascript"> 
-function control ($scope,$http){
+   <script language ="javascript"> 
+   function control ($scope,$http){
 		$scope.getVacancies=function(){
 		$http.get("/v/json/vacanciesold").success(function(data){
 			$scope.vacancies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Error upload vacancy list :( ["+data+"]"; });
 		    }
-	 $scope.getCompanies=function(){
+	 	$scope.getCompanies=function(){
 		$http.get("/v/json/companies").success(function(data){
 			$scope.companies=data.children;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Error upload company list :( ["+data+"]"; });
@@ -42,28 +42,28 @@ function control ($scope,$http){
 		    }   
 		    
 		    // добавляем обновление ВЫЗЫВАЕМ ЕЁ ТУТ
-		 $scope.update = function (compid){ 
-		      var url = "/v/json/v/"+compid[0].ID;
-		 $http.put(url ,compid[0])
+		 $scope.update = function (compid, v){ 
+		      //var url = "/v/json/v/"+compid[0].ID;
+		 $http.post("/v/json/v/"+compid,v)
 		     .success(function(data){$scope.alertzone="Update Ok!"+compid[0].Name;}).error(function(data,status){
 			 $scope.alertzone="["+status+"]Error update vacancy data:( ["+data+"]"; });
 			 //$scope.alert2="/v/json/vacancy/"+vacancy[0].ID;
 		     }
+		     
 		 // удаление вакансии
-	    $scope.deletevacancy = function (v){
-		    $http.delete("/v/json/vacancy/"+v[0].ID)
+	    $scope.deletevacancy = function (compid){
+		    $http.delete("/v/json/vacancy/"+compid)
 		    .success(function(data){
 			    document.location.href = "/csp/vacancy/index.csp";
 			    }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error delete vacancy :( ["+data+"]"; });
 		    }    
 		    
-$scope.createvacancy = function (v){
+		$scope.createvacancy = function (v){
 		    // что б кашэ был в курсе что мы ему предлагаем
 		    // company. class="Data.Company";
-		    $http.put("/v/json/vacancy/",v)
+		    $http.post("/v/json/vacancy/",v)
 		    .success(function(data){ $scope.alertzone="V_Company:"+v.Company; /*document.location.href = "/csp/vacancy/index1.csp";*/ }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error creating new vacancy :( ["+data+"]"; });
-		    }		    
-]]></CSP>
+		    }]]></CSP>
 </Export>

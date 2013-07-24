@@ -85,22 +85,29 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-   set ^aaa= "qweqweqweqwe"
-   set st=$$$OK
+		   set st=$$$OK
    try{
-	   //опять же преобраразуем переданный JSON в объект
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
-	   set v=##class(Vacancy.Vacancy).%New()
-       set v.Name=obj.Name
-       set v.MainInfo=obj.MainInfo
-       set id=##class(Vacancy.Company).%OpenId(obj.Company)
-       set v.Company=id
-      // set ^aaa= obj.Company
-       set v.CityVacancy="Киров"
-	   $$$THROWONERROR(st,v.%Save())
-   } catch ex{
-	  set st=ex.AsStatus()
-    }
+       
+       set vacancy=##class(Vacancy.Vacancy).%New()
+       set vacancy.Name=$ZCONVERT(obj.VacancyName,"I","UTF8")
+       set vacancy.Skills=$ZCONVERT(obj.Skills,"I","UTF8")
+       set vacancy.VacancyType=$ZCONVERT(obj.VacancyType,"I","UTF8")
+       set vacancy.EduLevel=$ZCONVERT(obj.EduLevel,"I","UTF8")
+       set vacancy.Institution=$ZCONVERT(obj.Institution,"I","UTF8")
+       set vacancy.StartSalary=$ZCONVERT(obj.StartSalary,"I","UTF8")
+       set vacancy.EndSalary=$ZCONVERT(obj.EndSalary,"I","UTF8")
+       set vacancy.RegDate=$piece($H, ",")
+       set vacancy.CityVacancy=$ZCONVERT(obj.CityVacancy,"I","UTF8")
+       set vacancy.MainInfo=$ZCONVERT(obj.MainInfo,"I","UTF8")
+       set vacancy.AddInfo=$ZCONVERT(obj.AddInfo,"I","UTF8")
+       set vacancy.Seats=$ZCONVERT(obj.Seats,"I","UTF8")
+       set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.comid)
+       //set vacancy.Links.URL=obj.Links_URL
+
+       $$$THROWONERROR(st,vacancy.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
     quit st
 ]]></Implementation>
 </Method>
@@ -145,42 +152,30 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-   k ^TEST
-   s ^TEST="here"
-   set st=$$$OK
-   &html<<h1>entering <b>UPDATE</b> block</h1>>  
-		
+	   set st=$$$OK
    try{
-	   // ошибка во втором параметре - д.б. строка
-	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,"Vacancy.Vacancy",.obj,1))
-       zw obj/*
-       s i=$i(^TEST($J))
-       s ^TEST($J,i)="I was here"
-       m ^TEST($J,i)=%request.Data*/
-       #;s ^TEST="DEMO"
-		//s stream=%request.Content
-		//s ^AAA($J,"stream")=stream
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
+       
+       set vacancy=##class(Vacancy.Vacancy).%OpenId(compid)
+      
+       set vacancy.Name=$ZCONVERT(obj.VacancyName,"I","UTF8")
+       set vacancy.Skills=$ZCONVERT(obj.Skills,"I","UTF8")
+       set vacancy.VacancyType=$ZCONVERT(obj.VacancyTypes,"I","UTF8")
+       set vacancy.EduLevel=$ZCONVERT(obj.EduLevel,"I","UTF8")
+       set vacancy.Institution=$ZCONVERT(obj.Institution,"I","UTF8")
+       set vacancy.StartSalary=$ZCONVERT(obj.StartSalary,"I","UTF8")
+       set vacancy.EndSalary=$ZCONVERT(obj.EndSalary,"I","UTF8")
+       set vacancy.RegDate=$piece($H, ",")
+       set vacancy.CityVacancy=$ZCONVERT(obj.CityVacancy,"I","UTF8")
+       set vacancy.MainInfo=$ZCONVERT(obj.MainInfo,"I","UTF8")
+       set vacancy.AddInfo=$ZCONVERT(obj.AddInfo,"I","UTF8")
+       set vacancy.Seats=$ZCONVERT(obj.Seats,"I","UTF8")
+       set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.CompanyName)
+       //set vacancy.Links.URL=obj.Links_URL
 
-	   // пытаемся сделать обратное преобразование - из формата json в объект
-       set comp=##class(Vacancy.Vacancy).%OpenId(compid)
-       throw:comp=$$$NULLOREF ##class(%Exception.StatusException).CreateFromStatus($$$ERROR(5001,"Нэ нашёль вакансию :("))
-       set comp.Name=obj.Name
-       set comp.Image=obj.Image
-       //set comp.RegDate=obj.RegDate
-       set comp.Skills=obj.Skills
-       set comp.VacancyTypes=obj.VacancyTypes
-       set comp.Seats=obj.Seats
-       //set comp.EduLevel=obj.EduLevel
-       //set comp.Institution=obj.Institution
-       set comp.StartSalary=obj.StartSalary
-       set comp.EndSalary=obj.EndSalary
-       set comp.Links=obj.Links
-       $$$THROWONERROR(st,comp.%Save())
+       $$$THROWONERROR(st,vacancy.%Save())
  
-   } catch ex{
-	  &html<<h1>entering <b>CATCH</b> block</h1>>  
-	  set st=ex.AsStatus()
-    }
+   } catch ex{set st=ex.AsStatus()}
     quit st
 ]]></Implementation>
 </Method>
@@ -221,7 +216,7 @@
 <Implementation><![CDATA[
   set vacQuery = "SELECT C.Name AS CompanyName, C.CompMainInfo, V.CityVacancy, V.Skills, V.Links_URL, "_ 
 					     "V.ID AS IDVac, V.VacancyType, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, "_ 
-					     "V.MainInfo, V.AddInfo,V.EduLevel "_
+					     "V.MainInfo, V.Institution, V.AddInfo,V.EduLevel "_
 				   "FROM Vacancy.Vacancy AS V "_
 				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
 				   "WHERE V.ID="_compid_
