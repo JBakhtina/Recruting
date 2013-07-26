@@ -54,7 +54,6 @@
 	
 	For i = 1:1:number
 	{
-		
 		if (##class(Vacancy.Vacancy).%ExistsId(i))
 		{
 			set a=##class(Vacancy.Vacancy).%OpenId(i)
