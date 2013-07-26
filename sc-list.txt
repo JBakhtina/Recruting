@@ -1,6 +1,9 @@
-/csp/vacancy
-/csp/vacancy/index2.CSP
+<cspapp>
+<cspapp>/index2.CSP
 Vacancy.PKG
 WEB.PKG
 Work.PKG
+angular
+angular.PKG
+csp.PKG
 mdg_vacancy

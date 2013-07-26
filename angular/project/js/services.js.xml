@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="project/js/services.js" application="/angular/"><![CDATA[
+'use strict';
+
+/* Services */
+
+
+// Demonstrate how to register services
+// In this case it is a simple value service.
+angular.module('myApp.services', []).
+  value('version', '0.1');
+]]></CSP>
+</Export>
