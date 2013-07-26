@@ -104,7 +104,7 @@
        set vacancy.Seats=$ZCONVERT(obj.Seats,"I","UTF8")
        set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.comid)
        //set vacancy.Links.URL=obj.Links_URL
-
+              
        $$$THROWONERROR(st,vacancy.%Save())
  
    } catch ex{set st=ex.AsStatus()}

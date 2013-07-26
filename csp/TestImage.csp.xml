@@ -13,13 +13,18 @@
 <body bgcolor=#CCCCFF>
 
 
+    <script language=Cache runat=server>
+          //set a=##class(Vacancy.Vacancy).%OpenId(39)
+          w ##class(Vacancy.Vacancy).%GetParameter("#")
+
+    </script>
+
 
 <form action="" enctype="multipart/form-data" method=post>
-    
+   
     файл для загрузки
-    
     <input name=FileStream size=30 type=file>
-    
+
     <p>
     <ul><input type=submit value="Upload file"></ul>
     <p>
@@ -27,11 +32,11 @@
 
 
 <csp:IF CONDITION=($data(%request.MimeData("FileStream",1)))>
-
     <script language=Cache runat=server>
-         set a=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
+         set a=##class(Vacancy.Vacancy).%OpenId(5)
          set a.Img=%request.GetMimeData("FileStream",1)
          do a.%Save()
+         
     </script>
     </ul>
 </csp:IF>

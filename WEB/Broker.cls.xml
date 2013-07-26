@@ -47,7 +47,8 @@
    
    <Route Url="/json/vacancyresp/:compid" Method="POST" Call="WEB.JSON:NVR"/>
    
-   <Route Url="/json/img/" Method="GET" Call="WEB.Image:OnPage"/>
+   <Route Url="/json/img/" Method="GET" Call="WEB.RSS:OnPage"/>
+   
    <Route Url="/json/vimage/:compid" Method="POST" Call="WEB.JSON:UpdateImage"/>
    
  </Routes>

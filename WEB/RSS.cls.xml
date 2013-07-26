@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="WEB.RSS">
+<Super>%CSP.Page</Super>
+<TimeCreated>63028,48897.945962</TimeCreated>
+
+<Parameter name="CONTENTTYPE">
+<Default>text/xml</Default>
+</Parameter>
+
+<Method name="OnPage">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	do ..Header()
+	do ..MyPage()
+	do ..EndBody()
+
+	Quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Header">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	Write "<?xml version=""1.0"" encoding=""utf-8""?>",!
+	Write " <rss version=""2.0"">",!
+	Write "  <channel>",!
+	Write "    <title>Вакансии</title>",!
+	Write "    <link>http://localhost:57772/csp/vacancy/index1.csp</link>",!
+	Write "    <description> Вакансии InterSystems</description>",!
+	Write "    <language>ru-ru</language>",!
+	Write "    <copyright>Copyright 2013 </copyright>",!
+	Write "     <author>InterSystems</author>",!
+	
+	Write " <image>",!
+	Write " 	<url>http://localhost:57772/csp/vacancy/WEB.Image.cls?id=1"
+	write "		</url>",!
+	Write "  	<title>InterSystems</title>",!
+	Write "  	<link>http://localhost:57772/csp/vacancy/showvacancy.CSP?id=1"
+	write "		</link>",!
+	Write " </image>",!
+	
+	Quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="MyPage">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+		For i = 1:1:70
+	{
+		set a=##class(Vacancy.Vacancy).%OpenId(i)
+
+		
+	Write " <item>",!
+	Write "  <title>Появилась новая вакансия "
+	write a.Name
+	Write "</title>",!
+    Write "<link>http://localhost:57772/csp/vacancy/showvacancy.CSP?id="
+    write i
+    write "</link>",!
+    Write "  <description>"
+    write a.MainInfo
+    write "</description>",!
+    Write "  <guid>"
+    write i
+    write "</guid>",!
+    Write " </item>",!
+		
+	}
+	
+	
+
+
+	
+	
+	
+	
+	
+
+
+    
+	Quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="EndBody">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	Write "</channel>",!
+    Write "</rss>",!
+    Quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+</Export>
