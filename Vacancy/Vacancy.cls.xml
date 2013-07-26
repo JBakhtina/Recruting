@@ -277,10 +277,10 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>8.3333%</Selectivity>
+<Selectivity>7.6923%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>11.1111%</Selectivity>
 </Property>
 <Property name="EduLevel">
 <Selectivity>10.0000%</Selectivity>
@@ -292,13 +292,13 @@
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
 <Property name="Img">
-<Selectivity>3.3333%</Selectivity>
+<Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Institution">
 <Selectivity>3.3333%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>3.7037%,URL:3.7037%</Selectivity>
+<Selectivity>3.4483%,URL:3.4483%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>

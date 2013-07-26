@@ -50,31 +50,33 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+	&sql(SELECT Count(*) into:number from Vacancy.Vacancy)
 	
-		For i = 1:1:70
+	For i = 1:1:number
 	{
-		set a=##class(Vacancy.Vacancy).%OpenId(i)
-
 		
-	Write " <item>",!
-	Write "  <title>Появилась новая вакансия "
-	write a.Name
-	Write "</title>",!
-    Write "<link>http://localhost:57772/csp/vacancy/showvacancy.CSP?id="
-    write i
-    write "</link>",!
-    Write "  <description>"
-    write a.MainInfo
-    write "</description>",!
-    Write "  <guid>"
-    write i
-    write "</guid>",!
-    Write " </item>",!
-		
+		if (##class(Vacancy.Vacancy).%ExistsId(i))
+		{
+			set a=##class(Vacancy.Vacancy).%OpenId(i)
+	
+			Write " <item>",!
+			Write "  <title>Появилась новая вакансия "
+			write a.Name
+			Write "</title>",!
+		    Write "<link>http://localhost:57772/csp/vacancy/showvacancy.CSP?id="
+		    write i
+		    write "</link>",!
+		    Write "  <description>"
+		    write a.MainInfo
+		    write "</description>",!
+		    Write "  <guid>"
+		    write i
+		    write "</guid>",!
+		    Write " </item>",!
+		}
+				
 	}
 	
-	
-
 
 	
 	
