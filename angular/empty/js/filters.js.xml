@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="empty/js/filters.js" application="/angular/"><![CDATA[
+'use strict';
+
+/* Filters */
+
+angular.module('myApp.filters', []).
+  filter('interpolate', ['version', function(version) {
+    return function(text) {
+      return String(text).replace(/\%VERSION\%/mg, version);
+    }
+  }]);
+]]></CSP>
+</Export>
