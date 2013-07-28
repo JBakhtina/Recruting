@@ -1,5 +1,8 @@
 <cspapp>
 <cspapp>/index2.CSP
+/csp/vacancy/index.csp
+/csp/vacancy/js/app.js
+/csp/vacancy/js/services.js
 Vacancy.PKG
 WEB.PKG
 Work.PKG
