@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="partials/vacancies.html" application="/csp/vacancy/"><![CDATA[
+<!---ВЫВОД ВАКАНСИЙ--->
+<div ID="vacanciesShow" >
+    <!---ФИЛЬТР--->
+    <div class="row">
+        <div class="input-append span5">
+            <input type="text" id="appendedInput"  ng-model="filterVacancy" placeholder="Введите слово для поиска">
+            <span class="add-on"><i class="icon-filter"></i></span>
+        </div>
+
+    </div>
+    <!---/ФИЛЬТР--->
+
+
+    <div class="row">
+        <div class="span9">
+            <div class="well" style="padding:1px">
+
+                <ul class='nav nav-pills nav-stacked'  >
+                    <li ng-repeat="vacancy in vacancies | filter:filterVacancy">
+                        <a  class='text-info' href="#/vacancy/{{vacancy.IDVac}}">
+                            <div class="row">
+
+                                <div class="span3">
+                                    <i class="icon-hand-right"></i>&nbsp
+                                    <input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
+                                    <b>{{vacancy.VacancyName}}</b></br>
+                                    <div class="text-success">{{vacancy.CompanyName}}</div>
+                                </div>
+                                <div class="span2"><span class="label label-info">{{vacancy.VacancyType}}</span></div>
+                                <div class="span2 text-info"><i class="icon-globe"></i>&nbsp{{vacancy.CityVacancy}}</div>
+                                <!--<div class="span2">{{vacancy.StartSalary}}-{{vacancy.EndSalary}}</div>-->
+                                <div class="span1"><span class="label label pull-right">{{vacancy.RegDate}}</span></div>
+                            </div>
+
+                        </a>
+                        <hr style="margin:0px;">
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!---/ВЫВОД ВАКАНСИЙ--->
+
+        <!---БОКОВАЯ ПАНЕЛЬ--->
+        <div class="span3" >
+            <div class="well">
+                <a class="btn btn-success" href="#" style="width:150px;"><i class="icon-ok"></i>&nbsp&nbsp<small>Разместить вакансию</small></a></p>
+                </hr>
+                <div class="btn-group pull-left" >
+                    <a class="" href="#"><img src='img\rss.png'></a>
+                </div>
+
+                <h3 class="text-warning">Работодатели</h3>
+
+                <ol class='nav nav-pills'>
+
+                    <li ng-repeat="cv in comvac" >
+
+                        <a href="" class="text-succes span2" style="margin:0px; ">{{cv.CVName}}
+                            <span class="span1 badge badge-warning pull-right">{{cv.VCOUNT}}</span></a>
+
+
+                    </li>
+
+                </ol>
+            </div>
+        </div>
+        <!---/БОКОВАЯ ПАНЕЛЬ--->
+]]></CSP>
+</Export>

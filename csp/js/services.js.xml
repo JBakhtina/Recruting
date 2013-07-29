@@ -3,9 +3,9 @@
 <CSP name="js/services.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
 
-angular.module('vacancy.services', [])
-    .factory('inserter', function($window){
-       return {
+angular.module('vacancyServices', ['ngResource'])
+    .factory('vacancies', function($resource){
+       return $resource ('vacancies/:vacId',{}) {
 		   ins: function(text) {
 			  
 		   }
