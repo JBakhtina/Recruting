@@ -15,7 +15,6 @@
 <Description>
 Город</Description>
 <Type>%String</Type>
-<Required>1</Required>
 </Property>
 
 <UDLText name="T">

@@ -108,9 +108,63 @@ function vacancyShowCtrl($scope,$http){
 			$scope.alertzone="["+status+"] Ошибка добавления  :( ["+data+"]"; });
 
 		    }
+		    
+		    
+
 		    		    
 }
 
+function SystemUserShow($scope,$http){
+
+		    // получение всех пользователей
+		    $scope.GetAllSystemUsers=function(){
+       		$http.get("/v/json/getallusers/").success(function(data){
+	       		
+            $scope.allusers=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
+    		}
+    		
+		    // получение  пользователя
+		    $scope.GetSystemUser=function(compid){
+       		$http.get("/v/json/getuser/"+compid).success(function(data){
+	       		
+            $scope.user=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
+    		}
+    		
+    	   // добавляем нового пользователя
+	   		$scope.newuser = function (v){
+		    $http.put("/v/json/createuser/",v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+		    
+		     // Обновление пользователя
+	   		$scope.updateuser = function (compid,v){
+		    $http.post("/v/json/updateteuser/"+compid,v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+		    
+		    
+		    // удаление пользователя
+	    	$scope.deleteuser = function (compid){
+		    $http.delete("/v/json/deleteuser/"+compid)
+		    .success(function(data){
+			    document.location.href = "/csp/vacancy/user.csp";
+			    }).error(function(data,status){
+			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
+		    }    
+		    
+    		
+    $scope.GetAllSystemUsers();
+
+
+}
 
 ]]></CSP>
 </Export>

@@ -21,6 +21,142 @@
 
 <UDLText name="T">
 <Content><![CDATA[
+// -------------System Users-----------------------
+
+]]></Content>
+</UDLText>
+
+<Method name="CreateSystemUsers">
+<Description>
+Добавление нового пользователя</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+	   set st=$$$OK
+   try{
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
+       
+      set su=##class(Vacancy.SystemUser).%New()
+      
+      set su.FirstName=$ZCONVERT(obj.FirstName,"I","UTF8")
+      set su.LastName=$ZCONVERT(obj.LastName,"I","UTF8")
+      set su.DOB=obj.DOB
+      set su.Sex=$ZCONVERT(obj.Sex,"I","UTF8")
+      set su.HomeAdress.Apartament=$ZCONVERT(obj.Apartament,"I","UTF8")
+      set su.HomeAdress.Building=$ZCONVERT(obj.Building,"I","UTF8")
+      set su.HomeAdress.City=$ZCONVERT(obj.City,"I","UTF8")
+      set su.HomeAdress.Country=$ZCONVERT(obj.Country,"I","UTF8")
+      set su.HomeAdress.Email=$ZCONVERT(obj.Email,"I","UTF8")
+      set su.HomeAdress.State=$ZCONVERT(obj.State,"I","UTF8")
+      set su.HomeAdress.Street=$ZCONVERT(obj.Street,"I","UTF8")
+      set su.HomeAdress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
+      set su.HomeAdress.URL=$ZCONVERT(obj.URL,"I","UTF8")
+      set su.Login="login"
+      set su.Password="awef"
+     
+       $$$THROWONERROR(st,su.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
+    quit st
+]]></Implementation>
+</Method>
+
+<Method name="UpdateSystemUsers">
+<Description>
+Обновление пользователя</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+	   set st=$$$OK
+   try{
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
+       
+      set su=##class(Vacancy.SystemUser).%OpenId(compid)
+      
+      set su.FirstName=$ZCONVERT(obj.FirstName,"I","UTF8")
+      set su.LastName=$ZCONVERT(obj.LastName,"I","UTF8")
+     // set su.DOB=obj.DOB
+      set su.Sex=$ZCONVERT(obj.Sex,"I","UTF8")
+      set su.HomeAdress.Apartament=$ZCONVERT(obj.Apartament,"I","UTF8")
+      set su.HomeAdress.Building=$ZCONVERT(obj.Building,"I","UTF8")
+      set su.HomeAdress.City=$ZCONVERT(obj.City,"I","UTF8")
+      set su.HomeAdress.Country=$ZCONVERT(obj.Country,"I","UTF8")
+      set su.HomeAdress.Email=$ZCONVERT(obj.Email,"I","UTF8")
+      set su.HomeAdress.State=$ZCONVERT(obj.State,"I","UTF8")
+      set su.HomeAdress.Street=$ZCONVERT(obj.Street,"I","UTF8")
+      set su.HomeAdress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
+      set su.HomeAdress.URL=$ZCONVERT(obj.URL,"I","UTF8")
+     
+       $$$THROWONERROR(st,su.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
+    quit st
+]]></Implementation>
+</Method>
+
+<Method name="DeleteSystemUsers">
+<Description>
+Удаление пользователя</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set st=##class(Vacancy.SystemUser).%DeleteId(compid)
+    quit st
+]]></Implementation>
+</Method>
+
+<Method name="GetSystemUser">
+<Description>
+пользователь</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT V.FirstName, V.LastName, V.HomeAdress_City AS City, V.HomeAdress_Country AS Country, "_
+	               "HomeAdress_Apartament AS Apartament, V.HomeAdress_Building AS Building,"_ 
+	               "V.HomeAdress_Email AS Email, V.HomeAdress_State AS State, V.HomeAdress_Street AS Street,"_
+	               "V.HomeAdress_Telephone AS Telephone, V.HomeAdress_URL AS URL,"_
+					      "V.ID AS IDUser, V.DOB, V.Sex, V.UserType "_ 
+				   "FROM Vacancy.SystemUser AS V "_
+				   "WHERE V.ID="_compid
+				   
+				 
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="GetAllSystemUsers">
+<Description>
+список пользователей</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT V.FirstName, V.LastName, V.HomeAdress_City AS City, V.HomeAdress_Country AS Country, "_
+	               "HomeAdress_Apartament AS Apartament, V.HomeAdress_Building AS Building,"_ 
+	               "V.HomeAdress_Email AS Email, V.HomeAdress_State AS State, V.HomeAdress_Street AS Street,"_
+	               "V.HomeAdress_Telephone AS Telephone, V.HomeAdress_URL AS URL,"_ 
+					      "V.ID AS IDUser, V.DOB, V.Sex, V.UserType "_ 
+				   "FROM Vacancy.SystemUser AS V "
+				 
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// -------------End system Users-------------------
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
 // -------------VACANCY RESPONSE-----------------------
 
 ]]></Content>
