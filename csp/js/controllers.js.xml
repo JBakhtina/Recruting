@@ -12,28 +12,6 @@ function vacancyCtrl($scope, $http){
                 $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
     }
 
-
-    // функция аутентификации - считываем данные из БД - возвращаем результат
-
-    $scope.authVerify=function(){
-
-        $http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword).success(function(data){
-            try{
-                // пробуем считать результат
-				var fName = data.children[0]["FirstName"];
-                $scope.name =fName;
-                $scope.h=1;
-               //authConstruct(fName);
-            } catch(err){
-                // если не удалось считать - значит ошибка входа
-                alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
-                $scope.authLogin = "";
-                $scope.authPassword = "";
-            }
-        }).error(function(data,status){
-                $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
-    }
-
     // функция получения компаний с кол-вом вакансий
     $scope.getCompaniesVacancies=function(){
         $http.get("/v/json/comvac").success(function(data){
@@ -47,12 +25,15 @@ function vacancyCtrl($scope, $http){
     $scope.getCompaniesVacancies();
 }
 
-function vacancyShowCtrl($scope,$http){
-	   
+function vacancyShowCtrl($scope,$http, $routeParams){
+
+      var vacID = $routeParams.vacID;
+
 	   // функция показа вакансии
        $scope.showVacancy = function(vacID){
 	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
 			try	{
+
 				// передаем массив полученных данных в функцию формирования текста
 				// выведем результат в соотвествующие поля
 				var vac = data.children
@@ -97,8 +78,7 @@ function vacancyShowCtrl($scope,$http){
                $scope.showV = true;
                $scope.showR = false;
            }
-
-    }
+       }
     
            // картинка  
     	   $scope.newImage= function (compid, v){
@@ -108,9 +88,9 @@ function vacancyShowCtrl($scope,$http){
 			$scope.alertzone="["+status+"] Ошибка добавления  :( ["+data+"]"; });
 
 		    }
-		    
-		    
 
+    $scope.showV = true;
+    $scope.showR = false;
 		    		    
 }
 
@@ -217,6 +197,44 @@ function SystemUserShow($scope,$http){
     		
     $scope.GetAllSystemUsers();
 
+}
+
+function authCtrl($scope, $http){
+	// функция аутентификации - считываем данные из БД - возвращаем результат
+    $scope.authVerify=function(){
+        $http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword)
+            .success(function(data){
+            try{
+                // пробуем считать результат
+                var fName = data.children[0]["FirstName"];
+                $scope.name =fName;
+                $scope.showAF = false;
+                $scope.showAG = true;
+            } catch(err){
+                // если не удалось считать - значит ошибка входа
+                alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
+                $scope.authLogin = "";
+                $scope.authPassword = "";
+
+            }
+            })
+            .error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
+    }
+
+    // функция показа/скрытия слоёв с формой аутентификации / формой приветствия
+    $scope.showAuthForm = function(sh){
+        if(sh){
+            $scope.showAF = true;
+            $scope.showAG = false;
+        } else {
+            $scope.showAF = false;
+            $scope.showAG = true;
+        }
+    }
+
+    $scope.showAF = true;
+    $scope.showAG = false;
 }
 
 ]]></CSP>
