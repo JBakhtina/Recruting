@@ -4,11 +4,9 @@
 <!---ОТОБРАЖЕНИЕ 1 ВАКАНСИИ--->
 <div ID="vacancyShow" class="container" ng-hide="showR" ng-show="showV" >
     <form ng-submit="vacanciesConstruct()" style="margin-bottom:10px">
-        <a class="btn" href="index1.csp"><i class="icon-list"></i> Список вакансий</a>
-    </form>
-
-    <span ng-init="showVacancy(#($Get(%request.Data("id",1),1))#)"></span>
-
+        <a class="btn" href="index.csp"><i class="icon-list"></i> Список вакансий</a>
+    </form> 
+ 
     <div class="row">
         <div class="well span8">
             <H3 class="text-info">
@@ -30,30 +28,11 @@
 
             <!---КНОПКИ/ССЫЛКИ--->
             <div class="span7">
-                <a href="#" class="btn btn-large" ng-click="showResponseForm(true)"><i class="icon-bullhorn"></i> <strong>Откликуться</strong></a>
+                <a class="btn btn-large" ng-click="showResponseForm(true)"><i class="icon-bullhorn"></i> <strong>Откликуться</strong></a>
 
                 <div class="pull-right">
                     <br>
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a>
 
-
-                    <div class="g-plus" data-action="share"></div>
-
-                    <script type="text/javascript">document.write(VK.Share.button());</script>
-
-                    <br><div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-send="true" data-width="450" data-show-faces="true"></div>
-                    <br>
-                    <!---
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class=""><img src='img\sn_fb.png'></a>
-                   <a href="https://twitter.com/share?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class=""><img src='img\sn_tw.png'></a>
-                   <a href="http://vk.com/share.php?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class="">
-                       <img src='img\sn_vk.png'>
-                   </a>
-
-                   <a href="https://plus.google.com/share?url=http://localhost:57773/csp/vacancy/showvacancy.CSP?id=#($Get(%request.Data("id",1),1))#" class="">
-                       <img src='img\sn_g+.png'>
-                   </a>
-                   --->
                 </div>
             </div>
             <!---/КНОПКИ/ССЫЛКИ--->
@@ -62,27 +41,29 @@
             <h6 class="text muted">На других ресурсах<h6>
                 <p>{{txtLinks}}</p>
 
-                <a rel="shortcut icon" href="http://hantim.ru/jobs/20028-javascript-razrabotchik-na-frontend"  type="image/x-icon">test</a>
+
                 <div>
                     <span class="label">Размещено  {{txtRegDate}}</span><div class="pull-right"><span class="label">Актуально</span></div>
                 </div>
         </div>
         <div class="well span3">
-            <h3>Работодатель</h3>
+
+            <img align="center" src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id={{vacID}}"/>
             <h6 class="text-success">{{txtVacancyCompany}}</h6>
+
+
+
             <p>{{txtCompMainInfo}}</p>
         </div>
     </div>
 </div>
 <!---/ОТОБРАЖЕНИЕ 1 ВАКАНСИИ--->
-<img src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id=#($Get(%request.Data("id",1),1))#"/>
-
 
 <V77>
     <div class="well" ng-hide="showV" ng-show="showR">
         <H3 align="center">Отклик на вакансию</h3>
 
-        <form class="form-horizontal" name="Response" ng-model="vr"  ng-submit="newResponse(#($Get(%request.Data("id",1),1))#,vr); showResponseForm(false); " accept-charset="windows1251">
+        <form class="form-horizontal" name="Response" ng-model="vr"  ng-submit="newResponse({{vacID}},vr); showResponseForm(false); " accept-charset="windows1251">
 
         <div class="control-group">
             <label for="FirstName" class="control-label">Имя:</label>

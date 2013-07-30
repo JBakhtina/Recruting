@@ -2,7 +2,9 @@
 <cspapp>/index2.CSP
 /csp/vacancy/index.csp
 /csp/vacancy/js/app.js
+/csp/vacancy/js/controllers.js
 /csp/vacancy/js/services.js
+/csp/vacancy/partials
 Vacancy.PKG
 WEB.PKG
 Work.PKG

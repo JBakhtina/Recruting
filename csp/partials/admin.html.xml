@@ -3,15 +3,11 @@
 <CSP name="partials/admin.html" application="/csp/vacancy/"><![CDATA[
 <h3>Администрирование</h3>
 
-
     <ul class="nav nav-tabs">
-       <li class="active">
-            <a href="#admin/users" data-toggle="tab">Пользователи</a>
-       </li>
-       <li>
-           <a href="#admin/companies" data-toggle="tab">Компании</a>
-       </li>
-       <li><a href="#admin/vacancies" data-toggle="tab">Вакансии</a></li>
+       <li class="active"><a href="#admin/vacancies" data-toggle="tab">Вакансии</a></li>
+       <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
+       <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
+       <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
     </ul>
 
 ]]></CSP>

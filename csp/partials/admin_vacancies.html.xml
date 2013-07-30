@@ -1,5 +1,233 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/admin_vacancies.html" application="/csp/vacancy/"><![CDATA[
-Вакансии]]></CSP>
+{{alert2}}
+
+<ul class="nav nav-tabs">
+    <li  class="active"><a href="#admin/vacancies" data-toggle="tab">Вакансии</a></li>
+    <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
+    <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
+    <li><a href="#admin/users" data-toggle="tab">Личные данные</a></li>
+</ul> 
+ 
+<!-- пока не понял как выдернуть данные из объекта без цикла -->
+<div class="row tab-pane">
+
+    <article class="span12">
+        Добавление/Удаление/Изменение Вакансии
+        <p>
+        <ul class='nav nav-tabs nav-stacked'>
+            <li>
+
+
+
+                <V77>
+                    <div class="well">
+                        <form class="form-horizontal" name="UpdVacancy" ng-model="vacancy"  ng-submit="update(#($Get(%request.Data("id",1),1))#,vacancy[0])">
+
+                        <div class="control-group">
+                            <label for="VacancyName" class="control-label">Должность</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].VacancyName"/></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="Skills" class="control-label">Требуемые умения</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].Skills"/></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="VacancyTypes" class="control-label">Тип занятости</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].VacancyType"/></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="EduLevel" class="control-label">Требуемое образование</label>
+                            <div class="controls">
+                                <select name="EduLevel" ng-model="vacancy[0].EduLevel"/>
+                                <option value="Среднее">Среднее</option>
+                                <option value="Неоконченное высшее">Неоконченное высшее</option>
+                                <option value="Высшее - бакалавр">Высшее - бакалавр</option>
+                                <option value="Высшее - специалист">Высшее - специалист</option>
+                                <option value="Аспирант">Аспирант</option>
+                                <option value="Магистр">Магистр</option>
+                                <option value="Кандидат наук">Кандидат наук</option>
+                                <option value="Доктор наук">Доктор наук</option>
+                                <option value="Два высших">Два высших</option>
+                                <option value="Другое">Другое</option>
+                                </select></div>
+
+
+                        </div>
+
+                        <div class="control-group">
+                            <label for="Institution" class="control-label">Учебное зеведение</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].Institution"/></div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="StartSalary" class="control-label">Начальная зарплата</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].StartSalary"/></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="EndSalary" class="control-label">Конечная зарплата</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].EndSalary"/></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="CityVacancy" class="control-label">Город</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].CityVacancy"/></div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="Links_URL" class="control-label">Ссылки на размещённые ресурсы</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].Links_URL"/></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="Company" class="control-label"> Компания</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].CompanyName"/></div>
+
+                            <div class="controls"><select name="CompanyName" ng-model="vacancy[0].CompanyName" />
+                                <option ng-repeat="companiess in companies" value={{companies[$index].ID}}>{{companies[$index].Name}}</option>
+                                </select></div>
+
+                        </div>
+
+                        <div class="control-group">
+                            <label for="MainInfo" class="control-label">Информация</label>
+                            <div class="controls"><textarea name="MainInfo" rows="10" cols="45" ng-model="vacancy[0].MainInfo" class="input-xlarge"></textarea></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="AddInfo" class="control-label">Дополнительная информация</label>
+                            <div class="controls"><textarea name="AddInfo" rows="10" cols="45" ng-model="vacancy[0].AddInfo" class="input-xlarge"></textarea></div>
+                        </div>
+
+
+                        <div class="form-actions">
+                            <input type="submit" value="Сохранить"/>
+                            <input type="button" value="Удалить" ng-click="deletevacancy(#($Get(%request.Data("id",1),1))#);"/>
+                        </div>
+                        </form>
+                    </div>
+</div>
+</V77>
+
+
+
+<H2> в компанию
+    <a href='{{company.Adress_URL}}'>{{vacancy[0].CompanyName}}</a></h2>
+Зарплата от {{vacancy[0].StartSalary}} до {{vacancy[0].EndSalary}}
+<br> Образование {{vacancy[0].EduLevel}}<hr>
+
+<font size='1px'><br>Дата регистрации {{vacancy[0].RegDate}}</font>
+
+</li>
+</ul>
+</p>
+</article>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <article class="span12">
+            <p>
+            <ul class='nav nav-tabs nav-stacked'>
+                <li>
+                    <div class="well">
+                        <form class="form-horizontal"   name="vCreateForm" ng-model="newvacancy" ng-submit="createvacancy(newvacancy); newvacancy.Name=''; newvacancy.Company='';newvacancy.MainInfo='';">
+
+                            <div class="control-group">
+                                <label for="VacancyName" class="control-label">Должность</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.VacancyName"/></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="Skills" class="control-label">Требуемые умения</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.Skills"/></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="VacancyTypes" class="control-label">Тип занятости</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.VacancyType"/></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="EduLevel" class="control-label">Требуемое образование</label>
+                                <div class="controls">
+                                    <select name="EduLevel" ng-model="newvacancy.EduLevel">
+                                        <option value="Среднее">Среднее</option>
+                                        <option value="Неоконченное высшее">Неоконченное высшее</option>
+                                        <option value="Высшее - бакалавр">Высшее - бакалавр</option>
+                                        <option value="Высшее - специалист">Высшее - специалист</option>
+                                        <option value="Аспирант">Аспирант</option>
+                                        <option value="Магистр">Магистр</option>
+                                        <option value="Кандидат наук">Кандидат наук</option>
+                                        <option value="Доктор наук">Доктор наук</option>
+                                        <option value="Два высших">Два высших</option>
+                                        <option value="Другое">Другое</option>
+                                    </select></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="Institution" class="control-label">Учебное зеведение</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.Institution"/></div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label for="StartSalary" class="control-label">Начальная зарплата</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.StartSalary"/></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="EndSalary" class="control-label">Конечная зарплата</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.EndSalary"/></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="CityVacancy" class="control-label">Город</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.CityVacancy"/></div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label for="Links_URL" class="control-label">Ссылки на размещённые ресурсы</label>
+                                <div class="controls"><input type="text" ng-model="newvacancy.Links_URL"/></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="comid" class="control-label">ИД компания</label>
+                                <div class="controls"><select name="comid" ng-model="newvacancy.comid" />
+                                    <option ng-repeat="companiess in companies" value={{companies[$index].ID}}>{{companies[$index].Name}}</option>
+                                    </select></div>
+
+                            </div>
+
+                            <div class="control-group">
+                                <label for="MainInfo" class="control-label">Информация</label>
+                                <div class="controls"><textarea name="MainInfo" rows="10" cols="45" ng-model="newvacancy.MainInfo" class="input-xlarge"></textarea></div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="AddInfo" class="control-label">Дополнительная информация</label>
+                                <div class="controls"><textarea name="AddInfo" rows="10" cols="45" ng-model="newvacancy.AddInfo" class="input-xlarge"></textarea></div>
+                            </div>
+
+                            <div class="form-actions">
+                                <input type="submit" value="Сохранить"/>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            </p>
+        </article>
+    </div>
+</div>]]></CSP>
 </Export>
