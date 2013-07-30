@@ -56,7 +56,7 @@
 ]]></Implementation>
 </Method>
 
-<Method name="companyupdate">
+<Method name="Companyupdate">
 <Description>
 Обновление компании</Description>
 <ClassMethod>1</ClassMethod>
@@ -283,6 +283,22 @@
 
 ]]></Content>
 </UDLText>
+
+<Method name="GetVacancyResponse">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT V.ID, V.FirstName, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
+	               "From_Building AS Building, From_City AS City, From_Country AS Country, From_Email AS Email, "_
+	               "From_State AS State, From_Street AS Street, From_Telephone AS Telephone, From_URL AS URL, V.Vacancy "_
+				   "FROM Vacancy.VacancyResponse AS V "_
+				   "WHERE V.Vacancy="_compid
+				 
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
 
 <Method name="NVR">
 <Description>

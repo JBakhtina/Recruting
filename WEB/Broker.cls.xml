@@ -45,7 +45,7 @@
    <Route Url="/json/vacancy/" Method="POST" Call="WEB.JSON:CreateVacancy"/>  
    
    
-   <Route Url="/json/vacancyresp/:compid" Method="POST" Call="WEB.JSON:NVR"/>
+   
    
    <Route Url="/json/img/" Method="GET" Call="WEB.RSS:OnPage"/>
    
@@ -64,8 +64,12 @@
    <Route Url="/json/getallcompanysr/" 		  Method="GET" Call="WEB.JSON:getallcompanys"/>
    <Route Url="/json/getcompanyr/:compid" 	  Method="GET" Call="WEB.JSON:companyGet"/>
    <Route Url="/json/createcompanyr/" 		  Method="PUT" Call="WEB.JSON:companyCreate"/> 
-   <Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:companyupdate"/>
+   <Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:Companyupdate"/>
    <Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
+   
+   
+   <Route Url="/json/vacancyresp/:compid" Method="POST" Call="WEB.JSON:NVR"/>
+   <Route Url="/json/getvacancyresp/:compid" Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
    
    
    
