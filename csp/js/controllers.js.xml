@@ -114,6 +114,60 @@ function vacancyShowCtrl($scope,$http){
 		    		    
 }
 
+function CompanyShow($scope,$http){
+
+		    // получение всех компаний
+		    $scope.GetAllCompanys=function(){
+       		$http.get("/v/json/getallcompanysr/").success(function(data){
+	       		
+            $scope.allcompanys=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
+    		}
+    		
+		    // получение  компании
+		    $scope.GetSystemCompany=function(compid){
+       		$http.get("/v/json/getcompanyr/"+compid).success(function(data){
+	       		
+            $scope.company=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
+    		}
+    		
+    	   // добавляем новой компании
+	   		$scope.newCompany = function (v){
+		    $http.put("/v/json/createcompanyr/",v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+		    
+		     // Обновление компании
+	   		$scope.updateCompany = function (compid,v){
+		    $http.post("/v/json/companyupdater/"+compid,v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+		    
+		    
+		    // удаление компании
+	    	$scope.deleteCompany = function (compid){
+		    $http.delete("/v/json/delcompany/"+compid)
+		    .success(function(data){
+			    document.location.href = "/csp/vacancy/companies.csp";
+			    }).error(function(data,status){
+			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
+		    }    
+		    
+    		
+    $scope.GetAllCompanys();
+
+}
+
+
+
+
 function SystemUserShow($scope,$http){
 
 		    // получение всех пользователей
@@ -162,7 +216,6 @@ function SystemUserShow($scope,$http){
 		    
     		
     $scope.GetAllSystemUsers();
-
 
 }
 

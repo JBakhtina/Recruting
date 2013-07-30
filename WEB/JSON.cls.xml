@@ -21,6 +21,128 @@
 
 <UDLText name="T">
 <Content><![CDATA[
+// -------------Company-----------------------
+
+]]></Content>
+</UDLText>
+
+<Method name="companyCreate">
+<Description>
+Добавление новой компании</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+	   set st=$$$OK
+   try{
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
+       
+      set com=##class(Vacancy.Company).%New()
+      set com.Name=$ZCONVERT(obj.CompanyName,"I","UTF8")
+      set com.Adress.Country=$ZCONVERT(obj.Country,"I","UTF8")
+      set com.Adress.State=$ZCONVERT(obj.State,"I","UTF8")
+      set com.Adress.City=$ZCONVERT(obj.City,"I","UTF8")
+      set com.Adress.Street=$ZCONVERT(obj.Street,"I","UTF8")
+      set com.Adress.Building=$ZCONVERT(obj.Building,"I","UTF8")
+      set com.Adress.Apartament=$ZCONVERT(obj.Apartament,"I","UTF8")
+      set com.Adress.Email=$ZCONVERT(obj.Email,"I","UTF8")
+      set com.Adress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
+      set com.Adress.URL=$ZCONVERT(obj.URL,"I","UTF8")
+      set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8")
+       $$$THROWONERROR(st,com.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
+    quit st
+]]></Implementation>
+</Method>
+
+<Method name="companyupdate">
+<Description>
+Обновление компании</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+	   set st=$$$OK
+   try{
+	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
+       
+      set com=##class(Vacancy.Company).%OpenId(compid)
+      set com.Name=$ZCONVERT(obj.CompanyName,"I","UTF8")
+      set com.Adress.Country=$ZCONVERT(obj.Country,"I","UTF8")
+      set com.Adress.State=$ZCONVERT(obj.State,"I","UTF8")
+      set com.Adress.City=$ZCONVERT(obj.City,"I","UTF8")
+      set com.Adress.Street=$ZCONVERT(obj.Street,"I","UTF8")
+      set com.Adress.Building=$ZCONVERT(obj.Building,"I","UTF8")
+      set com.Adress.Apartament=$ZCONVERT(obj.Apartament,"I","UTF8")
+      set com.Adress.Email=$ZCONVERT(obj.Email,"I","UTF8")
+      set com.Adress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
+      set com.Adress.URL=$ZCONVERT(obj.URL,"I","UTF8")
+      set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8") 
+       $$$THROWONERROR(st,com.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
+    quit st
+]]></Implementation>
+</Method>
+
+<Method name="delCompany">
+<Description>
+Удалить компанию из БД</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	do ##class(Vacancy.Company).DeleteCompany(compid)
+	q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="companyGet">
+<Description>
+компания</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT C.Name AS CompanyName, C.Adress_Apartament AS Apartament, C.Adress_Building AS Building, "_
+	              "C.Adress_City AS City, C.Adress_Country AS Country, C.Adress_Email AS Email, C.Adress_State AS State, "_
+	               "C.Adress_Street AS Street, C.Adress_Telephone AS Telephone, "_
+	               "C.Adress_URL AS URL, C.ID,  C.CompMainInfo "_
+				   "FROM Vacancy.Company AS C "_
+				   "WHERE C.ID="_compid
+				   
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="getallcompanys">
+<Description>
+список компаний</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT C.Name AS CompanyName, C.CompMainInfo, C.Adress_Apartament AS Apartament, C.Adress_Building AS Building,"_
+	               "C.Adress_City AS City, C.Adress_Country AS Country, C.Adress_Email AS Email, C.Adress_State AS State,"_
+	               "C.Adress_Street AS Street, C.Adress_Telephone AS Telephone, C.Adress_URL AS URL, C.ID AS IDComp "_
+				   "FROM Vacancy.Company AS C"
+				   
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// -------------End company-------------------
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
 // -------------System Users-----------------------
 
 ]]></Content>
@@ -472,13 +594,12 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 ]]></Implementation>
 </Method>
 
-<Method name="UpdateCompany">
-<Description>
-Обновить компанию</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>compid:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+<UDLText name="T">
+<Content><![CDATA[
+/*
+/// Обновить компанию
+ClassMethod UpdateCompany(compid As %String) As %Status
+{
    set st=$$$OK
    try{
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
@@ -492,20 +613,10 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
  
    } catch ex{set st=ex.AsStatus()}
     quit st
-]]></Implementation>
-</Method>
-
-<Method name="DeleteCompany">
-<Description>
-Удалить компанию из БД</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>compid:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
-  do ##class(Vacancy.Company).%DeleteId(compid)
-  quit $$$OK
-]]></Implementation>
-</Method>
+}
+*/
+]]></Content>
+</UDLText>
 
 <Method name="CreateCompany">
 <Description>

@@ -5,6 +5,7 @@
 <script language="Cache" runat="Server">
 set a=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
 set oid=a.Img.%Oid()
+
  </script>
  
 <image src="%25CSP.StreamServer.cls?STREAMOID=#(..Encrypt(oid))#">

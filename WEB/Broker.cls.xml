@@ -51,13 +51,22 @@
    
    <Route Url="/json/vimage/:compid" Method="POST" Call="WEB.JSON:UpdateImage"/>
    
-   <!--" SystemUsers "-->
+   
    <Route Url="/json/getallusers/"         Method="GET" Call="WEB.JSON:GetAllSystemUsers"/>
    <Route Url="/json/getuser/:compid"      Method="GET" Call="WEB.JSON:GetSystemUser"/>
    <Route Url="/json/createuser/"          Method="PUT" Call="WEB.JSON:CreateSystemUsers"/> 
    <Route Url="/json/updateteuser/:compid" Method="POST" Call="WEB.JSON:UpdateSystemUsers"/>
-   <Route Url="/json/deleteuser/:compid"   Method="DELETE" Call="WEB.JSON:DeleteSystemUsers" />
-   <!--" End SystemUsers "-->
+   <Route Url="/json/deleteuser/:compid"   Method="DELETE" Call="WEB.JSON:DeleteSystemUsers"/>
+  
+   
+   
+   
+   <Route Url="/json/getallcompanysr/" 		  Method="GET" Call="WEB.JSON:getallcompanys"/>
+   <Route Url="/json/getcompanyr/:compid" 	  Method="GET" Call="WEB.JSON:companyGet"/>
+   <Route Url="/json/createcompanyr/" 		  Method="PUT" Call="WEB.JSON:companyCreate"/> 
+   <Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:companyupdate"/>
+   <Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
+   
    
    
  </Routes>
