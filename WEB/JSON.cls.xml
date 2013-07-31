@@ -574,7 +574,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
  
-  do ##class(WEB.JSON).GetJSONData("select *from Vacancy.Company")
+  do ##class(WEB.JSON).GetJSONData("select * from Vacancy.Company ORDER BY Name")
   quit $$$OK
 ]]></Implementation>
 </Method>
@@ -588,7 +588,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 	set cvQuery = "SELECT C.Name AS CVName, COUNT(V.ID) AS VCOUNT "_
 				  "FROM Vacancy.Company AS C "_
 				  "INNER JOIN Vacancy.Vacancy AS V ON C.ID=V.Company "_
-				  "GROUP BY C.ID ORDER BY VCOUNT DESC"
+				  "GROUP BY C.ID ORDER BY VCOUNT DESC "
 	do ##class(WEB.JSON).GetJSONData(cvQuery)
   	quit $$$OK
 ]]></Implementation>
