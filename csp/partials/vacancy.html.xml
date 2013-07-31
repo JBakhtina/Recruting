@@ -5,7 +5,7 @@
 <div ID="vacancyShow" class="container" ng-hide="showR" ng-show="showV" >
     <form ng-submit="vacanciesConstruct()" style="margin-bottom:10px">
         <a class="btn" href="index.csp"><i class="icon-list"></i> Список вакансий</a>
-    </form> 
+    </form>  
  
     <div class="row">
         <div class="well span8">

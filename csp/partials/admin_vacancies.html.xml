@@ -9,9 +9,36 @@
     <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
     <li><a href="#admin/users" data-toggle="tab">Личные данные</a></li>
 </ul> 
- 
+  
 <!-- пока не понял как выдернуть данные из объекта без цикла -->
 <div class="row tab-pane">
+
+    <!---СПИСОК ВАКАНСИЙ--->
+    <div class="span12">
+        <ul class='nav nav-pills nav-stacked'  >
+            <li ng-repeat="vacancy in vacancies | filter:filterVacancy">
+                <a  class='text-info' href="#/admin_vacancy/{{vacancy.IDVac}}">
+                    <div class="row">
+
+                        <div class="span3">
+                            <i class="icon-hand-right"></i>&nbsp
+                            <input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
+                            <b>{{vacancy.VacancyName}}</b></br>
+                            <div class="text-success">{{vacancy.CompanyName}}</div>
+                        </div>
+                        <div class="span2"><span class="label label-info">{{vacancy.VacancyType}}</span></div>
+                        <div class="span2 text-info"><i class="icon-globe"></i>&nbsp{{vacancy.CityVacancy}}</div>
+                        <!--<div class="span2">{{vacancy.StartSalary}}-{{vacancy.EndSalary}}</div>-->
+                        <div class="span1"><span class="label label pull-right">{{vacancy.RegDate}}</span></div>
+                    </div>
+
+                </a>
+                <hr style="margin:0px;">
+            </li>
+        </ul>
+    </div>
+    <!---/СПИСОК ВАКАНСИЙ--->
+
 
     <article class="span12">
         Добавление/Удаление/Изменение Вакансии
@@ -109,7 +136,7 @@
 
                         <div class="form-actions">
                             <input type="submit" value="Сохранить"/>
-                            <input type="button" value="Удалить" ng-click="deletevacancy(#($Get(%request.Data("id",1),1))#);"/>
+                            <input type="button" value="Удалить" ng-click="deletevacancy({{vacID}});"/>
                         </div>
                         </form>
                     </div>

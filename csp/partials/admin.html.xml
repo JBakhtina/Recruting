@@ -2,7 +2,7 @@
 <Export generator="Cache" version="25">
 <CSP name="partials/admin.html" application="/csp/vacancy/"><![CDATA[
 <h3>Администрирование</h3>
-
+ 
     <ul class="nav nav-tabs">
        <li class="active"><a href="#admin/vacancies" data-toggle="tab">Вакансии</a></li>
        <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
