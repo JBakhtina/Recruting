@@ -4,7 +4,7 @@
 <!---ВЫВОД ВАКАНСИЙ--->
 <div ID="vacanciesShow" >
     <!---ФИЛЬТР---> 
-    <div class="row">
+    <div class="row"> 
         <div class="span10">
             <!--Общий фильтр-->
             <div class="input-append">

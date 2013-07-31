@@ -2,6 +2,6 @@
 <Export generator="Cache" version="25">
 <CSP name="js/filters.js" application="/csp/vacancy/"><![CDATA[
 'use strict'
-
+ 
 angular.module('vacanciesFilters',[]).filter]]></CSP>
 </Export>

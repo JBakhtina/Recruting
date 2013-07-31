@@ -6,7 +6,7 @@
         <h3>{{company[0].Name}}</h3>
         <p>{{company[0].CompMainInfo}}</p>
 
-        Адрес:
+        Адрес: 
        <address> 
             {{company[0].Adress_ZIP}},
             {{company[0].Adress_Country}},

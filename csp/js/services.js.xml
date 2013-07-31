@@ -2,7 +2,7 @@
 <Export generator="Cache" version="25">
 <CSP name="js/services.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
-
+ 
 angular.module('vacancyServices', ['ngResource'])
     .factory('vacancies', function($resource){
        return $resource ('vacancies/:vacId',{}) {

@@ -492,7 +492,7 @@
 					      "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
 				   "FROM Vacancy.Vacancy AS V "_
 				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
-				   "WHERE C.ID="_compID_
+				   "WHERE C.ID="_compID_ 
 				   "ORDER BY V.Company "
 				  
 				   
