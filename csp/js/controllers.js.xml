@@ -2,7 +2,7 @@
 <Export generator="Cache" version="25">
 <CSP name="js/controllers.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
- 
+  
  
 function vacancyCtrl($scope, $http){
 
@@ -13,7 +13,8 @@ function vacancyCtrl($scope, $http){
                 $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
     }
 
-    // функция получения вакансий
+
+    // функция получения компаний
     $scope.getCompanies=function(){
         $http.get("/v/json/companies").success(function(data){
             $scope.companies=data.children;}).error(function(data,status){
@@ -29,6 +30,10 @@ function vacancyCtrl($scope, $http){
 
     }
 
+    $scope.FilteredByCompany = function(){
+        alert($scope.filterCompany);
+    }
+
     $scope.getVacancies();
     $scope.getCompanies();
     $scope.getCompaniesVacancies();
@@ -38,6 +43,10 @@ function vacancyShowCtrl($scope,$http, $routeParams){
 
     var vacID = $routeParams.vacID;
 
+    $scope.test =function(){
+
+        alert($scope.img);
+    }
 
 	   // функция показа вакансии
        $scope.showVacancy = function(vacID){
@@ -95,7 +104,7 @@ function vacancyShowCtrl($scope,$http, $routeParams){
     
            // картинка  
     	   $scope.newImage= function (compid, v){
-		    $http.post("/v/json/vimage/"+compid,v)
+		    $http.post("/v/json/vimage/",compid,v)
 		    .success(function(data){
                     $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления  :( ["+data+"]"; });
@@ -105,6 +114,29 @@ function vacancyShowCtrl($scope,$http, $routeParams){
     $scope.showV = true;
     $scope.showR = false;
 		    		    
+}
+
+function companyCtrl($scope, $http, $routeParams){
+    // получим ИД компании
+    var compID = $routeParams.compID;
+
+    // получение  компании по ИД
+    $scope.GetCompany=function(compID){
+        $http.get("/v/json/company/"+compID).success(function(data){
+
+            $scope.company=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
+    }
+
+    // функция получения вакансий по ИД компании
+    $scope.getVacanciesByCompID=function(compID){
+        $http.get("/v/json/vacancies/"+compID).success(function(data){
+            $scope.vacancies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+    $scope.getVacanciesByCompID(compID);
+    $scope.GetCompany(compID);
 }
 
 function CompanyShow($scope,$http){

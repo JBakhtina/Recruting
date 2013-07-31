@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="partials/company.html" application="/csp/vacancy/"><![CDATA[
+<div class="well">
+
+        <h3>{{company[0].Name}}</h3>
+        <p>{{company[0].CompMainInfo}}</p>
+
+        Адрес:
+       <address> 
+            {{company[0].Adress_ZIP}},
+            {{company[0].Adress_Country}},
+            {{company[0].Adress_State}},
+            {{company[0].Adress_City}},
+            {{company[0].Adress_Street}}
+            {{company[0].Adress_Building}}
+        </address>
+
+        Контакты:
+        <p>
+            телефон {{company[0].Adress_Telephone}}<br>
+            E-mail {{company[0].Adress_Email}}<br>
+            Сайт <a href ="{{company[0].Adress_URL}}">{{company[0].Adress_URL}}</a>
+        </p>
+
+    <div class="according">
+        <div class="accordion-group">
+            <div class="accordion-heading area">
+                <a class="accordion-toggle" data-toggle="collapse" href="#area1">Вакансии</a>
+            <div>
+
+            <div class="dropdown edit"></div>
+        </div>
+    </div>
+
+
+
+            <div class="row">
+                <div class="span9">
+                    <div class="well" style="padding:1px">
+
+                        <ul class='nav nav-pills nav-stacked'  >
+                            <li ng-repeat="vacancy in vacancies | filter:filterVacancy | filter:filterCompany ">
+                                <a  class='text-info' href="#/vacancy/{{vacancy.IDVac}}">
+                                    <div class="row">
+
+                                        <div class="span3">
+                                            <i class="icon-hand-right"></i>&nbsp
+                                            <input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
+                                            <b>{{vacancy.VacancyName}}</b></br>
+                                            <div class="text-success">{{vacancy.CompanyName}}</div>
+                                        </div>
+                                        <div class="span2"><span class="label label-info">{{vacancy.VacancyType}}</span></div>
+                                        <div class="span2 text-info"><i class="icon-globe"></i>&nbsp{{vacancy.CityVacancy}}</div>
+                                        <!--<div class="span2">{{vacancy.StartSalary}}-{{vacancy.EndSalary}}</div>-->
+                                        <div class="span1"><span class="label label pull-right">{{vacancy.RegDate}}</span></div>
+                                    </div>
+
+                                </a>
+                                <hr style="margin:0px;">
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+      <!--  <form  method=post ng-submit="test(); alert(dsadas);">
+            <input type="file" mg-model="img" />
+            <input type="submit">dfsdf</input>
+        </form>   -->
+
+
+</div>]]></CSP>
+</Export>

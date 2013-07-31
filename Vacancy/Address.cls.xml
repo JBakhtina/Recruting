@@ -8,7 +8,7 @@
 <TimeCreated>63006,70425.58203</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Country:##class(Vacancy.PopUtils).Country(),State:##class(Vacancy.PopUtils).State(),City:##class(Vacancy.PopUtils).City(),Email:Company(),Telephone:USPhone(),Street:##class(Vacancy.PopUtils).Street(),Apartament:##class(Vacancy.PopUtils).Apartament(),Building:##class(Vacancy.PopUtils).Building(),URL:##class(Vacancy.PopUtils).URL()</Default>
+<Default>Country:##class(Vacancy.PopUtils).Country(),ZIP:##class(Vacancy.PopUtils).ZIP(),State:##class(Vacancy.PopUtils).State(),City:##class(Vacancy.PopUtils).City(),Email:Company(),Telephone:USPhone(),Street:##class(Vacancy.PopUtils).Street(),Apartament:##class(Vacancy.PopUtils).Apartament(),Building:##class(Vacancy.PopUtils).Building(),URL:##class(Vacancy.PopUtils).URL()</Default>
 </Parameter>
 
 <Property name="Country">
@@ -24,9 +24,13 @@
 ]]></Content>
 </UDLText>
 
+<Property name="ZIP">
+<Type>%String</Type>
+</Property>
+
 <UDLText name="T">
 <Content><![CDATA[
-// Property ZIP As %String(MAXLEN = 6, MINLEN = 6, PATTERN = "6n");
+// (MAXLEN = 6, MINLEN = 6, PATTERN = "6n");
 
 ]]></Content>
 </UDLText>
@@ -113,6 +117,9 @@
 </Value>
 <Value name="9">
 <Value>Street</Value>
+</Value>
+<Value name="10">
+<Value>ZIP</Value>
 </Value>
 </Data>
 </Storage>

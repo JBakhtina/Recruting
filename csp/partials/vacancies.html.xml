@@ -3,7 +3,7 @@
 <CSP name="partials/vacancies.html" application="/csp/vacancy/"><![CDATA[
 <!---ВЫВОД ВАКАНСИЙ--->
 <div ID="vacanciesShow" >
-    <!---ФИЛЬТР--->
+    <!---ФИЛЬТР---> 
     <div class="row">
         <div class="span10">
             <!--Общий фильтр-->
@@ -58,11 +58,8 @@
         <!---БОКОВАЯ ПАНЕЛЬ--->
         <div class="span3" >
             <div class="well">
-                <a class="btn btn-success" href="#" style="width:150px;"><i class="icon-ok"></i>&nbsp&nbsp<small>Разместить вакансию</small></a></p>
-                </hr>
-                <div class="btn-group pull-left" >
-                    <a class="" href="#"><img src='img\rss.png'></a>
-                </div>
+                <!--<a class="btn btn-success" href="#" style="width:150px;"><i class="icon-ok"></i>&nbsp&nbsp<small>Разместить вакансию</small></a></p> -->
+
 
                 <h3 class="text-warning">Работодатели</h3>
 
@@ -70,13 +67,17 @@
 
                     <li ng-repeat="cv in comvac" >
 
-                        <a href="" class="text-succes span2" style="margin:0px; ">{{cv.CVName}}
+                        <a href="#company/{{cv.compID}}" class="text-succes span2" style="margin:0px; ">{{cv.CVName}}
                             <span class="span1 badge badge-warning pull-right">{{cv.VCOUNT}}</span></a>
-
 
                     </li>
 
                 </ol>
+
+                </hr> <a class="" href="#"><img src='img\rss.png'></a>
+                <div class="btn-group pull-left" >
+
+                </div>
             </div>
         </div>
         <!---/БОКОВАЯ ПАНЕЛЬ--->

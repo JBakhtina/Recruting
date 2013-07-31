@@ -5,10 +5,11 @@
 <div ID="vacancyShow" class="container" ng-hide="showR" ng-show="showV" >
     <form ng-submit="vacanciesConstruct()" style="margin-bottom:10px">
         <a class="btn" href="index.csp"><i class="icon-list"></i> Список вакансий</a>
-    </form>  
+    </form>   
  
     <div class="row">
         <div class="well span8">
+            <img align="right" src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id={{vacID}}"/>
             <H3 class="text-info">
                 {{txtVacancyName}}
                 <span class="label label-info pull-right">{{txtVacancyType}}</span>
@@ -48,7 +49,7 @@
         </div>
         <div class="well span3">
 
-            <img align="center" src="http://localhost:57772/csp/vacancy/WEB.Image.cls?id={{vacID}}"/>
+
             <h6 class="text-success">{{txtVacancyCompany}}</h6>
 
 

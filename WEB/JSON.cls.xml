@@ -465,6 +465,26 @@
 ]]></Implementation>
 </Method>
 
+<Method name="GetVacanciesByCompID">
+<Description>
+список вакансий</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>compID</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
+					      "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
+				   "FROM Vacancy.Vacancy AS V "_
+				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
+				   "WHERE C.ID="_compID_
+				   "ORDER BY V.Company "
+				  
+				   
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
+
 <Method name="GetVacancy">
 <Description>
 список вакансий</Description>
@@ -562,7 +582,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
  
-  do ##class(WEB.JSON).GetJSONData("select *from Vacancy.Company where ID="_compid)
+  do ##class(WEB.JSON).GetJSONData("select * from Vacancy.Company where ID="_compid)
   quit $$$OK
 ]]></Implementation>
 </Method>
@@ -585,7 +605,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	set cvQuery = "SELECT C.Name AS CVName, COUNT(V.ID) AS VCOUNT "_
+	set cvQuery = "SELECT C.ID AS compID, C.Name AS CVName, COUNT(V.ID) AS VCOUNT "_
 				  "FROM Vacancy.Company AS C "_
 				  "INNER JOIN Vacancy.Vacancy AS V ON C.ID=V.Company "_
 				  "GROUP BY C.ID ORDER BY VCOUNT DESC "

@@ -4,7 +4,7 @@
 <!doctype html>
 <!-- blocked by {MDG.DCRUSHER} -->
 <html ng-app="recruting">
-<head>
+<head>  
 	<title>Vacancy</title>
 		
 	
@@ -70,7 +70,7 @@
     <!-- ОООЧЕНЬ медленно {MDG.CTP} - Семеро одного не ждут :)
     <script src="http://code.jquery/jquery-latest.js"></script>	-->
    
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
     <script src="bootstrap/js/jquery.js"></script>
 	 
 	<script language = "javascript" src="lib/angular/angular.js"></script>
