@@ -49,7 +49,7 @@
    
    <Route Url="/json/img/" Method="GET" Call="WEB.RSS:OnPage"/>
    
-   <Route Url="/json/vimage/:compid" Method="POST" Call="WEB.JSON:UpdateImage"/>
+   <Route Url="/json/vimage/" Method="POST" Call="WEB.JSON:UpdateImage"/>
    
    
    <Route Url="/json/getallusers/"         Method="GET" Call="WEB.JSON:GetAllSystemUsers"/>
