@@ -9,10 +9,10 @@
             <input type="text" id="appendedInput"  ng-model="filterVacancy" placeholder="Введите слово для поиска">
             <span class="add-on"><i class="icon-filter"></i></span>
         </div>
-
+ 
     </div>
     <!---/ФИЛЬТР--->
-
+ 
 
     <div class="row">
         <div class="span9">

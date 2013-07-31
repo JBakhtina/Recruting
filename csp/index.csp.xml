@@ -13,6 +13,11 @@
 
 <body>
 
+	<div class="container">
+		<head>
+			<img src="img/intersystems-header.gif">		
+		</head>
+		
 <!---НАВИГАЦИОННАЯ ПАНЕЛЬ--->
 		<div class="navbar" style="margin-bottom:10px;" ng-controller="authCtrl">
 
@@ -60,6 +65,7 @@
 
 	<div ng-view></div>
 
+	</div>
 
     <!-- ОООЧЕНЬ медленно {MDG.CTP} - Семеро одного не ждут :)
     <script src="http://code.jquery/jquery-latest.js"></script>	-->

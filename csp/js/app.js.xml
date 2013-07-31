@@ -6,10 +6,10 @@
 angular.module('recruting',[]).
     config(['$routeProvider',function($routeProvider) {
         $routeProvider.
-            when('/admin',{templateUrl: 'partials/admin.html', controller:vacancyCtrl}).
+            when('/admin',{templateUrl: 'partials/admin_vacancies.html', controller:vacancyCtrl}).
             when('/admin/users',{templateUrl: 'partials/admin_users.html', controller:vacancyCtrl}).
             when('/admin/companies',{templateUrl: 'partials/admin_companies.html', controller:vacancyCtrl}).
-            when('/admin/vacancies',{templateUrl: 'partials/admin_vacancies.html', controller:vacancyCtrl}).
+            when('/admin/vacancies',{templateUrl: 'partials/admin_vacancies.html', controller:adminVacanciesCtrl}).
             when('/vacancies',{templateUrl: 'partials/vacancies.html', controller:vacancyCtrl}).
             when('/vacancy/:vacID', {templateUrl: 'partials/vacancy.html', controller:vacancyShowCtrl}).
             otherwise({redirectTo: '/vacancies'});
