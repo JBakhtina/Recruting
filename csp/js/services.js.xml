@@ -6,7 +6,7 @@
 angular.module('vacancyServices', ['ngResource'])
     .factory('vacancies', function($resource){
        return $resource ('vacancies/:vacId',{}) {
-		   ins: function(text) {
+		   ins: function(text) { 
 			  
 		   }
 	   }

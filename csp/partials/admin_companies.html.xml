@@ -6,5 +6,5 @@
     <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
     <li class="active"><a href="#admin/companies" data-toggle="tab">Компании</a></li>
     <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
-</ul>]]></CSP>
+</ul> ]]></CSP>
 </Export>

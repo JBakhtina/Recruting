@@ -22,7 +22,7 @@
 		<div class="navbar" style="margin-bottom:10px;" ng-controller="authCtrl">
 
 		  <nav class="navbar-inner">
-			<a class="brand" href="/csp/vacancy/index2.CSP">&nbsp Вакансии</a>
+			<a class="brand" href="/csp/vacancy/index.CSP">&nbsp Вакансии</a>
 			<ul class="nav">
 				<li class="divider-vertical"></li>
 				<li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
@@ -72,8 +72,9 @@
    
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/js/jquery.js"></script>
-	
+	 
 	<script language = "javascript" src="lib/angular/angular.js"></script>
+	<script language = "javascript" src="js/filters.js"></script>
 	<script language = "javascript" src="js/app.js"></script>
 	<script language = "javascript" src="js/controllers.js"></script>
 	
