@@ -38,6 +38,8 @@
             			<input ng-model="authLogin" type="text" class="span2" placeholder="логин" required>
             			<input ng-model="authPassword" type="password" class="span2" placeholder="пароль" required>
             			<button type="submit" class="btn" >Войти</button>
+            			
+            			
           			</div>
         		</form>
               <!---/АУТЕНТИФИКАЦИЯ_ФОРМА ВХОДА--->
@@ -78,12 +80,45 @@
 	<script language = "javascript" src="js/app.js"></script>
 	<script language = "javascript" src="js/controllers.js"></script>
 	
-	<script language = "javascript">
 	
-
+	
+	<script language = "javascript">
+		function getCookie(name)
+			{
+   			var begin = document.cookie.indexOf(name+'=');
+    		if(-1 == begin) return null;
+   			begin += name.length + 1;
+    		end = document.cookie.indexOf('; ',begin);
+    		if (-1 == end) end = document.cookie.length;
+    		return document.cookie.substring(begin,end);
+    					}
+    					
+    					
+    					
+    		function write_cookie() {
+  			// получаем cookie и записываем значение в слой layer с помощью innerHTML
+  				document.getElementById('layer').innerHTML = getCookie('login'); 
+					}
     </script>
     
+    
+    
+    <input type="text" ng-model="$cookieStore.get('login')" >
+    
+    <a href="javascript:write_cookie();">Чтение</a>
+
+// слой, в котором показываем значение cookie
+<div id="layer" style="padding:5px;"></div> 
+ 
+	<script>
+		document.write(getCookie('login'));
+		//document.write(getCookie('pwd'));
+		</script>
+
+	
+    <script src="/csp/vacancy/js/angular-cookies.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
 </body>
 </html>
 

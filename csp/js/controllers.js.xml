@@ -319,7 +319,7 @@ function authCtrl($scope, $http){
             }
             })
             .error(function(data,status){
-            $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
+            $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });       
     }
 
     // функция показа/скрытия слоёв с формой аутентификации / формой приветствия
@@ -332,10 +332,13 @@ function authCtrl($scope, $http){
             $scope.showAG = true;
         }
     }
-
+    
+        
     $scope.showAF = true;
     $scope.showAG = false;
 }
+
+DemoApp.controller('DemoController', function($cookieStore, $scope, $location, $routeParams, $http , $timeout ){  })
 
 ]]></CSP>
 </Export>

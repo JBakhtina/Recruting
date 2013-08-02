@@ -160,7 +160,6 @@
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
       set su=##class(Vacancy.SystemUser).%New()
-      
       set su.FirstName=$ZCONVERT(obj.FirstName,"I","UTF8")
       set su.LastName=$ZCONVERT(obj.LastName,"I","UTF8")
       set su.DOB=obj.DOB
@@ -568,6 +567,11 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 <Implementation><![CDATA[
   set phash = $system.Encryption.MD5Hash(pwd)
   set str = "SELECT FirstName FROM Vacancy.SystemUser WHERE Login = '"_login_"' AND Password = '"_phash_"'"
+
+  set log ="Проверка Cookie"
+  do %response.SetCookie("login",log,$h+1000,"/")
+  do %response.SetCookie("pwd",log,$h+1000,"/")
+  
 
   do ##class(WEB.JSON).GetJSONData(str)
   quit $$$OK

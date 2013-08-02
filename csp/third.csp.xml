@@ -247,13 +247,15 @@
        		 	</article>
         	</div>
         </div>
-
 		<div id="footer">
 			<div class=""></div>
 			
 		</div>
 	
 	</div>
+	
+	
+	
     <CSP:INCLUDE PAGE="bootstrap/js/mdg_lib.js">
        $scope.getCompanies();
        $scope.getVacancy(#($Get(%request.Data("id",1),1))#);

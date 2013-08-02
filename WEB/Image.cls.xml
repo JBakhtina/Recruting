@@ -19,8 +19,7 @@
 
   d:$IsObject(a.Img) a.Img.OutputToDevice()
   
-  w a=##class(Vacancy.Vacancy).%GetParameter("ID")
-  w "biujbbhgb"
+
   
   // Добавляем новую запись о просмотре вакансии
  Set httpR=##class(Vacancy.VacancyView).%New()
