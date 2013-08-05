@@ -14,7 +14,7 @@ angular.module('recruting',['ngCookies']).
             when('/vacancies',{templateUrl: 'partials/vacancies.html', controller:vacancyCtrl}).
             when('/vacancy/:vacID', {templateUrl: 'partials/vacancy.html', controller:vacancyShowCtrl}).
             otherwise({redirectTo: '/vacancies'});
-    }]);
+    }]); 
       
     var DemoApp = angular.module( 'DemoApp', ['ngCookies'] ).config( demoConfig );
 

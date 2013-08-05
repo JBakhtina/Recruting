@@ -571,7 +571,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
  
   do %response.SetCookie("login",fname,$h+1000,"/csp/vacancy")
  // do %response.SetCookie("pwd",log,$h+1000,"/")
-
+ 
   set query = "SELECT FirstName FROM Vacancy.SystemUser WHERE Login = '"_login_"' AND Password = '"_phash_"'"
   do ##class(WEB.JSON).GetJSONData(query)
   quit $$$OK

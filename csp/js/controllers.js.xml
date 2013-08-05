@@ -3,7 +3,7 @@
 <CSP name="js/controllers.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
   
-   
+  
 function vacancyCtrl($scope, $http,  $cookies){
 
     // функция получения вакансий
