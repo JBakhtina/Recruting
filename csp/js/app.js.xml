@@ -3,7 +3,7 @@
 <CSP name="js/app.js" application="/csp/vacancy/"><![CDATA[
 'use strict'; 
  
-angular.module('recruting',[]).
+angular.module('recruting',['ngCookies']).
     config(['$routeProvider',function($routeProvider) {
         $routeProvider.
             when('/admin',{templateUrl: 'partials/admin_vacancies.html', controller:vacancyCtrl}).
@@ -15,7 +15,7 @@ angular.module('recruting',[]).
             when('/vacancy/:vacID', {templateUrl: 'partials/vacancy.html', controller:vacancyShowCtrl}).
             otherwise({redirectTo: '/vacancies'});
     }]);
-    
+      
     var DemoApp = angular.module( 'DemoApp', ['ngCookies'] ).config( demoConfig );
 
 ]]></CSP>

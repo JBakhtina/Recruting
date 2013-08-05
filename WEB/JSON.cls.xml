@@ -566,14 +566,14 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
   set phash = $system.Encryption.MD5Hash(pwd)
-  set str = "SELECT FirstName FROM Vacancy.SystemUser WHERE Login = '"_login_"' AND Password = '"_phash_"'"
+ 
+  &sql(SELECT FirstName into:fname FROM Vacancy.SystemUser WHERE Login = :login AND Password = :phash)
+ 
+  do %response.SetCookie("login",fname,$h+1000,"/csp/vacancy")
+ // do %response.SetCookie("pwd",log,$h+1000,"/")
 
-  set log ="Проверка Cookie"
-  do %response.SetCookie("login",log,$h+1000,"/")
-  do %response.SetCookie("pwd",log,$h+1000,"/")
-  
-
-  do ##class(WEB.JSON).GetJSONData(str)
+  set query = "SELECT FirstName FROM Vacancy.SystemUser WHERE Login = '"_login_"' AND Password = '"_phash_"'"
+  do ##class(WEB.JSON).GetJSONData(query)
   quit $$$OK
 ]]></Implementation>
 </Method>

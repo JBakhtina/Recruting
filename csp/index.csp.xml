@@ -17,9 +17,16 @@
 		<head>
 			<img src="img/intersystems-header.gif">		
 		</head>
+	
+		  
+	
 		
 <!---НАВИГАЦИОННАЯ ПАНЕЛЬ--->
 		<div class="navbar" style="margin-bottom:10px;" ng-controller="authCtrl">
+
+
+				{{test}}
+
 
 		  <nav class="navbar-inner">
 			<a class="brand" href="/csp/vacancy/index.CSP">&nbsp Вакансии</a>
@@ -48,12 +55,12 @@
         		<form ng-submit="authLogout()" class="navbar-form pull-right" ng-hide="showAF" ng-show="showAG">
           		  <div class="navbar-for pull-right">
            			<div class = "span3">
-              			<p class="text-info" style="margin:0px">Добрый день, {{name}}</br>
+              			<p class="text-info" style="margin:0px">Добрый день, {{fname}}</br>
              			<i class="icon-user"></i>&nbsp
              			<small><a href="#/admin/" >Личный кабинет</a></small></p>
             		</div>
             		<div class = "span1">
-             			 <button type="submit" class="btn" ng-click="showAuthForm(true)" >Выйти</button>
+             			 <button type="submit" class="btn" ng-click="logout()" >Выйти</button>
             	    </div>
           		  </div>
          		</form>
@@ -76,12 +83,14 @@
     <script src="bootstrap/js/jquery.js"></script>
 	 
 	<script language = "javascript" src="lib/angular/angular.js"></script>
+	<script language = "javascript" src="lib/angular/angular-cookies.min.js"></script>
+
 	<script language = "javascript" src="js/filters.js"></script>
 	<script language = "javascript" src="js/app.js"></script>
 	<script language = "javascript" src="js/controllers.js"></script>
 	
 	
-	
+	<!--
 	<script language = "javascript">
 		function getCookie(name)
 			{
@@ -100,7 +109,7 @@
   				document.getElementById('layer').innerHTML = getCookie('login'); 
 					}
     </script>
-    
+   
     
     
     <input type="text" ng-model="$cookieStore.get('login')" >
@@ -116,8 +125,8 @@
 		</script>
 
 	
-    <script src="/csp/vacancy/js/angular-cookies.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="lib/angular/angular-cookies.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script> -->
 
 </body>
 </html>

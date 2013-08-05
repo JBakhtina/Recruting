@@ -3,8 +3,8 @@
 <CSP name="js/controllers.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
   
-  
-function vacancyCtrl($scope, $http){
+   
+function vacancyCtrl($scope, $http,  $cookies){
 
     // функция получения вакансий
     $scope.getVacancies=function(){
@@ -296,17 +296,23 @@ function SystemUserShow($scope,$http){
 
 }
 
-function authCtrl($scope, $http){
+function authCtrl($scope, $http, $cookies){
+
+
 	// функция аутентификации - считываем данные из БД - возвращаем результат
     $scope.authVerify=function(){
         $http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword)
             .success(function(data){
             try{
                 // пробуем считать результат
-                var fName = data.children[0]["FirstName"];
-                $scope.name =fName;
+                var fName =  data.children[0]["FirstName"];
+                $scope.fname =fName;
                 $scope.showAF = false;
                 $scope.showAG = true;
+
+                // очистим поля ввода
+                $scope.authLogin = "";
+                $scope.authPassword = "";
             } catch(err){
                 // если не удалось считать - значит ошибка входа
                 if($scope.name == "")
@@ -324,6 +330,7 @@ function authCtrl($scope, $http){
 
     // функция показа/скрытия слоёв с формой аутентификации / формой приветствия
     $scope.showAuthForm = function(sh){
+
         if(sh){
             $scope.showAF = true;
             $scope.showAG = false;
@@ -332,13 +339,33 @@ function authCtrl($scope, $http){
             $scope.showAG = true;
         }
     }
-    
-        
-    $scope.showAF = true;
-    $scope.showAG = false;
-}
 
-DemoApp.controller('DemoController', function($cookieStore, $scope, $location, $routeParams, $http , $timeout ){  })
+    // функция разлогинивания
+    $scope.logout = function(){
+
+        $cookies["login"] = "";
+        $scope.cookiesVerify();
+        window.location.href = "/csp/vacancy/index.csp";     // нужно будет переделать на $location
+    }
+
+    // функция проверки кукисов
+    $scope.cookiesVerify = function(){
+        var login = $cookies.login;
+        if(login == null || login==""){
+            $scope.showAuthForm(true);
+        }
+        else {
+            $scope.showAuthForm(false);
+            $scope.fname = login;
+        }
+
+    }
+
+    $scope.cookiesVerify();
+
+
+
+}
 
 ]]></CSP>
 </Export>
