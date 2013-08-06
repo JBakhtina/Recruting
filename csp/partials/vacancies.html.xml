@@ -20,11 +20,12 @@
                     <option ><small class="muted"></small></option>
                     <option  ng-repeat="company in companies" value="{{company.Name}}">{{company.Name}}</option>
                 </select>
-
+ 
         </div>
 
     </div>
-    <!---/ФИЛЬТР--->
+    <!---/ФИЛЬТР---->
+    
  
 
     <div class="row">
@@ -69,7 +70,7 @@
 
                     <li ng-repeat="cv in comvac" >
 
-                        <a href="#company/{{cv.compID}}" class="text-succes span2" style="margin:0px; ">{{cv.CVName}}
+                        <a href="#{{isAdminStr}}company/{{cv.compID}}" class="text-succes span2" style="margin:0px; ">{{cv.CVName}}
                             <span class="span1 badge badge-warning pull-right">{{cv.VCOUNT}}</span></a>
 
                     </li>

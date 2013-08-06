@@ -37,11 +37,21 @@ function vacancyCtrl($scope, $http,  $cookies){
     $scope.getVacancies();
     $scope.getCompanies();
     $scope.getCompaniesVacancies();
-    $scope.inc_path="partials/tab_menu.html";
-    $scope.isAdminStr="#/vacancy/";
+
+    if($cookies.yoyo == "yes"){
+        $scope.inc_path="partials/tab_menu.html";
+        $scope.isAdminStr="#/admin/vacancy/";
+    }
+    else
+    {
+        $scope.inc_path="";
+        $scope.isAdminStr="#/vacancy/";
+    }
+
+
 
 }
-
+  
 function vacancyShowCtrl($scope,$http, $routeParams){
 
     var vacID = $routeParams.vacID;
@@ -349,7 +359,7 @@ function authCtrl($scope, $http, $cookies){
 
         $cookies["login"] = "";
         $scope.cookiesVerify();
-        window.location.href = "/csp/vacancy/index.csp";     // нужно будет переделать на $location
+        window.location.href = "/csp/vacancy/index.html";     // нужно будет переделать на $location
     }
 
     // функция проверки кукисов
@@ -357,10 +367,12 @@ function authCtrl($scope, $http, $cookies){
         var login = $cookies.login;
         if(login == null || login==""){
             $scope.showAuthForm(true);
+            $cookies.yoyo = "no";
         }
         else {
             $scope.showAuthForm(false);
             $scope.fname = login;
+            $cookies.yoyo = "yes";
         }
 
     }

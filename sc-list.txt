@@ -6,6 +6,9 @@
 <cspapp>/js/filters.js
 <cspapp>/js/services.js
 <cspapp>/partials
+/csp/vacancy
+/csp/vacancy/js
+/csp/vacancy/partials
 Vacancy.PKG
 WEB.PKG
 Work.PKG
