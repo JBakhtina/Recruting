@@ -40,12 +40,12 @@ function vacancyCtrl($scope, $http,  $cookies){
 
     if($cookies.yoyo == "yes"){
         $scope.inc_path="partials/tab_menu.html";
-        $scope.isAdminStr="#/admin/vacancy/";
+        $scope.isAdminStr="/admin/";
     }
     else
     {
         $scope.inc_path="";
-        $scope.isAdminStr="#/vacancy/";
+        $scope.isAdminStr="";
     }
 
 
