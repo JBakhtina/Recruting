@@ -3,6 +3,7 @@
 <CSP name="partials/vacancies.html" application="/csp/vacancy/"><![CDATA[
 <!---ВЫВОД ВАКАНСИЙ--->
 <div ID="vacanciesShow" >
+
     <!---ФИЛЬТР---> 
     <div class="row"> 
         <div class="span10">

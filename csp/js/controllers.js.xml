@@ -367,5 +367,21 @@ function authCtrl($scope, $http, $cookies){
 
 }
 
+function vrShow($scope, $http, $routeParams){
+
+    var vacID = $routeParams.vacID;
+
+        // получение  пользователя
+    $scope.showVacancyResp = function(vacID){
+            $http.get("/v/json/getvacancyresp/"+vacID).success(function(data){
+                $scope.vacresp=data.children;}).error(function(data,status){
+                    $scope.alertzone="["+status+"] Ошибка загрузки отзывов :( ["+data+"]"; });
+        }
+
+    $scope.showVacancyResp(vacID);
+    $scope.vacID = vacID;
+    }
+
+
 ]]></CSP>
 </Export>

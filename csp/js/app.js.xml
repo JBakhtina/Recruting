@@ -11,12 +11,12 @@ angular.module('recruting',['ngCookies']).
             when('/admin/companies',{templateUrl: 'partials/admin_companies.html', controller:vacancyCtrl}).
             when('/admin/vacancies',{templateUrl: 'partials/admin_vacancies.html', controller:adminVacanciesCtrl}).
             when('/company/:compID',{templateUrl: 'partials/company.html', controller:companyCtrl}).
+            when('/admin/response/:vacID',{templateUrl: 'partials/response.html', controller:vrShow}).
             when('/vacancies',{templateUrl: 'partials/vacancies.html', controller:vacancyCtrl}).
             when('/vacancy/:vacID', {templateUrl: 'partials/vacancy.html', controller:vacancyShowCtrl}).
             otherwise({redirectTo: '/vacancies'});
     }]); 
-      
-    var DemoApp = angular.module( 'DemoApp', ['ngCookies'] ).config( demoConfig );
+
 
 ]]></CSP>
 </Export>

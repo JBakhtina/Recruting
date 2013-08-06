@@ -48,7 +48,7 @@
    
    
    
-   <Route Url="/json/img/" Method="GET" Call="WEB.RSS:OnPage"/>
+   <Route Url="/json/rss/" Method="GET" Call="WEB.RSS:OnPage"/>
    
    <Route Url="/json/vimage/" Method="POST" Call="WEB.JSON:UpdateImage"/>
    
@@ -70,7 +70,7 @@
    
    
    <Route Url="/json/vacancyresp/:compid" 		 Method="POST" Call="WEB.JSON:NVR"/>
-   <Route Url="/json/getvacancyresp/:compid"	 Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
+   <Route Url="/json/getvacancyresp/:vacid"	 Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
    <Route Url="/json/getcountvacancyview/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
    <Route Url="/json/getcountvacancyresponse/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
    

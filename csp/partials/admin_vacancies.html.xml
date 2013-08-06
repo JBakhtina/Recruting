@@ -8,6 +8,7 @@
     <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
     <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
     <li><a href="#admin/users" data-toggle="tab">Личные данные</a></li>
+    <li><a href="#admin/response/1" data-toggle="tab">Отзывы</a></li>
 </ul>   
   
 <!-- пока не понял как выдернуть данные из объекта без цикла -->
