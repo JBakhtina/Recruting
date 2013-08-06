@@ -69,8 +69,10 @@
    <Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
    
    
-   <Route Url="/json/vacancyresp/:compid" Method="POST" Call="WEB.JSON:NVR"/>
-   <Route Url="/json/getvacancyresp/:compid" Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
+   <Route Url="/json/vacancyresp/:compid" 		 Method="POST" Call="WEB.JSON:NVR"/>
+   <Route Url="/json/getvacancyresp/:compid"	 Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
+   <Route Url="/json/getcountvacancyview/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
+   <Route Url="/json/getcountvacancyresponse/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
    
    
    

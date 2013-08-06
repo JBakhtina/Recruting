@@ -21,6 +21,34 @@
 
 <UDLText name="T">
 <Content><![CDATA[
+// -------------Start VacancyView---------------------
+
+]]></Content>
+</UDLText>
+
+<Method name="GetCountVacancyView">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>vacid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT Count(*) "_
+				   "FROM Vacancy.VacancyView AS V "_
+				   "WHERE V.Vacancy="_vacid
+				   
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// -------------End VacancyView-----------------------
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
 // -------------Company-----------------------
 
 ]]></Content>
@@ -282,6 +310,20 @@
 
 ]]></Content>
 </UDLText>
+
+<Method name="GetCountVacancyResponse">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>vacid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set vacQuery = "SELECT Count(*) "_
+				   "FROM Vacancy.VacancyResponse AS V "_
+				   "WHERE V.Vacancy="_vacid
+				   
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
 
 <Method name="GetVacancyResponse">
 <ClassMethod>1</ClassMethod>
