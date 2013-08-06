@@ -2,10 +2,27 @@
 <Export generator="Cache" version="25">
 <CSP name="partials/admin_companies.html" application="/csp/vacancy/"><![CDATA[
 <ul class="nav nav-tabs">
-    <li><a href="#admin/vacancies" data-toggle="tab">Вакансии</a></li>
+    <li><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
     <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
     <li class="active"><a href="#admin/companies" data-toggle="tab">Компании</a></li>
     <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
 </ul>
-<h1>Вывод списка компаний</h1>]]></CSP>
+<h1>Вывод списка компаний</h1>
+<!---ФИЛЬТР--->
+<div class="row">
+    <div class="input-append span5">
+        <input type="text" id="appendedInput"  ng-model="filterCompany" placeholder="Введите слово для поиска">
+        <span class="add-on"><i class="icon-filter"></i></span>
+    </div>
+</div>
+<li ng-repeat="all in allcompanys | filter:filterCompany" >
+    <a  ng-click="GetSystemCompany(all.IDComp);" class='text-info' href='#admin/company/{{all.IDComp}}'>
+        {{all.IDComp}}
+        {{all.CompanyName}}
+        {{all.Country}}
+        {{all.City}}
+        {{all.Telephone}}
+        {{all.Email}}
+    </a>
+</li>]]></CSP>
 </Export>

@@ -4,7 +4,7 @@
 <!---ОТОБРАЖЕНИЕ 1 ВАКАНСИИ--->
 <div ID="vacancyShow" class="container" ng-hide="showR" ng-show="showV" >
     <form ng-submit="vacanciesConstruct()" style="margin-bottom:10px">
-        <a class="btn" href="index.csp"><i class="icon-list"></i> Список вакансий</a>
+        <a class="btn" href="index.html"><i class="icon-list"></i> Список вакансий</a>
     </form>   
   
     <div class="row">
@@ -25,7 +25,6 @@
             <p>{{txtAddInfo}}</p>
 
             <hr>
-
 
             <!---КНОПКИ/ССЫЛКИ--->
             <div class="span7">
