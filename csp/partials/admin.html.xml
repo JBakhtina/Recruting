@@ -9,7 +9,7 @@
        <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
        <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
        <li class="active"><a href="#admin/vacancyresp/1" data-toggle="tab">Отзывы</a></li>
-    </ul> 
+    </ul>
 
 ]]></CSP>
 </Export>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/vacancies.html" application="/csp/vacancy/"><![CDATA[
+<div ng-include src="inc_path"></div>
 <!---ВЫВОД ВАКАНСИЙ--->
 <div ID="vacanciesShow" >
 
@@ -32,7 +33,7 @@
 
                 <ul class='nav nav-pills nav-stacked'  >
                     <li ng-repeat="vacancy in vacancies | filter:filterVacancy | filter:filterCompany ">
-                            <a  class='text-info' href="#/vacancy/{{vacancy.IDVac}}">
+                            <a  class='text-info' href="{{ isAdminStr }}{{vacancy.IDVac}}">
                             <div class="row">
 
                                 <div class="span3">

@@ -37,6 +37,9 @@ function vacancyCtrl($scope, $http,  $cookies){
     $scope.getVacancies();
     $scope.getCompanies();
     $scope.getCompaniesVacancies();
+    $scope.inc_path="partials/tab_menu.html";
+    $scope.isAdminStr="#/vacancy/";
+
 }
 
 function vacancyShowCtrl($scope,$http, $routeParams){
@@ -189,6 +192,7 @@ function CompanyShow($scope,$http){
     $scope.GetAllCompanys();
 }
 
+// мы тя грохнем
 function adminVacanciesCtrl ($scope,$http,$routeParams){
     // получаем ИД вакансии
     var vacID = $routeParams.vacID;
@@ -381,7 +385,27 @@ function vrShow($scope, $http, $routeParams){
     $scope.showVacancyResp(vacID);
     $scope.vacID = vacID;
     }
+// вывод всех пользователей
+function adminUsersCtrl ($scope, $http, $routeParams){
 
+}
+// работа с Пользователем
+function adminUserCtrl ($scope, $http, $routeParams){
+
+}
+// вывод всех компаний
+function adminCompaniesCtrl ($scope, $http, $routeParams){
+
+}
+// работа с компанией
+function adminCompanyCtrl ($scope, $http, $routeParams){
+
+}
+
+// работа с Вакансией
+function adminVacancyCtrl ($scope, $http, $routeParams){
+
+}
 
 ]]></CSP>
 </Export>
