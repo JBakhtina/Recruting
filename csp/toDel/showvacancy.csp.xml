@@ -9,7 +9,7 @@
     <meta charset="utf-8">
 	<title>Вакансия: {{mdgtitle}}  </title>
 	<script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?9" charset="windows-1251"></script>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 
 
@@ -17,7 +17,7 @@
 
 	<div class="container">
 		<head>
-			<img src="img/intersystems-header.gif">		
+			<img src="../img/intersystems-header.gif">
 		</head>
 		
  <!---НАВИГАЦИОННАЯ ПАНЕЛЬ--->  	
@@ -235,12 +235,14 @@
   	</div>
 <!---/ФУТЕР СТРАНИЦЫ--->	
 	
-   <script src="bootstrap/js/bootstrap.min.js"></script>
-   <script src="bootstrap/js/jquery.js"></script>
-	
-   <!--<script language = "javascript" src="js/app.js"></script>-->
-   <script language = "javascript" src="js/controllers.js"></script>
-     <script language = "javascript" src="test.js"></script>
+<script src="../lib/bootstrap.js"></script>
+<script src="../lib/jquery.js"></script>
+<script language = "javascript" src="../lib/angular/angular.js"></script>
+<script language = "javascript" src="../lib/angular/angular-cookies.min.js"></script>
+<script language = "javascript" src="../js/filters.js"></script>
+<script language = "javascript" src="../js/app.js"></script>
+<script language = "javascript" src="../js/controllers.js"></script>
+
    <script language = "javascript" >
    		//vacancyShowCtrl.$inject = ['$scope','$http', 'greeter'];
   </script>
