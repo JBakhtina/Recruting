@@ -2,95 +2,79 @@
 <Export generator="Cache" version="25">
 <CSP name="index.html" application="/csp/vacancy/"><![CDATA[
 <!doctype html>
-<html ng-app>
+
+<html ng-app="recruting">
 <head>
-	<title>Vacancy</title>
-	<script language ="javascript"> 
-	// здесь обработчики будут
-function control ($scope,$http){
-	// после переустановки каше порт стал 57773, а не 57772 как во всех примерах
-	// получаем данные в формате json и засовываем их в $scope.companies
-	// опять же абсолютная ссылка что бы не разбираться
-		$scope.getVacancies=function(){
-		// надо будет какую то универсальную относительную ссылку - у меня
-		// только абсолютная работает
-		$http.get("/v/json/vacancies").success(function(data){
-			$scope.vacancies=data.children;}).error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
-			
-		    }
-	 //тк теперь это функция - вызываем её, т.к. при изменениях в БД необходимо повторно обновлять используемый набор данных
-		$scope.getCompanyByID=function(compid){
-		$http.get("/v/json/company/"+compid).success(function(data){
-			$scope.companies=data.children;}).error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
-			
-		    }
-		$scope.getVacancies();
-		//$scope.getCompanyByID("1");
- }//control
-	</script>
-<link href="app/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <title>Vacancy</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
-<style>
-	.block1 {
-			height:50px;
-			background:magenta;
-	       }
-	
-</style>
 
-<body  ng-controller="control">
-<h1 ng-model="alertzone" ng-hide="true"><font color=red>ИДЁТ ЗАГРУЗКА ДАННЫХ. Пожалуйста ПОДОЖДИТЕ</font></h1>
+<body>
 
-	<div class="container">
-		<head>
-			<img src="img/intersystems-header.gif">		
-		</head>
-		
-		<div class="navbar">
-		  <nav class="navbar-inner">	
-			<a class="brand" href="#">&nbsp Вакансии</a>
-			<ul class="nav">
-				<li class="divider-vertical"></li>
-				<li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
-				<li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
-			</ul>
-			
-			<form class="navbar-form pull-right" >
-				<input name="login" type="text" class="span2" placeholder="логин">
-				<input name="pass" type="password" class="span2" placeholder="пароль">
-				<button type="submit" class="btn btn-mini" >Войти</button>
-			</form>
-		   </nav>	 
-		</div>
-		Фильтр <input ng-model="filterVacancy">
+<div class="container">
+    <head>
+        <img src="img/intersystems-header.gif">
+    </head>
 
-		<div class="row">
-			<article class="span12">
-				<p>
-				<ul class='nav nav-tabs nav-stacked'>
-				<li ng-repeat="vacancy in vacancies | filter:filterVacancy">
-				<a class='' href=''><H2>{{vacancy.Name}}</h2>
-				Зарплата от {{vacancy.StartSalary}} до {{vacancy.EndSalary}}</a>
-				<font size='1px'>Дата регистрации {{vacancy.RegDate</font>
-				</li>
-				</ul>
-				</p>
-			</article>
-		</div>
-		
-		<div id="footer">
-			<div class=""></div>
-			
-		</div>
-		
-		
-	</div>
+    <!---НАВИГАЦИОННАЯ ПАНЕЛЬ--->
+    <div class="navbar" style="margin-bottom:10px;" ng-controller="authCtrl">
 
-    <script src="app/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery/jquery-latest.js"></script>	
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+        <nav class="navbar-inner">
+            <a class="brand" href="index.html">&nbsp Вакансии</a>
+            <ul class="nav">
+                <li class="divider-vertical"></li>
+                <li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
+                <li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
+            </ul>
+
+            <!---АУТЕНТИФИКАЦИЯ--->
+            <div>
+
+                <!---АУТЕНТИФИКАЦИЯ_ФОРМА ВХОДА--->
+                <form ng-submit="authVerify()" class="navbar-form pull-right"  ng-hide="showAG" ng-show="showAF">
+                    <div >
+                        <input ng-model="authLogin" type="text" class="span2" placeholder="логин" required>
+                        <input ng-model="authPassword" type="password" class="span2" placeholder="пароль" required>
+                        <button type="submit" class="btn" >Войти</button>
+                    </div>
+                </form>
+                <!---/АУТЕНТИФИКАЦИЯ_ФОРМА ВХОДА--->
+
+                <!---АУТЕНТИФИКАЦИЯ_ЗАЛОГИНИЛСЯ--->
+                <form ng-submit="authLogout()" class="navbar-form pull-right" ng-hide="showAF" ng-show="showAG">
+                    <div class="navbar-for pull-right">
+                        <div class = "span3">
+                            <p class="text-info" style="margin:0px">Добрый день, {{fname}}</br>
+                                <i class="icon-user"></i>&nbsp
+                                <small><a href="#/admin/" >Личный кабинет</a></small></p>
+                        </div>
+                        <div class = "span1">
+                            <button type="submit" class="btn" ng-click="logout()" >Выйти</button>
+                        </div>
+                    </div>
+                </form>
+                <!---/АУТЕНТИФИКАЦИЯ_ЗАЛОГИНИЛСЯ--->
+            </div>
+            <!---/АУТЕНТИФИКАЦИЯ--->
+
+        </nav>
+    </div>
+    <!---/НАВИГАЦИОННАЯ ПАНЕЛЬ--->
+
+    <!---КОНТЕНТ--->
+    <div ng-view></div>
+    <!---/КОНТЕНТ--->
+</div>
+
+<script src="lib/bootstrap.js"></script>
+<script src="lib/jquery.js"></script>
+<script language = "javascript" src="lib/angular/angular.js"></script>
+<script language = "javascript" src="lib/angular/angular-cookies.min.js"></script>
+<script language = "javascript" src="js/filters.js"></script>
+<script language = "javascript" src="js/app.js"></script>
+<script language = "javascript" src="js/controllers.js"></script>
 </body>
-</html>]]></CSP>
+</html>
+
+]]></CSP>
 </Export>

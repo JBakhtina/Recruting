@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="partials/upload_image.html" application="/csp/vacancy/"><![CDATA[
+   <form action="http://localhost:57772/v/json/vimage/" enctype="multipart/form-data" method=post >
+
+        файл для загрузки
+        <input name=FileStream size=30 type=file>
+        <input name="id" type="text">
+        <input name="Type" type="text" value="Vacancy">
+
+        <p>
+        <ul><input type=submit value="Загрузить"></ul>
+        <p>
+    </form>]]></CSP>
+</Export>

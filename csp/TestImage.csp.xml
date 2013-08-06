@@ -27,6 +27,9 @@
 </form>
 
 
+<script language="Cache" runat="Server">
+w %request.Get("id","",1)
+</script>
 
 </body>
 </html>]]></CSP>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="css/vacancy.css" application="/csp/vacancy/"><![CDATA[
+<style>
+	.block1 {
+			height:50px;
+			background:magenta;
+	       }
+	
+</style>]]></CSP>
+</Export>
