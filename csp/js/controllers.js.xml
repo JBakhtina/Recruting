@@ -2,6 +2,7 @@
 <Export generator="Cache" version="25">
 <CSP name="js/controllers.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
+
   
 function vacancyCtrl($scope, $http,  $cookies){
     // делаем пагинатор  из примера на хабре
@@ -227,9 +228,10 @@ function CompanyShow($scope,$http,$routeParams){
 
 		    // удаление компании
 	    	$scope.deleteCompany = function (compid){
+                $scope.alertzone="AAA"+compid;
 		    $http.delete("/v/json/delcompany/"+compid)
 		    .success(function(data){
-			    document.location.href = "#admin/companies/";
+			    //document.location.href = "#admin/companies/";
 			    }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
 		    }
@@ -238,6 +240,7 @@ function CompanyShow($scope,$http,$routeParams){
     $scope.GetAllCompanys();
     //TODO: фейк - надо исправить инит
     $scope.GetSystemCompany($routeParams.compID);
+    $scope.alertzone="ZZZ";
 }
 
 // мы тя грохнем

@@ -18,8 +18,8 @@
                 {{txtVacancyCompany}}
                 <h7 class="text-info pull-right">{{txtVacancyCity}}</h7>
             </h6>
- 
-            <p>Зарплата от  {{txtStartSalary}} до {{txtEndSalary}} </p>
+
+            <p>Зарплата от {{txtStartSalary}} до {{txtEndSalary}} </p>
             <p>{{txtMainInfo}}</p>
             <p>{{txtEduLevel}}</p>
             <p>{{txtAddInfo}}</p>

@@ -9,7 +9,7 @@
     <li><a href="#admin/vacancyresp/{{ vacancyid }}" data-toggle="tab">Отзывы</a></li>
 </ul>
 
- 
+
 <div class="container">
     <div class="row">
         <article class="span12">
@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="control-group">
-                                <label  for="VacancyTypes" class="control-label">Тип занятости</label>
+                                <label for="VacancyTypes" class="control-label">Тип занятости</label>
                                 <div class="controls"><input type="text" ng-model="newvacancy.VacancyType"/></div>
                             </div>
 
@@ -80,14 +80,10 @@
 
                             <div class="control-group">
                                 <label for="comid" class="control-label">ИД компания</label>
-
-                                <div class="controls">
-                                    <select name="comid" ng-model="newvacancy.comid" >
-                                        <option ng-repeat="com in companies" value={{com.ID}}>
-                                            {{com.Name}}
-                                        </option>
-                                    </select>
-                                </div>
+                                <!--TODO:привязать список компаний -->
+                                <div class="controls"><select name="comid" ng-model="newvacancy.comid" />
+                                    <option ng-repeat="companiess in companies" value={{companies[$index].ID}}>{{companies[$index].Name}}</option>
+                                    </select></div>
 
                             </div>
 

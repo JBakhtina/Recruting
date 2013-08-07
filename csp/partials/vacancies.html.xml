@@ -55,7 +55,6 @@
             </div>
         </div>
         <!---/ВЫВОД ВАКАНСИЙ--->
-
         <!---БОКОВАЯ ПАНЕЛЬ--->
         <div class="span3" >
             <div class="well">
@@ -75,12 +74,27 @@
 
                 </ol>
 
-                </hr> <a class="" href="#"><img src='img\rss.png'></a>
+                </hr> <a class="" href="/v/json/rss/"><img src='img\rss.png'></a>
                 <div class="btn-group pull-left" >
 
                 </div>
             </div>
         </div>
         <!---/БОКОВАЯ ПАНЕЛЬ--->
+
+        <PAGINATOR>
+            <div class="pull-left">
+                Показано {{Math.min(paginator.count,vacancies.length)}} записей из {{vacancies.length}}
+            </div>
+            <div class="controls input-append pull-right">
+                <input type="button" ng-click="paginator.page=1" class="btn btn-small" value="&lt;&lt;">
+                <input type="button" ng-click="paginator.page=paginator.page-1 || 1" class="btn btn-small" value="&lt;">
+                <input ng-model="paginator.page" class="paginator-page"><span class="add-on">из {{paginator.pages}} стр.</span>
+                <input type="button" ng-click="paginator.page=Math.min(paginator.page+1,paginator.pages)" class="btn btn-small" value="&gt;">
+                <input type="button" ng-click="paginator.page=paginator.pages" class="btn btn-small" value="&gt;&gt;">
+            </div>
+            <div class="clear"></div>
+
+        </PAGINATOR>
 ]]></CSP>
 </Export>

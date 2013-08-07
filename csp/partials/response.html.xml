@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/response.html" application="/csp/vacancy/"><![CDATA[
+<h3></h3>
 <ul class="nav nav-tabs">
     <li><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
     <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
@@ -8,7 +9,7 @@
     <li class="active"><a href="#admin/response/{{ vacancyid }}" data-toggle="tab">Отзывы</a></li>
 
 </ul>
-<!--TODO: Отправка отзыва по почте -->
+<!--TODO: Кнопка отправки отзыва по почте -->
 <div class="row">
 
     <div class="span9">
@@ -17,10 +18,10 @@
             <ul class='nav nav-pills nav-stacked'  >
                 <li ng-repeat="vacresponse in vacresp" >
                    Отзыв от   {{vacresponse.FirstName}}   {{vacresponse.LastName}} <br>
-                   Проживающего   по адресу   {{vacresponse.Country}}   {{vacresponse.City}} {{vacresponse.State}}
+                   Проживающего  по адресу   {{vacresponse.Country}}   {{vacresponse.City}} {{vacresponse.State}}
                     {{vacresponse.Street}}   {{vacresponse.Street}}     {{vacresponse.Building}}   {{vacresponse.Apartament}}
                     {{vacresponse.ResponseText}}
- 
+
                  </li>
                 <br>
             </ul>

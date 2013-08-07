@@ -11,8 +11,8 @@
 {{ alertzone }}
 
 <form  name="NewCompany" ng-model="comp"  ng-submit="newCompany(comp)">
- 
-    Название  компании   <input type="text" ng-model="comp.CompanyName"/><br>
+
+    Название компании   <input type="text" ng-model="comp.CompanyName"/><br>
     Страна              <input type="text" ng-model="comp.Country"/><br>
     Край/область        <input type="text" ng-model="comp.State"/><br>
     Город 				<input type="text" ng-model="comp.City"/><br>

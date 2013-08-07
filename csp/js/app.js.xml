@@ -2,6 +2,7 @@
 <Export generator="Cache" version="25">
 <CSP name="js/app.js" application="/csp/vacancy/"><![CDATA[
 'use strict'; 
+
  
 angular.module('recruting',['ngCookies']).
     config(['$routeProvider',function($routeProvider) {
