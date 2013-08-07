@@ -130,7 +130,7 @@ User - зарезирвированное в ODBC</Description>
 <IdLocation>^Vacancy.SystemUserD</IdLocation>
 <IndexLocation>^Vacancy.SystemUserI</IndexLocation>
 <StreamLocation>^Vacancy.SystemUserS</StreamLocation>
-<ExtentSize>10</ExtentSize>
+<ExtentSize>20</ExtentSize>
 <Data name="SystemUserDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -165,27 +165,36 @@ User - зарезирвированное в ODBC</Description>
 <Value name="11">
 <Value>Company</Value>
 </Value>
+<Value name="12">
+<Value>SMTPServer</Value>
+</Value>
+<Value name="13">
+<Value>MailToResponse</Value>
+</Value>
+<Value name="14">
+<Value>PassMail</Value>
+</Value>
 </Data>
 <Property name="%%CLASSNAME">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>20.0000%</Selectivity>
+<Selectivity>7.1429%</Selectivity>
 </Property>
 <Property name="DOB">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>5.0000%</Selectivity>
 </Property>
 <Property name="FirstName">
-<Selectivity>11.1111%</Selectivity>
+<Selectivity>5.2632%</Selectivity>
 </Property>
 <Property name="HomeAdress">
-<Selectivity>10.0000%,Apartament:10.0000%,Building:10.0000%,City:16.6667%,Country:16.6667%,Email:10.0000%,State:14.2857%,Street:11.1111%,Telephone:10.0000%,URL:16.6667%</Selectivity>
+<Selectivity>5.0000%,Apartament:5.0000%,Building:5.5556%,City:8.3333%,Country:11.1111%,Email:5.0000%,State:11.1111%,Street:7.6923%,Telephone:5.0000%,URL:12.5000%,ZIP:5.0000%</Selectivity>
 </Property>
 <Property name="LastName">
-<Selectivity>10.0000%</Selectivity>
+<Selectivity>5.8824%</Selectivity>
 </Property>
 <Property name="Login">
-<Selectivity>100.0000%</Selectivity>
+<Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="Password">
 <Selectivity>100.0000%</Selectivity>
@@ -194,10 +203,10 @@ User - зарезирвированное в ODBC</Description>
 <Selectivity>50.0000%</Selectivity>
 </Property>
 <Property name="UserType">
-<Selectivity>10.0000%,Level:10.0000%</Selectivity>
+<Selectivity>5.0000%,Level:5.0000%</Selectivity>
 </Property>
 <Property name="VacancyAdress">
-<Selectivity>10.0000%,Apartament:10.0000%,Building:11.1111%,City:11.1111%,Country:14.2857%,Email:10.0000%,State:16.6667%,Street:12.5000%,Telephone:10.0000%,URL:33.3333%</Selectivity>
+<Selectivity>5.0000%,Apartament:5.0000%,Building:5.8824%,City:10.0000%,Country:11.1111%,Email:5.0000%,State:9.0909%,Street:9.0909%,Telephone:5.0000%,URL:10.0000%,ZIP:5.0000%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
 <BlockCount>-4</BlockCount>

@@ -9,15 +9,28 @@
 <FormalSpec>Id:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
- // 
- set vr=##class(Vacancy.VacancyResponse).%OpenId(Id)	
+ //
+ // Нулевые настройки почтового ящика
+ // Отправитель
+ set MailFrom="18523897@mail.ru"
+ //
+ // stmp сервер diamex.info
+ set MailSMTP="smtp.mail.ru"
+ //
+ // Пароль
+ set MailPASS="12Victor89Lilo"
+ //
+ //
+ set vr=##class(Vacancy.VacancyResponse).%OpenId(Id)
+ set AdminMail=vr.Vacancy.Company.MailToResponse
+
 	
   #dim smtp As %Net.SMTP
   #dim mail As %Net.MailMessage
   
   set mail=##class(%Net.MailMessage).%New()
   // Отправитель
-  set mail.From=""
+  set mail.From=MailFrom
   // Тема письма
   set mail.Subject="Отзыв на вакансию: "_vr.Vacancy.Name_" от: "_vr.FirstName
   // Кодировка
@@ -27,21 +40,80 @@
   // Текст письма
   do mail.TextData.Write(vr.ResponseText)
   // Получатель
-  do mail.To.Insert("")
+  do mail.To.Insert(AdminMail)
   
   
   set smtp=##class(%Net.SMTP).%New()
   
   // Сервер исходящей почты, например smtp.mail.ru
-  set smtp.smtpserver=""
+  set smtp.smtpserver=MailSMTP
   // Порт
   set smtp.port=25
   
   Set auth=##class(%Net.Authenticator).%New()
   // Имя пользователя, 123@mn.ru
-  set auth.UserName=""
+  set auth.UserName=MailFrom
   // Пароль
-  set auth.Password=""
+  set auth.Password=MailPASS
+  set smtp.authenticator=auth
+  
+  s status= smtp.Send(mail)
+
+	Quit status
+]]></Implementation>
+</Method>
+
+<Method name="ReDirectMail">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>vrID:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+ //
+ // Нулевые настройки почтового ящика
+ // Отправитель
+ set MailFrom="18523897@mail.ru"
+ //
+ // stmp сервер diamex.info
+ set MailSMTP="smtp.mail.ru"
+ //
+ // Пароль
+ set MailPASS="12Victor89Lilo"
+ //
+ //
+ set vr=##class(Vacancy.VacancyResponse).%OpenId(vrID)
+ set AdminMail=vr.Vacancy.Company.MailToResponse
+
+	
+  #dim smtp As %Net.SMTP
+  #dim mail As %Net.MailMessage
+  
+  set mail=##class(%Net.MailMessage).%New()
+  // Отправитель
+  set mail.From=MailFrom
+  // Тема письма
+  set mail.Subject="ReDirect Отзыв на вакансию: "_vr.Vacancy.Name_" от: "_vr.FirstName
+  // Кодировка
+  set mail.Charset="utf-8"
+  set mail.IsHTML=1
+  set mail.ContentType="text/html"
+  // Текст письма
+  do mail.TextData.Write(vr.ResponseText)
+  // Получатель
+  do mail.To.Insert(vr.Vacancy.Company.Adress.Email)
+  
+  
+  set smtp=##class(%Net.SMTP).%New()
+  
+  // Сервер исходящей почты, например smtp.mail.ru
+  set smtp.smtpserver=MailSMTP
+  // Порт
+  set smtp.port=25
+  
+  Set auth=##class(%Net.Authenticator).%New()
+  // Имя пользователя, 123@mn.ru
+  set auth.UserName=MailFrom
+  // Пароль
+  set auth.Password=MailPASS
   set smtp.authenticator=auth
   
   s status= smtp.Send(mail)

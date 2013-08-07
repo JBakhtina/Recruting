@@ -56,7 +56,7 @@
 <ReturnType>%Status</ReturnType>
 <ServerOnly>1</ServerOnly>
 <Implementation><![CDATA[
-   //do ##class(Vacancy.CreateMail).NewMail(..%Id())
+   do ##class(Vacancy.CreateMail).NewMail(..%Id())
 	Quit insert
 ]]></Implementation>
 </Method>

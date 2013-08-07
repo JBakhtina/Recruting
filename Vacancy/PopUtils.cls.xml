@@ -12,6 +12,13 @@
 ]]></Content>
 </UDLText>
 
+<Method name="MailToResponse">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[	 return "18523897@mail.ru"
+]]></Implementation>
+</Method>
+
 <Method name="PopImage">
 <ClassMethod>1</ClassMethod>
 <ReturnType>%BinaryStream</ReturnType>

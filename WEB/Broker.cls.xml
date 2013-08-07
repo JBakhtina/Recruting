@@ -60,6 +60,10 @@
    <Route Url="/json/getvacancyresp/:vacid"	 Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
    <Route Url="/json/getcountvacancyview/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
    <Route Url="/json/getcountvacancyresponse/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
+ 	<Route Url="/json/redirectmail/:vrid" Method="POST" Call="WEB.JSON:ReDirectMail"/>
+ 
+ 
+ 
  </Routes>
 ]]></Data>
 </XData>

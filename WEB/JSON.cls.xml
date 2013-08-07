@@ -19,6 +19,16 @@
 ]]></Implementation>
 </Method>
 
+<Method name="ReDirectMail">
+<Description>
+Отправка </Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>vrID:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[	q ##class(Vacancy.CreateMail).ReDirectMail(vrID)
+]]></Implementation>
+</Method>
+
 <UDLText name="T">
 <Content><![CDATA[
 // -------------Start VacancyView---------------------

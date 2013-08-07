@@ -7,7 +7,7 @@
 <TimeCreated>63006,70543.55085</TimeCreated>
 
 <Parameter name="POPSPEC">
-<Default>Name:Company(),CompMainInfo:##class(Vacancy.PopUtils).CompMainInfo()</Default>
+<Default>Name:Company(),CompMainInfo:##class(Vacancy.PopUtils).CompMainInfo(),MailToResponse:##class(Vacancy.PopUtils).MailToResponse()</Default>
 </Parameter>
 
 <UDLText name="T">
@@ -63,6 +63,12 @@
 <Parameter name="MAXLEN" value="500"/>
 </Property>
 
+<Property name="MailToResponse">
+<Description>
+mail для отправки почты админу</Description>
+<Type>%String</Type>
+</Property>
+
 <Method name="DeleteCompany">
 <ClassMethod>1</ClassMethod>
 <FormalSpec>compid:%String</FormalSpec>
@@ -111,6 +117,15 @@
 <Value name="13">
 <Value>Description</Value>
 </Value>
+<Value name="14">
+<Value>SMTPServer</Value>
+</Value>
+<Value name="15">
+<Value>MailToResponse</Value>
+</Value>
+<Value name="16">
+<Value>PassMail</Value>
+</Value>
 </Data>
 <Property name="%%CLASSNAME">
 <Selectivity>100.0000%</Selectivity>
@@ -119,7 +134,7 @@
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="Adress">
-<Selectivity>5.0000%,Apartament:5.2632%,Building:5.8824%,City:10.0000%,Country:10.0000%,Email:5.0000%,State:9.0909%,Street:8.3333%,Telephone:5.0000%,URL:10.0000%</Selectivity>
+<Selectivity>5.0000%,Apartament:5.2632%,Building:5.2632%,City:9.0909%,Country:9.0909%,Email:5.0000%,State:9.0909%,Street:9.0909%,Telephone:5.0000%,URL:12.5000%,ZIP:5.0000%</Selectivity>
 </Property>
 <Property name="CompMainInfo">
 <Selectivity>100.0000%</Selectivity>
