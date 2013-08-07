@@ -485,7 +485,7 @@
        set vacancy.MainInfo=$ZCONVERT(obj.MainInfo,"I","UTF8")
        set vacancy.AddInfo=$ZCONVERT(obj.AddInfo,"I","UTF8")
        set vacancy.Seats=$ZCONVERT(obj.Seats,"I","UTF8")
-       set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.CompanyName)
+       set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.compID)
        //set vacancy.Links.URL=obj.Links_URL
 
        $$$THROWONERROR(st,vacancy.%Save())

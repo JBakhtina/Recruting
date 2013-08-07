@@ -8,13 +8,13 @@
     <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
     <li><a href="#admin/vacancyresp/{{ vacancyid }}" data-toggle="tab">Отзывы</a></li>
 </ul>
-<div class="row">
+<div  class="row">
     <article class="span12">
         <p>
         <ul class='nav nav-tabs nav-stacked'>
             <li>
-
-
+ 
+ 
                 <V77>
                     <div class="well">
                         <form class="form-horizontal" name="UpdVacancy" ng-model="vacancy"  ng-submit="update({{ vacancyid }},vacancy[0])">
@@ -37,7 +37,7 @@
                         <div class="control-group">
                             <label for="EduLevel" class="control-label">Требуемое образование</label>
                             <div class="controls">
-                                <select name="EduLevel" ng-model="vacancy[0].EduLevel"/>
+                                <select name="EduLevel" ng-model="vacancy[0].EduLevel">
                                 <option value="Среднее">Среднее</option>
                                 <option value="Неоконченное высшее">Неоконченное высшее</option>
                                 <option value="Высшее - бакалавр">Высшее - бакалавр</option>
@@ -82,12 +82,22 @@
 
                         <div class="control-group">
                             <label for="Company" class="control-label"> Компания</label>
+
+                           <!--
                             <div class="controls"><input type="text" ng-model="vacancy[0].CompanyName"/></div>
 
-                            <div class="controls"><select name="CompanyName" ng-model="vacancy[0].CompanyName" />
-                                <!--TODO:привязать список компаний -->
-                                <option ng-repeat="companiess in companies" value={{companies[$index].ID}}>{{companiess[$index].Name}}</option>
-                                </select></div>
+                            <div class="controls">
+                                <select name="compID" ng-model="vacancy[0].compID">
+
+                                    <option  value=18>Test</option>
+                                    <option ng-repeat="companiess in companies" value={{companies[$index].ID}}>{{companies[$index].Name}}</option>
+                                </select>
+                            </div>
+                                 -->
+
+                            <div class="controls">
+                                <select ng-model="vacancy[0].compID" ng-options="c.ID as c.Name for c in companies" > </select>
+                            </div>
 
                         </div>
 
@@ -100,7 +110,7 @@
                             <label for="AddInfo" class="control-label">Дополнительная информация</label>
                             <div class="controls"><textarea name="AddInfo" rows="10" cols="45" ng-model="vacancy[0].AddInfo" class="input-xlarge"></textarea></div>
                         </div>
-                            <!--TODO: СПИСКОМ URL's ГДЕ РАЗМЕЩЕНА -->
+
 
                         <div class="form-actions">
                             <input type="submit" value="Сохранить"/>

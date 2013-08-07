@@ -2,9 +2,9 @@
 <Export generator="Cache" version="25">
 <CSP name="js/controllers.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
-
-  
-function vacancyCtrl($scope, $http,  $cookies){
+ 
+   
+function vacancyCtl($scope, $http,  $cookies){
     // делаем пагинатор  из примера на хабре
 
 //TODO: возможно пагинатору необходимо использовать фабрику и фильтр - сделаем позже
@@ -267,7 +267,9 @@ function adminVacanciesCtrl ($scope,$http,$routeParams){
 
     $scope.getVacancy=function(vacID){
         $http.get("/v/json/vacancy/"+vacID).success(function(data){
-            $scope.vacancy=data.children;}).error(function(data,status){
+            $scope.vacancy=data.children;
+
+        }).error(function(data,status){
                 $scope.alertzone="["+status+"] Error upload one vacancy :( ["+data+"]"; });
     }
 
