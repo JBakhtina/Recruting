@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/tab_menu.html" application="/csp/vacancy/"><![CDATA[
-<ul class="nav nav-tabs">
+ <ul class="nav nav-tabs">
     <li class="active"><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
     <li><a href="#admin/addvacancy" data-toggle="tab"><b>Добавить вакансию</b></a></li>
     <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
-    <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
+    <li><a href="#admin/companies" data-toggle="tab"> Компании</a></li>
     <li><a href="#admin/admin_init" data-toggle="tab">Личные данные</a></li>
 </ul>]]></CSP>
 </Export>

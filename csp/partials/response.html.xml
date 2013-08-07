@@ -17,10 +17,10 @@
             <ul class='nav nav-pills nav-stacked'  >
                 <li ng-repeat="vacresponse in vacresp" >
                    Отзыв от   {{vacresponse.FirstName}}   {{vacresponse.LastName}} <br>
-                   Проживающего  по адресу   {{vacresponse.Country}}   {{vacresponse.City}} {{vacresponse.State}}
+                   Проживающего   по адресу   {{vacresponse.Country}}   {{vacresponse.City}} {{vacresponse.State}}
                     {{vacresponse.Street}}   {{vacresponse.Street}}     {{vacresponse.Building}}   {{vacresponse.Apartament}}
                     {{vacresponse.ResponseText}}
-
+ 
                  </li>
                 <br>
             </ul>

@@ -8,9 +8,9 @@
     <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
     <li><a href="#admin/admin" data-toggle="tab">Настройки?</a></li>
 </ul> 
-<!--TODO: заменить на нормальный алерт -->
+<!--TODO: заменить  на нормальный алерт -->
 {{ alertzone }}
-
+ 
 
 <form  name="SystemUser" ng-model="user"  ng-submit="updateuser({{ userid }},user[0])">
 <!-- TODO: неотрабатывает инит -->
@@ -18,11 +18,11 @@
 
 Имя <input type="text" ng-model="user[0].FirstName"/><br>
 Фамилия<input type="text" ng-model="user[0].LastName"/><br>
-<!--TODO: неработает выборка -->
-    Пол 		<select name="Sex" ng-model="user[0].Sex" ng-value="user[0].Sex"/>
-<option value="М">М</option>
-<option value="Ж">Ж</option>
-</select><br>
+
+    Пол 		<select name="Sex" ng-model="user[0].Sex" ng-value="user[0].Sex">
+                    <option value="М">М</option>
+                    <option value="Ж">Ж</option>
+                </select><br>
 Тип пользователя <input type="text" ng-model="user[0].UserType"/><br>
 Дата рождения <input type="text" ng-model="user[0].DOB"/><br>
 Страна <input type="text" ng-model="user[0].Country"/><br>

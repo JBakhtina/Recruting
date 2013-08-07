@@ -9,13 +9,13 @@
     <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
 </ul> 
 <h1>Список пользователей</h1>
-<!---ФИЛЬТР--->
+<!---ФИЛЬТР--- >
 <div class="row">
     <div class="input-append span5">
         <input type="text" id="appendedInput"  ng-model="filterUser" placeholder="Введите слово для поиска">
         <span class="add-on"><i class="icon-filter"></i></span>
     </div>
-</div>
+</div> 
 <li ng-repeat="sysuserss in allusers | filter:filterUser" >
     <a  ng-click="GetSystemUser(sysuserss.IDUser);" class='text-info' href='#admin/user/{{sysuserss.IDUser}}'>
         {{sysuserss.IDUser}}

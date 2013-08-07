@@ -15,10 +15,10 @@
             {{company[0].Adress_Street}}
             {{company[0].Adress_Building}}
         </address>
-
+ 
         Контакты:
         <p>
-            телефон {{company[0].Adress_Telephone}}<br>
+            телефон  {{company[0].Adress_Telephone}}<br>
             E-mail {{company[0].Adress_Email}}<br>
             Сайт <a href ="{{company[0].Adress_URL}}">{{company[0].Adress_URL}}</a>
         </p>

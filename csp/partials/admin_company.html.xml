@@ -10,14 +10,14 @@
 </ul>
 {{ alertzone }}
 
-<form  name="SystemCompany" ng-model="company"  ng-submit="updateCompany({{ companyid}},company[0])">
-<!--TODO: не работает вызов функции   -->
-<span ng-init="GetSystemCompany({{ companyid}})"></span>
+<form  name="SystemCompany" ng-model="company"  ng-submit="updateCompany({{companyid}},company[0])">
+<!--TODO: не работает вызов функции ????????????????????????  -->
+<span ng-init="GetSystemCompany({{companyid}})"></span>
 
 Название компании <input type="text" ng-model="company[0].CompanyName"/><br>
+ 
 
-
-Страна 			<input type="text" ng-model="company[0].Country"/>   <br>
+Страна  			<input type="text" ng-model="company[0].Country"/>   <br>
 Край/область 	<input type="text" ng-model="company[0].State"/>     <br>
 Город 			<input type="text" ng-model="company[0].City"/>      <br>
 Улица 			<input type="text" ng-model="company[0].Street"/>    <br>
@@ -28,7 +28,8 @@ E-mail 			<input type="text" ng-model="company[0].Email"/>     <br>
 URL 			<input type="text" ng-model="company[0].URL"/>       <br>
 
 <input type="submit" value="Сохранить"/><br>
-    <!-- TODO: неотрабатывает УДАЛЕНИЕ -->
-<input type="button" value="Удалить" ng-click="deleteCompany({{ companyid}});"/>
+    <!-- TODO: неотрабатывает УДАЛЕНИЕ ????????????? потомучто не корректно передаем туда данные-->
+    {{companyid}}
+<input type="button" value="Удалить" ng-click="deleteCompany(17);"/>
 </form>]]></CSP>
 </Export>

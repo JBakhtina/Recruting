@@ -10,14 +10,14 @@
 </ul> 
 <!--TODO: заменить на нормальный алерт -->
 {{ alertzone }}
-
+ 
 <form  name="NewSystemUser" ng-model="u"  ng-submit="newuser(u)">
 
-    Имя <input type="text" ng-model="u.FirstName"/><br>
+    Имя  <input type="text" ng-model="u.FirstName"/><br>
     Фамилия<input type="text" ng-model="u.LastName"/><br>
     Пол
 
-    <select name="Sex" ng-model="u.Sex"/>
+    <select name="Sex" ng-model="u.Sex">
     <option value="М">М</option>
     <option value="Ж">Ж</option>
     </select><br>

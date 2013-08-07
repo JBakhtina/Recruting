@@ -13,8 +13,8 @@
   
 <!-- пока не понял как выдернуть данные из объекта без цикла -->
 <div class="row tab-pane">
-
-    <!---СПИСОК ВАКАНСИЙ--->
+ 
+    <!---СПИСОК ВАКАНСИЙ --->
     <div class="span12">
         <ul class='nav nav-pills nav-stacked'  >
             <li ng-repeat="vacancy in vacancies | filter:filterVacancy">
