@@ -9,14 +9,7 @@
 
 <UDLText name="T">
 <Content><![CDATA[
-// тест пуша без авторизации
-
-]]></Content>
-</UDLText>
-
-<UDLText name="T">
-<Content><![CDATA[
-// необходимо настроить роутинг на изменения таким образом что бы он вызывал универсальные методы
+// TODO: необходимо настроить роутинг на изменения таким образом что бы он вызывал универсальные методы
 
 ]]></Content>
 </UDLText>
@@ -29,7 +22,6 @@
    <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/>
    <Route Url="/json/vacancies/:compid" Method="GET" Call="WEB.JSON:GetVacanciesByCompID"/> 
    <Route Url="/json/vacanciesold" Method="GET" Call="WEB.JSON:GetVacanciesOld"/> 
-   <!--"КАшэ не принимает? "--> 
    <Route Url="/json/vacancy/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
    
    <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
@@ -39,14 +31,13 @@
    <Route Url="/json/authVerify/:authLogin/:authPassword" Method="GET" Call="WEB.JSON:AuthVerify"/> 
    
    <Route Url="/json/v/:compid" Method="POST" Call="WEB.JSON:UpdateVacancy"/>
-   <!--Route Url="/json/v/:compid" Method="PUT" Call="WEB.TestJSON:OnPage"/-->
+
+   <!-- перехват страницы:
+   Route Url="/json/v/:compid" Method="PUT" Call="WEB.TestJSON:OnPage"/-->
    <Route Url="/json/candv/:compid" Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
    <Route Url="/json/vacancy/:compid" Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
    
    <Route Url="/json/vacancy/" Method="POST" Call="WEB.JSON:CreateVacancy"/>  
-   
-   
-   
    
    <Route Url="/json/rss/" Method="GET" Call="WEB.RSS:OnPage"/>
    
@@ -59,23 +50,16 @@
    <Route Url="/json/updateteuser/:compid" Method="POST" Call="WEB.JSON:UpdateSystemUsers"/>
    <Route Url="/json/deleteuser/:compid"   Method="DELETE" Call="WEB.JSON:DeleteSystemUsers"/>
   
-   
-   
-   
    <Route Url="/json/getallcompanysr/" 		  Method="GET" Call="WEB.JSON:getallcompanys"/>
    <Route Url="/json/getcompanyr/:compid" 	  Method="GET" Call="WEB.JSON:companyGet"/>
    <Route Url="/json/createcompanyr/" 		  Method="PUT" Call="WEB.JSON:companyCreate"/> 
    <Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:Companyupdate"/>
    <Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
    
-   
    <Route Url="/json/vacancyresp/:compid" 		 Method="POST" Call="WEB.JSON:NVR"/>
    <Route Url="/json/getvacancyresp/:vacid"	 Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
    <Route Url="/json/getcountvacancyview/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
    <Route Url="/json/getcountvacancyresponse/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
-   
-   
-   
  </Routes>
 ]]></Data>
 </XData>

@@ -2,28 +2,40 @@
 <Export generator="Cache" version="25">
 <CSP name="partials/admin_user.html" application="/csp/vacancy/"><![CDATA[
 <ul class="nav nav-tabs">
-    <li><a href="#admin/vacancies" data-toggle="tab">Вакансии</a></li>
+    <li><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
     <li class="active"><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
+    <li><a href="#admin/adduser" data-toggle="tab"><b>Добавить пользователя</b></a></li>
     <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
-    <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
+    <li><a href="#admin/admin" data-toggle="tab">Настройки?</a></li>
 </ul> 
-<h1>ПОЛЬЗОВАТЕЛЬ</h1>
-<!---ФИЛЬТР--->
-<div class="row">
-    <div class="input-append span5">
-        <input type="text" id="appendedInput"  ng-model="filterUser" placeholder="Введите слово для поиска">
-        <span class="add-on"><i class="icon-filter"></i></span>
-    </div>
-</div>
-<li ng-repeat="sysuserss in allusers | filter:filterUser" >
-    <a  ng-click="GetSystemUser(sysuserss.IDUser);" class='text-info' href='first.CSP?id={{sysuserss.IDUser}}'>
-        {{sysuserss.IDUser}}
-        {{sysuserss.FirstName}}
-        {{sysuserss.LastName}}
-        {{sysuserss.Sex}}
-        {{sysuserss.DOB}}
-        {{sysuserss.UserType}}
-    </a>
-</li>
-</div>]]></CSP>
+<!--TODO: заменить на нормальный алерт -->
+{{ alertzone }}
+
+
+<form  name="SystemUser" ng-model="user"  ng-submit="updateuser({{ userid }},user[0])">
+<!-- TODO: неотрабатывает инит -->
+<span ng-init="GetSystemUser({{ userid }})"></span>
+
+Имя <input type="text" ng-model="user[0].FirstName"/><br>
+Фамилия<input type="text" ng-model="user[0].LastName"/><br>
+<!--TODO: неработает выборка -->
+    Пол 		<select name="Sex" ng-model="user[0].Sex" ng-value="user[0].Sex"/>
+<option value="М">М</option>
+<option value="Ж">Ж</option>
+</select><br>
+Тип пользователя <input type="text" ng-model="user[0].UserType"/><br>
+Дата рождения <input type="text" ng-model="user[0].DOB"/><br>
+Страна <input type="text" ng-model="user[0].Country"/><br>
+Край/область <input type="text" ng-model="user[0].State"/><br>
+Город <input type="text" ng-model="user[0].City"/><br>
+Улица <input type="text" ng-model="user[0].Street"/><br>
+Строение <input type="text" ng-model="user[0].Building"/><br>
+Квартира <input type="text" ng-model="user[0].Apartament"/><br>
+E-mail <input type="text" ng-model="user[0].Email"/><br>
+Телефон <input type="text" ng-model="user[0].Telephone"/><br>
+URL <input type="text" ng-model="user[0].URL"/><br>
+<input type="submit" value="Сохранить"/><br>
+    <!-- TODO: неотрабатывает УДАЛЕНИЕ -->
+<input type="button" value="Удалить" ng-click="deleteuser({{ userid }});"/>
+</form>]]></CSP>
 </Export>

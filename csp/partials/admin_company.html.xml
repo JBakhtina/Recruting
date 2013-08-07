@@ -5,11 +5,10 @@
     <li><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
     <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
     <li class="active"><a href="#admin/companies" data-toggle="tab">Компании</a></li>
+    <li><a href="#admin/addcompany" data-toggle="tab"><b>Добавить компанию</b></a></li>
     <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
 </ul>
-<h1>компания</h1>
-Добавление/Удаление/Изменение компании{{ companyid}}
-</h1>
+{{ alertzone }}
 
 <form  name="SystemCompany" ng-model="company"  ng-submit="updateCompany({{ companyid}},company[0])">
 <!--TODO: не работает вызов функции   -->
@@ -29,27 +28,7 @@ E-mail 			<input type="text" ng-model="company[0].Email"/>     <br>
 URL 			<input type="text" ng-model="company[0].URL"/>       <br>
 
 <input type="submit" value="Сохранить"/><br>
+    <!-- TODO: неотрабатывает УДАЛЕНИЕ -->
 <input type="button" value="Удалить" ng-click="deleteCompany({{ companyid}});"/>
-</form>
-
-{{ alertzone }}
-
-<form  name="NewCompany" ng-model="comp"  ng-submit="newCompany(comp)">
-
-    Название компании   <input type="text" ng-model="comp.CompanyName"/><br>
-    Страна              <input type="text" ng-model="comp.Country"/><br>
-    Край/область        <input type="text" ng-model="comp.State"/><br>
-    Город 				<input type="text" ng-model="comp.City"/><br>
-    Улица 				<input type="text" ng-model="comp.Street"/><br>
-    Строение			<input type="text" ng-model="comp.Building"/><br>
-    Квартира 			<input type="text" ng-model="comp.Apartament"/><br>
-    E-mail 				<input type="text" ng-model="comp.Email"/><br>
-    Телефон 			<input type="text" ng-model="comp.Telephone"/><br>
-    URL 				<input type="text" ng-model="comp.URL"/><br>
-    <input type="submit" value="Сохранить"/>
-
-</form>
-
-
-]]></CSP>
+</form>]]></CSP>
 </Export>

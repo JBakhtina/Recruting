@@ -66,7 +66,7 @@
         <form class="form-horizontal" name="Response" ng-model="vr"  ng-submit="newResponse({{vacID}},vr); showResponseForm(false); " accept-charset="windows1251">
 
         <div class="control-group">
-            <label for="FirstName" class="control-label">Имя:</label>
+            <label for="FirstName" class="control-label" required>Имя:</label>
             <div class="controls"><input name="FirstName" ng-model="vr.FirstName" class="input-xlarge"></div>
         </div>
 
@@ -76,10 +76,18 @@
         </div>
 
         <div class="control-group">
-            <label for="Email" class="control-label">E-mail:</label>
+            <label for="Email" class="control-label" required>E-mail:</label>
             <div class="controls"><input name="Email" ng-model="vr.Email" class="input-xlarge"></div>
         </div>
+            <div class="control-group">
+                <label for="ResponseText" class="control-label" required>Добавте отзыв</label>
+                <div class="controls"><textarea name="ResponseText" rows="10" cols="45" ng-model="vr.ResponseText" class="input-xlarge"></textarea></div>
+            </div>
 
+            <div class="form-actions">
+                <button type="submit" class="btn btn-large btn-primary">Оставить отклик</button>
+            </div>
+      укажите больше данных о себе и мы сможем быстрее с Вами связаться:
         <div class="control-group">
             <label for="Telephone" class="control-label">Телефон:</label>
             <div class="controls"><input name="Telephone" ng-model="vr.Telephone" class="input-xlarge"></div>
@@ -87,7 +95,7 @@
 
         <div class="control-group">
             <label for="Country" class="control-label">Страна:</label>
-            <div class="controls"><input name="Country" ng-model="vr.Country" class="input-xlarge" required></div>
+            <div class="controls"><input name="Country" ng-model="vr.Country" class="input-xlarge" ></div>
         </div>
 
         <div class="control-group">
@@ -115,14 +123,6 @@
             <div class="controls"><input name="Apartament" ng-model="vr.Apartament" class="input-xlarge"></div>
         </div>
 
-        <div class="control-group">
-            <label for="ResponseText" class="control-label">Добавте отзыв</label>
-            <div class="controls"><textarea name="ResponseText" rows="10" cols="45" ng-model="vr.ResponseText" class="input-xlarge"></textarea></div>
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" class="btn btn-large btn-primary">Оставить отклик</button>
-        </div>
         </form>
     </div>
     </div>

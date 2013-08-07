@@ -3,9 +3,9 @@
 <CSP name="partials/tab_menu.html" application="/csp/vacancy/"><![CDATA[
 <ul class="nav nav-tabs">
     <li class="active"><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
+    <li><a href="#admin/addvacancy" data-toggle="tab"><b>Добавить вакансию</b></a></li>
     <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
     <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
-    <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
-    <li><a href="#admin/vacancyresp/1" data-toggle="tab">Отзывы</a></li>
+    <li><a href="#admin/admin_init" data-toggle="tab">Личные данные</a></li>
 </ul>]]></CSP>
 </Export>

@@ -157,7 +157,7 @@ function CompanyShow($scope,$http,$routeParams){
 		    // получение всех компаний
 		    $scope.GetAllCompanys=function(){
        		$http.get("/v/json/getallcompanysr/").success(function(data){
-	       		
+
             $scope.allcompanys=data.children;}).error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
     		}
@@ -166,46 +166,48 @@ function CompanyShow($scope,$http,$routeParams){
 		    $scope.GetSystemCompany=function(compid){
 
        		$http.get("/v/json/getcompanyr/"+compid).success(function(data){
-	       		
+
             $scope.company=data.children;}).error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
     		}
-    		
+
     	   // добавляем новой компании
 	   		$scope.newCompany = function (v){
 		    $http.put("/v/json/createcompanyr/",v)
 		    .success(function(data){
                     $scope.alertzone="FirstName:"+v.FirstName;
-                    document.location.href = "/csp/vacancy/index.html#admin/companies/";
+                    document.location.href = "#admin/companies/";
                 })
 
                 .error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
 
 		    }
-		    
+
 		     // Обновление компании
 	   		$scope.updateCompany = function (compid,v){
 		    $http.post("/v/json/companyupdater/"+compid,v)
 		    .success(function(data){
-                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+                    $scope.alertzone="FirstName:"+v.FirstName;
+                    document.location.href = "#admin/companies/";
+                }).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
 
 		    }
-		    
-		    
+
+
 		    // удаление компании
 	    	$scope.deleteCompany = function (compid){
 		    $http.delete("/v/json/delcompany/"+compid)
 		    .success(function(data){
-			    document.location.href = "/csp/vacancy/index.html#admin/companies/";
+			    document.location.href = "#admin/companies/";
 			    }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
-		    }    
-		    
-    		
+		    }
+
+
     $scope.GetAllCompanys();
-    //TODO: fake надо исправить
+    //TODO: фейк - надо исправить инит
     $scope.GetSystemCompany($routeParams.compID);
 }
 
@@ -213,6 +215,7 @@ function CompanyShow($scope,$http,$routeParams){
 function adminVacanciesCtrl ($scope,$http,$routeParams){
     // получаем ИД вакансии
     var vacID = $routeParams.vacID;
+    $scope.vacancyid = $routeParams.vacID;
 
     $scope.getVacancies=function(){
         $http.get("/v/json/vacanciesold").success(function(data){
@@ -243,7 +246,9 @@ function adminVacanciesCtrl ($scope,$http,$routeParams){
     $scope.update = function (vacID, v){
         //var url = "/v/json/v/"+compid[0].ID;
         $http.post("/v/json/v/"+vacID,v)
-            .success(function(data){$scope.alertzone="Update Ok!"+compid[0].Name;}).error(function(data,status){
+            .success(function(data){$scope.alertzone="Update Ok!"+compid[0].Name;
+             document.location.href = "#admin/vacancies/";
+            }).error(function(data,status){
                 $scope.alertzone="["+status+"]Error update vacancy data:( ["+data+"]"; });
         //$scope.alert2="/v/json/vacancy/"+vacancy[0].ID;
     }
@@ -252,7 +257,7 @@ function adminVacanciesCtrl ($scope,$http,$routeParams){
     $scope.deletevacancy = function (vacID){
         $http.delete("/v/json/vacancy/"+vacID)
             .success(function(data){
-                document.location.href = "/csp/vacancy/index.csp";
+                document.location.href = "#admin/vacancies/";
             }).error(function(data,status){
                 $scope.alertzone="["+status+"] Error delete vacancy :( ["+data+"]"; });
     }
@@ -261,62 +266,76 @@ function adminVacanciesCtrl ($scope,$http,$routeParams){
         // что б кашэ был в курсе что мы ему предлагаем
         // company. class="Data.Company";
         $http.post("/v/json/vacancy/",v)
-            .success(function(data){ $scope.alertzone="V_Company:"+v.Company; /*document.location.href = "/csp/vacancy/index1.csp";*/ }).error(function(data,status){
+            .success(function(data){ $scope.alertzone="V_Company:"+v.Company;
+             document.location.href = "#admin/vacancies/";
+            }).error(function(data,status){
                 $scope.alertzone="["+status+"] Error creating new vacancy :( ["+data+"]"; });
     }
+
+    $scope.getCompanies();
+    $scope.getVacancy(vacID);
+
 }
 
-function SystemUserShow($scope,$http){
+function SystemUserShow($scope,$http,$routeParams){
+    var UID = $routeParams.UID;
+    $scope.userid = $routeParams.UID;
 
 		    // получение всех пользователей
 		    $scope.GetAllSystemUsers=function(){
        		$http.get("/v/json/getallusers/").success(function(data){
-	       		
+
             $scope.allusers=data.children;}).error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
     		}
-    		
+
 		    // получение  пользователя
 		    $scope.GetSystemUser=function(compid){
        		$http.get("/v/json/getuser/"+compid).success(function(data){
-	       		
+
             $scope.user=data.children;}).error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
     		}
-    		
+
     	   // добавляем нового пользователя
 	   		$scope.newuser = function (v){
 		    $http.put("/v/json/createuser/",v)
 		    .success(function(data){
-                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+                    $scope.alertzone="FirstName:"+v.FirstName;
+                    document.location.href = "#admin/users/";
+                }).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
 
 		    }
-		    
+
 		     // Обновление пользователя
 	   		$scope.updateuser = function (compid,v){
 		    $http.post("/v/json/updateteuser/"+compid,v)
 		    .success(function(data){
-                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+                    $scope.alertzone="FirstName:"+v.FirstName;
+                    document.location.href = "#admin/users/";
+                }).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
 
 		    }
-		    
-		    
+
 		    // удаление пользователя
 	    	$scope.deleteuser = function (compid){
 		    $http.delete("/v/json/deleteuser/"+compid)
 		    .success(function(data){
-			    document.location.href = "/csp/vacancy/user.csp";
+                    $scope.alertzone="deleted";
+                    document.location.href = "#admin/users/";
 			    }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
-		    }    
-		    
-    		
-    $scope.GetAllSystemUsers();
+		    }
 
+
+    $scope.GetAllSystemUsers();
+    //TODO: убить когда инит станет отрабатывать:
+    $scope.GetSystemUser(UID);
 }
 
+// TODO: почистить серые контролы
 function authCtrl($scope, $http, $cookies){
 
 
@@ -347,7 +366,7 @@ function authCtrl($scope, $http, $cookies){
             })
             .error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
-        //document.location.href = "/csp/vacancy/index.html";
+        //document.location.href = "";
     }
 
     // функция показа/скрытия слоёв с формой аутентификации / формой приветствия
@@ -367,7 +386,7 @@ function authCtrl($scope, $http, $cookies){
 
         $cookies["login"] = "";
         $scope.cookiesVerify();
-        window.location.href = "/csp/vacancy/index.html";     // нужно будет переделать на $location
+        window.location.href = "";     // нужно будет переделать на $location
     }
 
     // функция проверки кукисов
