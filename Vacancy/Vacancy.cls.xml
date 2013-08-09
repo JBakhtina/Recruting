@@ -16,7 +16,7 @@
 <Description>
 Наименование вакансии - то что будет выводиться списком</Description>
 <Type>%String</Type>
-<Parameter name="MAXLEN" value="30"/>
+<Parameter name="MAXLEN" value="200"/>
 </Property>
 
 <Property name="Image">
@@ -34,14 +34,14 @@
 <Property name="Skills">
 <Description>
 Требуемые умения</Description>
-<Type>%String</Type>
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="5000"/>
 </Property>
 
 <Property name="VacancyType">
 <Description>
 Должности подходящие для данной вакансии</Description>
 <Type>%String</Type>
-<Parameter name="VALUELIST" value=",полная занятость, договорная, подработка"/>
 </Property>
 
 <Property name="Seats">
@@ -92,14 +92,14 @@
 <Description>
 Основное описание</Description>
 <Type>%Text</Type>
-<Parameter name="MAXLEN" value="500"/>
+<Parameter name="MAXLEN" value="5000"/>
 </Property>
 
 <Property name="AddInfo">
 <Description>
 Дополнительное описание</Description>
 <Type>%Text</Type>
-<Parameter name="MAXLEN" value="500"/>
+<Parameter name="MAXLEN" value="5000"/>
 </Property>
 
 <Property name="Company">
@@ -141,7 +141,7 @@
 
 <Property name="Img">
 <Type>%Stream.GlobalBinary</Type>
-<Parameter name="LOCATION" value="^MyPics"/>
+<Parameter name="LOCATION" value="^MyVacancyPics"/>
 </Property>
 
 <Method name="DeleteImg">
@@ -171,37 +171,6 @@
 ]]></Implementation>
 </Method>
 
-<Query name="NewQuery1">
-<Type>%Query</Type>
-<Parameter name="ROWSPEC" value="%Id:%String:ID"/>
-</Query>
-
-<Method name="NewQuery1Execute">
-<ClassMethod>1</ClassMethod>
-<FormalSpec><![CDATA[&qHandle:%Binary]]></FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[	Quit $$$OK
-]]></Implementation>
-</Method>
-
-<Method name="NewQuery1Close">
-<ClassMethod>1</ClassMethod>
-<FormalSpec><![CDATA[&qHandle:%Binary]]></FormalSpec>
-<PlaceAfter>NewQuery1Execute</PlaceAfter>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[	Quit $$$OK
-]]></Implementation>
-</Method>
-
-<Method name="NewQuery1Fetch">
-<ClassMethod>1</ClassMethod>
-<FormalSpec><![CDATA[&qHandle:%Binary,&Row:%List,&AtEnd:%Integer=0]]></FormalSpec>
-<PlaceAfter>NewQuery1Execute</PlaceAfter>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[	Quit $$$OK
-]]></Implementation>
-</Method>
-
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
 <DataLocation>^Vacancy.VacancyD</DataLocation>
@@ -209,7 +178,7 @@
 <IdLocation>^Vacancy.VacancyD</IdLocation>
 <IndexLocation>^Vacancy.VacancyI</IndexLocation>
 <StreamLocation>^Vacancy.VacancyS</StreamLocation>
-<ExtentSize>30</ExtentSize>
+<ExtentSize>16</ExtentSize>
 <Data name="Seats">
 <Attribute>Seats</Attribute>
 <Structure>subnode</Structure>
@@ -277,28 +246,28 @@
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="CityVacancy">
-<Selectivity>7.6923%</Selectivity>
+<Selectivity>9.0909%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>11.1111%</Selectivity>
-</Property>
-<Property name="EduLevel">
 <Selectivity>10.0000%</Selectivity>
 </Property>
+<Property name="EduLevel">
+<Selectivity>14.2857%</Selectivity>
+</Property>
 <Property name="EndSalary">
-<Selectivity>3.3333%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
 <Property name="Img">
-<Selectivity>100.0000%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="Institution">
-<Selectivity>3.3333%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="Links">
-<Selectivity>3.4483%,URL:3.4483%</Selectivity>
+<Selectivity>6.2500%,URL:6.2500%</Selectivity>
 </Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>
@@ -307,19 +276,19 @@
 <Selectivity>20.0000%</Selectivity>
 </Property>
 <Property name="RegDate">
-<Selectivity>3.3333%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="Skills">
-<Selectivity>3.3333%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="StartSalary">
-<Selectivity>3.3333%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="VacancyType">
 <Selectivity>33.3333%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-20</BlockCount>
+<BlockCount>-8</BlockCount>
 </SQLMap>
 </Storage>
 </Class>

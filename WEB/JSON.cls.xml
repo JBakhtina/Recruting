@@ -485,7 +485,7 @@
       
        set vacancy.Name=$ZCONVERT(obj.VacancyName,"I","UTF8")
        set vacancy.Skills=$ZCONVERT(obj.Skills,"I","UTF8")
-       set vacancy.VacancyType=$ZCONVERT(obj.VacancyTypes,"I","UTF8")
+       set vacancy.VacancyType=$ZCONVERT(obj.VacancyType,"I","UTF8")
        set vacancy.EduLevel=$ZCONVERT(obj.EduLevel,"I","UTF8")
        set vacancy.Institution=$ZCONVERT(obj.Institution,"I","UTF8")
        set vacancy.StartSalary=$ZCONVERT(obj.StartSalary,"I","UTF8")

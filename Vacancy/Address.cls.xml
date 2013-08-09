@@ -83,7 +83,7 @@
 <Description>
 Телефон</Description>
 <Type>%String</Type>
-<Parameter name="MAXLEN" value="12"/>
+<Parameter name="MAXLEN" value="20"/>
 </Property>
 
 <Storage name="Default">

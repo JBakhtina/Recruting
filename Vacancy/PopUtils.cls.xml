@@ -322,6 +322,7 @@ count - сколько записей в каждую таблицу добав�
 <FormalSpec>count:%Integer</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+	/*
 	; удалить все данные
 	do ##class(Vacancy.SystemUser).%KillExtent()
 	do ##class(Vacancy.Vacancy).%KillExtent()
@@ -332,7 +333,8 @@ count - сколько записей в каждую таблицу добав�
 	do ##class(Vacancy.Company).Populate(count,1)
 	do ##class(Vacancy.SystemUser).Populate(count,1)
 	; т.к. вакансий д.б. больше чем пользователей и компаний
-	do ##class(Vacancy.Vacancy).Populate(count*3,1)
+	do ##class(Vacancy.Vacancy).Populate(count,1)
+	*/ 
 	Quit $$$OK
 ]]></Implementation>
 </Method>

@@ -10,6 +10,11 @@
 <Default>Name:Company(),CompMainInfo:##class(Vacancy.PopUtils).CompMainInfo(),MailToResponse:##class(Vacancy.PopUtils).MailToResponse()</Default>
 </Parameter>
 
+<Property name="Img">
+<Type>%Stream.GlobalBinary</Type>
+<Parameter name="LOCATION" value="^MyCompanyPics"/>
+</Property>
+
 <UDLText name="T">
 <Content><![CDATA[
 // c маленьким maxlen не работает
@@ -88,7 +93,7 @@ mail для отправки почты админу</Description>
 <IdLocation>^Vacancy.CompanyD</IdLocation>
 <IndexLocation>^Vacancy.CompanyI</IndexLocation>
 <StreamLocation>^Vacancy.CompanyS</StreamLocation>
-<ExtentSize>20</ExtentSize>
+<ExtentSize>1</ExtentSize>
 <Data name="CompanyDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -134,7 +139,7 @@ mail для отправки почты админу</Description>
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="Adress">
-<Selectivity>5.0000%,Apartament:5.2632%,Building:5.2632%,City:9.0909%,Country:9.0909%,Email:5.0000%,State:9.0909%,Street:9.0909%,Telephone:5.0000%,URL:12.5000%,ZIP:5.0000%</Selectivity>
+<Selectivity>100.0000%,Apartament:100.0000%,Building:100.0000%,City:100.0000%,Country:100.0000%,Email:100.0000%,State:100.0000%,Street:100.0000%,Telephone:100.0000%,URL:100.0000%,ZIP:100.0000%</Selectivity>
 </Property>
 <Property name="CompMainInfo">
 <Selectivity>100.0000%</Selectivity>
@@ -151,11 +156,14 @@ mail для отправки почты админу</Description>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
+<Property name="MailToResponse">
+<Selectivity>100.0000%</Selectivity>
+</Property>
 <Property name="MainInfo">
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>5.0000%</Selectivity>
+<Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="NewProperty1">
 <Selectivity>100.0000%</Selectivity>
@@ -167,7 +175,7 @@ mail для отправки почты админу</Description>
 <Selectivity>5.5556%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-8</BlockCount>
+<BlockCount>-4</BlockCount>
 </SQLMap>
 <SQLMap name="UsersIndex">
 <BlockCount>-4</BlockCount>
