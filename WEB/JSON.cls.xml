@@ -502,10 +502,11 @@
        set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.compID)
        
        set vacancy.Links.URL=obj.URL
-       
+ /*
+  заблокируем, пока, изменение картинки       
        set compimg=##class(Vacancy.Company).%OpenId(obj.compID)
        do vacancy.Img.CopyFromAndSave(compimg.Img)
-
+ */
        $$$THROWONERROR(st,vacancy.%Save())
  
    } catch ex{set st=ex.AsStatus()}
