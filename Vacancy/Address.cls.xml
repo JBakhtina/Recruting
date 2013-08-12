@@ -3,6 +3,7 @@
 <Class name="Vacancy.Address">
 <Description>
 Тип адреса и не только, {MDG}.CTP тут телефон и мыло ещё есть!
+я тут был
 думаю PATTERNы не помешали бы </Description>
 <Super>%SerialObject,%Populate,%XML.Adaptor</Super>
 <TimeCreated>63006,70425.58203</TimeCreated>

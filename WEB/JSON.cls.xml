@@ -89,6 +89,8 @@
       set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8")
        $$$THROWONERROR(st,com.%Save())
  
+	  set com.Name = $ZCONVERT(obj.compImg,"I","UTF8") 
+ 
    } catch ex{set st=ex.AsStatus()}
     quit st
 ]]></Implementation>
@@ -428,7 +430,9 @@
        set vacancy.AddInfo=$ZCONVERT(obj.AddInfo,"I","UTF8")
        set vacancy.Seats=$ZCONVERT(obj.Seats,"I","UTF8")
        set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.comid)
-       //set vacancy.Links.URL=obj.Links_URL
+       set vacancy.Links.URL=obj.URL
+       set compimg=##class(Vacancy.Company).%OpenId(obj.comid)
+       do vacancy.Img.CopyFromAndSave(compimg.Img)
               
        $$$THROWONERROR(st,vacancy.%Save())
  
@@ -498,6 +502,9 @@
        set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.compID)
        
        set vacancy.Links.URL=obj.URL
+       
+       set compimg=##class(Vacancy.Company).%OpenId(obj.compID)
+       do vacancy.Img.CopyFromAndSave(compimg.Img)
 
        $$$THROWONERROR(st,vacancy.%Save())
  
@@ -523,11 +530,14 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	set vacQuery = "SELECT C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
+	set vacQuery = "SELECT  Count(VV.ID) AS CountView, C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
 					      "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
 				   "FROM Vacancy.Vacancy AS V "_
 				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
+				   "INNER JOIN Vacancy.VacancyView AS VV ON V.ID=VV.Vacancy  "_
+				   "GROUP BY V.ID "_
 				   "ORDER BY V.Company"
+				   
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
 	quit $$$OK
 ]]></Implementation>
