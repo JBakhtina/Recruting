@@ -89,7 +89,7 @@
       set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8")
        $$$THROWONERROR(st,com.%Save())
  
-	  set com.Name = $ZCONVERT(obj.compImg,"I","UTF8") 
+	//  set com.Name = com.%Id 
  
    } catch ex{set st=ex.AsStatus()}
     quit st
@@ -855,30 +855,77 @@ SqlRequest - текстовый SQL запрос</Description>
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	   set st=$$$OK
+   set st=$$$OK
  
-   try{
-		     
-	     	     
-	 If (%request.Get("Type",,1)="Vacancy")
-	{
-	 set a=##class(Vacancy.Vacancy).%OpenId(%request.Get("id",,1))	
-	}
-	Else
-	{
-	 set a=##class(Vacancy.Company).%OpenId(%request.Get("id",,1))	
-	}
-	     
-   // set tt = %request.Get("FileToUpload",,1)
-   // set ^test = %request.GetMimeData("FileStream",1)
-
-    set ^test = %request.GetMimeData("FileToUpload",1)
+   try{ 	     
+		If (%request.Get("Type",,1)="Vacancy"){
+		 	set a=##class(Vacancy.Vacancy).%OpenId(%request.Get("id",,1))	
+		}
+		Else {
+		 	set a=##class(Vacancy.Company).%OpenId(%request.Get("id",,1))	
+		}
     
-    set a.Img=%request.GetMimeData("FileToUpload",1)
-   // set a.Img=%request.GetMimeData("FileToUpload",1)
+    	set ^test=%request.GetMimeData("FileToUpload",1)
+	    set a.Img=%request.GetMimeData("FileToUpload",1)
+      
+        $$$THROWONERROR(st,a.%Save())
+	 
+   } catch ex{set st=ex.AsStatus()}
+   
+    quit st
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+// метод загрузки картинки в базу. 
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// ПАРАМЕТРЫ - ИД объекта которому будет отнесена картинка, 
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// 			   Тип объекта - компания или вакансия
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// 			   Поток байт - картинка	
+
+]]></Content>
+</UDLText>
+
+<Method name="LoadImage">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>objID:%Integer,objType:%String,objImg:%BinaryStream</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+   set st=$$$OK
  
-       $$$THROWONERROR(st,a.%Save())
- 
+   try{ 	     
+		
+		// Откроем объект по ИД
+		If (objType="Vacancy"){
+		 	set a=##class(Vacancy.Vacancy).%OpenId(objID)	
+		}
+		ElseIf (objType="Company") {
+		 	set a=##class(Vacancy.Company).%OpenId(objID)	
+		}
+    
+        // загрузим картинку для данного объекта
+	    set a.Img = objImg
+      
+        $$$THROWONERROR(st,a.%Save())
+	 
    } catch ex{set st=ex.AsStatus()}
    
     quit st
