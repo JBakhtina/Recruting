@@ -38,7 +38,7 @@
   set mail.IsHTML=1
   set mail.ContentType="text/html"
   // Текст письма
-  do mail.TextData.Write(vr.ResponseText)
+  do mail.TextData.Write("Skype:"_vr.Skype_"  "_vr.ResponseText)
   // Получатель
   do mail.To.Insert(AdminMail)
   
@@ -97,7 +97,7 @@
   set mail.IsHTML=1
   set mail.ContentType="text/html"
   // Текст письма
-  do mail.TextData.Write(vr.ResponseText)
+  do mail.TextData.Write("Skype:"_vr.Skype_"   "_vr.ResponseText)
   // Получатель
   do mail.To.Insert(vr.Vacancy.Company.Adress.Email)
   

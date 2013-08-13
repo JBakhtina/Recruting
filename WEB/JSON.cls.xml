@@ -342,7 +342,7 @@
 <FormalSpec>vacid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	set vacQuery = "SELECT V.ID, V.FirstName, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
+	set vacQuery = "SELECT V.ID, V.FirstName, V.Skype, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
 	               "From_Building AS Building, From_City AS City, From_Country AS Country, From_Email AS Email, "_
 	               "From_State AS State, From_Street AS Street, From_Telephone AS Telephone, From_URL AS URL, V.Vacancy "_
 				   "FROM Vacancy.VacancyResponse AS V "_
@@ -378,10 +378,11 @@
        set vr.From.State=$ZCONVERT(obj.State,"I","UTF8")
        set vr.From.City=$ZCONVERT(obj.City,"I","UTF8")
        set vr.From.Street=$ZCONVERT(obj.Street,"I","UTF8")
-       set vr.From.Building=obj.Building
-       set vr.From.Apartament=obj.Apartament
-       set vr.From.Email=obj.Email
-       set vr.From.Telephone=obj.Telephone
+       set vr.From.Building=$ZCONVERT(obj.Building,"I","UTF8")
+       set vr.From.Apartament=$ZCONVERT(obj.Apartament,"I","UTF8")
+       set vr.From.Email=$ZCONVERT(obj.Email,"I","UTF8")
+       set vr.From.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
+       set vr.Skype=$ZCONVERT(obj.Skype,"I","UTF8")
        //set vr.ResponseDate=##class(%Library.TimeStamp).OdbcToLogical($h)
        set vr.ResponseDate=$piece($H, ",")
        set vr.ResponseText=$ZCONVERT(obj.ResponseText,"I","UTF8") 
@@ -855,8 +856,9 @@ SqlRequest - текстовый SQL запрос</Description>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 	   set st=$$$OK
+ 
    try{
-	     
+		     
 	     	     
 	 If (%request.Get("Type",,1)="Vacancy")
 	{
@@ -867,7 +869,13 @@ SqlRequest - текстовый SQL запрос</Description>
 	 set a=##class(Vacancy.Company).%OpenId(%request.Get("id",,1))	
 	}
 	     
-      set a.Img=%request.GetMimeData("FileStream",1)
+   // set tt = %request.Get("FileToUpload",,1)
+   // set ^test = %request.GetMimeData("FileStream",1)
+
+    set ^test = %request.GetMimeData("FileToUpload",1)
+    
+    set a.Img=%request.GetMimeData("FileToUpload",1)
+   // set a.Img=%request.GetMimeData("FileToUpload",1)
  
        $$$THROWONERROR(st,a.%Save())
  

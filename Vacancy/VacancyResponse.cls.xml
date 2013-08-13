@@ -24,6 +24,12 @@
 <Type>Vacancy.Address</Type>
 </Property>
 
+<Property name="Skype">
+<Description>
+Скайп</Description>
+<Type>%String</Type>
+</Property>
+
 <Property name="ResponseDate">
 <Description>
 Дата отклика</Description>
