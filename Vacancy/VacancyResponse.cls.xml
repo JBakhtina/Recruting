@@ -36,6 +36,12 @@
 <Type>%Date</Type>
 </Property>
 
+<Property name="Stat">
+<Description>
+Статус отправки</Description>
+<Type>%String</Type>
+</Property>
+
 <Property name="ResponseText">
 <Description>
 Текст отзыва ... хорошо бы в формате HTML
@@ -54,16 +60,27 @@
 <Relationship>1</Relationship>
 </Property>
 
-<Method name="%OnAfterSave">
+<Method name="Mail">
 <Description>
 Генерируется письмо при создании новой записи</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>Id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+   set st= ##class(Vacancy.CreateMail).NewMail(Id)
+	Quit st
+]]></Implementation>
+</Method>
+
+<Method name="%OnAfterSave">
 <FormalSpec>insert:%Boolean</FormalSpec>
 <Private>1</Private>
 <ReturnType>%Status</ReturnType>
 <ServerOnly>1</ServerOnly>
 <Implementation><![CDATA[
-   do ##class(Vacancy.CreateMail).NewMail(..%Id())
-	Quit insert
+	#Dim num AS %Global
+	set num=..%Id()
+	Quit $$$OK
 ]]></Implementation>
 </Method>
 
@@ -96,6 +113,15 @@
 </Value>
 <Value name="7">
 <Value>LastName</Value>
+</Value>
+<Value name="8">
+<Value>Skype</Value>
+</Value>
+<Value name="9">
+<Value>Status</Value>
+</Value>
+<Value name="10">
+<Value>Stat</Value>
 </Value>
 </Data>
 </Storage>

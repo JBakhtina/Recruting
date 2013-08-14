@@ -1,6 +1,12 @@
-<cspapp>/index.csp
+/angular
+/angular/index.csp
+/angular/index2.CSP
+/angular/js/app.js
+/angular/js/controllers.js
+/angular/js/filters.js
+/angular/js/services.js
+/angular/partials
 <cspapp>/index.html
-<cspapp>/index2.CSP
 <cspapp>/js/app.js
 <cspapp>/js/controllers.js
 <cspapp>/js/filters.js

@@ -17,54 +17,55 @@
 <XData name="UrlMap">
 <Data><![CDATA[
 <Routes>
-   <Route Url="/temp" Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
-   <Route Url="/test" Method="GET" Call="WEB.Broker:Test"/> 
-   <Route Url="/json/vacancies" Method="GET" Call="WEB.JSON:GetVacancies"/>
-   <Route Url="/json/vacancies/:compid" Method="GET" Call="WEB.JSON:GetVacanciesByCompID"/> 
-   <Route Url="/json/vacanciesold" Method="GET" Call="WEB.JSON:GetVacanciesOld"/> 
-   <Route Url="/json/vacancy/:compid" Method="GET" Call="WEB.JSON:GetVacancy"/> 
-   
-   <Route Url="/json/users" Method="GET" Call="WEB.JSON:GetUsers"/> 
-   <Route Url="/json/company/:compid" Method="GET" Call="WEB.JSON:GetCompany"/> 
-   <Route Url="/json/companies" Method="GET" Call="WEB.JSON:GetAllCompanies"/>
-   <Route Url="/json/comvac" Method="GET" Call="WEB.JSON:GetCompaniesVacancies"/>
-   <Route Url="/json/authVerify/:authLogin/:authPassword" Method="GET" Call="WEB.JSON:AuthVerify"/> 
-   
-   <Route Url="/json/v/:compid" Method="POST" Call="WEB.JSON:UpdateVacancy"/>
+	   <Route Url="/temp" 					Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
+	   <Route Url="/test" 					Method="GET" Call="WEB.Broker:Test"/> 
+	   <Route Url="/json/vacancies" 		Method="GET" Call="WEB.JSON:GetVacancies"/>
+	   <Route Url="/json/vacancies/:compid" Method="GET" Call="WEB.JSON:GetVacanciesByCompID"/> 
+	   <Route Url="/json/vacanciesold" 		Method="GET" Call="WEB.JSON:GetVacanciesOld"/> 
+	   <Route Url="/json/vacancy/:compid" 	Method="GET" Call="WEB.JSON:GetVacancy"/> 
+	   
+	   <Route Url="/json/users" 			Method="GET" Call="WEB.JSON:GetUsers"/> 
+	   <Route Url="/json/company/:compid" 	Method="GET" Call="WEB.JSON:GetCompany"/> 
+	   <Route Url="/json/companies" 		Method="GET" Call="WEB.JSON:GetAllCompanies"/>
+	   <Route Url="/json/comvac" 			Method="GET" Call="WEB.JSON:GetCompaniesVacancies"/>
+	   <Route Url="/json/authVerify/:authLogin/:authPassword" Method="GET" Call="WEB.JSON:AuthVerify"/> 
+	   
+	   <Route Url="/json/v/:compid" 		Method="POST" Call="WEB.JSON:UpdateVacancy"/>
 
-   <!-- перехват страницы:
-   Route Url="/json/v/:compid" Method="PUT" Call="WEB.TestJSON:OnPage"/-->
-   <Route Url="/json/candv/:compid" Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
-   <Route Url="/json/vacancy/:compid" Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
-   
-   <Route Url="/json/vacancy/" Method="POST" Call="WEB.JSON:CreateVacancy"/>  
-   
-   <Route Url="/json/rss/" Method="GET" Call="WEB.RSS:OnPage"/>
-   
-   <Route Url="/json/vimage/" Method="POST" Call="WEB.JSON:UpdateImage"/>
-   
-   
-   <Route Url="/json/getallusers/"         Method="GET" Call="WEB.JSON:GetAllSystemUsers"/>
-   <Route Url="/json/getuser/:compid"      Method="GET" Call="WEB.JSON:GetSystemUser"/>
-   <Route Url="/json/createuser/"          Method="PUT" Call="WEB.JSON:CreateSystemUsers"/> 
-   <Route Url="/json/updateteuser/:compid" Method="POST" Call="WEB.JSON:UpdateSystemUsers"/>
-   <Route Url="/json/deleteuser/:compid"   Method="DELETE" Call="WEB.JSON:DeleteSystemUsers"/>
-  
-   <Route Url="/json/getallcompanysr/" 		  Method="GET" Call="WEB.JSON:getallcompanys"/>
-   <Route Url="/json/getcompanyr/:compid" 	  Method="GET" Call="WEB.JSON:companyGet"/>
-   <Route Url="/json/createcompanyr/" 		  Method="PUT" Call="WEB.JSON:companyCreate"/> 
-   <Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:Companyupdate"/>
-   <Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
-   
-   <Route Url="/json/vacancyresp/:compid" 		 Method="POST" Call="WEB.JSON:NVR"/>
-   <Route Url="/json/getvacancyresp/:vacid"	 Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
-   <Route Url="/json/getcountvacancyview/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
-   <Route Url="/json/getcountvacancyresponse/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
- 	<Route Url="/json/redirectmail/:vrid" Method="POST" Call="WEB.JSON:ReDirectMail"/>
- 
- 
- 
- </Routes>
+	   <!-- перехват страницы:
+	   Route Url="/json/v/:compid" 			Method="PUT" Call="WEB.TestJSON:OnPage"/-->
+	   <Route Url="/json/candv/:compid" 	Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
+	   <Route Url="/json/vacancy/:compid" 	Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
+	   
+	   <Route Url="/json/vacancy/" 			Method="POST" Call="WEB.JSON:CreateVacancy"/>  
+	   
+	   <Route Url="/json/rss/" 				Method="GET" Call="WEB.RSS:OnPage"/>
+	   
+	   <Route Url="/json/vimage/" 			Method="POST" Call="WEB.JSON:UpdateImage"/>
+	   
+	   
+	   <Route Url="/json/getallusers/"         Method="GET" Call="WEB.JSON:GetAllSystemUsers"/>
+	   <Route Url="/json/getuser/:compid"      Method="GET" Call="WEB.JSON:GetSystemUser"/>
+	   <Route Url="/json/createuser/"          Method="PUT" Call="WEB.JSON:CreateSystemUsers"/> 
+	   <Route Url="/json/updateteuser/:compid" Method="POST" Call="WEB.JSON:UpdateSystemUsers"/>
+	   <Route Url="/json/deleteuser/:compid"   Method="DELETE" Call="WEB.JSON:DeleteSystemUsers"/>
+	  
+	   <Route Url="/json/getallcompanysr/" 		  Method="GET" Call="WEB.JSON:getallcompanys"/>
+	   <Route Url="/json/getcompanyr/:compid" 	  Method="GET" Call="WEB.JSON:companyGet"/>
+	   <Route Url="/json/createcompanyr/" 		  Method="PUT" Call="WEB.JSON:companyCreate"/> 
+	   <Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:Companyupdate"/>
+	   <Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
+	   
+	   <Route Url="/json/vacancyresp/:compid" 		 	Method="POST" Call="WEB.JSON:NVR"/>
+	   <Route Url="/json/getvacancyresp"	 		Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
+	   <Route Url="/json/getvacancyresp/:vacid"	 		Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
+	   <Route Url="/json/getcountvacancyview/:vacid" 	Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
+	   <Route Url="/json/getcountvacancyresponse/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
+	   <Route Url="/json/redirectmail/:vrid" 			Method="POST" Call="WEB.JSON:ReDirectMail"/>
+	 
+	 
+	 
+	</Routes>
 ]]></Data>
 </XData>
 
@@ -86,6 +87,112 @@
 	&html<<h1>А НЕФИГА не Работает!!! :P </h1>>
 	&html<<h1>(всё нормуль просто данный адресс не существует)</h1>>
 	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="DispatchRequest">
+<Description>
+Dispatch a REST request according to URL and Method</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>pUrl:%String,pMethod:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    #dim tSC As %Status = $$$OK
+    #dim e As %Exception.AbstractException
+    
+    #dim tMatcher As %Regex.Matcher
+    
+    #dim tArgs,tClass,tMatchUrl,tRegEx,tTarget,tAccess As %String
+    #dim tI,tIndex As %Integer
+    #dim tResourceMatched As %Boolean = 0
+    #dim tMethodMatched As %Boolean = 0
+    
+    #; Example: ^ISC.REST.UrlMap(classname,"/udl/(.?)","GET") = GetClassText"
+    Try {
+        #; Check that the effective user ( could be unknown user ) can access this resource
+        Set tAccess=$SYSTEM.Security.Check($Piece($zu(90,21,$namespace),"^",4))
+        If tAccess'["READ,WRITE"
+        {
+            #; Don't want the session token
+            Set %response.OutputSessionToken=0
+            
+            #; Set the Http Status
+            Set %response.Status="401 Unauthorized"
+        
+            #; Write out the header
+            Do %response.WriteHTTPHeader()
+            
+            #; Done
+            Quit
+        }
+        
+        #; Walk the dispatch map in collation order of defintion
+        Set tIndex="" For {
+            
+            #; Get the next index
+            Set tIndex=$Order(^ISC.REST.UrlMap($classname(),tIndex)) If tIndex="" Quit
+                
+            #; Pick out the RegEx
+            Set tRegEx=$Order(^ISC.REST.UrlMap($classname(),tIndex,""))
+            
+            #; Create a matcher
+            Set tMatcher=##class(%Regex.Matcher).%New(tRegEx)
+                
+            #; Extract the match url from the application name
+            Set tMatchUrl="/"_$Extract(pUrl,$Length(%request.Application)+1,*)
+                 
+            #; Test each regular expression in turn, extracting the arguments,
+            #; dispatching to the named method  
+            If tMatcher.Match(tMatchUrl) {
+                
+                #; We have matched the resource
+                Set tResourceMatched=1
+                
+                #; Now check method name
+                Set tTarget=$Get(^ISC.REST.UrlMap($classname(),tIndex,tRegEx,pMethod))
+                
+                #; No match on method name, retry next
+                If tTarget="" Continue
+                
+                #; We have matched a method
+                Set tMethodMatched=1
+                
+                #; Got a match, marshall the arguments
+                If tMatcher.GroupCount {
+                    For tI=1:1:tMatcher.GroupCount Set tArgs(tI)=tMatcher.Group(tI)
+                    Set tArgs=tI
+                } else {
+                    Set tArgs=0
+                }
+                
+                #; Check for optional ClassName prefix
+                Set tClass=$classname()
+                If tTarget[":" Set tClass=$Piece(tTarget,":"),tTarget=$Piece(tTarget,":",2)
+                
+                #; Dispatch
+                Set tSC=$zobjclassmethod(tClass,tTarget,tArgs...)
+                If $$$ISERR(tSC) Do ..Http500(##class(%Exception.StatusException).CreateFromStatus(tSC))
+                
+                #; Don't want multiple matches
+                Quit
+            }
+        }
+        
+        #; Didn't have a match for the resource, report not found
+        If tResourceMatched=0 Set tSC=..Http404() Quit
+        
+        #; Had a match for resource but method not matched
+        If tMethodMatched=0 Set tSC=..Http405() Quit
+            
+    } Catch (e) {
+        
+        #; Issue a '500'
+        Do ..Http500(e)
+    }
+    
+    Set %session.EndSession=('..#UseSession)
+    
+    Quit tSC
 ]]></Implementation>
 </Method>
 </Class>

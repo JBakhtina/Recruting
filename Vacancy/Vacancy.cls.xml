@@ -102,6 +102,12 @@
 <Parameter name="MAXLEN" value="5000"/>
 </Property>
 
+<Property name="IsActive">
+<Description>
+Active vacancy or not</Description>
+<Type>%Boolean</Type>
+</Property>
+
 <Property name="Company">
 <Description>
 Связь компаний и вакансий</Description>
@@ -119,20 +125,6 @@
 <Inverse>Vacancy</Inverse>
 <Relationship>1</Relationship>
 </Property>
-
-<UDLText name="T">
-<Content><![CDATA[
-// этот метод вместо IsApproved, думаю для перевыставления будем менять Vacancy.RegDate или добавим DateOfUpdate
-
-]]></Content>
-</UDLText>
-
-<Method name="IsAlive">
-<Description>
-Возвращает 1 если прошло менее 2-х месяцев со дня опубликования вакансии
-0 в противном случае</Description>
-<ClassMethod>1</ClassMethod>
-</Method>
 
 <Query name="getVacancies">
 <Type>%SQLQuery</Type>

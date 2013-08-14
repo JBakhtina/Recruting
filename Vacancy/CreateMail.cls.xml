@@ -99,7 +99,9 @@
   // Текст письма
   do mail.TextData.Write("Skype:"_vr.Skype_"   "_vr.ResponseText)
   // Получатель
-  do mail.To.Insert(vr.Vacancy.Company.Adress.Email)
+ //  do mail.To.Insert(vr.Vacancy.Company.Adress.Email)
+ set ctpMailBox = "optimainform@gmail.com"
+  do mail.To.Insert(ctpMailBox)
   
   
   set smtp=##class(%Net.SMTP).%New()
