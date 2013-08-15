@@ -27,12 +27,25 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 	set st= ##class(Vacancy.CreateMail).ReDirectMail(vrID)
-	set a =##class(Vacancy.VacancyResponse).%OpenId(vrID)
-	set a.Stat="true"
+	set a =##class(Vacancy.CreateMail).%OpenId(vrID)
+	set a.Status="true"
+	do a.%Save()
 	
 
 	
 	q $system.OBJ.DisplayError(st)
+]]></Implementation>
+</Method>
+
+<Method name="DeleteVacancyResponse">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>vrid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	do ##class(Vacancy.VacancyResponse).%DeleteId(vrid)
+	do ##class(Vacancy.CreateMail).%DeleteId(vrid)
+	
+	q $$$OK
 ]]></Implementation>
 </Method>
 
@@ -350,6 +363,7 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 		
+		
 	set addToQuery = ""
 	
 	// попробуем считать значение переменной, если не получилось считать - вернет пустую строку
@@ -358,13 +372,16 @@
 		 // если задан ИД для вакансии - зададим условие выбора по ИД 
 		 set addToQuery = "WHERE V.Vacancy="_vacid
 	} 
-
-	set vacQuery = "SELECT V.ID, V.FirstName, V.Skype, V.Stat, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
+		
+				  
+	set vacQuery = "SELECT V.ID, V.FirstName, V.Skype, CM.Status, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
 	               "From_Building AS Building, From_City AS City, From_Country AS Country, From_Email AS Email, "_
 	               "From_State AS State, From_Street AS Street, From_Telephone AS Telephone, From_URL AS URL, V.Vacancy "_
 				   "FROM Vacancy.VacancyResponse AS V "_
+				   "INNER JOIN Vacancy.CreateMail AS CM ON V.ID=CM.ID "_
 				   addToQuery_" ORDER BY V.ResponseDate DESC"
-				 
+
+	
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
 	quit $$$OK
 ]]></Implementation>
@@ -403,15 +420,19 @@
        //set vr.ResponseDate=##class(%Library.TimeStamp).OdbcToLogical($h)
        set vr.ResponseDate=$piece($H, ",")
        set vr.ResponseText=$ZCONVERT(obj.ResponseText,"I","UTF8") 
-       set vr.Stat="false"
+       //set vr.Stat="false"
+       //do ##class(Vacancy.VacancyResponse).Mail(num)
+       set SM=##class(Vacancy.CreateMail).%New()
+       set SM.Status="false"
+       do SM.%Save()
        
        $$$THROWONERROR(st,vr.%Save())
  	
  
    } catch ex{set st=ex.AsStatus()}
    
-   		do ##class(Vacancy.VacancyResponse).Mail(num)
-    quit num
+   		
+    quit st
 ]]></Implementation>
 </Method>
 
@@ -538,16 +559,37 @@
 <Description>
 список вакансий</Description>
 <ClassMethod>1</ClassMethod>
+<FormalSpec>isAdm:%Boolean</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	set vacQuery = "SELECT  Count(VV.ID) AS CountView, Count(VR.ID) AS CountResp, C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
-					      "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
-				   "FROM Vacancy.Vacancy AS V "_
-				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
-				   "LEFT OUTER JOIN Vacancy.VacancyView AS VV  ON V.ID=VV.Vacancy  "_
-				   "LEFT OUTER JOIN Vacancy.VacancyResponse AS VR ON V.ID=VR.Vacancy "_
-				   "GROUP BY V.ID "_
-				   "ORDER BY V.Company"
+	if (isAdm){
+		// Этот жуткий запрос создан гуру SQL!
+		set vacQuery = "SELECT V.name, V.IsActive, C.Name AS CompanyName, V.ID, nvl(SUM(d.cou_view),0) AS CountView, nvl(SUM(d.cou_resp),0) AS CountResp, "_
+					   "V.CityVacancy, V.VacancyType, V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_  
+					   "FROM "_
+					   "(SELECT  VV.Vacancy, Count(VV.ID) as cou_view,0 as cou_resp "_
+					   "FROM Vacancy.VacancyView AS VV GROUP BY VV.Vacancy "_
+					   "UNION ALL "_
+					   "SELECT  VR.Vacancy, 0 as cou_view,Count(VR.ID)as cou_resp "_
+					   "FROM Vacancy.VacancyResponse AS VR GROUP BY VR.Vacancy) d "_
+					   "RIGHT OUTER JOIN  vacancy.vacancy V ON V.ID = d.Vacancy "_
+					   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_  
+					   "GROUP BY D.Vacancy, V.Name "_
+					   "ORDER BY V.Company"
+	}
+	else{
+		// если это не админский запрос
+		set vacQuery = "SELECT  Count(VV.ID) AS CountView, Count(VR.ID) AS CountResp, C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
+					           "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
+					   "FROM Vacancy.Vacancy AS V "_
+					   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
+					   "LEFT OUTER JOIN Vacancy.VacancyView AS VV  ON V.ID=VV.Vacancy  "_
+					   "LEFT OUTER JOIN Vacancy.VacancyResponse AS VR ON V.ID=VR.Vacancy "_
+					   "WHERE V.IsActive = 1 "_
+					   "GROUP BY V.ID "_
+					   "ORDER BY V.Company"	
+	}
+		
 				   
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
 	quit $$$OK
@@ -604,6 +646,35 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
   do ##class(WEB.JSON).GetJSONData("Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C ON V.Company = C.ID")
   // WHERE V.ID ="_compid)
   quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="VacancyReverse">
+<Description>
+метод переключения статуса вакансии активная/неактивная</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>vacid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	// откроем вакансию по ИД
+	set v = ##class(Vacancy.Vacancy).%OpenId(vacid)
+	// считаем текущий статус
+	set stat = v.IsActive
+	
+	// в зависимости от статуса - поменяем на противоположный
+	if (stat = 1){
+		set v.IsActive = 0
+	}
+	else{
+		set v.IsActive = 1	
+	}
+ 
+	do v.%Save()
+	
+	// костыль для возврата значения
+	do ##class(WEB.JSON).GetJSONData("SELECT * FROM Vacancy.Vacancy WHERE ID="_vacid)
+	
+	quit $$$OK
 ]]></Implementation>
 </Method>
 

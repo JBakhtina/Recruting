@@ -27,7 +27,7 @@
 Название  компании</Description>
 <Type>%String</Type>
 <Required>1</Required>
-<Parameter name="MAXLEN" value="30"/>
+<Parameter name="MAXLEN" value="100"/>
 </Property>
 
 <Property name="Adress">
@@ -93,7 +93,7 @@ mail для отправки почты админу</Description>
 <IdLocation>^Vacancy.CompanyD</IdLocation>
 <IndexLocation>^Vacancy.CompanyI</IndexLocation>
 <StreamLocation>^Vacancy.CompanyS</StreamLocation>
-<ExtentSize>1</ExtentSize>
+<ExtentSize>16</ExtentSize>
 <Data name="CompanyDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -131,6 +131,9 @@ mail для отправки почты админу</Description>
 <Value name="16">
 <Value>PassMail</Value>
 </Value>
+<Value name="17">
+<Value>Img</Value>
+</Value>
 </Data>
 <Property name="%%CLASSNAME">
 <Selectivity>100.0000%</Selectivity>
@@ -139,7 +142,7 @@ mail для отправки почты админу</Description>
 <Selectivity>10.0000%</Selectivity>
 </Property>
 <Property name="Adress">
-<Selectivity>100.0000%,Apartament:100.0000%,Building:100.0000%,City:100.0000%,Country:100.0000%,Email:100.0000%,State:100.0000%,Street:100.0000%,Telephone:100.0000%,URL:100.0000%,ZIP:100.0000%</Selectivity>
+<Selectivity>6.2500%,Apartament:6.2500%,Building:7.1429%,City:10.0000%,Country:12.5000%,Email:6.2500%,State:10.0000%,Street:8.3333%,Telephone:6.2500%,URL:12.5000%,ZIP:6.2500%</Selectivity>
 </Property>
 <Property name="CompMainInfo">
 <Selectivity>100.0000%</Selectivity>
@@ -156,6 +159,9 @@ mail для отправки почты админу</Description>
 <Property name="Image">
 <Selectivity>100.0000%,ImageDescription:100.0000%,ImageUrl:100.0000%</Selectivity>
 </Property>
+<Property name="Img">
+<Selectivity>100.0000%</Selectivity>
+</Property>
 <Property name="MailToResponse">
 <Selectivity>100.0000%</Selectivity>
 </Property>
@@ -163,7 +169,7 @@ mail для отправки почты админу</Description>
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Name">
-<Selectivity>100.0000%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="NewProperty1">
 <Selectivity>100.0000%</Selectivity>
@@ -175,7 +181,7 @@ mail для отправки почты админу</Description>
 <Selectivity>5.5556%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
-<BlockCount>-4</BlockCount>
+<BlockCount>-8</BlockCount>
 </SQLMap>
 <SQLMap name="UsersIndex">
 <BlockCount>-4</BlockCount>

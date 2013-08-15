@@ -19,10 +19,11 @@
 <Routes>
 	   <Route Url="/temp" 					Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
 	   <Route Url="/test" 					Method="GET" Call="WEB.Broker:Test"/> 
-	   <Route Url="/json/vacancies" 		Method="GET" Call="WEB.JSON:GetVacancies"/>
+	   <Route Url="/json/vacancies/:isAdm" 	Method="GET" Call="WEB.JSON:GetVacancies"/>
 	   <Route Url="/json/vacancies/:compid" Method="GET" Call="WEB.JSON:GetVacanciesByCompID"/> 
 	   <Route Url="/json/vacanciesold" 		Method="GET" Call="WEB.JSON:GetVacanciesOld"/> 
 	   <Route Url="/json/vacancy/:compid" 	Method="GET" Call="WEB.JSON:GetVacancy"/> 
+	   <Route Url="/json/vacancyreverse/:vacid" Method="GET" Call="WEB.JSON:VacancyReverse"/>
 	   
 	   <Route Url="/json/users" 			Method="GET" Call="WEB.JSON:GetUsers"/> 
 	   <Route Url="/json/company/:compid" 	Method="GET" Call="WEB.JSON:GetCompany"/> 
@@ -58,6 +59,7 @@
 	   
 	   <Route Url="/json/vacancyresp/:compid" 		 	Method="POST" Call="WEB.JSON:NVR"/>
 	   <Route Url="/json/getvacancyresp"	 		Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
+	   <Route Url="/json/deletevacancyresp/:vrid"	 		Method="DELETE" Call="WEB.JSON:DeleteVacancyResponse"/>
 	   <Route Url="/json/getvacancyresp/:vacid"	 		Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
 	   <Route Url="/json/getcountvacancyview/:vacid" 	Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
 	   <Route Url="/json/getcountvacancyresponse/:vacid" Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
@@ -90,13 +92,12 @@
 ]]></Implementation>
 </Method>
 
-<Method name="DispatchRequest">
-<Description>
-Dispatch a REST request according to URL and Method</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>pUrl:%String,pMethod:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+<UDLText name="T">
+<Content><![CDATA[
+/*
+/// Dispatch a REST request according to URL and Method
+ClassMethod DispatchRequest(pUrl As %String, pMethod As %String) As %Status
+{
     #dim tSC As %Status = $$$OK
     #dim e As %Exception.AbstractException
     
@@ -193,7 +194,9 @@ Dispatch a REST request according to URL and Method</Description>
     Set %session.EndSession=('..#UseSession)
     
     Quit tSC
-]]></Implementation>
-</Method>
+}
+*/
+]]></Content>
+</UDLText>
 </Class>
 </Export>

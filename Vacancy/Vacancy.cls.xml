@@ -106,6 +106,7 @@
 <Description>
 Active vacancy or not</Description>
 <Type>%Boolean</Type>
+<InitialExpression>1</InitialExpression>
 </Property>
 
 <Property name="Company">
@@ -227,6 +228,9 @@ Active vacancy or not</Description>
 </Value>
 <Value name="17">
 <Value>Skype</Value>
+</Value>
+<Value name="18">
+<Value>IsActive</Value>
 </Value>
 </Data>
 <Data name="VacancyTypes">

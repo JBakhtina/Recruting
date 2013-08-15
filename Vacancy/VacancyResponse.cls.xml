@@ -36,14 +36,9 @@
 <Type>%Date</Type>
 </Property>
 
-<Property name="Stat">
-<Description>
-Статус отправки</Description>
-<Type>%String</Type>
-</Property>
-
 <Property name="ResponseText">
 <Description>
+Статус отправки
 Текст отзыва ... хорошо бы в формате HTML
 "макс лен" должно быть "позитив интейджер", а то ругается :)
 со временем, возможно, поменяем на иной - более подходящий тип</Description>
@@ -60,29 +55,31 @@
 <Relationship>1</Relationship>
 </Property>
 
-<Method name="Mail">
+<Method name="%OnAfterSave">
 <Description>
 Генерируется письмо при создании новой записи</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>Id:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
-   set st= ##class(Vacancy.CreateMail).NewMail(Id)
-	Quit st
-]]></Implementation>
-</Method>
-
-<Method name="%OnAfterSave">
 <FormalSpec>insert:%Boolean</FormalSpec>
 <Private>1</Private>
 <ReturnType>%Status</ReturnType>
 <ServerOnly>1</ServerOnly>
 <Implementation><![CDATA[
+   set st= ##class(Vacancy.CreateMail).NewMail(..%Id())
+	Quit st
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+/*
+Method %OnAfterSave(insert As %Boolean) As %Status [ Private, ServerOnly = 1 ]
+{
 	#Dim num AS %Global
 	set num=..%Id()
 	Quit $$$OK
-]]></Implementation>
-</Method>
+}
+*/
+]]></Content>
+</UDLText>
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>

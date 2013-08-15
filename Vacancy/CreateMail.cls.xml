@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <Class name="Vacancy.CreateMail">
-<Super>%SerialObject</Super>
+<Super>%Persistent</Super>
 <TimeCreated>63021,43547.622918</TimeCreated>
+
+<Property name="Status">
+<Description>
+Статус отправки</Description>
+<Type>%String</Type>
+</Property>
 
 <Method name="NewMail">
 <ClassMethod>1</ClassMethod>
@@ -40,6 +46,8 @@
   // Текст письма
   do mail.TextData.Write("Skype:"_vr.Skype_"  "_vr.ResponseText)
   // Получатель
+  // временно
+  set AdminMail = "optimainform@gmail.com"
   do mail.To.Insert(AdminMail)
   
   
@@ -97,7 +105,7 @@
   set mail.IsHTML=1
   set mail.ContentType="text/html"
   // Текст письма
-  do mail.TextData.Write("Skype:"_vr.Skype_"   "_vr.ResponseText)
+  do mail.TextData.Write("Skype:"_vr.Skype_"        "_vr.ResponseText)
   // Получатель
  //  do mail.To.Insert(vr.Vacancy.Company.Adress.Email)
  set ctpMailBox = "optimainform@gmail.com"
@@ -126,7 +134,24 @@
 
 <Storage name="Default">
 <Type>%Library.CacheSerialState</Type>
+<DataLocation>^Vacancy.CreateMailD</DataLocation>
+<DefaultData>CreateMailDefaultData</DefaultData>
+<IdLocation>^Vacancy.CreateMailD</IdLocation>
+<IndexLocation>^Vacancy.CreateMailI</IndexLocation>
+<State>CreateMailState</State>
 <StreamLocation>^Vacancy.CreateMailS</StreamLocation>
+<ExtentSize>100000</ExtentSize>
+<Data name="CreateMailDefaultData">
+<Subscript>"1"</Subscript>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+</Data>
+<Data name="CreateMailState">
+<Value name="1">
+<Value>Status</Value>
+</Value>
+</Data>
 </Storage>
 </Class>
 </Export>
