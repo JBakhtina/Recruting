@@ -587,7 +587,7 @@
 					   "LEFT OUTER JOIN Vacancy.VacancyResponse AS VR ON V.ID=VR.Vacancy "_
 					   "WHERE V.IsActive = 1 "_
 					   "GROUP BY V.ID "_
-					   "ORDER BY V.Company"	
+					   "ORDER BY V.RegDate DESC"	
 	}
 		
 				   
