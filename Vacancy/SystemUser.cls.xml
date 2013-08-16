@@ -51,6 +51,26 @@ User - зарезирвированное в ODBC</Description>
 <Parameter name="MAXLEN" value="50"/>
 </Property>
 
+<UDLText name="T">
+<Content><![CDATA[
+// TODO:неустанавливает пароли
+
+]]></Content>
+</UDLText>
+
+<Method name="SetPwd">
+<Description>
+Установка пароля конкретному пользователю</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>UID,Pass:%String</FormalSpec>
+<Implementation><![CDATA[
+	set pwd=##class(Vacancy.SystemUser).%OpenId(UID)
+	set pwd.Password= $system.Encryption.MD5Hash(Pass)
+	do pwd.%Save()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
 <Method name="PasswordSetterSet">
 <Description>
 Метод установки пароля - получения хэша MD5</Description>
@@ -130,7 +150,7 @@ User - зарезирвированное в ODBC</Description>
 <IdLocation>^Vacancy.SystemUserD</IdLocation>
 <IndexLocation>^Vacancy.SystemUserI</IndexLocation>
 <StreamLocation>^Vacancy.SystemUserS</StreamLocation>
-<ExtentSize>20</ExtentSize>
+<ExtentSize>16</ExtentSize>
 <Data name="SystemUserDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -179,19 +199,19 @@ User - зарезирвированное в ODBC</Description>
 <Selectivity>100.0000%</Selectivity>
 </Property>
 <Property name="Company">
-<Selectivity>7.1429%</Selectivity>
+<Selectivity>12.5000%</Selectivity>
 </Property>
 <Property name="DOB">
-<Selectivity>5.0000%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="FirstName">
-<Selectivity>5.2632%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="HomeAdress">
-<Selectivity>5.0000%,Apartament:5.0000%,Building:5.5556%,City:8.3333%,Country:11.1111%,Email:5.0000%,State:11.1111%,Street:7.6923%,Telephone:5.0000%,URL:12.5000%,ZIP:5.0000%</Selectivity>
+<Selectivity>6.2500%,Apartament:6.2500%,Building:6.2500%,City:9.0909%,Country:11.1111%,Email:6.2500%,State:10.0000%,Street:8.3333%,Telephone:6.2500%,URL:11.1111%,ZIP:6.2500%</Selectivity>
 </Property>
 <Property name="LastName">
-<Selectivity>5.8824%</Selectivity>
+<Selectivity>6.2500%</Selectivity>
 </Property>
 <Property name="Login">
 <Selectivity>20.0000%</Selectivity>
@@ -203,10 +223,10 @@ User - зарезирвированное в ODBC</Description>
 <Selectivity>50.0000%</Selectivity>
 </Property>
 <Property name="UserType">
-<Selectivity>5.0000%,Level:5.0000%</Selectivity>
+<Selectivity>6.2500%,Level:6.2500%</Selectivity>
 </Property>
 <Property name="VacancyAdress">
-<Selectivity>5.0000%,Apartament:5.0000%,Building:5.8824%,City:10.0000%,Country:11.1111%,Email:5.0000%,State:9.0909%,Street:9.0909%,Telephone:5.0000%,URL:10.0000%,ZIP:5.0000%</Selectivity>
+<Selectivity>6.2500%,Apartament:6.2500%,Building:7.1429%,City:14.2857%,Country:14.2857%,Email:6.2500%,State:10.0000%,Street:8.3333%,Telephone:6.2500%,URL:11.1111%,ZIP:6.2500%</Selectivity>
 </Property>
 <SQLMap name="IDKEY">
 <BlockCount>-4</BlockCount>
