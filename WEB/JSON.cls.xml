@@ -107,6 +107,9 @@
       set com.Adress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
       set com.Adress.URL=$ZCONVERT(obj.URL,"I","UTF8")
       set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8")
+	  set com.IsModerated=obj.IsModerated
+
+
        $$$THROWONERROR(st,com.%Save())
  
 	//  set com.Name = com.%Id 
@@ -139,7 +142,10 @@
       set com.Adress.Email=$ZCONVERT(obj.Email,"I","UTF8")
       set com.Adress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
       set com.Adress.URL=$ZCONVERT(obj.URL,"I","UTF8")
-      set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8") 
+      set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8")
+	  set com.IsModerated=obj.IsModerated
+
+      
        $$$THROWONERROR(st,com.%Save())
  
    } catch ex{set st=ex.AsStatus()}
@@ -166,7 +172,7 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	set vacQuery = "SELECT C.Name AS CompanyName, C.Adress_Apartament AS Apartament, C.Adress_Building AS Building, "_
+	set vacQuery = "SELECT C.Name AS CompanyName, C.IsModerated, C.Adress_Apartament AS Apartament, C.Adress_Building AS Building, "_
 	              "C.Adress_City AS City, C.Adress_Country AS Country, C.Adress_Email AS Email, C.Adress_State AS State, "_
 	               "C.Adress_Street AS Street, C.Adress_Telephone AS Telephone, "_
 	               "C.Adress_URL AS URL, C.ID,  C.CompMainInfo "_

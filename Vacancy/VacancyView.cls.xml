@@ -28,6 +28,17 @@
 
 <UDLText name="T">
 <Content><![CDATA[
+// Откуда пришел
+
+]]></Content>
+</UDLText>
+
+<Property name="Referer">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
 // IP
 
 ]]></Content>
@@ -87,6 +98,12 @@
 </Value>
 <Value name="6">
 <Value>Vacancy</Value>
+</Value>
+<Value name="7">
+<Value>Date</Value>
+</Value>
+<Value name="8">
+<Value>Referer</Value>
 </Value>
 </Data>
 </Storage>

@@ -74,6 +74,14 @@ mail для отправки почты админу</Description>
 <Type>%String</Type>
 </Property>
 
+<Property name="IsModerated">
+<Description>
+Если тру то отправлять отклик админу системы (как сейчас)
+Иначе отправлять сюда MailToResponse</Description>
+<Type>%Boolean</Type>
+<InitialExpression>1</InitialExpression>
+</Property>
+
 <Method name="DeleteCompany">
 <ClassMethod>1</ClassMethod>
 <FormalSpec>compid:%String</FormalSpec>
@@ -133,6 +141,9 @@ mail для отправки почты админу</Description>
 </Value>
 <Value name="17">
 <Value>Img</Value>
+</Value>
+<Value name="18">
+<Value>IsModerated</Value>
 </Value>
 </Data>
 <Property name="%%CLASSNAME">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <Class name="WEB.Image">
-<Super>%CSP.Page,%Net.HttpRequest</Super>
+<Super>%CSP.Page,%Net.HttpRequest,%CSP.Request</Super>
 <TimeCreated>63025,67400.421029</TimeCreated>
 
 <Parameter name="CONTENTTYPE">
@@ -24,11 +24,16 @@
   // Добавляем новую запись о просмотре вакансии
  Set httpR=##class(Vacancy.VacancyView).%New()
  set httpR.Browser=%session.BrowserName
+ //set httpR.Referer=%request.GetCgiEnv("HTTP_USER_AGENT") 
+ //set httpR.Referer=%request.GetCgiEnv("HTTP_REFERER") 
  //TODO разобраться почему неотробатывает URL источник
- set httpRr=##class(%Net.HttpRequest).%New()
- set httpR.URL=httpRr.Referer
+ //set httpRr=##class(%Net.HttpRequest).%New()
+ //do httpRr.Reset() 
+ set httpR.URL=%request.GetCgiEnv("HTTP_REFERER") 
  set httpR.Date=$piece($H, ",")
- set httpR.IP=%request.GatewayConnectionName
+ // возвращаем IP посетителя
+ set httpR.IP=%request.GetCgiEnv("REMOTE_ADDR")
+ //set httpR.IP=%request.GatewayConnectionName
  //w ##class(%SYSTEM.INetInfo).GetInterfacesInfo()
  set httpR.Vacancy=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
  do httpR.%Save()
