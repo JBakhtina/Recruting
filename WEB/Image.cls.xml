@@ -27,10 +27,10 @@
  //TODO разобраться почему неотробатывает URL источник
  set httpRr=##class(%Net.HttpRequest).%New()
  set httpR.URL=httpRr.Referer
- set httpR.TimeStamp=$zdt($h,4)
+ set httpR.Date=$piece($H, ",")
  set httpR.IP=%request.GatewayConnectionName
  //w ##class(%SYSTEM.INetInfo).GetInterfacesInfo()
- set httpR.Vacancy=$Get(%request.Data("id",1),1)
+ set httpR.Vacancy=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
  do httpR.%Save()
   
   

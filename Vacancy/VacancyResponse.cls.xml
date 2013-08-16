@@ -120,6 +120,9 @@ Method %OnAfterSave(insert As %Boolean) As %Status [ Private, ServerOnly = 1 ]
 <Value name="10">
 <Value>Stat</Value>
 </Value>
+<Value name="11">
+<Value>FromWho</Value>
+</Value>
 </Data>
 </Storage>
 </Class>

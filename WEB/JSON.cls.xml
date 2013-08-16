@@ -374,12 +374,14 @@
 	} 
 		
 				  
-	set vacQuery = "SELECT V.ID, V.FirstName, V.Skype, CM.Status, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
+	set vacQuery = "SELECT V.ID, VV.Name AS VacancyName, VK.Name AS CompanyName, V.FirstName, V.Skype, CM.Status, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
 	               "From_Building AS Building, From_City AS City, From_Country AS Country, From_Email AS Email, "_
 	               "From_State AS State, From_Street AS Street, From_Telephone AS Telephone, From_URL AS URL, V.Vacancy "_
 				   "FROM Vacancy.VacancyResponse AS V "_
 				   "INNER JOIN Vacancy.CreateMail AS CM ON V.ID=CM.ID "_
-				   addToQuery_" ORDER BY V.ResponseDate DESC"
+				   "INNER JOIN Vacancy.Vacancy AS VV ON V.Vacancy=VV.ID "_
+				   "INNER JOIN Vacancy.Company AS VK ON VV.Company=VK.ID  "_
+				    addToQuery_" ORDER BY V.ResponseDate DESC"
 
 	
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
@@ -420,8 +422,6 @@
        //set vr.ResponseDate=##class(%Library.TimeStamp).OdbcToLogical($h)
        set vr.ResponseDate=$piece($H, ",")
        set vr.ResponseText=$ZCONVERT(obj.ResponseText,"I","UTF8") 
-       //set vr.Stat="false"
-       //do ##class(Vacancy.VacancyResponse).Mail(num)
        set SM=##class(Vacancy.CreateMail).%New()
        set SM.Status="false"
        do SM.%Save()

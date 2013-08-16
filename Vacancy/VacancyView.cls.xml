@@ -44,8 +44,8 @@
 ]]></Content>
 </UDLText>
 
-<Property name="TimeStamp">
-<Type>%String</Type>
+<Property name="Date">
+<Type>%Date</Type>
 </Property>
 
 <UDLText name="T">
@@ -56,7 +56,39 @@
 </UDLText>
 
 <Property name="Vacancy">
-<Type>%String</Type>
+<Type>Vacancy.Vacancy</Type>
+<Cardinality>one</Cardinality>
+<Inverse>VacancyResponses</Inverse>
 </Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^Vacancy.VacancyViewD</DataLocation>
+<DefaultData>VacancyViewDefaultData</DefaultData>
+<IdLocation>^Vacancy.VacancyViewD</IdLocation>
+<IndexLocation>^Vacancy.VacancyViewI</IndexLocation>
+<StreamLocation>^Vacancy.VacancyViewS</StreamLocation>
+<ExtentSize>100000</ExtentSize>
+<Data name="VacancyViewDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>URL</Value>
+</Value>
+<Value name="3">
+<Value>Browser</Value>
+</Value>
+<Value name="4">
+<Value>IP</Value>
+</Value>
+<Value name="5">
+<Value>TimeStamp</Value>
+</Value>
+<Value name="6">
+<Value>Vacancy</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 </Export>
