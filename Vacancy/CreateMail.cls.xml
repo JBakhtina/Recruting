@@ -27,9 +27,14 @@
  set MailPASS="12Victor89Lilo"
  //
  //
+ /*
+ set MailFrom="vacancy@rbufa.ru"
+ set MailSMTP="mx25.valuehost.ru"
+ set MailPASS="PzMQdaK5*"
+*/ 
+ 
  set vr=##class(Vacancy.VacancyResponse).%OpenId(Id)
  set AdminMail=vr.Vacancy.Company.MailToResponse
-
 	
   #dim smtp As %Net.SMTP
   #dim mail As %Net.MailMessage
@@ -38,13 +43,19 @@
   // Отправитель
   set mail.From=MailFrom
   // Тема письма
-  set mail.Subject="Отзыв на вакансию: "_vr.Vacancy.Name_" от: "_vr.FirstName
+  set mail.Subject="Размещён отзыв от: "_vr.FirstName_"  "_vr.LastName
   // Кодировка
   set mail.Charset="utf-8"
   set mail.IsHTML=1
   set mail.ContentType="text/html"
   // Текст письма
-  do mail.TextData.Write("Skype:"_vr.Skype_"  "_vr.ResponseText)
+  do mail.TextData.Write("<b>Вакансия</b>: "_vr.Vacancy.Name_"<br>"
+  						_"<b>Компания</b>: "_vr.Vacancy.Company.Name_"<br>"
+  						_"<b>Skype</b>: "_vr.Skype_"<br>"
+  						_"<b>Почта</b>: "_"<a href=mailto:"_vr.From_">"_vr.From_"</a>"_"<br>"
+                        _"<b>Имя</b>: "_vr.FirstName_"<br>"
+                        _"<b>Фамилия</b>: "_vr.LastName_"<br>"_"<br>"
+                        _"<b>Текст отклика:</b><br>"_vr.ResponseText)
   // Получатель
   // временно
   set AdminMail = "optimainform@gmail.com"
@@ -76,7 +87,7 @@
 <FormalSpec>vrID:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
- //
+ // DKSBX6
  // Нулевые настройки почтового ящика
  // Отправитель
  set MailFrom="18523897@mail.ru"
@@ -87,7 +98,14 @@
  // Пароль
  set MailPASS="12Victor89Lilo"
  //
+ /*
+ set MailFrom="vacancy@rbufa.ru"
+ set MailSMTP="mx25.valuehost.ru"
+ set MailPASS="PzMQdaK5*"
+ */
+
  //
+
  set vr=##class(Vacancy.VacancyResponse).%OpenId(vrID)
  set AdminMail=vr.Vacancy.Company.MailToResponse
 
@@ -99,13 +117,19 @@
   // Отправитель
   set mail.From=MailFrom
   // Тема письма
-  set mail.Subject="ReDirect Отзыв на вакансию: "_vr.Vacancy.Name_" от: "_vr.FirstName
+  set mail.Subject="Отзыв на вакансию: "_vr.Vacancy.Name_" от: "_vr.FirstName
   // Кодировка
   set mail.Charset="utf-8"
   set mail.IsHTML=1
   set mail.ContentType="text/html"
   // Текст письма
-  do mail.TextData.Write("Skype:"_vr.Skype_"        "_vr.ResponseText)
+  do mail.TextData.Write("<b>Вакансия</b>: "_vr.Vacancy.Name_"<br>"
+  						_"<b>Компания</b>: "_vr.Vacancy.Company.Name_"<br>"
+  						_"<b>Skype</b>: "_vr.Skype_"<br>"
+  						_"<b>Почта</b>: "_"<a href=mailto:"_vr.From_">"_vr.From_"</a>"_"<br>"
+                        _"<b>Имя</b>: "_vr.FirstName_"<br>"
+                        _"<b>Фамилия</b>: "_vr.LastName_"<br>"_"<br>"
+                        _"<b>Текст отклика</b><br>"_vr.ResponseText)
   // Получатель
  //  do mail.To.Insert(vr.Vacancy.Company.Adress.Email)
  set ctpMailBox = "optimainform@gmail.com"
