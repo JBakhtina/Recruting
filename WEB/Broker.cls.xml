@@ -14,12 +14,19 @@
 ]]></Content>
 </UDLText>
 
+<UDLText name="T">
+<Content><![CDATA[
+// 	   <Route Url="/json/vacancies/:isAdm" 	Method="GET" Call="WEB.JSON:GetVacancies"/>
+
+]]></Content>
+</UDLText>
+
 <XData name="UrlMap">
 <Data><![CDATA[
 <Routes>
 	   <Route Url="/temp" 					Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
 	   <Route Url="/test" 					Method="GET" Call="WEB.Broker:Test"/> 
-	   <Route Url="/json/vacancies/:isAdm" 	Method="GET" Call="WEB.JSON:GetVacancies"/>
+	   <Route Url="/json/vacancies" 	Method="GET" Call="WEB.JSON:GetVacancies"/>
 	   <Route Url="/json/vacanciesByComp/:compid" Method="GET" Call="WEB.JSON:GetVacanciesByCompID"/> 
 	   <Route Url="/json/vacanciesold" 		Method="GET" Call="WEB.JSON:GetVacanciesOld"/> 
 	   <Route Url="/json/vacancy/:compid" 	Method="GET" Call="WEB.JSON:GetVacancy"/> 

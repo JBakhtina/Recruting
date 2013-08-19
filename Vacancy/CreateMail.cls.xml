@@ -43,7 +43,7 @@
   // Отправитель
   set mail.From=MailFrom
   // Тема письма
-  set mail.Subject="Размещён отзыв от: "_vr.FirstName_"  "_vr.LastName
+  set mail.Subject="auto.Размещён отзыв от: "_vr.FirstName_"  "_vr.LastName
   // Кодировка
   set mail.Charset="utf-8"
   set mail.IsHTML=1

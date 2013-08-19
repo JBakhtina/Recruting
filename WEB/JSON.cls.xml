@@ -380,7 +380,7 @@
 	} 
 		
 				  
-	set vacQuery = "SELECT V.ID, VV.Name AS VacancyName, VK.Name AS CompanyName, V.FirstName, V.Skype, CM.Status, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
+	set vacQuery = "SELECT V.ID, VV.Name AS VacancyName, VK.Name AS CompanyName, VK.ID AS Company, V.FirstName, V.Skype, CM.Status, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
 	               "From_Building AS Building, From_City AS City, From_Country AS Country, From_Email AS Email, "_
 	               "From_State AS State, From_Street AS Street, From_Telephone AS Telephone, From_URL AS URL, V.Vacancy "_
 				   "FROM Vacancy.VacancyResponse AS V "_
@@ -565,9 +565,10 @@
 <Description>
 список вакансий</Description>
 <ClassMethod>1</ClassMethod>
-<FormalSpec>isAdm:%Boolean</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+ /* а это закоментарено недовольными ламерами
+ ClassMethod GetVacancies(isAdm As %Boolean) As %Status
 	if (isAdm){
 		// Этот жуткий запрос создан гуру SQL!
 		set vacQuery = "SELECT V.name, V.IsActive, C.Name AS CompanyName, V.ID, nvl(SUM(d.cou_view),0) AS CountView, nvl(SUM(d.cou_resp),0) AS CountResp, "_
@@ -596,7 +597,16 @@
 					   "ORDER BY V.RegDate DESC"	
 	}
 		
-				   
+*/				   
+		set vacQuery = "SELECT  Count(VV.ID) AS CountView, Count(VR.ID) AS CountResp, C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
+					           "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
+					   "FROM Vacancy.Vacancy AS V "_
+					   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
+					   "LEFT OUTER JOIN Vacancy.VacancyView AS VV  ON V.ID=VV.Vacancy  "_
+					   "LEFT OUTER JOIN Vacancy.VacancyResponse AS VR ON V.ID=VR.Vacancy "_
+					   "WHERE V.IsActive = 1 "_
+					   "GROUP BY V.ID "_
+					   "ORDER BY V.RegDate DESC"	
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
 	quit $$$OK
 ]]></Implementation>
@@ -613,7 +623,7 @@
 					      "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
 				   "FROM Vacancy.Vacancy AS V "_
 				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
-				   "WHERE C.ID="_compID_ 
+				   "WHERE C.ID="_compID_" AND V.IsActive = 1"_ 
 				   "ORDER BY V.Company "
 				  
 				   
