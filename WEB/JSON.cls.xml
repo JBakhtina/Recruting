@@ -561,16 +561,22 @@
 ]]></Implementation>
 </Method>
 
+<UDLText name="T">
+<Content><![CDATA[
+// а это закоментарено недовольными ламерами. Ламеров - на курсы SQL (или можно хотя бы спросить что к чему)!!!
+
+]]></Content>
+</UDLText>
+
 <Method name="GetVacancies">
 <Description>
 список вакансий</Description>
 <ClassMethod>1</ClassMethod>
+<FormalSpec>isAdm:%Boolean</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
- /* а это закоментарено недовольными ламерами
- ClassMethod GetVacancies(isAdm As %Boolean) As %Status
 	if (isAdm){
-		// Этот жуткий запрос создан гуру SQL!
+		// Админский запрос -[Этот жуткий запрос создан гуру SQL!]
 		set vacQuery = "SELECT V.name, V.IsActive, C.Name AS CompanyName, V.ID, nvl(SUM(d.cou_view),0) AS CountView, nvl(SUM(d.cou_resp),0) AS CountResp, "_
 					   "V.CityVacancy, V.VacancyType, V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_  
 					   "FROM "_
@@ -596,8 +602,14 @@
 					   "GROUP BY V.ID "_
 					   "ORDER BY V.RegDate DESC"	
 	}
-		
-*/				   
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<UDLText name="T">
+<Content><![CDATA[
+/*				   
 		set vacQuery = "SELECT  Count(VV.ID) AS CountView, Count(VR.ID) AS CountResp, C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
 					           "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
 					   "FROM Vacancy.Vacancy AS V "_
@@ -607,6 +619,27 @@
 					   "WHERE V.IsActive = 1 "_
 					   "GROUP BY V.ID "_
 					   "ORDER BY V.RegDate DESC"	
+	do ##class(WEB.JSON).GetJSONData(vacQuery)
+	
+} */
+]]></Content>
+</UDLText>
+
+<Method name="GetForWidget">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+			set vacQuery = "SELECT TOP 7 V.VacancyType, "_ 
+					       "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate "_ 
+					   "FROM Vacancy.Vacancy AS V "_
+					   "WHERE V.IsActive = 1 "_
+					   "ORDER BY V.RegDate DESC "	
+					   //w vacQuery 
+			/*set vacQuery = "SELECT TOP 1 *"_ 
+					   "FROM Vacancy.Vacancy "_
+					   "WHERE  Vacancy.Vacancy.IsActive = 1 "_
+					   "ORDER BY  Vacancy.Vacancy.RegDate DESC "	
+*/
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
 	quit $$$OK
 ]]></Implementation>
@@ -729,7 +762,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
   set phash = $system.Encryption.MD5Hash(pwd)
  
   &sql(SELECT FirstName into:fname FROM Vacancy.SystemUser WHERE Login = :login AND Password = :phash)
- 
+  do %response.SetCookie("yoyo","yes",$h+1000,"/csp/vacancy")
   do %response.SetCookie("login",fname,$h+1000,"/csp/vacancy")
  // do %response.SetCookie("pwd",log,$h+1000,"/")
  

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="WEB.CompanyImage">
+<Super>%CSP.Page,%Net.HttpRequest</Super>
+<TimeCreated>63043,53051.083825</TimeCreated>
+
+<Parameter name="CONTENTTYPE">
+<Default>image/jpeg</Default>
+</Parameter>
+
+<Method name="OnPage">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+
+  set a=##class(Vacancy.Company).%OpenId($Get(%request.Data("id",1),1))
+ 
+  set oid=a.Img.%Oid()
+
+  d:$IsObject(a.Img) a.Img.OutputToDevice()
+  
+    
+  Q $$$OK
+]]></Implementation>
+</Method>
+</Class>
+</Export>

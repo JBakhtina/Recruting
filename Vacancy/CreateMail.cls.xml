@@ -53,7 +53,7 @@
                         _"<b>Вакансия</b>: "_vr.Vacancy.Name_"<br>"
   						_"<b>Компания</b>: "_vr.Vacancy.Company.Name_"<br>"
   						_"<b>Skype</b>: "_vr.Skype_"<br>"
-  						_"<b>Почта</b>: "_"<a href=mailto:"_vr.From_">"_vr.From_"</a>"_"<br>"
+  						_"<b>Почта</b>:"_vr.From.Email_"<br>"
                         _"<b>Имя</b>: "_vr.FirstName_"<br>"
                         _"<b>Фамилия</b>: "_vr.LastName_"<br>"_"<br>"
                         _"<b>Текст отклика</b><br>"_vr.ResponseText)
@@ -128,7 +128,7 @@
                         _"<b>Вакансия</b>: "_vr.Vacancy.Name_"<br>"
   						_"<b>Компания</b>: "_vr.Vacancy.Company.Name_"<br>"
   						_"<b>Skype</b>: "_vr.Skype_"<br>"
-  						_"<b>Почта</b>: "_"<a href=mailto:"_vr.From_">"_vr.From_"</a>"_"<br>"
+  						_"<b>Почта</b>:"_vr.From.Email_"<br>"
                         _"<b>Имя</b>: "_vr.FirstName_"<br>"
                         _"<b>Фамилия</b>: "_vr.LastName_"<br>"_"<br>"
                         _"<b>Текст отклика</b><br>"_vr.ResponseText)
