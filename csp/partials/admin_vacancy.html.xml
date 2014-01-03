@@ -1,43 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/admin_vacancy.html" application="/csp/vacancy/"><![CDATA[
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
-    <li><a href="#admin/addvacancy" data-toggle="tab"><b>Добавить вакансию</b></a></li>
-    <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
-    <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
-    <li><a href="#admin/vacancyresp/{{ vacancyid }}" data-toggle="tab">Отзывы</a></li>
-</ul>
+<div ng-include="'partials/tab_menu.html'" ng-init="vac_active = 'active'"></div>
+
+<!--             Загрузчик файлов   -->
+<script language = "javascript" src="js/uploader.js"></script>
+
 <div  class="row">
     <article class="span12">
         <p>
         <ul class='nav nav-tabs nav-stacked'>
             <li>
- 
- 
-                <V77>
+
                     <div class="well">
-                        <form class="form-horizontal" name="UpdVacancy" ng-model="vacancy"  ng-submit="update({{ vacancyid }},vacancy[0])">
+                        <form class="form-horizontal" name="UpdVacancy" ng-model="vacancy"  ng-submit="alert('dasd');update({{ vacID }},vacancy[0])">
+                            <div class="row">
+
+                                <!--ПАНЕЛЬ ИНСТРУМЕНТОВ-->
+                                   <div class="span4">
+                                        <a class="btn" href="/csp/vacancy/index.html#/admin/vacancies" title="Вернуться к списку"><i class="icon-list"/></a>
+                                        <a class="btn" href="/csp/vacancy/index.html#/vacancy/{{vacID}}" target="_blank" title="Предпросмотр"><i class="icon-eye-open"/></a>
+                                        <button onclick="uploadFile('Vacancy','{{vacID}}','true')" class="btn" title="Обновить логотип"><i class="icon-picture"/></button>
+                                        <input class="btn btn-success" type="submit" value="Сохранить" title="Сохранить изменения"/>
+                                        <a class="btn btn-info" type="button" value="Удалить" title="Удалить" ng-click="deletevacancy(vacancy[0].IDVac);"><i class="icon-remove"/></a>
+                                   </div>
+                                <!--/ПАНЕЛЬ ИНСТРУМЕНТОВ-->
+
+                                    <div class="span3 pull-right ">
+                                        <span class="label label-info" title="дата регистрации">{{vacancy[0].RegDate}}</span>
+                                    </div>
+
+                                   <div class="span2 pull-right">
+                                       <i class=" icon-eye-open" title="колличество просмотров"></i>
+                                       <span  title="колличество просмотров">{{vacancy[0].CountView}}</span>
+                                       <i class=" icon-envelope" title="колличество откликов"></i>
+                                       <a href="#admin/response/{{vacID}}"  title="колличество откликов">
+                                           {{vacancy[0].CountResp}}
+                                       </a>
+                                   </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="control-group">
+                                <label for="VacancyImg" class="control-label">Логотип вакансии</label>
+
+                            <!--
+                            <div class="span3">
+                                <img align="left" class="img-rounded VacancyImg" src="/csp/vacancy/WEB.Image.cls?id={{vacID}}" />
+                            </div>
+                              -->
+
+                            <!--ЗАГРУЗКА КАРТИНКИ-->
+                            <div class="span3">
+
+                                <div ID="UploadContainer">
+                                    <img ID="Logo" class="img-rounded VacancyImg"  src="{{rootURL}}csp/vacancy/WEB.Image.cls?id={{vacID}}&counter=0" style="max-width: 340px; max-height:110px;">
+                                    <input type="file" name="file" id="FileToUpload" size="1" accept="image/*" onchange="setFile(this)">
+                                </div>
+
+                            </div>
+                            <!--/ЗАГРУЗКА КАРТИНКИ-->
+
+
+                           <!--
+                            <input name="ImageSrc" value="">
+                             <div class="controls">http://cache-vacancies.intersystems.ru/csp/vacancy/WEB.Image.cls?id={{vacID}}</div> <br>
+                            вставьте эту картинку в любой проект -->
+                        </div>
+
+                            <div class="control-group">
+                                <label for="Company" class="control-label"> Компания</label>
+
+                                <!--
+                                 <div class="controls"><input type="text" ng-model="vacancy[0].CompanyName"/></div>
+
+                                 <div class="controls">
+                                     <select name="compID" ng-model="vacancy[0].compID">
+
+                                         <option  value=18>Test</option>
+                                         <option ng-repeat="companiess in companies" value={{companies[$index].ID}}>{{companies[$index].Name}}</option>
+                                     </select>
+                                 </div>
+                                      -->
+
+                                <div class="controls">
+                                    <select ng-model="vacancy[0].compID" ng-options="c.ID as c.Name for c in companies" class="input-xxlarge"> </select>
+                                </div>
+
+                            </div>
+
 
                         <div class="control-group">
                             <label for="VacancyName" class="control-label">Должность</label>
-                            <div class="controls"><input type="text" ng-model="vacancy[0].VacancyName"/></div>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].VacancyName" class="input-xxlarge"/></div>
                         </div>
 
                         <div class="control-group">
                             <label for="Skills" class="control-label">Требуемые умения</label>
-                            <div class="controls"><input type="text" ng-model="vacancy[0].Skills"/></div>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].Skills"  class="input-xxlarge"/></div>
                         </div>
 
                         <div class="control-group">
                             <label for="VacancyTypes" class="control-label">Тип занятости</label>
-                            <div class="controls"><input type="text" ng-model="vacancy[0].VacancyType"/></div>
+
+
+                            <div class="controls">
+                                <select name="VacancyType" ng-model="vacancy[0].VacancyType">
+                                    <option value="полная занятость">полная занятость</option>
+                                    <option value="частичная занятость">частичная занятость</option>
+                                    <option value="контракт">контракт</option>
+                                    <option value="фриланс">фриланс</option>
+                                </select>
+                            </div>
+
+
                         </div>
 
                         <div class="control-group">
                             <label for="EduLevel" class="control-label">Требуемое образование</label>
                             <div class="controls">
                                 <select name="EduLevel" ng-model="vacancy[0].EduLevel">
+                                <option value=""></option>
                                 <option value="Среднее">Среднее</option>
                                 <option value="Неоконченное высшее">Неоконченное высшее</option>
                                 <option value="Высшее - бакалавр">Высшее - бакалавр</option>
@@ -54,19 +138,20 @@
                         </div>
 
                         <div class="control-group">
-                            <label for="Institution" class="control-label">Учебное зеведение</label>
-                            <div class="controls"><input type="text" ng-model="vacancy[0].Institution"/></div>
+                            <label for="Institution" class="control-label" >Учебное заведение</label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].Institution"  class="input-large"/></div>
                         </div>
 
 
-                        <div class="control-group">
-                            <label for="StartSalary" class="control-label">Начальная зарплата</label>
-                            <div class="controls"><input type="text" ng-model="vacancy[0].StartSalary"/></div>
-                        </div>
+                            <div class="control-group">
+                                <label for="Curency" class="control-label">Валюта:</label>
+                                <div class="controls"><input type="text" ng-model="vacancy[0].VacancyCurrency"/></div>
+                            </div>
 
                         <div class="control-group">
-                            <label for="EndSalary" class="control-label">Конечная зарплата</label>
-                            <div class="controls"><input type="text" ng-model="vacancy[0].EndSalary"/></div>
+                            <label for="StartSalary" class="control-label">Зарплата от </label>
+                            <div class="controls"><input type="text" ng-model="vacancy[0].StartSalary" class="input-small"/>
+                            До <input type="text" ng-model="vacancy[0].EndSalary" class="input-small"/></div>
                         </div>
 
                         <div class="control-group">
@@ -77,51 +162,41 @@
 
                         <div class="control-group">
                             <label for="Links_URL" class="control-label">Ссылки на размещённые ресурсы</label>
-                            <div class="controls"><input type="text" ng-model="vacancy[0].Links_URL"/></div>
-                        </div>
+                            <div class="controls well">
 
-                        <div class="control-group">
-                            <label for="Company" class="control-label"> Компания</label>
+                                <li ng-repeat="link in links">
+                                    <p> <input type="text" ng-model="links[$index].URL" placeholder="URL" class="input-xlarge" required/>
+                                        <input type="text" ng-model="links[$index].URLName" placeholder="Название" class="input-medium" required/>
+                                        <a href ng-click=" links.splice($index, 1)" class="btn"><i class="icon-remove-sign"/></a></p>
+                                </li>
 
-                           <!--
-                            <div class="controls"><input type="text" ng-model="vacancy[0].CompanyName"/></div>
-
-                            <div class="controls">
-                                <select name="compID" ng-model="vacancy[0].compID">
-
-                                    <option  value=18>Test</option>
-                                    <option ng-repeat="companiess in companies" value={{companies[$index].ID}}>{{companies[$index].Name}}</option>
-                                </select>
+                                <a href ng-click=" links.push([{}])" class="btn"><i class="icon-plus-sign"/></a>
                             </div>
-                                 -->
-
-                            <div class="controls">
-                                <select ng-model="vacancy[0].compID" ng-options="c.ID as c.Name for c in companies" > </select>
-                            </div>
-
                         </div>
 
                         <div class="control-group">
                             <label for="MainInfo" class="control-label">Информация</label>
-                            <div class="controls"><textarea name="MainInfo" rows="10" cols="45" ng-model="vacancy[0].MainInfo" class="input-xlarge"></textarea></div>
+                            <div class="controls"><textarea ui-tinymce="{theme:'modern', language: 'ru',
+                     plugins: ['advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker',
+                               'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                               'table contextmenu directionality emoticons template textcolor paste fullpage textcolor'],
+                               toolbar_items_size: 'small'
+                              }" name="MainInfo" rows="10" cols="45" ng-model="vacancy[0].MainInfo" class="input-xlarge"></textarea></div>
                         </div>
 
+
                         <div class="control-group">
-                            <label for="AddInfo" class="control-label">Дополнительная информация</label>
+                            <label for="AddInfo" class="control-label">Описания для соц. сетей</label>
                             <div class="controls"><textarea name="AddInfo" rows="10" cols="45" ng-model="vacancy[0].AddInfo" class="input-xlarge"></textarea></div>
                         </div>
 
 
-                        <div class="form-actions">
-                            <input type="submit" value="Сохранить"/>
-                            <input type="button" value="Удалить" ng-click="deletevacancy({{ vacancyid }});"/>
-                        </div>
+
+
                         </form>
                     </div>
-</div>
-</V77>
 
-<font size='1px'><br>Дата регистрации {{vacancy[0].RegDate}}</font>
+
 
 </li>
 </ul>
@@ -130,11 +205,13 @@
 </div>
 
 
+
 <div id="footer">
     <div class=""></div>
 
 </div>
 
 </div>
+
 ]]></CSP>
 </Export>

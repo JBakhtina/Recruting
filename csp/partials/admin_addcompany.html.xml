@@ -1,31 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/admin_addcompany.html" application="/csp/vacancy/"><![CDATA[
-<ul class="nav nav-tabs">
-    <li><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
-    <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
-    <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
-    <li class="active"><a href="#admin/addcompany" data-toggle="tab"><b>Добавить компанию</b></a></li>
-    <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li>
-</ul>
-{{ alertzone }}
-
-<form  name="NewCompany" ng-model="comp"  ng-submit="newCompany(comp)">
-
-    Название компании   <input type="text" ng-model="comp.CompanyName"/><br>
-    Страна              <input type="text" ng-model="comp.Country"/><br>
-    Край/область        <input type="text" ng-model="comp.State"/><br>
-    Город 				<input type="text" ng-model="comp.City"/><br>
-    Улица 				<input type="text" ng-model="comp.Street"/><br>
-    Строение			<input type="text" ng-model="comp.Building"/><br>
-    Квартира 			<input type="text" ng-model="comp.Apartament"/><br>
-    E-mail 				<input type="text" ng-model="comp.Email"/><br>
-    Телефон 			<input type="text" ng-model="comp.Telephone"/><br>
-    URL 				<input type="text" ng-model="comp.URL"/><br>
-    <input type="submit" value="Сохранить"/>
-
-</form>
+<div ng-include="'partials/tab_menu.html'" ng-init="comp_add_active = 'active'" xmlns="http://www.w3.org/1999/html"></div>
 
 
+
+<div  class="row">
+    <div class="span12">
+        <div class="well">
+            <form class="form-horizontal"  name="NewCompany" ng-model="comp"  ng-submit="newCompany(comp)">
+
+                <div class="row">
+                    <div class="control-group span6">
+                        <label for="CompanyName" class="control-label" >Название компании:</label>
+                        <div class="controls"><input type="text" ng-model="comp.CompanyName"/></div>
+                    </div>
+
+            <!--ЗАГРУЗКА КАРТИНКИ-->
+                 <!--   <div class="span5 row pull-right">
+
+                        <div ID="UploadContainer" class="span4">
+                            <img ID="Logo" src="img\comp1.png" style="padding-top:10px">
+                            <input type="file" name="file" id="FileToUpload" size="1" accept="image/*" onchange="setFile(this)">
+                        </div>
+                        <div class="span1" style="vertical-align: middle">
+                            <button onclick="uploadFile('Company','1')" class="btn btn-info"><i class="icon-download"/></button>
+                        </div>
+                    </div>  -->
+            <!--/ЗАГРУЗКА КАРТИНКИ-->
+                </div>
+
+                <div class="control-group">
+                    <label for="IsModerated" class="control-label" >Модерируемость:</label>
+                    <div class="controls"><input type="checkbox" ng-model="comp.IsModerated"  ng-true-value="1" ng-false-value="0" ></div>
+                </div>
+
+
+                <div class="control-group">
+                    <label for="Country" class="control-label" >Страна:</label>
+                    <div class="controls"><input type="text" ng-model="comp.Country"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="State" class="control-label" >Край/область:</label>
+                    <div class="controls"><input type="text" ng-model="comp.State"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="City" class="control-label" >Город:</label>
+                    <div class="controls"><input type="text" ng-model="comp.City"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="Street" class="control-label" >Улица:</label>
+                    <div class="controls"><input type="text" ng-model="comp.Street"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="Building" class="control-label" >Строение:</label>
+                    <div class="controls"><input type="text" ng-model="comp.Building"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="Apartament" class="control-label">Квартира:</label>
+                    <div class="controls"><input type="text" ng-model="comp.Apartament"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="Email" class="control-label">E-mail:</label>
+                    <div class="controls"><input type="text" ng-model="comp.Email"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="Telephone" class="control-label">Телефон:</label>
+                    <div class="controls"><input type="text" ng-model="comp.Telephone"/></div>
+                </div>
+                <div class="control-group">
+                    <label for="Curency" class="control-label">Валюта:</label>
+                    <div class="controls"><input type="text" value="руб." ng-model="comp.CompanyCurrency"  /></div>
+                </div>
+                <div class="control-group">
+                    <label for="URL" class="control-label">URL:</label>
+                    <div class="controls"><input type="text" ng-model="comp.URL"/></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="CompMainInfo" class="control-label">О компании:</label>
+                    <div class="controls"><textarea ui-tinymce="{theme:'modern', language: 'ru',
+             plugins: ['advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker',
+                       'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                       'table contextmenu directionality emoticons template textcolor paste fullpage textcolor'],
+                       toolbar_items_size: 'small'
+                      }"
+
+                                                    name="MainInfo" rows="10" cols="45" ng-model="comp.CompMainInfo" class="input-xlarge"></textarea></div>
+                </div>
+
+
+                <!--
+
+                        <input type="file" ng-model-instant id="fileToUpload"  ACCEPT="image/*" onchange="angular.element(this).scope().setFile(this)" />
+                   -->
+
+                    <div class="form-actions">
+                        <input type="submit" value="Сохранить"/>
+
+                    </div>
+
+                </form>
+         </div>
+     </div>
+</div>
+
+
+<!--             Загрузчик файлов   -->
+<script language = "javascript" src="js/uploader.js"></script>
 ]]></CSP>
 </Export>

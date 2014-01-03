@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/vacancies.html" application="/csp/vacancy/"><![CDATA[
-<div ng-include src="inc_path"></div>
+<!--<div ng-include src="inc_path"></div> -->
 <!---ВЫВОД ВАКАНСИЙ--->
 <div ID="vacanciesShow" >
-
+    {{Conf}}
     <!---ФИЛЬТР---> 
     <div class="row"> 
         <div class="span10">
@@ -17,11 +17,25 @@
             <!--Фильтр по команиям-->
 
                 <select ng-model="filterCompany">
-                    <option ><small class="muted"></small></option>
+                    <option value="" ng-selected="true">--Компания</option>
                     <option  ng-repeat="company in companies" value="{{company.Name}}">{{company.Name}}</option>
                 </select>
+
+
+            <!--Фильтр по типам занятости-->
+            <select ng-model="filterType" >
+                <option value="" ng-selected="true">--Тип занятости</option>
+                <option value="полная занятость">полная занятость</option>
+                <option value="частичная занятость">частичная занятость</option>
+                <option value="контракт">контракт</option>
+                <option value="фриланс">фриланс</option>
+            </select>
  
         </div>
+
+            <div class="btn-group pull-right" >
+                <a class="" href="/v/json/rss/"><img src='img/rss.png'></a>
+            </div>
 
     </div>
     <!---/ФИЛЬТР---->
@@ -30,21 +44,46 @@
         <div class="span9">
             <div class="well" style="padding:1px">
 
-                <ul class='nav nav-pills nav-stacked'  >
-                    <li ng-repeat="vacancy in vacancies | filter:filterVacancy | filter:filterCompany ">
-                            <a  class='text-info' href="#{{ isAdminStr }}vacancy/{{vacancy.IDVac}}">
-                            <div class="row">
+                <ul class='nav nav-pills nav-stacked' >
+                    <li ng-repeat="vacancy in vacancies | filter:filterVacancy | filter:filterCompany | filter:filterType ">
+                            <a  class='text-info' href="#/vacancy/{{vacancy.IDVac}}">
+                            <div class="row" >
 
-                                <div class="span3">
-                                    <i class="icon-hand-right"></i>&nbsp
+                                <!--Скрытый костыль-->
+                                <input type="hidden" value="{{vacancy.Skills}}">
+                                <input type="hidden" value="{{vacancy.EduLevel}}">
+                                <input type="hidden" value="{{vacancy.Links}}">
+                                <input type="hidden" value="{{vacancy.Skills}}">
+                                <input type="hidden" value="{{vacancy.MainInfo}}">
+                                <input type="hidden" value="{{vacancy.AddInfo}}">
+                                <!--/Скрытый костыль-->
+
+                                <div class="span1">
+                                   <!-- <img class="img-rounded VacancyImg" src="/csp/vacancy/WEB.Image.cls?id={{vacancy.IDVac}}&counter=0" width="40" height="40"/>  -->
+                                    <img class="img-rounded VacancyImg" src="{{rootURL}}csp/vacancy/WEB.Image.cls?id={{vacancy.IDVac}}" width="40" height="40"/>
+                                </div>
+
+                                <div class="span4">
                                     <input type="hidden" ng-model="vacID" value="{{vacancy.IDVac}}" />
                                     <b>{{vacancy.VacancyName}}</b></br>
                                     <div class="text-success">{{vacancy.CompanyName}}</div>
                                 </div>
-                                <div class="span2"><span class="label label-info">{{vacancy.VacancyType}}</span></div>
-                                <div class="span2 text-info"><i class="icon-globe"></i>&nbsp{{vacancy.CityVacancy}}</div>
-                                <!--<div class="span2">{{vacancy.StartSalary}}-{{vacancy.EndSalary}}</div>-->
-                                <div class="span1"><span class="label label pull-right">{{vacancy.RegDate}}</span></div>
+
+                                <div class="span1">
+                                    <div ng-bind-html-unsafe="Color(vacancy.VacancyType)"></div>
+                                </div>
+
+                                <div class="span2 text-info pull-right ">
+                                    <div> <i class="icon-globe"></i>&nbsp {{vacancy.CityVacancy}}</div>
+                                    <div><span class="muted ">Просмотры: {{vacancy.CountView}} </span> </div>
+
+                                </div>
+
+                                <!-- <div class="span2">{{vacancy.StartSalary}}-{{vacancy.EndSalary}}</div> -->
+
+
+                                <!-- -->
+
                             </div>
 
                         </a>
@@ -55,33 +94,40 @@
             </div>
         </div>
         <!---/ВЫВОД ВАКАНСИЙ--->
+
         <!---БОКОВАЯ ПАНЕЛЬ--->
-        <div class="span3" >
-            <div class="well">
+        <div class="span3">
+            <div class="well" >
                 <!--<a class="btn btn-success" href="#" style="width:150px;"><i class="icon-ok"></i>&nbsp&nbsp<small>Разместить вакансию</small></a></p> -->
 
 
-                <h3 class="text-warning">Работодатели</h3>
+               <!-- <h3 class="text-warning">Работодатели</h3>  -->
 
                 <ol class='nav nav-pills'>
 
-                    <li ng-repeat="cv in comvac" >
+                    <li ng-repeat="cv in comvac" style="margin-left:-8px; margin-bottom: 10px; ">
 
-                        <a href="#{{isAdminStr}}company/{{cv.compID}}" class="text-succes span2" style="margin:0px; ">{{cv.CVName}}
-                            <span class="span1 badge badge-warning pull-right">{{cv.VCOUNT}}</span></a>
+                            <div>
+                                <a href="#/company/{{cv.compID}}" class="text-succes span2">
+                                   <img ID="Logo" class="img-polaroid"  src="{{rootURL}}csp/vacancy/WEB.CompanyImage.cls?id={{cv.compID}}" >
+                                </a>
+                            </div>
+                            <div class="pull-right">
+                                <span class="muted">вакансий: {{cv.VCOUNT}}</span>
+                            </div>
+
 
                     </li>
 
                 </ol>
 
-                </hr> <a class="" href="/v/json/rss/"><img src='img\rss.png'></a>
-                <div class="btn-group pull-left" >
+                </hr>
 
-                </div>
             </div>
         </div>
-        <!---/БОКОВАЯ ПАНЕЛЬ--->
 
+        <!---/БОКОВАЯ ПАНЕЛЬ--->
+        <!--
         <PAGINATOR>
             <div class="pull-left">
                 Показано {{Math.min(paginator.count,vacancies.length)}} записей из {{vacancies.length}}
@@ -96,5 +142,5 @@
             <div class="clear"></div>
 
         </PAGINATOR>
-]]></CSP>
+                -->]]></CSP>
 </Export>

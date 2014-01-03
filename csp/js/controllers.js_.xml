@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="js/controllers.js_" application="/csp/vacancy/"><![CDATA[
+'use strict';
+  
+   
+function vacancyCtrl($scope, $http,  $cookies){
+    // делаем пагинатор  из примера на хабре
+
+//TODO: возможно пагинатору необходимо использовать фабрику и фильтр - сделаем позже
+    /*
+
+    $scope.Math = Math;
+    $scope.items = vacancies.query(function(data){
+        $scope.paginator.setPages($scope.items.length);
+        var i = 0;
+        angular.forEach(data, function(v,k) { data[k]._id = i++; });
+    });
+
+    $scope.paginator = {
+        count: 10,
+        page:  1,
+        pages: 1,
+        setPages: function(itemsCount){ this.pages = Math.ceil(itemsCount/this.count); }
+    };
+    $scope.$watch('items',function(newValue, oldValue) {
+        if (newValue!==oldValue) $scope.paginator.setPages($scope.items.length);
+    });
+    $scope.$watch('paginator.page',function(page,old) {
+        var newPage = page;
+        if (page<1) newPage = 1;
+        if (page>$scope.paginator.pages) newPage = old;
+        if (typeof(newPage)=='string') newPage = +newPage.replace(/[^0-9]/,'');
+        if (page!==newPage) $scope.paginator.page = newPage;
+        angular.forEach($scope.items, function(v,k) { $scope.items[k].selected = false; });
+    });
+  */
+    // функция получения вакансий
+    $scope.getVacancies=function(){
+        $http.get("/v/json/vacancies").success(function(data){
+            $scope.vacancies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+
+    // функция получения компаний
+    $scope.getCompanies=function(){
+        $http.get("/v/json/companies").success(function(data){
+            $scope.companies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+    // функция получения компаний с кол-вом вакансий
+    $scope.getCompaniesVacancies=function(){
+        $http.get("/v/json/comvac").success(function(data){
+            $scope.comvac=data.children;
+        }).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+
+    }
+
+    $scope.FilteredByCompany = function(){
+        alert($scope.filterCompany);
+    }
+
+    $scope.getVacancies();
+    $scope.getCompanies();
+    $scope.getCompaniesVacancies();
+
+    if($cookies.yoyo == "yes"){
+        $scope.inc_path="partials/tab_menu.html";
+        $scope.isAdminStr="/admin/";
+    }
+    else
+    {
+        $scope.inc_path="";
+        $scope.isAdminStr="";
+    }
+
+
+
+}
+  
+function vacancyShowCtrl($scope,$http, $routeParams){
+
+    var vacID = $routeParams.vacID;
+
+    $scope.test =function(){
+
+        alert($scope.img);
+    }
+
+	   // функция показа вакансии
+       $scope.showVacancy = function(vacID){
+	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
+			try	{
+
+				// передаем массив полученных данных в функцию формирования текста
+				// выведем результат в соотвествующие поля
+				var vac = data.children
+				$scope.txtVacancyName = vac[0]["VacancyName"]
+				$scope.txtVacancyCompany = vac[0]["CompanyName"]
+				$scope.txtVacancyCity = vac[0]["CityVacancy"]
+				$scope.txtRegDate = vac[0]["RegDate"]
+				$scope.txtEduLevel = vac[0]["EduLevel"]
+				$scope.txtStartSalary = vac[0]["StartSalary"]
+				$scope.txtEndSalary = vac[0]["EndSalary"]
+				$scope.txtAddInfo = vac[0]["AddInfo"]
+				$scope.txtMainInfo = vac[0]["MainInfo"]
+                $scope.txtCompMainInfo = vac[0]["CompMainInfo"]
+                $scope.txtLinks = vac[0]["Links_URL"]
+                       
+                // показываем слой с инфо о вакансии
+                $scope.showV=true;
+                // скрываем слой с формой ввода отклика
+                $scope.showR=false;
+
+			} catch(err){	
+			}
+			}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+	   }
+
+    $scope.showVacancy(vacID);
+    $scope.vacID = vacID;
+
+	   // добавляем новый отзыв о вакансии
+	   $scope.newResponse = function (compid, v){
+		    $http.post("/v/json/vacancyresp/"+compid,v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления отзыва :( ["+data+"]"; });
+
+		    }
+
+      // функция показа/скрытия слоёв с инфо о вакансии и с формой ввода отзыва
+       $scope.showResponseForm = function(sh){
+           if(sh){
+               $scope.showR = true;
+               $scope.showV = false;
+           } else {
+               $scope.showV = true;
+               $scope.showR = false;
+           }
+       }
+    
+           // картинка  
+    	   $scope.newImage= function (compid, v){
+		    $http.post("/v/json/vimage/",compid,v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления  :( ["+data+"]"; });
+
+		    }
+
+    $scope.showV = true;
+    $scope.showR = false;
+		    		    
+}
+
+function companyCtrl($scope, $http, $routeParams){
+    // получим ИД компании
+    var compID = $routeParams.compID;
+
+    // получение  компании по ИД
+    $scope.GetCompany=function(compID){
+        $http.get("/v/json/company/"+compID).success(function(data){
+
+            $scope.company=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
+    }
+
+    // функция получения вакансий по ИД компании
+    $scope.getVacanciesByCompID=function(compID){
+        $http.get("/v/json/vacancies/"+compID).success(function(data){
+            $scope.vacancies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+    $scope.getVacanciesByCompID(compID);
+    $scope.GetCompany(compID);
+}
+
+function CompanyShow($scope,$http,$routeParams){
+            var compid = $routeParams.compID;
+            $scope.companyid  = $routeParams.compID;
+		    // получение всех компаний
+		    $scope.GetAllCompanys=function(){
+       		$http.get("/v/json/getallcompanysr/").success(function(data){
+
+            $scope.allcompanys=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
+    		}
+
+		    // получение  компании
+		    $scope.GetSystemCompany=function(compid){
+
+       		$http.get("/v/json/getcompanyr/"+compid).success(function(data){
+
+            $scope.company=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
+    		}
+
+    	   // добавляем новой компании
+	   		$scope.newCompany = function (v){
+		    $http.put("/v/json/createcompanyr/",v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;
+                    document.location.href = "#admin/companies/";
+                })
+
+                .error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+
+		     // Обновление компании
+	   		$scope.updateCompany = function (compid,v){
+		    $http.post("/v/json/companyupdater/"+compid,v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;
+                    document.location.href = "#admin/companies/";
+                }).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+
+
+		    // удаление компании
+	    	$scope.deleteCompany = function (compid){
+                $scope.alertzone="AAA"+compid;
+		    $http.delete("/v/json/delcompany/"+compid)
+		    .success(function(data){
+			    //document.location.href = "#admin/companies/";
+			    }).error(function(data,status){
+			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
+		    }
+
+
+    $scope.GetAllCompanys();
+    //TODO: фейк - надо исправить инит
+    $scope.GetSystemCompany($routeParams.compID);
+    $scope.alertzone="ZZZ";
+}
+
+// мы тя грохнем
+function adminVacanciesCtrl ($scope,$http,$routeParams){
+    // получаем ИД вакансии
+    var vacID = $routeParams.vacID;
+    $scope.vacancyid = $routeParams.vacID;
+
+    $scope.getVacancies=function(){
+        $http.get("/v/json/vacanciesold").success(function(data){
+            $scope.vacancies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Error upload vacancy list :( ["+data+"]"; });
+    }
+    $scope.getCompanies=function(){
+        $http.get("/v/json/companies").success(function(data){
+            $scope.companies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Error upload company list :( ["+data+"]"; });
+    }
+    $scope.getCompany=function(compid){
+        $http.get("/v/json/company/"+compid).success(function(data){
+            $scope.company=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Error upload one company :( ["+data+"]"; });
+    }
+
+    $scope.getVacancy=function(vacID){
+        $http.get("/v/json/vacancy/"+vacID).success(function(data){
+            $scope.vacancy=data.children;
+
+        }).error(function(data,status){
+                $scope.alertzone="["+status+"] Error upload one vacancy :( ["+data+"]"; });
+    }
+
+    // вызовем функцию получения вакансии
+    $scope.getVacancies();
+
+    // добавляем обновление ВЫЗЫВАЕМ ЕЁ ТУТ
+    $scope.update = function (vacID, v){
+        //var url = "/v/json/v/"+compid[0].ID;
+        $http.post("/v/json/v/"+vacID,v)
+            .success(function(data){$scope.alertzone="Update Ok!"+compid[0].Name;
+             document.location.href = "#admin/vacancies/";
+            }).error(function(data,status){
+                $scope.alertzone="["+status+"]Error update vacancy data:( ["+data+"]"; });
+        //$scope.alert2="/v/json/vacancy/"+vacancy[0].ID;
+    }
+
+    // удаление вакансии
+    $scope.deletevacancy = function (vacID){
+        $http.delete("/v/json/vacancy/"+vacID)
+            .success(function(data){
+                document.location.href = "#admin/vacancies/";
+            }).error(function(data,status){
+                $scope.alertzone="["+status+"] Error delete vacancy :( ["+data+"]"; });
+    }
+
+    $scope.createvacancy = function (v){
+        // что б кашэ был в курсе что мы ему предлагаем
+        // company. class="Data.Company";
+        $http.post("/v/json/vacancy/",v)
+            .success(function(data){ $scope.alertzone="V_Company:"+v.Company;
+             document.location.href = "#admin/vacancies/";
+            }).error(function(data,status){
+                $scope.alertzone="["+status+"] Error creating new vacancy :( ["+data+"]"; });
+    }
+
+    $scope.getCompanies();
+    $scope.getVacancy(vacID);
+
+}
+
+function SystemUserShow($scope,$http,$routeParams){
+    var UID = $routeParams.UID;
+    $scope.userid = $routeParams.UID;
+
+		    // получение всех пользователей
+		    $scope.GetAllSystemUsers=function(){
+       		$http.get("/v/json/getallusers/").success(function(data){
+
+            $scope.allusers=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
+    		}
+
+		    // получение  пользователя
+		    $scope.GetSystemUser=function(compid){
+       		$http.get("/v/json/getuser/"+compid).success(function(data){
+
+            $scope.user=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
+    		}
+
+    	   // добавляем нового пользователя
+	   		$scope.newuser = function (v){
+		    $http.put("/v/json/createuser/",v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;
+                    document.location.href = "#admin/users/";
+                }).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+
+		     // Обновление пользователя
+	   		$scope.updateuser = function (compid,v){
+		    $http.post("/v/json/updateteuser/"+compid,v)
+		    .success(function(data){
+                    $scope.alertzone="FirstName:"+v.FirstName;
+                    document.location.href = "#admin/users/";
+                }).error(function(data,status){
+			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+
+		    }
+
+		    // удаление пользователя
+	    	$scope.deleteuser = function (compid){
+		    $http.delete("/v/json/deleteuser/"+compid)
+		    .success(function(data){
+                    $scope.alertzone="deleted";
+                    document.location.href = "#admin/users/";
+			    }).error(function(data,status){
+			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
+		    }
+
+
+    $scope.GetAllSystemUsers();
+    //TODO: убить когда инит станет отрабатывать:
+    $scope.GetSystemUser(UID);
+}
+
+// TODO: почистить серые контролы
+function authCtrl($scope, $http, $cookies){
+
+
+	// функция аутентификации - считываем данные из БД - возвращаем результат
+    $scope.authVerify=function(){
+        $http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword)
+            .success(function(data){
+            try{
+                // пробуем считать результат
+                var fName =  data.children[0]["FirstName"];
+                $scope.fname =fName;
+                $scope.showAF = false;
+                $scope.showAG = true;
+
+                // очистим поля ввода
+                $scope.authLogin = "";
+                $scope.authPassword = "";
+            } catch(err){
+                // если не удалось считать - значит ошибка входа
+                if($scope.name == "")
+                {
+                    alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
+                    $scope.authLogin = "";
+                    $scope.authPassword = "";
+                }
+
+            }
+            })
+            .error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
+        //document.location.href = "";
+    }
+
+    // функция показа/скрытия слоёв с формой аутентификации / формой приветствия
+    $scope.showAuthForm = function(sh){
+
+        if(sh){
+            $scope.showAF = true;
+            $scope.showAG = false;
+        } else {
+            $scope.showAF = false;
+            $scope.showAG = true;
+        }
+    }
+
+    // функция разлогинивания
+    $scope.logout = function(){
+
+        $cookies["login"] = "";
+        $scope.cookiesVerify();
+        window.location.href = "";     // нужно будет переделать на $location
+    }
+
+    // функция проверки кукисов
+    $scope.cookiesVerify = function(){
+        var login = $cookies.login;
+        if(login == null || login==""){
+            $scope.showAuthForm(true);
+            $cookies.yoyo = "no";
+        }
+        else {
+            $scope.showAuthForm(false);
+            $scope.fname = login;
+            $cookies.yoyo = "yes";
+        }
+
+    }
+
+    $scope.cookiesVerify();
+
+
+
+}
+
+function vrShow($scope, $http, $routeParams){
+
+    var vacID = $routeParams.vacID;
+
+    // $scope.alertzone="QQQ";
+
+    $scope.RM = function (vrid){
+        //$scope.alertzone="test" + vrid;
+        $http.post("/v/json/redirectmail/"+vrid)
+            .success(function(data){
+              // document.location.href = "#admin/companies/";
+            }).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка отправления почты :( ["+data+"]";
+            });
+
+    }
+        // получение  отзывов
+    $scope.showVacancyResp = function(vacID){
+            $http.get("/v/json/getvacancyresp/"+vacID).success(function(data){
+                $scope.vacresp=data.children;}).error(function(data,status){
+                    $scope.alertzone="["+status+"] Ошибка загрузки отзывов :( ["+data+"]"; });
+        }
+
+    $scope.showVacancyResp(vacID);
+    $scope.vacID = vacID;
+    }
+
+// вывод всех пользователей
+function adminUsersCtrl ($scope, $http, $routeParams){
+
+}
+// работа с Пользователем
+function adminUserCtrl ($scope, $http, $routeParams){
+
+}
+// вывод всех компаний
+function adminCompaniesCtrl ($scope, $http, $routeParams){
+
+}
+// работа с компанией
+function adminCompanyCtrl ($scope, $http, $routeParams){
+
+}
+
+// работа с Вакансией
+function adminVacancyCtrl ($scope, $http, $routeParams){
+
+}
+
+]]></CSP>
+</Export>

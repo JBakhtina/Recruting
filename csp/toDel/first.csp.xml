@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="toDel/first.CSP" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+
+<html ng-app>
+<head>
+	<title>Пользователи</title>
+	
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+
+
+
+<body ng-controller="SystemUserShow">
+<h1>
+Добавление/Удаление/Изменение Пользователей
+</h1>
+
+
+
+		<form  name="SystemUser" ng-model="user"  ng-submit="updateuser(#($Get(%request.Data("id",1),1))#,user[0])">
+  		
+  		<span ng-init="GetSystemUser(#($Get(%request.Data("id",1),1))#)"></span>
+		
+		Имя <input type="text" ng-model="user[0].FirstName"/><br>
+		Фамилия<input type="text" ng-model="user[0].LastName"/><br>
+		Пол 		<select name="Sex" ng-model="user[0].Sex"/>
+  		<option value="М">М</option>
+  		<option value="Ж">Ж</option>
+		</select><br>
+		Тип пользователя <input type="text" ng-model="user[0].UserType"/><br>
+		Дата рождения <input type="text" ng-model="user[0].DOB"/><br>
+		Страна <input type="text" ng-model="user[0].Country"/><br>
+		Край/область <input type="text" ng-model="user[0].State"/><br>
+		Город <input type="text" ng-model="user[0].City"/><br>
+		Улица <input type="text" ng-model="user[0].Street"/><br>
+		Строение <input type="text" ng-model="user[0].Building"/><br>
+		Квартира <input type="text" ng-model="user[0].Apartament"/><br>
+	    E-mail <input type="text" ng-model="user[0].Email"/><br>
+		Телефон <input type="text" ng-model="user[0].Telephone"/><br>
+		URL <input type="text" ng-model="user[0].URL"/><br>
+		<input type="submit" value="Сохранить"/><br>
+		<input type="button" value="Удалить" ng-click="deleteuser(#($Get(%request.Data("id",1),1))#);"/>
+		</form>
+
+
+
+		<form  name="NewSystemUser" ng-model="u"  ng-submit="newuser(u)">
+  		
+		Имя <input type="text" ng-model="u.FirstName"/><br>
+		Фамилия<input type="text" ng-model="u.LastName"/><br>
+		Пол 
+		
+		<select name="Sex" ng-model="u.Sex"/>
+  		<option value="М">М</option>
+  		<option value="Ж">Ж</option>
+		</select><br>
+		
+		
+		Тип пользователя <input type="text" ng-model="u.UserType"/><br>
+		Дата рождения <input type="text" ng-model="u.DOB"/><br>
+		Страна <input type="text" ng-model="u.Country"/><br>
+		Край/область <input type="text" ng-model="u.State"/><br>
+		Город <input type="text" ng-model="u.City"/><br>
+		Улица <input type="text" ng-model="u.Street"/><br>
+		Строение <input type="text" ng-model="u.Building"/><br>
+		Квартира <input type="text" ng-model="u.Apartament"/><br>
+	    E-mail <input type="text" ng-model="u.Email"/><br>
+		Телефон <input type="text" ng-model="u.Telephone"/><br>
+		URL <input type="text" ng-model="u.URL"/><br>
+		<input type="submit" value="Сохранить"/><br>
+	
+		</form>
+
+
+
+
+
+<script src="../lib/bootstrap.js"></script>
+<script src="../lib/jquery.js"></script>
+<script language = "javascript" src="../lib/angular/angular.js"></script>
+<script language = "javascript" src="../lib/angular/angular-cookies.min.js"></script>
+<script language = "javascript" src="../js/filters.js"></script>
+<script language = "javascript" src="../js/app.js"></script>
+<script language = "javascript" src="../js/controllers.js"></script>
+        
+</body>
+</html>
+]]></CSP>
+</Export>

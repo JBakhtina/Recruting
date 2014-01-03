@@ -2,33 +2,76 @@
 <Export generator="Cache" version="25">
 <CSP name="js/services.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
- 
-angular.module('vacancyServices', ['ngResource'])
-    .factory('vacancies', function($resource){
-       return $resource ('vacancies/:vacId',{}) {
-		   ins: function(text) { 
-			  
-		   }
-	   }
-    };
-});
-
-/* для примера
-angular.module('admin.services', ['ngResource'])
-    .factory('Items', function($resource){
-        return $resource('back/questions/:id/:action', {}, {
-            create: {method:'PUT'},
-            saveData: {method:'POST'},
-            toggle: {method:'GET', params:{action:'toggle'}}
+angular.module('jsonService', ['ngResource']).
+    factory('configProvider', function($resource){
+        return $resource('/av/json/getsettings2/:requestParam',{},{
+            getAll:{method:'GET',params:{requestParam:'all'} },
+            getURL:{method:'GET',params:{requestParam:'url'}},
+            getEmail:{method:'GET',params:{requestParam:'email'}},
+            getEmailCheck:{method:'GET',params:{requestParam:'emailcheck'}},
+            getSMTPServer:{method:'GET',params:{requestParam:'smtpserver'}},
+            getMailPassword:{method:'GET',params:{requestParam:'mailpassword'}},
+            getMailLogin:{method:'GET',params:{requestParam:'maillogin'}},
+            get:{method:'JSONP',params:{}}
         });
+
     })
-    .factory('Data', function($resource){
-        var load = $resource('back/list/:name', {});
-        var loadList = ['answerers','categories'];
-        var data = {};
-        for (var i=0; i<loadList.length; i++)
-            data[loadList[i]] = load.get({name:loadList[i]});
-        return function(key){ return data[key]; };
- });
-*/]]></CSP>
+    .factory('httpProvider', function($http){
+         function res (){
+             $http.get("/av/json/getsettings2/url")
+                 .success(function(data){
+                    // alert(data)
+                 })
+                 .error(function(data,status){});
+         }
+
+          return res;
+    })
+    .factory('configProviderNA', function($resource){
+        return $resource('/v/json/getsettingsNA',{},{
+            getURL:{method:'GET'}
+        });
+    });
+
+
+
+
+
+
+
+
+/*
+angular.module('fileUploader',[]).
+    service('fuSetFile', SetFile);
+
+
+
+function SetFile(){
+   var element = document.getElementById("FileToUpload");
+
+   if (element != null) {
+        // получим первый файл из массива
+        usrImage = element.files[0];
+        console.log('file:',usrImage);
+
+        // считыватель
+        var reader = new FileReader;
+        reader.readAsDataURL(usrImage);
+
+        // установим место загрузки - элемент документа типа img
+        var place = document.getElementById("Logo");
+
+        // Как только картинка загрузится
+        reader.onload = function(e) {
+
+            // установим картинку в объект img
+            place.src = e.target.result;
+
+            console.log('width:',place.width);
+            console.log('width:',place.height);
+
+            return "Test";
+        }
+   }
+}   */]]></CSP>
 </Export>

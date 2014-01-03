@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="TestImage.CSP" application="/csp/vacancy/"><![CDATA[
+<csp:class description="  ">
+<html>
+
+<head>
+</head>
+
+<body bgcolor=#CCCCFF>
+
+
+
+<form action="/av/json/vimage/" enctype="multipart/form-data" method=post >
+   
+    файл для загрузки
+    <input name="FileStream" size=30 type=file>
+    <input name="id" type="text">
+    <!-- <input name="Type" type="text" value="Company"> -->
+    
+    <select name="Type">
+  <option value = "Company">Company</option>
+  <option selected value = "Vacancy">Vacancy</option>
+   <option selected value = "Logo">Logo</option>
+  </select>
+
+    <p>
+    <ul><input type=submit value="Загрузить"></ul>
+    <p>
+</form>
+<script language="Cache" runat="Server">
+   //w %request.GetCookie("login",,)
+
+   
+// w %request.
+</script>
+</body>
+</html>]]></CSP>
+</Export>

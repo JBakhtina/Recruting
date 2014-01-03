@@ -109,6 +109,12 @@ User - зарезирвированное в ODBC</Description>
 <Parameter name="MAXLEN" value="1"/>
 </Property>
 
+<Property name="Salt">
+<Description>
+Соль</Description>
+<Type>%String</Type>
+</Property>
+
 <UDLText name="T">
 <Content><![CDATA[
 // все адреса в последствии м. использовать для геопозиционирования
@@ -193,6 +199,9 @@ User - зарезирвированное в ODBC</Description>
 </Value>
 <Value name="14">
 <Value>PassMail</Value>
+</Value>
+<Value name="15">
+<Value>Status</Value>
 </Value>
 </Data>
 <Property name="%%CLASSNAME">

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="test/js/services.js" application="/csp/vacancy/"><![CDATA[
+'use strict';
+
+/* Services */
+
+angular.module('phonecatServices', ['ngResource']).
+    factory('Phone', function($resource){
+      return $resource('phones/:phoneId.json', {}, {
+         query: {method:'GET', params:{phoneId:'phones'}, isArray:true},
+         query2: {method2:'GET', params:{phoneId:'test'}, isArray:true}
+      });
+    });
+
+angular.module('testService',['ngResource']).
+    factory('Conf', function($resource){
+        return $resource('av/json/getsettings',{}, {
+            testQuery: {method:'GET',params:{},isArray:false}
+        });
+    });
+]]></CSP>
+</Export>

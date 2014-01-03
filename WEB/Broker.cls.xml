@@ -24,55 +24,54 @@
 <XData name="UrlMap">
 <Data><![CDATA[
 <Routes>
+
+ 		<!--Авторизация через куки-->
+       <Route Url="/json/authVerifyCookie/:cookie" 	Method="GET" Call="WEB.JSON:AuthVerifyByCookie"/> 
+       
+       
+       
 	   <Route Url="/temp" 					Method="GET" Call="WEB.JSON:DefaultTemplate"/> 
-	   <Route Url="/test" 					Method="GET" Call="WEB.Broker:Test"/> 
+	   
+	   <Route Url="/test/:cookie" 					Method="GET" Call="WEB.JSON:AuthVerifyByCookie"/> 
+	   
 	   <Route Url="/json/vacancies/:isAdm" 	Method="GET" Call="WEB.JSON:GetVacancies"/>
 	   <Route Url="/json/vacanciesByComp/:compid" Method="GET" Call="WEB.JSON:GetVacanciesByCompID"/> 
 	   <Route Url="/json/vacanciesold" 		Method="GET" Call="WEB.JSON:GetVacanciesOld"/> 
 	   <Route Url="/json/vacancy/:compid" 	Method="GET" Call="WEB.JSON:GetVacancy"/> 
-	   <Route Url="/json/vacancyreverse/:vacid" Method="GET" Call="WEB.JSON:VacancyReverse"/>
 	   
-	   <Route Url="/json/users" 			Method="GET" Call="WEB.JSON:GetUsers"/> 
+	   
+	   
+	   
+	   
+	  
 	   <Route Url="/json/company/:compid" 	Method="GET" Call="WEB.JSON:GetCompany"/> 
 	   <Route Url="/json/companies" 		Method="GET" Call="WEB.JSON:GetAllCompanies"/>
 	   <Route Url="/json/comvac" 			Method="GET" Call="WEB.JSON:GetCompaniesVacancies"/>
 	   <Route Url="/json/authVerify/:authLogin/:authPassword" Method="GET" Call="WEB.JSON:AuthVerify"/> 
+	  
+	   <Route Url="/json/LoginOut/:session" 				Method="POST" Call="WEB.JSON:LoginOut"/>  
 	   
-	   <Route Url="/json/v/:compid" 		Method="POST" Call="WEB.JSON:UpdateVacancy"/>
-
 	   <!-- перехват страницы:
 	   Route Url="/json/v/:compid" 			Method="PUT" Call="WEB.TestJSON:OnPage"/-->
 	   <Route Url="/json/candv/:compid" 	Method="GET" Call="WEB.JSON:GetVacancyAndCompany"/> 
 	   <Route Url="/json/forwidget" 	Method="GET" Call="WEB.JSON:GetForWidget"/> 
-	   <Route Url="/json/vacancy/:compid" 	Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
-	   
-	   <Route Url="/json/vacancy/" 			Method="POST" Call="WEB.JSON:CreateVacancy"/>  
-	   
+
 	   <Route Url="/json/rss/" 				Method="GET" Call="WEB.RSS:OnPage"/>
 	   
-	   <Route Url="/json/vimage/" 			Method="POST" Call="WEB.JSON:UpdateImage"/>
-	   
-	   
-	   <Route Url="/json/getallusers/"         Method="GET" Call="WEB.JSON:GetAllSystemUsers"/>
-	   <Route Url="/json/getuser/:compid"      Method="GET" Call="WEB.JSON:GetSystemUser"/>
-	   <Route Url="/json/createuser/"          Method="PUT" Call="WEB.JSON:CreateSystemUsers"/> 
-	   <Route Url="/json/updateteuser/:compid" Method="POST" Call="WEB.JSON:UpdateSystemUsers"/>
-	   <Route Url="/json/deleteuser/:compid"   Method="DELETE" Call="WEB.JSON:DeleteSystemUsers"/>
+
+ 	<Route Url="/json/vacancyresp/:compid" 		 		Method="POST" Call="WEB.JSON:NVR"/>
+	  
 	  
 	   <Route Url="/json/getallcompanysr/" 		  Method="GET" Call="WEB.JSON:getallcompanys"/>
+	  
 	   <Route Url="/json/getcompanyr/:compid" 	  Method="GET" Call="WEB.JSON:companyGet"/>
-	   <Route Url="/json/createcompanyr/" 		  Method="PUT" Call="WEB.JSON:companyCreate"/> 
-	   <Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:Companyupdate"/>
-	   <Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
 	   
-	   <Route Url="/json/vacancyresp/:compid" 		 		Method="POST" Call="WEB.JSON:NVR"/>
-	   <Route Url="/json/getvacancyresp"	 				Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
-	   <Route Url="/json/deletevacancyresp/:vrid"	 		Method="DELETE" Call="WEB.JSON:DeleteVacancyResponse"/>
-	   <Route Url="/json/getvacancyresp/:vacid"	 			Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
-	   <Route Url="/json/getcountvacancyview/:vacid" 		Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
-	   <Route Url="/json/getcountvacancyresponse/:vacid"	Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
-	   <Route Url="/json/redirectmail/:vrid" 				Method="POST" Call="WEB.JSON:ReDirectMail"/>
+
 	 
+	   
+	   <Route Url="/json/getcountvacancyview/:vacid" 		Method="GET" Call="WEB.JSON:GetCountVacancyView"/>
+	  
+	   
 	 
 	 
 	</Routes>
@@ -179,9 +178,16 @@ ClassMethod DispatchRequest(pUrl As %String, pMethod As %String) As %Status
                 If tTarget[":" Set tClass=$Piece(tTarget,":"),tTarget=$Piece(tTarget,":",2)
                 
                 #; Dispatch
+                #; Пробуем сделать свой 
+                w "omg ((("
+                if ##class(WEB.JSON).CookieControl() {
+	                w "oh no ((("
                 Set tSC=$zobjclassmethod(tClass,tTarget,tArgs...)
                 If $$$ISERR(tSC) Do ..Http500(##class(%Exception.StatusException).CreateFromStatus(tSC))
-                
+                }
+                else {
+	                w "Yearr!!!"
+	                }
                 #; Don't want multiple matches
                 Quit
             }

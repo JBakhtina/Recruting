@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="lib/ui-tinymce/.gitignore" application="/csp/vacancy/"><![CDATA[
+bower_components/
+node_modules/]]></CSP>
+</Export>

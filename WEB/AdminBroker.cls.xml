@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="WEB.AdminBroker">
+<Super>%CSP.REST,%CSP.Request</Super>
+<TimeCreated>63076,44631.427955</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Админский Брокер
+
+]]></Content>
+</UDLText>
+
+<XData name="UrlMap">
+<Data><![CDATA[
+<Routes>
+
+
+		<!--Активная/не активнв вакансия -->	
+	<Route Url="/json/vacancyreverse/:vacid" Method="GET" Call="WEB.JSON:VacancyReverse"/>
+	
+		<!--Поднимаем вакансию вверх -->
+	<Route Url="/json/VacancyUp/:vacid" Method="GET" Call="WEB.JSON:VacancyUp"/>
+	
+		<!--Все пользователи ??????????????? -->
+ 	<Route Url="/json/users" 			Method="GET" Call="WEB.JSON:GetUsers"/>
+ 	
+		<!--Обновление вакансии -->
+ 	<Route Url="/json/v/:compid" 		Method="POST" Call="WEB.JSON:UpdateVacancy"/>
+ 	
+ 		<!--Удаление вакансии -->
+ 	<Route Url="/json/vacancy/:compid" 	Method="DELETE" Call="WEB.JSON:DeleteVacancy" />
+ 	
+ 		<!--Создание вакансии -->
+	<Route Url="/json/vacancy/" 			Method="POST" Call="WEB.JSON:CreateVacancy"/> 
+	
+		<!--Загрузка картинок --> 
+ 	<Route Url="/json/vimage/" 			Method="POST" Call="WEB.JSON:UpdateImage"/>
+	<Route Url="/json/loadimg/" 			Method="POST" Call="WEB.JSON:LoadImage"/>
+
+		<!--Все пользователи -->
+ 	<Route Url="/json/getallusers/"         Method="GET" Call="WEB.JSON:GetAllSystemUsers"/>
+ 	
+ 		<!--Конкректный пользователь -->
+	<Route Url="/json/getuser/:compid"      Method="GET" Call="WEB.JSON:GetSystemUser"/>
+	
+		<!--Создаем пользователя -->
+	<Route Url="/json/createuser/"          Method="PUT" Call="WEB.JSON:CreateSystemUsers"/>
+	 
+	 	<!--Обновляем пользователя -->
+	<Route Url="/json/updateteuser/:compid" Method="POST" Call="WEB.JSON:UpdateSystemUsers"/>
+	
+		<!--Удаляем пользователя
+		 -->
+	<Route Url="/json/deleteuser/:compid"   Method="DELETE" Call="WEB.JSON:DeleteSystemUsers"/>
+	  
+ 	<Route Url="/json/createcompanyr/" 		  Method="PUT" Call="WEB.JSON:companyCreate"/> 
+	<Route Url="/json/companyupdater/:compid"  Method="POST" Call="WEB.JSON:Companyupdate"/>
+	<Route Url="/json/delcompany/:compid"      Method="DELETE" Call="WEB.JSON:delCompany"/>
+  
+	<Route Url="/json/getvacancyresp"	 				Method="GET" Call="WEB.JSON:GetVacancyResponse"/>
+	<Route Url="/json/deletevacancyresp/:vrid"	 		Method="DELETE" Call="WEB.JSON:DeleteVacancyResponse"/>
+	<Route Url="/json/getvacancyresp/:vacid"	 			Method="GET" Call="WEB.JSON:GetVacancyResponse"/>  
+ 	<Route Url="/json/getcountvacancyresponse/:vacid"	Method="GET" Call="WEB.JSON:GetCountVacancyResponse"/>
+ 	<Route Url="/json/redirectmail/:vrid" 				Method="POST" Call="WEB.JSON:ReDirectMail"/>
+ 
+</Routes>
+]]></Data>
+</XData>
+
+<Method name="DispatchRequest">
+<Description>
+Dispatch a REST request according to URL and Method</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>pUrl:%String,pMethod:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	//---ЗАЩИТА ОТ СРИПТОВЫХ ВОЗДЕЙСТВИЙ---//
+	
+	//set stat = ..CheckText(pUrl)
+	//if (stat = 0) {
+	//	return 0
+	//}
+	
+	//-------------------------------------//
+	
+	//set ^test = %request.DeleteCookie("login",1)
+	//do %response.SetCookie("login","",0,"/av") 
+    #dim tSC As %Status = $$$OK
+    #dim e As %Exception.AbstractException
+    
+    #dim tMatcher As %Regex.Matcher
+    
+    #dim tArgs,tClass,tMatchUrl,tRegEx,tTarget,tAccess As %String
+    #dim tI,tIndex As %Integer
+    #dim tResourceMatched As %Boolean = 0
+    #dim tMethodMatched As %Boolean = 0
+    
+    #; Example: ^ISC.REST.UrlMap(classname,"/udl/(.?)","GET") = GetClassText"
+    Try {
+        #; Check that the effective user ( could be unknown user ) can access this resource
+        Set tAccess=$SYSTEM.Security.Check($Piece($zu(90,21,$namespace),"^",4))
+        If tAccess'["READ,WRITE"
+        {
+            #; Don't want the session token
+            Set %response.OutputSessionToken=0
+            
+            #; Set the Http Status
+            Set %response.Status="401 Unauthorized"
+        
+            #; Write out the header
+            Do %response.WriteHTTPHeader()
+            
+            #; Done
+            Quit
+        }
+        
+        #; Walk the dispatch map in collation order of defintion
+        Set tIndex="" For {
+            
+            #; Get the next index
+            Set tIndex=$Order(^ISC.REST.UrlMap($classname(),tIndex)) If tIndex="" Quit
+                
+            #; Pick out the RegEx
+            Set tRegEx=$Order(^ISC.REST.UrlMap($classname(),tIndex,""))
+            
+            #; Create a matcher
+            Set tMatcher=##class(%Regex.Matcher).%New(tRegEx)
+                
+            #; Extract the match url from the application name
+            Set tMatchUrl="/"_$Extract(pUrl,$Length(%request.Application)+1,*)
+                 
+            #; Test each regular expression in turn, extracting the arguments,
+            #; dispatching to the named method  
+            If tMatcher.Match(tMatchUrl) {
+                
+                #; We have matched the resource
+                Set tResourceMatched=1
+                
+                #; Now check method name
+                Set tTarget=$Get(^ISC.REST.UrlMap($classname(),tIndex,tRegEx,pMethod))
+                
+                #; No match on method name, retry next
+                If tTarget="" Continue
+                
+                #; We have matched a method
+                Set tMethodMatched=1
+                
+                #; Got a match, marshall the arguments
+                If tMatcher.GroupCount {
+                    For tI=1:1:tMatcher.GroupCount Set tArgs(tI)=tMatcher.Group(tI)
+                    Set tArgs=tI
+                } else {
+                    Set tArgs=0
+                }
+                
+                #; Check for optional ClassName prefix
+                Set tClass=$classname()
+                If tTarget[":" Set tClass=$Piece(tTarget,":"),tTarget=$Piece(tTarget,":",2)
+                
+                #; Dispatch
+                
+                //// 
+                //
+                //
+                //	Тут ставим свою проверку!!!
+                //
+                //
+                 IF ..AccessControl() {
+	            	//w "oh no ((("
+                	Set tSC=$zobjclassmethod(tClass,tTarget,tArgs...)
+                		If $$$ISERR(tSC) Do ..Http500(##class(%Exception.StatusException).CreateFromStatus(tSC))
+                 	}
+                else {
+	               /// w "Yearr!!!"
+	                }
+                
+                
+                
+                
+                #; Don't want multiple matches
+                Quit
+            }
+        }
+        
+        #; Didn't have a match for the resource, report not found
+        If tResourceMatched=0 Set tSC=..Http404() Quit
+        
+        #; Had a match for resource but method not matched
+        If tMethodMatched=0 Set tSC=..Http405() Quit
+            
+    } Catch (e) {
+        
+        #; Issue a '500'
+        Do ..Http500(e)
+    }
+    
+    Set %session.EndSession=('..#UseSession)
+    
+    Quit tSC
+]]></Implementation>
+</Method>
+
+<Method name="AccessControl">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	set ip =%request.GetCgiEnv("REMOTE_ADDR")
+	set Session=%request.GetCookie("CookieSession",1,)
+	Quit ##class(WEB.JSON).VerificationSessions(Session, ip)
+]]></Implementation>
+</Method>
+
+<Method name="CheckText">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>txtIn:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set fbdWords = ##class(%Library.ListOfDataTypes).%New()
+	do fbdWords.Insert("SELECT")
+	do fbdWords.Insert("DELETE")
+	do fbdWords.Insert("UPDATE")
+	do fbdWords.Insert("INSERT")
+	do fbdWords.Insert("TRUNCATE")
+	do fbdWords.Insert("CREATE")
+	
+	for i=1:1:fbdWords.Count(){
+		if ($find(txtIn,fbdWords.GetAt(i)) = 2){
+		 	
+		 	// не авторизовывать хулигана
+            Set %response.Status="401 Unauthorized"	
+            do ..Http404()
+            return 0
+		}
+	} 
+	return $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="Http404">
+<Description>
+Issue an '404' error ( user can override)</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    Set %response.Status="404 Not Found"
+    &html<<h1>(всё нормуль просто данный адресс не существует)</h1>>
+    Quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+</Export>

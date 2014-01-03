@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="Settings.html" application="/csp/vacancy/"><![CDATA[
+<!--
+<html>
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+   <!-- <script src="lib/bootstrap.js"></script>
+    <title>	Страница настроек </title>
+
+</head>
+
+<body ng-app>   -->
+<div ng-include="'partials/tab_menu.html'" ng-init="settings_active= 'active'"></div>
+
+<div ng-controller="SettingsCtrl" class="container ">
+    <div class="well">
+        <form class="form-horizontal"  name="Settings" ng-submit="SetSettings(Settings[0])">
+                 <h2>Настройки</h2> <hr>
+
+
+                <div class="control-group">
+                  <label for="URL" class="control-label label">URL проекта:</label>
+                    <div class="controls">
+                        <input  type="text"  ng-model="Settings[0].URL">
+                    </div>
+                </div>
+
+            <div class="control-group">
+                <label for="URL" class="control-label label">Режим отладки:</label>
+                <div class="controls">
+                    Выводить ошибки:
+                    <input class="checkbox" type="checkbox"  ng-model="Settings[0].DeveloperMode" ng-true-value="1" ng-false-value="0" >
+                </div>
+            </div>
+
+
+                <div class="control-group">
+                    <label for="email" class="control-label  label">Почта</label>
+                    <div class="controls well">
+                       <div class="span3"> E-mail для рассылки:</div>
+                        <input type="text"  ng-model="Settings[0].email">
+
+                        Заменить
+                        <input class="checkbox" type="checkbox"  ng-model="Settings[0].emailcheck" ng-true-value="1" ng-false-value="0" > <br>  <br>
+
+                        <div class="span3">  smtp server:  </div>
+                        <input type="text"  ng-model="Settings[0].smtpserver">   <br>      <br>
+
+                            <div class="span3">  Пароль: </div>
+                        <input type="text"  ng-model="Settings[0].mailpassword">  <br>   <br>
+
+                        <div class="span3">Логин (Отправитель):    </div>
+                        <input type="text"  ng-model="Settings[0].maillogin">    <br>   <br>
+                     </div>
+                </div>
+
+
+                <div class="control-group">
+
+                    <div class="controls">
+                        <input class="btn" type="submit" value="Сохранить">
+                    </div>
+                </div>
+
+        </form>
+    </div>
+</div>
+
+<!--<script language = "javascript" src="lib/angular/angular.min.js"></script>  -->
+
+<script language = "javascript" >
+
+    function SettingsCtrl($scope,$http){
+        $scope.GetSettings=function(){
+            $http.get("/av/json/getsettings").success(function(data){
+
+                $scope.Settings=data.children;}).error(function(data,status){ });
+        }
+
+        $scope.SetSettings = function (s){
+            $http.post("/av/json/setsettings/",s)
+                    .success(function(data){ }).error(function(data,status){});
+        }
+
+        $scope.GetSettings();
+    }
+</script>
+
+<!--
+</body>
+</html>       -->
+]]></CSP>
+</Export>

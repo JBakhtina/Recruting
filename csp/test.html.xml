@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="test.html" application="/csp/vacancy/"><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body ng-app="test" >
+    <h1>Это жопа, товарищи </h1>
+    <div ng-controller="TestCtrl">
+       <h3>{{TestURL}}</h3>
+
+        <font color="red">{{TestURL2}}</font>
+        <font color="blue">{{TestURL3}}</font>
+        <font color="green">{{TestURL4}}</font>
+    </div>
+
+<script language = "javascript" src="lib/angular/angular.min.js"></script>
+<script language = "javascript" src="lib/angular/angular-cookies.min.js"></script>
+<script language = "javascript" src="lib/angular/angular-resource.js"></script>
+
+<script language = "javascript" >
+
+
+    angular.module('testService', ['ngResource']).
+            factory('configProvider', function($resource){
+                return $resource('/v/json/getsettings2/:requestParam',{},{
+                    getAll:{method:'GET',params:{requestParam:'all'} },
+                    getURL:{method:'GET',params:{requestParam:'url'}},
+                    getEmail:{method:'GET',params:{requestParam:'email'}},
+                    getEmailCheck:{method:'GET',params:{requestParam:'emailcheck'}},
+                    getSMTPServer:{method:'GET',params:{requestParam:'smtpserver'}},
+                    getMailPassword:{method:'GET',params:{requestParam:'mailpassword'}},
+                    getMailLogin:{method:'GET',params:{requestParam:'maillogin'}},
+                    get:{method:'JSONP',params:{}}
+                });
+
+            });
+
+    var app = angular.module('test',['testService', 'ngResource'])
+
+
+    function TestCtrl($scope, configProvider, testService1, testFactory,$resource){
+        configProvider.getURL(function(data){
+            $scope.TestURL = data.URL
+        })
+
+        alert($scope.TestURL);
+
+        $scope.TestURL2 = testService1
+        $scope.TestURL3 = testFactory.get({param:"email"})
+
+        var MyResource =  $resource('/v/json/getsettings2/url', {},
+                {
+                    get: { method: 'JSONP', params: {property_code: 'DEMO_ERFOLGX', adults: '2',
+                        callback: 'JSON_CALLBACK'} }
+                }
+        );
+        $scope.TestURL4 = MyResource.get()
+    }
+    /*
+    app.provider('testProvider',function($http){
+
+    })
+*/
+
+    app.factory('testFactory', ['$resource',
+        function ($resource) {
+            return ($resource('/v/json/getsettings2/:param',{param: '@param'},{transformResponse: function (data) {return angular.fromJson(data).list}}));
+        }]);
+
+
+    app.service('testService1', function($http){
+        var a = "aaaa"
+
+        return $http({
+            method: 'GET',
+            url: '/v/json/getsettings2/all',
+            transformRequest: function(data){
+                return data;
+            }
+        });
+    })
+
+
+</script>
+</body>
+</html>]]></CSP>
+</Export>

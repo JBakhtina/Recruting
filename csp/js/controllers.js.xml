@@ -2,11 +2,39 @@
 <Export generator="Cache" version="25">
 <CSP name="js/controllers.js" application="/csp/vacancy/"><![CDATA[
 'use strict';
-  
-   
-function vacancyCtrl($scope, $http,  $cookies){
-    // делаем пагинатор  из примера на хабре
 
+function vacancyCtrl($scope, $http,  $cookies, $window, configProvider, configProviderNA){
+    $window.document.title="Вакансии по технологиям InterSystems";
+
+
+    // получим из менеджера конфигурации корневой адрес
+    if ($scope.rootURL == undefined && $cookies.login != undefined){
+        configProvider.getURL(function(data){
+            $scope.rootURL = data.URL;
+
+        })
+    }
+
+    // если корневой адрес не заполнен - попытаемся получить из неавторизованного доступа
+    if ($scope.rootURL == undefined && $cookies.login == undefined){
+        configProviderNA.getURL(function(data){
+
+            $scope.rootURL = data.URL;
+        })
+    }
+
+    /*
+    $http.get('config/cfg.json').success(function(data) {
+        alert(data[0]["url"]);
+    });
+
+   /* var cfg = jsonService.query({Id: 1}, function(config) {
+       alert(jsonService.url[1]);
+    });     */
+
+
+
+    // делаем пагинатор  из примера на хабре
 //TODO: возможно пагинатору необходимо использовать фабрику и фильтр - сделаем позже
     /*
 
@@ -35,15 +63,52 @@ function vacancyCtrl($scope, $http,  $cookies){
         angular.forEach($scope.items, function(v,k) { $scope.items[k].selected = false; });
     });
   */
+    // функция получения количества отзывов
+    $scope.GetCountVacancyResponse=function(vacid){
+        $http.get("/av/json/getcountvacancyresponse/"+vacid).success(function(data){
+            $scope.responsecount=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки  :( ["+data+"]"; });
+    }
+    // функция получения количества просмотров
+    $scope.GetCountVacancyView=function(vacid){
+        $http.get("/v/json/getcountvacancyview/"+vacid).success(function(data){
+            $scope.viewcount=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки  :( ["+data+"]"; });
+    }
     // функция получения вакансий
     $scope.getVacancies=function(){
-        $http.get("/v/json/vacancies").success(function(data){
+
+        $http.get("/v/json/vacancies/").success(function(data){
+
+       // $http.get("/v/json/vacancies").success(function(data){
             $scope.vacancies=data.children;}).error(function(data,status){
                 $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+        if($cookies.yoyo != "yes")  {
+
+            $scope.isCountView=true;
+        }
+        else{
+            $scope.isCountView=false;
+        }
     }
 
+    $scope.Color=function(VacancyType){
+        if(VacancyType=='полная занятость'){
+            return "<span class='label label-important'><small>полная занятость</small></span>"
+        }
+        if(VacancyType=='частичная занятость'){
+            return "<span class='label label-warning'><small>частичная занятость</small></span>"
+        }
+        if(VacancyType=='контракт'){
+            return  "<span class='label label-info'><small>контракт</small></span>"
+        }
+        if(VacancyType=='фриланс'){
+            return "<span class='label label-success'><small>фриланс</small></span>"
+        }
+        if(VacancyType==''){}
+    }
 
-    // функция получения компаний
+    // функция получения компаний  =
     $scope.getCompanies=function(){
         $http.get("/v/json/companies").success(function(data){
             $scope.companies=data.children;}).error(function(data,status){
@@ -60,13 +125,15 @@ function vacancyCtrl($scope, $http,  $cookies){
     }
 
     $scope.FilteredByCompany = function(){
-        alert($scope.filterCompany);
+        //alert($scope.filterCompany);
     }
 
     $scope.getVacancies();
     $scope.getCompanies();
     $scope.getCompaniesVacancies();
 
+
+     /*
     if($cookies.yoyo == "yes"){
         $scope.inc_path="partials/tab_menu.html";
         $scope.isAdminStr="/admin/";
@@ -75,22 +142,131 @@ function vacancyCtrl($scope, $http,  $cookies){
     {
         $scope.inc_path="";
         $scope.isAdminStr="";
-    }
-
-
-
+    }   */
 }
   
-function vacancyShowCtrl($scope,$http, $routeParams){
-
+function vacancyShowCtrl($scope,$http, $routeParams, $window, $cookies, configProvider, configProviderNA){
+    //$scope.$window=$window;
     var vacID = $routeParams.vacID;
+    $scope.ref= document.referrer;
+    var ref =$scope.ref
 
-    $scope.test =function(){
+    // получим из менеджера конфигурации корневой адрес
+    if ($scope.rootURL == undefined && $cookies.login !=undefined){
 
-        alert($scope.img);
+        configProvider.getURL(function(data){
+
+          // $scope.rootURL = data.URL;
+            var imgLink = data.URL+"csp/vacancy/WEB.Image.cls?id="+ vacID+ "&counter=1&ref="+  ref;
+            $scope.rootImgPath = imgLink;
+            $scope.rootURL = data.URL;
+        })
     }
 
-	   // функция показа вакансии
+    // если корневой адрес не заполнен - попытаемся получить из неавторизованного доступа
+    if ($scope.rootURL==undefined && $cookies.login == undefined){
+        //alert("ddd")
+        configProviderNA.getURL(function(data){
+
+           // alert(data.URL);
+            var imgLink = data.URL+"csp/vacancy/WEB.Image.cls?id="+ vacID+ "&counter=1&ref="+  ref;
+            $scope.rootImgPath = imgLink;
+            $scope.rootURL = data.URL;
+            //return "<img alt='VacancyLogo' align='right' ng-src='imgLink' class='VacancyImg img-rounded pull-right' style='max-width:200px; max-height:300px;'/>"
+        })
+    }
+
+
+   // $scope.rootURL="zzz";
+   /*
+   // получим из менеджера конфигурации корневой адрес
+    configProvider.getURL(function(data){
+        $scope.rootURL = data.URL;
+
+    })    */
+
+   // $scope.test = httpProvider.get()
+ /*
+    $scope.test = function(vacID, ref){
+        $http.get("/av/json/getsettings2/url").success(function(data){
+
+            $scope.rootURL = data.URL+"csp/vacancy/WEB.Image.cls?id="+ vacID+ "&counter=1&ref="+  ref;
+        })
+            .error(function(data,status){
+                $scope.alertzone="test"; });
+    }
+
+   */
+
+     // alert($scope.rootURL);
+    //$scope.rootURL = RURL;
+
+
+    //$scope.imgURL=$scope.rootURL+"csp/vacancy/WEB.Image.cls?id="+ vacID+ "&counter=1&ref="+  $scope.ref;
+
+    $scope.title_text = "TEST";
+
+    $scope.Color=function(VacancyType){
+        if(VacancyType=='полная занятость'){
+            return "<span class='label label-important'>полная занятость</span>"
+        }
+        if(VacancyType=='частичная занятость'){
+            return "<span class='label label-warning'>частичная занятость</span>"
+        }
+        if(VacancyType=='контракт'){
+            return  "<span class='label label-info'>контракт</span>"
+        }
+        if(VacancyType=='фриланс'){
+            return "<span class='label label-success'>фриланс</span>"
+        }
+        if(VacancyType==''){}
+    }
+
+    $scope.LinkToStr=function(link){
+
+        var temp="";
+        for(var i = 0; i < link.length; i++){
+
+            if(i!=link.length-1){
+                temp= temp+link[i].URL+" "+link[i].URLName+" ";
+            }
+            else{
+                temp= temp+link[i].URL+" "+link[i].URLName;
+            }
+
+        }
+        return temp;
+    }
+
+
+    $scope.StrToLink=function(str){
+
+        var arrayObject=new Object();
+        var arrayObject={};
+// Если объект не пустой
+        if (str.length > 0){
+            var ArrayLinks=new Array();
+            var ArrayLinks=[arrayObject];
+        }
+
+        var temp=str.split(' ');
+        var k=0;
+
+        for (var i = 0; i < temp.length-1; i+=2 ){
+            ArrayLinks[k].URL=temp[i];
+            ArrayLinks[k].URLName=temp[i+1];
+            k++;
+// Не создаём новый объект, если цикл закончился
+            if (k!=temp.length/2){
+                ArrayLinks.push([{}]);
+            }
+        }
+
+        return  ArrayLinks;
+    }
+
+
+   // функция показа вакансии
        $scope.showVacancy = function(vacID){
 	     $http.get("/v/json/vacancy/"+vacID).success(function(data){
 			try	{
@@ -98,18 +274,64 @@ function vacancyShowCtrl($scope,$http, $routeParams){
 				// передаем массив полученных данных в функцию формирования текста
 				// выведем результат в соотвествующие поля
 				var vac = data.children
+
 				$scope.txtVacancyName = vac[0]["VacancyName"]
+                // задаём title
+                $window.document.title=$scope.txtVacancyName;
 				$scope.txtVacancyCompany = vac[0]["CompanyName"]
+                $scope.txtVacancyType = vac[0]["VacancyType"]
 				$scope.txtVacancyCity = vac[0]["CityVacancy"]
+                $scope.txtVacancyCurrency=  vac[0]["VacancyCurrency"]
+
 				$scope.txtRegDate = vac[0]["RegDate"]
-				$scope.txtEduLevel = vac[0]["EduLevel"]
-				$scope.txtStartSalary = vac[0]["StartSalary"]
+
+                // образование
+                if (vac[0]["EduLevel"] != "") {
+				    $scope.txtEduLevel = "<b>Образование: </b> "+vac[0]["EduLevel"]
+                }
+
+                $scope.txtStartSalary = vac[0]["StartSalary"]
 				$scope.txtEndSalary = vac[0]["EndSalary"]
-				$scope.txtAddInfo = vac[0]["AddInfo"]
-				$scope.txtMainInfo = vac[0]["MainInfo"]
+
+                $scope.txtMainInfo =vac[0]["MainInfo"]
+
+                // Дополнительная инфа (бонусы)
+                if (vac[0]["AddInfo"] != "") {
+                    $scope.txtAddInfo = "<b>Бонусы: </b> "+vac[0]["AddInfo"]
+                    $scope.txtsoc=  vac[0]["AddInfo"];
+                }
+
+                // Основная инфа (требуемые навыки)
+                if (vac[0]["Skills"] != "") {
+                    $scope.txtSkills = "<b>Необходимые навыки: </b> "+vac[0]["Skills"]
+                }
                 $scope.txtCompMainInfo = vac[0]["CompMainInfo"]
-                $scope.txtLinks = vac[0]["Links_URL"]
-                       
+                $scope.txtCompanyId = vac[0]["compID"]
+/*
+                $scope.txtCompanyCurency = vac[0]["compID"]
+                $scope.txtVacancyCurency = vac[0]["compID"]
+*/
+
+                // Она родимая - зарплата
+                $scope.isSalary = "";
+                //TODO: Удалить нули после точки в End/Start Salary
+                if ($scope.txtStartSalary != "" || $scope.txtEndSalary != "") {
+                    var a="";
+                    var b="";
+                    var c="";
+                    if ($scope.txtStartSalary !="" ) { a = " от " + $scope.txtStartSalary;}
+                    if ($scope.txtEndSalary !="") { b = " до "+ $scope.txtEndSalary;}
+                    if ($scope.txtVacancyCurrency !="" && $scope.txtVacancyCurrency !=undefined) { c =" " + $scope.txtVacancyCurrency;}
+                      $scope.isSalary = "Зарплата: " + a  + b + c;
+                }
+
+
+
+                var a=  vac[0].URL;
+                $scope.txtLink =$scope.StrToLink(a);
+                $scope.otherUrls = "";
+                if ($scope.txtLink != null) {$scope.otherUrls = "На других ресурсах";}
+
                 // показываем слой с инфо о вакансии
                 $scope.showV=true;
                 // скрываем слой с формой ввода отклика
@@ -121,7 +343,11 @@ function vacancyShowCtrl($scope,$http, $routeParams){
 			$scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
 	   }
 
+
+
     $scope.showVacancy(vacID);
+//    $scope.$window.document.title="Вакансия ";
+
     $scope.vacID = vacID;
 
 	   // добавляем новый отзыв о вакансии
@@ -143,25 +369,48 @@ function vacancyShowCtrl($scope,$http, $routeParams){
                $scope.showR = false;
            }
        }
-    
-           // картинка  
+
+    /*
+           // картинка
     	   $scope.newImage= function (compid, v){
-		    $http.post("/v/json/vimage/",compid,v)
+		    $http.post("/av/json/vimage/",compid,v)
 		    .success(function(data){
                     $scope.alertzone="FirstName:"+v.FirstName;}).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления  :( ["+data+"]"; });
 
 		    }
+     */
 
     $scope.showV = true;
     $scope.showR = false;
 		    		    
 }
 
-function companyCtrl($scope, $http, $routeParams){
+function companyCtrl($scope, $http, $routeParams, $window, configProvider){
+
+
+    // не удалять!!
+   /*  configProvider.query(function(data){
+        $scope.testconfig = data.children[0]["URL"];
+        $scope.testconfig2 = data
+    })
+
+
+    configProvider.getURL(function(data){
+         $scope.testconfig2 = data;
+    })
+    */
+
+    // получим из менеджера конфигурации корневой адрес
+    configProvider.getURL(function(data){
+        $scope.rootURL = data.URL;
+    })
+
+    // это для баяна - он же аккордион - чтобы сворачивать-разворачивать список вакансий
+    $scope.isCollapsed = false;
+
     // получим ИД компании
     var compID = $routeParams.compID;
-
     // получение  компании по ИД
     $scope.GetCompany=function(compID){
         $http.get("/v/json/company/"+compID).success(function(data){
@@ -169,27 +418,54 @@ function companyCtrl($scope, $http, $routeParams){
             $scope.company=data.children;}).error(function(data,status){
                 $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
     }
-
     // функция получения вакансий по ИД компании
     $scope.getVacanciesByCompID=function(compID){
-        $http.get("/v/json/vacancies/"+compID).success(function(data){
-            $scope.vacancies=data.children;}).error(function(data,status){
+        $http.get("/v/json/vacanciesByComp/"+compID).success(function(data){
+            $scope.vacancies=data.children;
+            $scope.vacCount = data.children[0]["vacCount"]
+        }).error(function(data,status){
                 $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
     }
 
     $scope.getVacanciesByCompID(compID);
     $scope.GetCompany(compID);
+    // TODO: change title for company:
+    //$window.document.title=$scope.company[0]["Name"];
+    $window.document.title="Работодатель";
+
+    $scope.Color=function(VacancyType){
+        if(VacancyType=='полная занятость'){
+            return "<span class='label label-important'><small>полная занятость</small></span>"
+        }
+        if(VacancyType=='частичная занятость'){
+            return "<span class='label label-warning'><small>частичная занятость</small></span>"
+        }
+        if(VacancyType=='контракт'){
+            return  "<span class='label label-info'><small>контракт</small></span>"
+        }
+        if(VacancyType=='фриланс'){
+            return "<span class='label label-success'><small>фриланс</small></span>"
+        }
+        if(VacancyType==''){}
+    }
+
 }
 
-function CompanyShow($scope,$http,$routeParams){
+function CompanyShow($scope,$http,$routeParams, configProvider){
             var compid = $routeParams.compID;
             $scope.companyid  = $routeParams.compID;
-		    // получение всех компаний
+
+            // получим из менеджера конфигурации корневой адрес
+            configProvider.getURL(function(data){
+                $scope.rootURL = data.URL;
+            })
+
+
+    // получение всех компаний
 		    $scope.GetAllCompanys=function(){
        		$http.get("/v/json/getallcompanysr/").success(function(data){
-
-            $scope.allcompanys=data.children;}).error(function(data,status){
-            $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
+                   $scope.allcompanys=data.children;}).error(function(data,status){
+                   $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
     		}
 
 		    // получение  компании
@@ -201,37 +477,39 @@ function CompanyShow($scope,$http,$routeParams){
             $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
     		}
 
-    	   // добавляем новой компании
+    	    // добавляем новой компании
 	   		$scope.newCompany = function (v){
-		    $http.put("/v/json/createcompanyr/",v)
+		    $http.put("/av/json/createcompanyr/",v)
 		    .success(function(data){
+                    //alert(v.IsModerated);
                     $scope.alertzone="FirstName:"+v.FirstName;
                     document.location.href = "#admin/companies/";
                 })
-
                 .error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
+			$scope.alertzone="["+status+"] Ошибка добавления компании :( ["+data+"]"; });
 
 		    }
 
 		     // Обновление компании
 	   		$scope.updateCompany = function (compid,v){
-		    $http.post("/v/json/companyupdater/"+compid,v)
+		    $http.post("/av/json/companyupdater/"+compid,v)
 		    .success(function(data){
                     $scope.alertzone="FirstName:"+v.FirstName;
                     document.location.href = "#admin/companies/";
                 }).error(function(data,status){
-			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
-
+			    $scope.alertzone="["+status+"] Ошибка добавления компании :( ["+data+"]"; });
+                //обновим картинку
+                uploadFile('Company',compid,false);
 		    }
 
 
 		    // удаление компании
 	    	$scope.deleteCompany = function (compid){
-                $scope.alertzone="AAA"+compid;
-		    $http.delete("/v/json/delcompany/"+compid)
+
+
+		    $http.delete("/av/json/delcompany/"+compid)
 		    .success(function(data){
-			    //document.location.href = "#admin/companies/";
+			    document.location.href = "#admin/companies/";
 			    }).error(function(data,status){
 			$scope.alertzone="["+status+"] Error delete user :( ["+data+"]"; });
 		    }
@@ -243,53 +521,179 @@ function CompanyShow($scope,$http,$routeParams){
     $scope.alertzone="ZZZ";
 }
 
-// мы тя грохнем
-function adminVacanciesCtrl ($scope,$http,$routeParams){
-    // получаем ИД вакансии
-    var vacID = $routeParams.vacID;
-    $scope.vacancyid = $routeParams.vacID;
+// Админский контролер для вакансий
+function adminVacanciesCtrl ($scope,$http,$routeParams,$window,configProvider){
+    $window.document.title="Администрирование вакансий";
 
-    $scope.getVacancies=function(){
-        $http.get("/v/json/vacanciesold").success(function(data){
-            $scope.vacancies=data.children;}).error(function(data,status){
-                $scope.alertzone="["+status+"] Error upload vacancy list :( ["+data+"]"; });
+    // получим из менеджера конфигурации корневой адрес
+    configProvider.getURL(function(data){
+        $scope.rootURL = data.URL;
+    })
+
+    $scope.LoadCompanyCurrency=function (ID){
+
+        $http.get("/v/json/getcompanyr/"+ID).success(function(data){
+
+            $scope.com=data.children;
+
+            $scope.newvacancy.VacancyCurrency= $scope.com[0].CompanyCurrency;
+        }).error(function(data,status){ });
+
     }
+
+    $scope.Color=function(VacancyType){
+        if(VacancyType=='полная занятость'){
+            return "<span class='label label-important'>полная занятость</span>"
+        }
+        if(VacancyType=='частичная занятость'){
+            return "<span class='label label-warning'>частичная занятость</span>"
+        }
+        if(VacancyType=='контракт'){
+            return  "<span class='label label-info'>контракт</span>"
+        }
+        if(VacancyType=='фриланс'){
+            return "<span class='label label-success'>фриланс</span>"
+        }
+        if(VacancyType==''){}
+    }
+
+
+    $scope.LinkToStr=function(link){
+
+        var temp="";
+        for(var i = 0; i < link.length; i++){
+
+            if(i!=link.length-1){
+            temp= temp+link[i].URL+" "+link[i].URLName+" ";
+            }
+             else{
+            temp= temp+link[i].URL+" "+link[i].URLName;
+            }
+        }
+
+        return temp;
+    }
+
+    $scope.StrToLink=function(str){
+
+        var arrayObject=new Object();
+        var arrayObject={};
+        var ArrayLinks=new Array();
+        var ArrayLinks=[arrayObject];
+        var temp=str.split(' ');
+        var k=0;
+
+        var len =  temp.length  // кол-во элементов временного массива
+
+
+        if(len >=2) {
+            for (var i = 0; i < len-1; i+=2 ){
+                ArrayLinks[k].URL=temp[i];
+                ArrayLinks[k].URLName=temp[i+1];
+
+                if(i < len-2)
+                { ArrayLinks.push([{}]);  }
+
+                k++;
+            }
+        }
+
+        return  ArrayLinks;
+    }
+    // функция получения вакансий
+    $scope.getVacancies=function(){
+       $http.get("/av/json/vacancies/").success(function(data){
+        //    $http.get("/v/json/vacancies").success(function(data){
+            $scope.vacancies=data.children;}).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+
+    var vacID = $routeParams.vacID;
+    $scope.vacID= vacID
+    // функция получения вакансий
+    $scope.getVacancy=function(vacID){
+        $http.get("/v/json/vacancy/"+vacID).success(function(data){
+            var a=  data.children[0].URL;
+            $scope.links =$scope.StrToLink(a);
+
+            $scope.vacancy=data.children;}).error(function(data,status){
+            $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+    $scope.getVacancy(vacID);
+
+    // функция получения компаний
     $scope.getCompanies=function(){
         $http.get("/v/json/companies").success(function(data){
             $scope.companies=data.children;}).error(function(data,status){
-                $scope.alertzone="["+status+"] Error upload company list :( ["+data+"]"; });
-    }
-    $scope.getCompany=function(compid){
-        $http.get("/v/json/company/"+compid).success(function(data){
-            $scope.company=data.children;}).error(function(data,status){
-                $scope.alertzone="["+status+"] Error upload one company :( ["+data+"]"; });
-    }
-
-    $scope.getVacancy=function(vacID){
-        $http.get("/v/json/vacancy/"+vacID).success(function(data){
-            $scope.vacancy=data.children;
-
-        }).error(function(data,status){
-                $scope.alertzone="["+status+"] Error upload one vacancy :( ["+data+"]"; });
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
     }
 
     // вызовем функцию получения вакансии
     $scope.getVacancies();
+    // вызовем функция получения компаний(для фильтра)
+    $scope.getCompanies();
+
+
+    $scope.VacancyUp = function (vacID){
+        $http.get("/av/json/VacancyUp/"+vacID).success(function(data){
+
+        }).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка измения  вакансии :( ["+data+"]"; });
+
+
+         //window.location.reload();
+    }
+
+    // функция клонирования вакансии
+    $scope.VacancyClone=function(vacID){
+
+        $http.get("/av/json/clonevacancy/"+vacID).success(function(data){
+            // вызовем функцию получения вакансии
+            $scope.getVacancies();
+           }
+
+        ).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка загрузки компаний :( ["+data+"]"; });
+    }
+
+    $scope.VacancyReverse = function(vacID,ind){
+
+        $http.get("/av/json/vacancyreverse/"+vacID).success(function(data){
+
+            var ss = ! $scope.vacancies[ind].IsActive
+            if (ss == true)
+            {  $scope.vacancies[ind].IsActive = 1 }
+            else
+            {  $scope.vacancies[ind].IsActive = 0 }
+
+
+        }).error(function(data,status){
+                $scope.alertzone="["+status+"] Ошибка измения статуса вакансии :( ["+data+"]"; });
+
+    }
 
     // добавляем обновление ВЫЗЫВАЕМ ЕЁ ТУТ
+
     $scope.update = function (vacID, v){
-        //var url = "/v/json/v/"+compid[0].ID;
-        $http.post("/v/json/v/"+vacID,v)
+
+        var b=$scope.LinkToStr($scope.links);
+         v.URL=b;
+        $http.post("/av/json/v/"+vacID,v)
             .success(function(data){$scope.alertzone="Update Ok!"+compid[0].Name;
              document.location.href = "#admin/vacancies/";
             }).error(function(data,status){
                 $scope.alertzone="["+status+"]Error update vacancy data:( ["+data+"]"; });
+
+        //обновим картинку
+        uploadFile('Vacancy',vacID,false);
         //$scope.alert2="/v/json/vacancy/"+vacancy[0].ID;
     }
 
     // удаление вакансии
     $scope.deletevacancy = function (vacID){
-        $http.delete("/v/json/vacancy/"+vacID)
+        $http.delete("/av/json/vacancy/"+vacID)
             .success(function(data){
                 document.location.href = "#admin/vacancies/";
             }).error(function(data,status){
@@ -297,27 +701,42 @@ function adminVacanciesCtrl ($scope,$http,$routeParams){
     }
 
     $scope.createvacancy = function (v){
+        var b=$scope.LinkToStr($scope.link);
+        //alert(b);
+        v.URL=b;
+
         // что б кашэ был в курсе что мы ему предлагаем
         // company. class="Data.Company";
-        $http.post("/v/json/vacancy/",v)
+        $http.post("/av/json/vacancy/",v)
             .success(function(data){ $scope.alertzone="V_Company:"+v.Company;
              document.location.href = "#admin/vacancies/";
             }).error(function(data,status){
                 $scope.alertzone="["+status+"] Error creating new vacancy :( ["+data+"]"; });
     }
-
-    $scope.getCompanies();
-    $scope.getVacancy(vacID);
-
 }
 
 function SystemUserShow($scope,$http,$routeParams){
     var UID = $routeParams.UID;
     $scope.userid = $routeParams.UID;
+               /// Запрашиваем логин  проверяем логин
+            $scope.LoginVerify=function(login){
+                $scope.isLogin="";
+                $http.get("/av/json/getlogin/"+login).success(function(data){
+                    $scope.CLogin=data.children;
+                    if($scope.CLogin[0].Login!=""){
+                       // alert("Введите уникальный Login");
+                        $scope.isLogin="Login занят";
+                    }
+                }).error(function(data,status){});
+            }
+
+
+
+
 
 		    // получение всех пользователей
 		    $scope.GetAllSystemUsers=function(){
-       		$http.get("/v/json/getallusers/").success(function(data){
+       		$http.get("/av/json/getallusers/").success(function(data){
 
             $scope.allusers=data.children;}).error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки пользователей :( ["+data+"]"; });
@@ -325,7 +744,7 @@ function SystemUserShow($scope,$http,$routeParams){
 
 		    // получение  пользователя
 		    $scope.GetSystemUser=function(compid){
-       		$http.get("/v/json/getuser/"+compid).success(function(data){
+       		$http.get("/av/json/getuser/"+compid).success(function(data){
 
             $scope.user=data.children;}).error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки пользователя :( ["+data+"]"; });
@@ -333,7 +752,7 @@ function SystemUserShow($scope,$http,$routeParams){
 
     	   // добавляем нового пользователя
 	   		$scope.newuser = function (v){
-		    $http.put("/v/json/createuser/",v)
+		    $http.put("/av/json/createuser/",v)
 		    .success(function(data){
                     $scope.alertzone="FirstName:"+v.FirstName;
                     document.location.href = "#admin/users/";
@@ -344,10 +763,11 @@ function SystemUserShow($scope,$http,$routeParams){
 
 		     // Обновление пользователя
 	   		$scope.updateuser = function (compid,v){
-		    $http.post("/v/json/updateteuser/"+compid,v)
+		    $http.post("/av/json/updateteuser/"+compid,v)
 		    .success(function(data){
                     $scope.alertzone="FirstName:"+v.FirstName;
-                    document.location.href = "#admin/users/";
+                    //document.location.href = "#admin/users/";
+                    document.location.reload();
                 }).error(function(data,status){
 			$scope.alertzone="["+status+"] Ошибка добавления пользователя :( ["+data+"]"; });
 
@@ -355,7 +775,7 @@ function SystemUserShow($scope,$http,$routeParams){
 
 		    // удаление пользователя
 	    	$scope.deleteuser = function (compid){
-		    $http.delete("/v/json/deleteuser/"+compid)
+		    $http.delete("/av/json/deleteuser/"+compid)
 		    .success(function(data){
                     $scope.alertzone="deleted";
                     document.location.href = "#admin/users/";
@@ -371,32 +791,66 @@ function SystemUserShow($scope,$http,$routeParams){
 
 // TODO: почистить серые контролы
 function authCtrl($scope, $http, $cookies){
+    /// Авторизация через Cookies
+    $scope.isLoad=function(){
 
+        $scope.authVerifyCookie = function (l){
+            $http.get("/v/json/authVerifyCookie/"+l)
+                .success(function(data){
+                    $scope.CookieStatus=data.children;
+                    $scope.Status=$scope.CookieStatus[0].Status;
+
+                    if ($scope.Status=="0"){
+                        setCookie("CookieSession",null,{expires:-1, path:"/"});
+                        setCookie("login",null,{expires:-1, path:"/csp/vacancy"});
+                    }
+                    else{
+                        $scope.fname=$cookies.login;
+                        $scope.showAF = false;
+                        $scope.showAG = true;
+                    }
+                }).error(function(data,status){});
+        }
+
+        if($cookies.CookieSession!=null && $cookies.CookieSession!="" && $cookies.CookieSession!="undefined " ){
+            $scope.authVerifyCookie($cookies.CookieSession);
+        }
+        else{}
+
+
+    }
+
+    $scope.isLoad();
+
+
+    //здесь проверка на админственность
 
 	// функция аутентификации - считываем данные из БД - возвращаем результат
     $scope.authVerify=function(){
         $http.get("/v/json/authVerify/"+$scope.authLogin+"/"+$scope.authPassword)
             .success(function(data){
-            try{
-                // пробуем считать результат
-                var fName =  data.children[0]["FirstName"];
-                $scope.fname =fName;
-                $scope.showAF = false;
-                $scope.showAG = true;
+                var fName;
+                try {
+                    // пробуем считать результат
+                    fName = data.children[0]["FirstName"];
+                   // var fName = $cookies.login;
+                    $scope.fname =fName;
+                    $scope.showAF = false;
+                    $scope.showAG = true;
 
-                // очистим поля ввода
-                $scope.authLogin = "";
-                $scope.authPassword = "";
-            } catch(err){
-                // если не удалось считать - значит ошибка входа
-                if($scope.name == "")
-                {
-                    alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
+                    // очистим поля ввода
                     $scope.authLogin = "";
                     $scope.authPassword = "";
-                }
+                }  catch (err) {
 
-            }
+                    // если не удалось считать - значит ошибка входа
+                    if(fName  = "undefined")
+                    {
+                        alert("Неправильно введен логин/пароль. Повторите ввод","Ошибка аутентификации");
+                        $scope.authLogin = "";
+                        $scope.authPassword = "";
+                    }
+                }
             })
             .error(function(data,status){
             $scope.alertzone="["+status+"] Ошибка загрузки :( ["+data+"]"; });
@@ -417,10 +871,13 @@ function authCtrl($scope, $http, $cookies){
 
     // функция разлогинивания
     $scope.logout = function(){
+        var c=$cookies.CookieSession;
+        $http.post("/v/json/LoginOut/"+c).success(function(data){
+        }).error(function(data,status){});
+        setCookie("CookieSession",null,{expires:-1, path:"/"});
+        setCookie("login",null,{expires:-1, path:"/csp/vacancy"});
+        window.location.reload();
 
-        $cookies["login"] = "";
-        $scope.cookiesVerify();
-        window.location.href = "";     // нужно будет переделать на $location
     }
 
     // функция проверки кукисов
@@ -428,18 +885,17 @@ function authCtrl($scope, $http, $cookies){
         var login = $cookies.login;
         if(login == null || login==""){
             $scope.showAuthForm(true);
-            $cookies.yoyo = "no";
+          //  $cookies.yoyo = "no";
         }
         else {
             $scope.showAuthForm(false);
             $scope.fname = login;
-            $cookies.yoyo = "yes";
+          //  $cookies.yoyo = "yes";
         }
 
     }
 
     $scope.cookiesVerify();
-
 
 
 }
@@ -448,13 +904,26 @@ function vrShow($scope, $http, $routeParams){
 
     var vacID = $routeParams.vacID;
 
-    // $scope.alertzone="QQQ";
+
+
+
+
+    $scope.deletevr = function (vrid){
+        $http.delete("/av/json/deletevacancyresp/"+vrid)
+            .success(function(data){
+                $scope.alertzone="deleted";
+                document.location.href = "#admin/responses/";
+            }).error(function(data,status){
+                $scope.alertzone="["+status+"] Error delete vacancy rsponse :( ["+data+"]"; });
+    }
+
+
 
     $scope.RM = function (vrid){
         //$scope.alertzone="test" + vrid;
-        $http.post("/v/json/redirectmail/"+vrid)
+        $http.post("/av/json/redirectmail/"+vrid)
             .success(function(data){
-              // document.location.href = "#admin/companies/";
+                document.location.href = "#admin/responses/";
             }).error(function(data,status){
                 $scope.alertzone="["+status+"] Ошибка отправления почты :( ["+data+"]";
             });
@@ -462,9 +931,15 @@ function vrShow($scope, $http, $routeParams){
     }
         // получение  отзывов
     $scope.showVacancyResp = function(vacID){
-            $http.get("/v/json/getvacancyresp/"+vacID).success(function(data){
-                $scope.vacresp=data.children;}).error(function(data,status){
-                    $scope.alertzone="["+status+"] Ошибка загрузки отзывов :( ["+data+"]"; });
+        var addToQuery="";
+        if ($routeParams.vacID !=null) {
+            addToQuery="/"+vacID;
+        }
+
+        $scope.alertzone=addToQuery;
+        $http.get("/av/json/getvacancyresp"+addToQuery).success(function(data){
+        $scope.vacresp=data.children;}).error(function(data,status){
+        $scope.alertzone="["+status+"] Ошибка загрузки отзывов :( ["+data+"]"; });
         }
 
     $scope.showVacancyResp(vacID);
@@ -484,13 +959,49 @@ function adminCompaniesCtrl ($scope, $http, $routeParams){
 
 }
 // работа с компанией
-function adminCompanyCtrl ($scope, $http, $routeParams){
+function adminCompanyCtrl ($scope,$cookies ){
+
 
 }
 
-// работа с Вакансией
-function adminVacancyCtrl ($scope, $http, $routeParams){
+//здесь проверка на админственность
+function adminCtrl (path){
+    // возвращает   Cookie
+    function getCookie(name)
+        {
+        var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+        return matches ? decodeURIComponent(matches[1]) : "";
+        }
+     //
+    if(getCookie('login')!=""){return path;} else {return '/vacancies';}
 
+}
+
+// уcтанавливает cookie
+function setCookie(name, value, props) {
+    props = props || {}
+    var exp = props.expires
+    if (typeof exp == "number" && exp) {
+        var d = new Date()
+        d.setTime(d.getTime() + exp*1000)
+        exp = props.expires = d
+    }
+    if(exp && exp.toUTCString) { props.expires = exp.toUTCString() }
+    value = encodeURIComponent(value)
+    var updatedCookie = name + "=" + value
+    for(var propName in props){
+        updatedCookie += "; " + propName
+        var propValue = props[propName]
+        if(propValue !== true){ updatedCookie += "=" + propValue }
+    }
+
+    document.cookie = updatedCookie
+}
+
+// удаляет cookie
+function deleteCookie(name) {
+    setCookie(name, null, { expires: -1 })
 }
 
 ]]></CSP>

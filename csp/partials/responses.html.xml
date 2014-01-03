@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="partials/responses.html" application="/csp/vacancy/"><![CDATA[
+<div ng-include="'partials/tab_menu.html'" ng-init="responses_add_active = 'active'"></div>
+
+
+         <div class="row" style="padding:0px; margin-bottom:5px;">
+
+                <div class="span2 text-center"><button class="btn">Откликнувшийся</button></div>
+                <div class="span2 text-center"><button class="btn">Вакансия</button></div>
+                <div class="span2 text-center"><button class="btn">Компания</button></div>
+                <div class="span2 text-center"><button class="btn">Дата отклика</button></div>
+                <div class="span2 text-center"><button class="btn">Отправлено</button></div>
+                <div class="span2 text-center text-error"><b>Операции</b></div>
+         </div>
+
+<!--
+ <div class="btn-group">
+       <button class="btn btn-mini span2">Откликнувшийся</button>
+       <button class="btn btn-mini span2">Вакансия</button>
+       <button class="btn btn-mini span2">Компания</button>
+       <button class="btn btn-mini span2">Дата отклика</button>
+       <button class="btn btn-mini span2">Отправлено</button>
+       <button class="btn btn-mini span2">Отправлено</button>
+ </div>
+            -->
+
+<div class="well" style="padding:10px">
+   <ul class='nav nav-pills' >
+       <li ng-repeat="vacresponse in vacresp" >
+                   <a href="#vacancy/{{ vacresponse.Vacancy }}" class="pull-left" style="text-align: left;"  title="{{vacresponse.ResponseText}}">
+                       <div class="span2 pull-left">
+                           <input type="hidden" ng-model="ID" value="{{vacresponse.ID}}" />
+                           <i class="icon-user"></i>&nbsp
+                           <i>{{vacresponse.FirstName}}
+                              {{vacresponse.LastName}}
+                           </i> <br>
+                            <i class="icon-envelope"></i><b><a href="mailto:{{vacresponse.Email}}">{{vacresponse.Email}}</a></b><br>
+                           <i class="icon-volume-up"></i>&nbsp {{ vacresponse.Telephone }}
+
+                       </div>
+
+                       <div class="span2 text-info">
+                           {{vacresponse.VacancyName}}
+                       </div>
+
+                       <div class="span2 text-succes">
+                           <img align="left" src="/csp/vacancy/WEB.CompanyImage.cls?id={{vacresponse.Company}}" width="120" height="90" title="{{vacresponse.CompanyName}}"/>
+
+                       </div>
+
+                        <div class="span2">
+                            <span class="label">{{vacresponse.ResponseDate}}</span>
+                        </div>
+
+                        <div class="span2">
+                               <span class="label label-success" ng-show="vacresponse.Status" >Отправлено</span>
+                        </div>
+
+                   </a>
+                        <div class="span1">
+                            <button   class="btn btn-mini  " ng-click=" deletevr(vacresponse.ID)"><i class="icon-remove"></i></button>
+                            <button   class="btn btn-mini  btn-primary" ng-click=" RM(vacresponse.ID)"><i class="icon-envelope"></i></button>
+                        </div>
+
+             <br>
+           <div class="span11">
+           <hr  style="margin:10px;color: black">
+               </div>
+       </li>
+
+   </ul>
+</div>
+
+                 <!--
+                       <div class="span1">
+
+
+
+                           <span class="label label-success" ng-show="vacresponse.Status" >Успех</span>
+
+                       </div>
+                       <div class="span2">
+
+                       <span class="label label-info pull-right">
+                          Skype: {{vacresponse.Skype}} <br>
+                           <br>
+
+                       </span>
+                       </div>
+
+                   <div class="span3" ng-hide="true">
+                           <span class="text">
+                               {{vacresponse.ResponseText}}
+                           </span>
+                   </div>
+
+
+
+                           -->
+
+
+                  <!--
+
+                            <div class="span1">
+                                <button   class=" btn-small  " ng-click=" deletevr(vacresponse.ID)">Удалить</button>
+                                </div>
+                            <div class="span1">
+
+                                <button   class=" btn-small  btn-primary" ng-click=" RM(vacresponse.ID)">Отправить</button>
+                            </div>
+
+                      -->
+
+
+
+
+
+]]></CSP>
+</Export>

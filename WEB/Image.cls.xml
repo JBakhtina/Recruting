@@ -13,33 +13,36 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 
+
   set a=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
+ // set counter=%request.Get("counter")
+ 	
  
   set oid=a.Img.%Oid()
 
   d:$IsObject(a.Img) a.Img.OutputToDevice()
   
 
+  // Если это счётчик  
+  //if (counter = "1"){
+		  // Добавляем новую запись о просмотре вакансии
+		 Set httpR=##class(Vacancy.VacancyView).%New()
+		 set httpR.Browser=%session.BrowserName
+		 //set httpR.Referer=%request.GetCgiEnv("HTTP_USER_AGENT") 
+		 //set httpR.Referer=%request.GetCgiEnv("HTTP_REFERER") 
+		 //TODO разобраться почему неотробатывает URL источник
+		 //set httpRr=##class(%Net.HttpRequest).%New()
+		 //do httpRr.Reset() 
+		 set httpR.URL=%request.GetCgiEnv("HTTP_REFERER") 
+		 set httpR.Date=$piece($H, ",")
+		 // возвращаем IP посетителя
+		 set httpR.IP=%request.GetCgiEnv("REMOTE_ADDR")
+	
+		 set httpR.Vacancy=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
+		 do httpR.%Save()
+ // }
   
-  // Добавляем новую запись о просмотре вакансии
- Set httpR=##class(Vacancy.VacancyView).%New()
- set httpR.Browser=%session.BrowserName
- //set httpR.Referer=%request.GetCgiEnv("HTTP_USER_AGENT") 
- //set httpR.Referer=%request.GetCgiEnv("HTTP_REFERER") 
- //TODO разобраться почему неотробатывает URL источник
- //set httpRr=##class(%Net.HttpRequest).%New()
- //do httpRr.Reset() 
- set httpR.URL=%request.GetCgiEnv("HTTP_REFERER") 
- set httpR.Date=$piece($H, ",")
- // возвращаем IP посетителя
- set httpR.IP=%request.GetCgiEnv("REMOTE_ADDR")
- //set httpR.IP=%request.GatewayConnectionName
- //w ##class(%SYSTEM.INetInfo).GetInterfacesInfo()
- set httpR.Vacancy=##class(Vacancy.Vacancy).%OpenId($Get(%request.Data("id",1),1))
- do httpR.%Save()
-  
-  
-    
+ // S %session.EndSession=1
   Q $$$OK
 ]]></Implementation>
 </Method>

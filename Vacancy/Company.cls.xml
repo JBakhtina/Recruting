@@ -65,7 +65,7 @@
 <Description>
 Описание компании</Description>
 <Type>%Text</Type>
-<Parameter name="MAXLEN" value="500"/>
+<Parameter name="MAXLEN" value="5000"/>
 </Property>
 
 <Property name="MailToResponse">
@@ -80,6 +80,13 @@ mail для отправки почты админу</Description>
 Иначе отправлять сюда MailToResponse</Description>
 <Type>%Boolean</Type>
 <InitialExpression>1</InitialExpression>
+</Property>
+
+<Property name="CompanyCurrency">
+<Description>
+Валюта компании</Description>
+<Type>%String</Type>
+<InitialExpression>"руб."</InitialExpression>
 </Property>
 
 <Method name="DeleteCompany">

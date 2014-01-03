@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="widget.html" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+
+<html ng-app>
+<head>
+    <title>Vacancy widget</title>
+
+</head>
+<body>
+<div ng-controller="mycontroller">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript">
+        function mycontroller ($scope, $http){
+            $scope.GetWidgetInfo=function(){
+                $http.get("http://cache-vacancies.intersystems.ru/v/json/forwidget").success(function(data){
+                    $scope.widget=data.children;}).error(function(data,status){
+                            $scope.alertzone="["+status+"] Ошибка загрузки виджета :( ["+data+"]"; });
+            }
+            $scope.GetWidgetInfo();
+        }
+    </script>
+    <a href="http://www.intersystems.ru/cache/index.html" target="_blank"><img src="http://bit.ly/WuRdkU" alt="image"/></a>
+    <!--<br>-->
+    <b> Вакансии партнеров: </b>
+    <div ng-repeat="w in widget">
+        <a href="http://cache-vacancies.intersystems.ru/index.html#vacancy/{{ w.IDVac }}" target = "_blank">{{ w.VacancyName }}</a> <br>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+</div>
+
+</body>
+</html>]]></CSP>
+</Export>

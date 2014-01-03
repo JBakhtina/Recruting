@@ -12,6 +12,7 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+	
 	do ..Header()
 	do ..MyPage()
 	do ..EndBody()

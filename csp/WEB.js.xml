@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="WEB.js" application="/csp/vacancy/"><![CDATA[
+/*** Zen Module: WEB ***/
+
+self._zenClassIdx['JSON'] = 'WEB_JSON';
+self.WEB_JSON = function(index,id) {
+	if (index>=0) {WEB_JSON__init(this,index,id);}
+}
+
+self.WEB_JSON__init = function(o,index,id) {
+	('undefined' == typeof _Library_Base__init) ?zenMaster._Library_Base__init(o,index,id):_Library_Base__init(o,index,id);
+	o.OnCreateResultSet = '';
+	o.OnExecuteResultSet = '';
+	o.alertOnError = true;
+	o.columnName = '';
+	o.countRows = '0';
+	o.currPage = '1';
+	o.dataLoaded = false;
+	o.defaultSeries = '1';
+	o.dragEnabled = false;
+	o.dropEnabled = false;
+	o.dynamic = false;
+	o.enclosingClass = 'zendiv';
+	o.groupByClause = '';
+	o.height = '';
+	o.hidden = false;
+	o.hintClass = 'zenHint';
+	o.labelClass = 'zenLabel';
+	o.labelDisabledClass = 'zenLabelDisabled';
+	o.maxRows = '100';
+	o.modelChanged = true;
+	o.orderByClause = '';
+	o.overlayMode = '0';
+	o.pageSize = '25';
+	o.queryClass = '';
+	o.queryName = '';
+	o.readOnly = false;
+	o.renderFlag = '0';
+	o.seriesNameProperty = 'caption';
+	o.showLabel = true;
+	o.sql = ''; // encrypted
+	o.tableName = '';
+	o.visible = false;
+	o.whereClause = '';
+	o.width = '';
+}
+function WEB_JSON_serialize(set,s)
+{
+	var o = this;s[0]='242232957';s[1]=o.index;s[2]=o.id;s[3]=o.name;s[4]=set.addObject(o.parent,'parent');s[5]=set.addObject(o.composite,'composite');s[6]=o.OnCreateResultSet;s[7]=o.OnExecuteResultSet;s[8]=o.OnGetArray;s[9]=o.OnGetSQL;s[10]=o.OnGetTargetObject;s[11]=o.OnRenderJSON;s[12]=o.OnSubmitContent;s[13]=(o.alertOnError?1:0);s[14]=o.align;s[15]=o.autoRefresh;s[16]=o.aux;s[17]=o.columnName;s[18]=o.containerStyle;s[19]=o.content;s[20]=o.contentType;s[21]=o.countRows;s[22]=set.addObject(o.criteria,'criteria');s[23]=o.currPage;s[24]=set.addObject(o.dataBag,'dataBag');s[25]=(o.dataLoaded?1:0);s[26]=(o.dataReadOnly?1:0);s[27]=o.defaultSeries;s[28]=o.documentId;s[29]=(o.dragEnabled?1:0);s[30]=(o.dropEnabled?1:0);s[31]=(o.dynamic?1:0);s[32]=o.enclosingClass;s[33]=o.enclosingStyle;s[34]=o.error;s[35]=o.groupByClause;s[36]=o.height;s[37]=(o.hidden?1:0);s[38]=o.hint;s[39]=o.hintClass;s[40]=o.hintStyle;s[41]=o.label;s[42]=o.labelClass;s[43]=o.labelDisabledClass;s[44]=o.labelStyle;s[45]=o.maxRows;s[46]=(o.modelChanged?1:0);s[47]=o.modelError;s[48]=o.modelId;s[49]=o.onafterdrag;s[50]=o.onbeforedrag;s[51]=o.oncreate;s[52]=o.ondelete;s[53]=o.ondrag;s[54]=o.ondrop;s[55]=o.onerror;s[56]=o.onhide;s[57]=o.onnotifyController;s[58]=o.onrefresh;s[59]=o.onsave;s[60]=o.onshow;s[61]=o.onupdate;s[62]=o.orderByClause;s[63]=o.overlayMode;s[64]=o.pageSize;s[65]=set.serializeArray(o,o.parameters,true,'parameters');s[66]=o.propertyList;s[67]=o.queryClass;s[68]=o.queryName;s[69]=(o.readOnly?1:0);s[70]=o.recordCount;s[71]=o.renderFlag;s[72]=o.seriesNameProperty;s[73]=(o.showLabel?1:0);s[74]=o.slice;s[75]=o.sql;s[76]=o.tableName;s[77]=o.targetClass;s[78]=o.timerid;s[79]=o.title;s[80]=o.tuple;s[81]=o.valign;s[82]=(o.visible?1:0);s[83]=o.whereClause;s[84]=o.width;
+}
+function WEB_JSON_getSettings(s)
+{
+	s['name'] = 'string';
+	s['columnName'] = 'string';
+	s['countRows'] = 'integer';
+	s['groupByClause'] = 'string';
+	s['maxRows'] = 'integer';
+	s['orderByClause'] = 'string';
+	s['queryClass'] = 'className';
+	s['queryName'] = 'classMember:QUERY';
+	s['sql'] = 'sql';
+	s['tableName'] = 'string';
+	s['whereClause'] = 'string';
+	this.invokeSuper('getSettings',arguments);
+}
+
+self.WEB_JSON_DeleteFromServer = function(pID) {
+	return zenInstanceMethod(this,'DeleteFromServer','L','BOOLEAN',arguments);
+}
+
+self.WEB_JSON_ExecuteAction = function(pAction,pData) {
+	return zenInstanceMethod(this,'ExecuteAction','L,L','BOOLEAN',arguments);
+}
+
+self.WEB_JSON_LoadFromServer = function() {
+	return zenInstanceMethod(this,'LoadFromServer','','VARCHAR',arguments);
+}
+
+self.WEB_JSON_ReallyRefreshContents = function() {
+	zenInstanceMethod(this,'ReallyRefreshContents','','',arguments);
+}
+
+self.WEB_JSON_RefreshFromServer = function() {
+	return zenInstanceMethod(this,'RefreshFromServer','','BOOLEAN',arguments);
+}
+
+self.WEB_JSON_RefreshFromServerAsynch = function() {
+	zenInstanceMethod(this,'RefreshFromServerAsynch','','',arguments);
+}
+
+self.WEB_JSON_SaveToServer = function() {
+	return zenInstanceMethod(this,'SaveToServer','','VARCHAR',arguments);
+}
+
+self.WEB_JSON_SubmitToServer = function(pCommand,pContent,pTargetClass) {
+	return zenInstanceMethod(this,'SubmitToServer','L,L,L','BOOLEAN',arguments);
+}
+self.WEB_JSON__Loader = function() {
+	zenLoadClass('_Library_Base');
+	WEB_JSON.prototype = zenCreate('_Library_Base',-1);
+	var p = WEB_JSON.prototype;
+	if (null==p) {return;}
+	p.constructor = WEB_JSON;
+	p.superClass = ('undefined' == typeof _Library_Base) ? zenMaster._Library_Base.prototype:_Library_Base.prototype;
+	p.__ZENcomponent = true;
+	p._serverClass = 'WEB.JSON';
+	p._type = 'JSON';
+	p.serialize = WEB_JSON_serialize;
+	p.getSettings = WEB_JSON_getSettings;
+	p.DeleteFromServer = WEB_JSON_DeleteFromServer;
+	p.ExecuteAction = WEB_JSON_ExecuteAction;
+	p.LoadFromServer = WEB_JSON_LoadFromServer;
+	p.ReallyRefreshContents = WEB_JSON_ReallyRefreshContents;
+	p.RefreshFromServer = WEB_JSON_RefreshFromServer;
+	p.RefreshFromServerAsynch = WEB_JSON_RefreshFromServerAsynch;
+	p.SaveToServer = WEB_JSON_SaveToServer;
+	p.SubmitToServer = WEB_JSON_SubmitToServer;
+}
+/* EOF */]]></CSP>
+</Export>

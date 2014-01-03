@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="js/uploader.js" application="/csp/vacancy/"><![CDATA[
+var usrImage;      // переменная для хранения пользовательского файла - изображения
+
+// метод получения локального файла картинки
+function setFile(element)
+{
+    // получим первый файл из массива
+    usrImage = element.files[0];
+    console.log('file:',usrImage);
+
+    // считыватель
+    var reader = new FileReader;
+    reader.readAsDataURL(usrImage);
+
+    // установим место загрузки - элемент документа типа img
+    var place = document.getElementById("Logo");
+
+    // Как только картинка загрузится
+    reader.onload = function(e) {
+
+        // установим картинку в объект img
+        place.src = e.target.result;
+
+        console.log('width:',place.width);
+        console.log('width:',place.height);
+    }
+}
+
+// метод отправки файлов
+function uploadFile(objType, objID,showDialog)
+{
+    // создадим форму для загрузки файлов
+    var fd = new FormData()
+    fd.append("objType", objType);
+    fd.append("objID", objID);
+    fd.append("objImg", usrImage);
+
+    // Объект для отправки данных на сервер
+    var xhr = new XMLHttpRequest();
+
+    // Отправим данные на сервер
+    xhr.open("POST", "/av/json/loadimg/", false);
+    xhr.send(fd);
+    if(showDialog){
+        if(xhr.status == 200) {
+            var resp = xhr.responseText
+            if(resp == "") {
+                resp = "Изображение установлено";
+            }
+
+            alert(resp,"установка изображения");
+        }
+    }
+}]]></CSP>
+</Export>
