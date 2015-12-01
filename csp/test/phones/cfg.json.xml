@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="test/phones/cfg.json" application="/csp/vacancy/"><![CDATA[
+[
+    {
+       "id": 1,
+       "url": "test",
+       "post": "sample@post.ru"
+    },
+    {
+       "id": 2,
+       "url": "test2",
+       "post": "sample2@post.ru"
+    }
+]]]></CSP>
+</Export>

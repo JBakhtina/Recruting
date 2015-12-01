@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/tab_menu.html" application="/csp/vacancy/"><![CDATA[
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
-    <li><a href="#admin/addvacancy" data-toggle="tab"><b>Добавить вакансию</b></a></li>
-    <li><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
-    <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
-    <li><a href="#admin/admin_init" data-toggle="tab">Личные данные</a></li>
-</ul>]]></CSP>
+
+     <ul class="nav nav-tabs"  style="font-size: 11px;">
+
+        <li class="{{vac_active}}"  >
+            <a href="#admin/vacancies" data-toggle="tab"><i class="icon-list"/>&nbsp<b>Вакансии</b></a>
+        </li>
+        <li class="{{vac_add_active}}">
+            <a href="#admin/addvacancy" data-toggle="tab"><i class="icon-plus"/>&nbspНовая вакансия</a>
+        </li>
+
+
+        <li class="{{usr_active}}">
+            <a href="#admin/users" data-toggle="tab"><i class="icon-user"/>&nbsp<b>Пользователи</b></a>
+        </li>
+        <li class="{{usr_add_active}}">
+            <a href="#admin/adduser" data-toggle="tab"><i class="icon-plus"/>&nbspНовый пользователь</a>
+        </li>
+
+        <li class="{{comp_active}}">
+            <a href="#admin/companies" data-toggle="tab"><i class="icon-home"/>&nbsp<b>Компании</b></a>
+        </li>
+        <li class="{{comp_add_active}}">
+            <a href="#admin/addcompany" data-toggle="tab"><i class="icon-plus"/>&nbspНовая компания</a>
+        </li>
+         <!--
+                  TODO:отклик на конкретную вакансию серым, если не выбрана вакансия
+         <li class="{{resp_add_active}}">
+             <a href="#admin/response/{{ vacancyid }}" data-toggle="tab">Все отклики</a>
+         </li>
+
+          -->
+         <li class="{{responses_add_active}}">
+             <a href="#admin/responses" data-toggle="tab"><i class="icon-bullhorn"/>&nbsp<b>Отклики</b></a>
+         </li>
+
+         <li class="{{settings_active}}">
+             <a href="#admin/settings" data-toggle="tab"><i class="icon-wrench"/>&nbsp<b>Настройки</b></a>
+         </li>
+
+
+         <!--
+             TODO:ссылка на настройки
+             <li><a href="#admin/admin" data-toggle="tab">Личные данные</a></li> -->
+    </ul>
+]]></CSP>
 </Export>

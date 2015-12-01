@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="Settings.CSP" application="/csp/vacancy/"><![CDATA[
+<html>
+<head>
+    <link href="css/bootstrap3/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="lib/bootstrap.js"></script>
+<title>	Страница настроек </title>
+<h1>Настройки</h1> <br><br>
+</head>
+
+<body>
+<div class="span12">
+	<div class="well">
+		<form class="form-horizontal"  name="Converter">
+            <div class="control-group">
+                <label class="control-label">
+                  URL:
+                </label>
+                <div class="controls">
+ 	             	<input class="input-xlarge" type="text" name="URL" value="#(##class(WEB.JSON).GetDataFromGlobal("URL"))#">
+				</div>
+			</div>
+			
+			<div class="control-group">
+                <label class="control-label">
+                 E-mail для рассылки:
+                </label>
+                <div class="controls">
+ 					<input class="input-xlarge" type="text" name="email" value="#(##class(WEB.JSON).GetDataFromGlobal("email"))#">
+				Заменить получателя <input type="checkbox" name="emailcheck" value="1" CHECKED="#(##class(WEB.JSON).GetDataFromGlobal("emailcheck"))#">
+				</div>
+			</div>
+
+            <div class="control-group">
+                <div class="controls">
+					<input class="btn" type="button" value="Сохранить" onClick="btnClick()">
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+<script language="javascript" runat="Server">
+function btnClick(){
+	var Arg1=self.document.Converter.URL.value;
+	var Arg2=self.document.Converter.email.value;
+	var Arg3=self.document.Converter.emailcheck.value;
+	
+	
+	#server(WEB.JSON.SetGlobal("URL",Arg1))#
+	#server(WEB.JSON.SetGlobal("email",Arg2))#
+	#server(WEB.JSON.SetGlobal("emailcheck",Arg3))#
+	}
+</script>
+<script language="Cache" runat="Server">
+	w "{""children"":[{""Status"":""1""}]}"
+</script>
+
+</body>
+</html>
+]]></CSP>
+</Export>

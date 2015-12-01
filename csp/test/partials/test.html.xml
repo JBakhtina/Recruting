@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="test/partials/test.html" application="/csp/vacancy/"><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+<h3>{{test}}</h3>
+    <div class="span10">
+    <!--Body content-->
+
+    <ul class="test">
+        <li ng-repeat="pt in phoneTest" class="thumbnail">
+            <a href="#/phones/{{pt.id}}" class="thumb"><img ng-src="{{pt.imageUrl}}"></a>
+            <a href="#/phones/{{pt.id}}">{{pt.name}}</a>
+            <p>{{pt.snippet}}</p>
+        </li>
+    </ul>
+
+    </div>
+</body>
+</html>]]></CSP>
+</Export>

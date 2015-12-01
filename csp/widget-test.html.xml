@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="widget-test.html" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+
+<html ng-app>
+<head>
+    <title>Vacancy widget</title>
+</head>
+
+<body>
+ <iframe src="widget.html"> </iframe>
+</body>
+</html>
+
+]]></CSP>
+</Export>

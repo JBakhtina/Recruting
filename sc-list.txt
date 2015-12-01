@@ -1,2 +1,3 @@
+<cspapp>
 Vacancy.PKG
 WEB.PKG

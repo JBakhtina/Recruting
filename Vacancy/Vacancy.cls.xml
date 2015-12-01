@@ -28,7 +28,7 @@
 <Property name="RegDate">
 <Description>
 Дата выставления</Description>
-<Type>%Date</Type>
+<Type>%TimeStamp</Type>
 </Property>
 
 <Property name="Skills">
@@ -102,11 +102,18 @@
 <Parameter name="MAXLEN" value="5000"/>
 </Property>
 
+<Property name="VacancyCurrency">
+<Description>
+Валюта вакансии</Description>
+<Type>%String</Type>
+<InitialExpression>"руб."</InitialExpression>
+</Property>
+
 <Property name="IsActive">
 <Description>
 Active vacancy or not</Description>
 <Type>%Boolean</Type>
-<InitialExpression>1</InitialExpression>
+<InitialExpression>0</InitialExpression>
 </Property>
 
 <Property name="Company">
@@ -231,6 +238,9 @@ Active vacancy or not</Description>
 </Value>
 <Value name="18">
 <Value>IsActive</Value>
+</Value>
+<Value name="19">
+<Value>VacancyCurrency</Value>
 </Value>
 </Data>
 <Data name="VacancyTypes">

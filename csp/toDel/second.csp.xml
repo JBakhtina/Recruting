@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="toDel/second.CSP" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+
+<html ng-app>
+<head>
+	<title>Компании</title>
+	
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+
+
+
+<body ng-controller="CompanyShow">
+<h1>
+Добавление/Удаление/Изменение компаний
+</h1>
+
+
+
+		<form  name="SystemCompany" ng-model="company"  ng-submit="updateCompany(#($Get(%request.Data("id",1),1))#,company[0])">
+  		
+  		<span ng-init="GetSystemCompany(#($Get(%request.Data("id",1),1))#)"></span>
+		
+		Название компании <input type="text" ng-model="company[0].CompanyName"/><br>
+
+		
+		Страна 			<input type="text" ng-model="company[0].Country"/>   <br>
+		Край/область 	<input type="text" ng-model="company[0].State"/>     <br>
+		Город 			<input type="text" ng-model="company[0].City"/>      <br>
+		Улица 			<input type="text" ng-model="company[0].Street"/>    <br>
+		Строение 		<input type="text" ng-model="company[0].Building"/>  <br>
+		Квартира 		<input type="text" ng-model="company[0].Apartament"/><br>
+	    E-mail 			<input type="text" ng-model="company[0].Email"/>     <br>
+		Телефон 		<input type="text" ng-model="company[0].Telephone"/> <br>
+		URL 			<input type="text" ng-model="company[0].URL"/>       <br>
+		
+		<input type="submit" value="Сохранить"/><br>
+		<input type="button" value="Удалить" ng-click="deleteCompany(#($Get(%request.Data("id",1),1))#);"/>
+		</form>
+
+
+
+		<form  name="NewCompany" ng-model="comp"  ng-submit="newCompany(comp)">
+  		
+		Название компании   <input type="text" ng-model="comp.CompanyName"/><br>
+		Страна              <input type="text" ng-model="comp.Country"/><br>
+		Край/область        <input type="text" ng-model="comp.State"/><br>
+		Город 				<input type="text" ng-model="comp.City"/><br>
+		Улица 				<input type="text" ng-model="comp.Street"/><br>
+		Строение			<input type="text" ng-model="comp.Building"/><br>
+		Квартира 			<input type="text" ng-model="comp.Apartament"/><br>
+	    E-mail 				<input type="text" ng-model="comp.Email"/><br>
+		Телефон 			<input type="text" ng-model="comp.Telephone"/><br>
+		URL 				<input type="text" ng-model="comp.URL"/><br>
+		<input type="submit" value="Сохранить"/>
+	
+		</form>
+
+
+<script src="../lib/bootstrap.js"></script>
+<script src="../lib/jquery.js"></script>
+<script language = "javascript" src="../lib/angular/angular.js"></script>
+<script language = "javascript" src="../lib/angular/angular-cookies.min.js"></script>
+<script language = "javascript" src="../js/filters.js"></script>
+<script language = "javascript" src="../js/app.js"></script>
+<script language = "javascript" src="../js/controllers.js"></script>
+
+</body>
+</html>
+]]></CSP>
+</Export>

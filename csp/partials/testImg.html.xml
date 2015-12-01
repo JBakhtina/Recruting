@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="partials/testImg.html" application="/csp/vacancy/"><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+ </head>
+<body>
+
+<script>
+    /*
+    fileUploadCtrl.$inject = ['$scope','$http']
+    function fileUploadCtrl(scope, http) {
+        scope.setFile = function(element) {
+            scope.$apply(function(scope) {
+                console.log('files:', element.files);
+
+                scope.file = element.files[0]
+                console.log('file:',scope.file);
+
+                var reader = new FileReader
+
+                var place = document.getElementById("Logo")
+                reader.readAsDataURL(scope.file);
+                reader.onload = function(e) { // Как только картинка загрузится
+                    place.src = e.target.result;
+                }
+
+                // for (var i = 0; i < element.files.length; i++) {
+                // scope.files.push(element.files[i])
+                // }
+                //scope.progressVisible = false
+
+                //document.getElementById("Logo").src = scope.file.name;
+            });
+        };
+
+        scope.uploadFile = function() {
+
+            var fd = new FormData()
+            fd.append("objType", "Company")
+            fd.append("objID", 2)
+            fd.append("objImg", scope.file)
+            //   http.post("http://localhost:57772/v/json/vimage/",fd).success()
+            //         .error(function(data,status){alert(data);alert(status);});
+            //
+           //  for (var i in scope.files) {
+           //  fd.append("uploadedFile", scope.files[i])
+            // alert(scope.files[i])
+           //  }
+
+            var xhr = new XMLHttpRequest()
+            //  xhr.upload.addEventListener("progress", uploadProgress, false)
+            //  xhr.addEventListener("load", uploadComplete, false)
+            //   xhr.addEventListener("error", uploadFailed, false)
+            //  xhr.addEventListener("abort", uploadCanceled, false)
+            var str = "objType="+"'Company'"+"&objID="+2+"&objImg="+scope.file
+            alert(fd)
+            xhr.open("POST", "http://localhost:57772/v/json/testimg/", false)
+            // scope.progressVisible = true
+            xhr.send(fd)
+              if(xhr.status == 200) {
+                   alert(xhr.responseText);
+             }
+        }
+    }
+ */
+
+
+
+   var usrImage;      // переменная для хранения пользовательского файла - изображения
+
+   // метод получения локального файла картинки
+   function setFile(element)
+    {
+        // получим первый файл из массива
+        usrImage = element.files[0];
+        console.log('file:',usrImage);
+
+        // считыватель
+        var reader = new FileReader;
+        reader.readAsDataURL(usrImage);
+
+        // установим место загрузки - элемент документа типа img
+        var place = document.getElementById("Logo");
+
+        // Как только картинка загрузится
+        reader.onload = function(e) {
+            // установим картинку в объект img
+            place.src = e.target.result;
+        }
+    }
+
+    // метод отправки файлов
+    function uploadFile(objType, objID)
+    {
+        // создадим форму для загрузки файлов
+        var fd = new FormData()
+        fd.append("objType", objType);
+        fd.append("objID", objID);
+        fd.append("objImg", usrImage);
+
+        // Объект для отправки данных на сервер
+        var xhr = new XMLHttpRequest();
+
+        // Отправим данные на сервер
+        xhr.open("POST", "http://localhost:57772/v/json/loadimg/", false);
+        xhr.send(fd);
+        if(xhr.status == 200) {
+            alert(xhr.responseText);
+        }
+    }
+
+</script>
+<!--
+<div ng-controller="fileUploadCtrl">
+    <div ID="UploadContainer" >
+        <img ID="Logo" src="img\comp1.png" style="padding-top:10px">
+        <input type="file" name="file" id="FileToUpload" size="1" accept="image/*" onchange="angular.element(this).scope().setFile(this)">
+    </div>
+    <input type="button" ng-click="uploadFile()" value="Upload" />
+</div>
+
+ -->
+ <!--
+<div>
+    <div ID="UploadContainer" >
+        <img ID="Logo" src="img\comp1.png" style="padding-top:10px">
+        <input type="file" name="file" id="FileToUpload" size="1" accept="image/*" onchange="setFile(this)">
+    </div>
+    <input type="button" onclick="uploadFile('Company','1')" value="Upload" />
+</div>       -->
+
+<div class="btn-group">
+<button class="btn btn-xlarge btn-danger">Test</button>
+<button class="btn btn-mini btn-warning">Test2</button>
+<button class="btn btn-mini btn-info">Test2</button>
+<button class="btn btn-mini btn-success">Test2</button>
+</div>
+
+<div class="well">
+<img ID="Logo" src="img\comp1.png"  class="img-polaroid">
+ </div>
+</body>
+</html>]]></CSP>
+</Export>

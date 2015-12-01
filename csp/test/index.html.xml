@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="test/index.html" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+<html lang="en" ng-app="phonecat">
+<head>
+  <meta charset="utf-8">
+  <title>Google Phone Gallery</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/services.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+
+</head>
+<body>
+    <a href="#/test/">Test</a>
+    <img src="img/phones/dell-streak-7.0.jpg">
+
+    <div ng-view></div>
+
+</body>
+</html>
+]]></CSP>
+</Export>

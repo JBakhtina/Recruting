@@ -5,8 +5,10 @@
 
 <html ng-app="recruting">
 <head>
-    <title>Vacancy</title>
+    <title ng-bind-template="Vacancies: {{title_text}}">Vacancy IS</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/vacancy.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -20,12 +22,15 @@
     <div class="navbar" style="margin-bottom:10px;" ng-controller="authCtrl">
 
         <nav class="navbar-inner">
-            <a class="brand" href="index.html">&nbsp Вакансии</a>
+            <a class="brand" href="index.html">&nbspВакансии по технологиям InterSystems</a>
             <ul class="nav">
                 <li class="divider-vertical"></li>
-                <li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
-                <li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
-            </ul>
+                    <li><a href="#/about"><i class="icon-envelope"></i>&nbsp О проекте</a></li>
+                <!--
+                TODO: Решить что с этим делать
+                    <li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
+                         -->
+                </ul>
 
             <!---АУТЕНТИФИКАЦИЯ--->
             <div>
@@ -41,12 +46,12 @@
                 <!---/АУТЕНТИФИКАЦИЯ_ФОРМА ВХОДА--->
 
                 <!---АУТЕНТИФИКАЦИЯ_ЗАЛОГИНИЛСЯ--->
-                <form ng-submit="authLogout()" class="navbar-form pull-right" ng-hide="showAF" ng-show="showAG">
+                <form ng-submit="authLogout()" class="navbar-form pull-right" ng-hide="showAF" ng-show="showAG"  ng-cloak>
                     <div class="navbar-for pull-right">
                         <div class = "span3">
                             <p class="text-info" style="margin:0px">Добрый день, {{fname}}</br>
                                 <i class="icon-user"></i>&nbsp
-                                <small><a href="#/admin" >Личный кабинет</a></small></p>
+                                <small><a href="#/admin/vacancies" >Личный кабинет</a></small></p>
                         </div>
                         <div class = "span1">
                             <button type="submit" class="btn" ng-click="logout()" >Выйти</button>
@@ -61,20 +66,40 @@
     </div>
     <!---/НАВИГАЦИОННАЯ ПАНЕЛЬ--->
 
+
     <!---КОНТЕНТ--->
     <div ng-view></div>
     <!---/КОНТЕНТ--->
 </div>
 
-<script src="lib/bootstrap.js"></script>
+
+<script src="lib/bootstrap.min.js"></script>
 <script src="lib/jquery.js"></script>
-<script language = "javascript" src="lib/angular/angular.js"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>-->
+
+<script language = "javascript" src="lib/angular/angular.min.js"></script>
 <script language = "javascript" src="lib/angular/angular-cookies.min.js"></script>
-<script language = "javascript" src="lib/angular/angular-resource.min.js"></script>
+<script language = "javascript" src="lib/angular/angular-resource.js"></script>
+<script language = "javascript" src="lib/angular/ui-bootstrap-tpls-0.6.0.js"></script>
+
+<script language = "javascript" src="lib/angular/angular-sanitize.min.js"></script>
 
 <script language = "javascript" src="js/filters.js"></script>
+<script language = "javascript" src="js/services.js"></script>
 <script language = "javascript" src="js/app.js"></script>
+
 <script language = "javascript" src="js/controllers.js"></script>
+
+
+<!--             Текстовый редактор   -->
+<script type="text/javascript" src="lib/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="lib/ui-tinymce/src/tinymce.js"></script>
+<!--            END Текстовый редактор   -->
+<!--Метрика яндека-->
+<!-- Yandex.Metrika counter
+<script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter22312432 = new Ya.Metrika({id:22312432, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/22312432?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+<!--/Метрика яндека-->
+
 </body>
 </html>
 

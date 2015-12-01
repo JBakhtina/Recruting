@@ -1,42 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="partials/admin_user.html" application="/csp/vacancy/"><![CDATA[
+<div ng-include="'partials/tab_menu.html'" ng-init="usr_active = 'active'"></div>
 
-<ul class="nav nav-tabs">
-    <li><a href="#vacancies" data-toggle="tab">Вакансии</a></li>
-    <li class="active"><a href="#admin/users" data-toggle="tab">Пользователи</a></li>
-    <li><a href="#admin/adduser" data-toggle="tab"><b>Добавить пользователя</b></a></li>
-    <li><a href="#admin/companies" data-toggle="tab">Компании</a></li>
-    <li><a href="#admin/admin" data-toggle="tab">Настройки?</a></li>
-</ul> 
-<!--TODO: заменить на нормальный алерт -->
-{{ alertzone }}
+<div  class="row">
+    <article class="span12">
+        <p>
+        <ul class='nav nav-tabs nav-stacked'>
+            <li>
+            <div class="well">
+                <form class="form-horizontal"  name="SystemUser" ng-model="user"  ng-submit="updateuser({{ userid }},user[0])">
+
+                    <!-- TODO: неотрабатывает инит -->
+                    <span ng-init="GetSystemUser({{ userid }})"></span>
+
+                    <div class="control-group">
+                        <label for="FirstName" class="control-label" >Имя:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].FirstName"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="LastName" class="control-label" >Фамилия:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].LastName"/></div>
+                    </div>
 
 
-<form  name="SystemUser" ng-model="user"  ng-submit="updateuser({{ userid }},user[0])">
-<!-- TODO: неотрабатывает инит -->
-<span ng-init="GetSystemUser({{ userid }})"></span>
+                    <div class="control-group">
+                        <label for="Login" class="control-label" >Логин:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Login" required="" ng-change="LoginVerify(u.Login)"/>
+                            <div class="label label-warning">{{isLogin}}</div>
+                        </div>
+                    </div>
 
-Имя <input type="text" ng-model="user[0].FirstName"/><br>
-Фамилия<input type="text" ng-model="user[0].LastName"/><br>
-<!--TODO: неработает выборка -->
-    Пол 		<select name="Sex" ng-model="user[0].Sex" ng-value="user[0].Sex"/>
-<option value="М">М</option>
-<option value="Ж">Ж</option>
-</select><br>
-Тип пользователя <input type="text" ng-model="user[0].UserType"/><br>
-Дата рождения <input type="text" ng-model="user[0].DOB"/><br>
-Страна <input type="text" ng-model="user[0].Country"/><br>
-Край/область <input type="text" ng-model="user[0].State"/><br>
-Город <input type="text" ng-model="user[0].City"/><br>
-Улица <input type="text" ng-model="user[0].Street"/><br>
-Строение <input type="text" ng-model="user[0].Building"/><br>
-Квартира <input type="text" ng-model="user[0].Apartament"/><br>
-E-mail <input type="text" ng-model="user[0].Email"/><br>
-Телефон <input type="text" ng-model="user[0].Telephone"/><br>
-URL <input type="text" ng-model="user[0].URL"/><br>
-<input type="submit" value="Сохранить"/><br>
-    <!-- TODO: неотрабатывает УДАЛЕНИЕ -->
-<input type="button" value="Удалить" ng-click="deleteuser({{ userid }});"/>
-</form>]]></CSP>
+                    <div class="control-group">
+                        <label for="Password" class="control-label" >Пароль:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Password" placeholder="старый, если не вводить"/></div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label for="Sex" class="control-label" >Пол:</label>
+                        <div class="controls"><select name="Sex" ng-model="user[0].Sex" ng-value="user[0].Sex">
+                                <option value="М">М</option>
+                                <option value="Ж">Ж</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="UserType" class="control-label" >Тип пользователя:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].UserType"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="DOB" class="control-label" >Дата рождения:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].DOB"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="Country" class="control-label" >Страна:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Country"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="State" class="control-label" >Край/область:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].State"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="City" class="control-label">Город:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].City"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="Street" class="control-label">Улица:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Street"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="Building" class="control-label">Строение:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Building"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="Apartament" class="control-label">Квартира:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Apartament"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="Email" class="control-label">E-mail:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Email"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="Telephone" class="control-label">Телефон:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].Telephone"/></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="URL" class="control-label">URL:</label>
+                        <div class="controls"><input type="text" ng-model="user[0].URL"/></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="Сохранить"/>
+
+                        <input type="button" value="Удалить" ng-click="deleteuser(userid);"/>
+                    </div>
+
+                </form>
+            </div>
+            </li>
+         </ul>
+        </p>
+     </article>
+</div>]]></CSP>
 </Export>

@@ -3,7 +3,7 @@
 <Class name="WEB.JSON">
 <Description>
 Обработка запросов к/от базы</Description>
-<Super>%Persistent,%Base,%RegisteredObject</Super>
+<Super>%Base,%RegisteredObject,%CSP.Request,%CSP.Response</Super>
 <TimeCreated>63004,63548.548932</TimeCreated>
 
 <Method name="DefaultTemplate">
@@ -42,9 +42,10 @@
 <FormalSpec>vrid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+	
 	do ##class(Vacancy.VacancyResponse).%DeleteId(vrid)
 	do ##class(Vacancy.CreateMail).%DeleteId(vrid)
-	
+
 	q $$$OK
 ]]></Implementation>
 </Method>
@@ -61,11 +62,13 @@
 <FormalSpec>vacid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+
 	set vacQuery = "SELECT Count(*) "_
 				   "FROM Vacancy.VacancyView AS V "_
 				   "WHERE V.Vacancy="_vacid
 				   
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
+
 	quit $$$OK
 ]]></Implementation>
 </Method>
@@ -92,6 +95,9 @@
 <Implementation><![CDATA[
 	
 	   set st=$$$OK
+	   
+	   if (st=$$$OK) {
+ 
    try{
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
@@ -107,7 +113,9 @@
       set com.Adress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
       set com.Adress.URL=$ZCONVERT(obj.URL,"I","UTF8")
       set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8")
+      set com.CompanyCurrency=$ZCONVERT(obj.CompanyCurrency,"I","UTF8")
 	  set com.IsModerated=obj.IsModerated
+	  
 
 
        $$$THROWONERROR(st,com.%Save())
@@ -115,6 +123,7 @@
 	//  set com.Name = com.%Id 
  
    } catch ex{set st=ex.AsStatus()}
+	   }
     quit st
 ]]></Implementation>
 </Method>
@@ -128,6 +137,8 @@
 <Implementation><![CDATA[
 	
 	   set st=$$$OK
+ 
+ 	   if (st=$$$OK) {
    try{
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
@@ -144,11 +155,11 @@
       set com.Adress.URL=$ZCONVERT(obj.URL,"I","UTF8")
       set com.CompMainInfo=$ZCONVERT(obj.CompMainInfo,"I","UTF8")
 	  set com.IsModerated=obj.IsModerated
-
+      set com.CompanyCurrency=$ZCONVERT(obj.CompanyCurrency,"I","UTF8")
       
        $$$THROWONERROR(st,com.%Save())
  
-   } catch ex{set st=ex.AsStatus()}
+   } catch ex{set st=ex.AsStatus()} }
     quit st
 ]]></Implementation>
 </Method>
@@ -160,7 +171,7 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-	 
+	
 	q ##class(Vacancy.Company).DeleteCompany(compid)
 ]]></Implementation>
 </Method>
@@ -174,7 +185,7 @@
 <Implementation><![CDATA[
 	set vacQuery = "SELECT C.Name AS CompanyName, C.IsModerated, C.Adress_Apartament AS Apartament, C.Adress_Building AS Building, "_
 	              "C.Adress_City AS City, C.Adress_Country AS Country, C.Adress_Email AS Email, C.Adress_State AS State, "_
-	               "C.Adress_Street AS Street, C.Adress_Telephone AS Telephone, "_
+	               "C.Adress_Street AS Street, C.Adress_Telephone AS Telephone, C.CompanyCurrency, "_
 	               "C.Adress_URL AS URL, C.ID,  C.CompMainInfo "_
 				   "FROM Vacancy.Company AS C "_
 				   "WHERE C.ID="_compid
@@ -222,6 +233,7 @@
 <Implementation><![CDATA[
 	
 	   set st=$$$OK
+	  
    try{
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
@@ -239,8 +251,9 @@
       set su.HomeAdress.Street=$ZCONVERT(obj.Street,"I","UTF8")
       set su.HomeAdress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
       set su.HomeAdress.URL=$ZCONVERT(obj.URL,"I","UTF8")
-      set su.Login="login"
-      set su.Password="awef"
+      set su.Login=$ZCONVERT(obj.Login,"I","UTF8")
+      set su.Password=$system.Encryption.MD5Hash($ZCONVERT(obj.Password,"I","UTF8"))
+      set su.Salt=$RANDOM(1000)
      
        $$$THROWONERROR(st,su.%Save())
  
@@ -258,6 +271,7 @@
 <Implementation><![CDATA[
 	
 	   set st=$$$OK
+	   
    try{
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
@@ -276,6 +290,13 @@
       set su.HomeAdress.Street=$ZCONVERT(obj.Street,"I","UTF8")
       set su.HomeAdress.Telephone=$ZCONVERT(obj.Telephone,"I","UTF8")
       set su.HomeAdress.URL=$ZCONVERT(obj.URL,"I","UTF8")
+      set su.Login=$ZCONVERT(obj.Login,"I","UTF8")
+      //set su.Salt=$RANDOM(1000)
+      
+      
+      if (obj.Password'=""){
+      set su.Password=$system.Encryption.MD5Hash($ZCONVERT(obj.Password,"I","UTF8"))}
+     
      
        $$$THROWONERROR(st,su.%Save())
  
@@ -291,6 +312,7 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+	
 	set st=##class(Vacancy.SystemUser).%DeleteId(compid)
     quit st
 ]]></Implementation>
@@ -303,8 +325,9 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+
 	set vacQuery = "SELECT V.FirstName, V.LastName, V.HomeAdress_City AS City, V.HomeAdress_Country AS Country, "_
-	               "HomeAdress_Apartament AS Apartament, V.HomeAdress_Building AS Building,"_ 
+	               "HomeAdress_Apartament AS Apartament, V.HomeAdress_Building AS Building, V.Login, "_ 
 	               "V.HomeAdress_Email AS Email, V.HomeAdress_State AS State, V.HomeAdress_Street AS Street,"_
 	               "V.HomeAdress_Telephone AS Telephone, V.HomeAdress_URL AS URL,"_
 					      "V.ID AS IDUser, V.DOB, V.Sex, V.UserType "_ 
@@ -323,6 +346,7 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+
 	set vacQuery = "SELECT V.FirstName, V.LastName, V.HomeAdress_City AS City, V.HomeAdress_Country AS Country, "_
 	               "HomeAdress_Apartament AS Apartament, V.HomeAdress_Building AS Building,"_ 
 	               "V.HomeAdress_Email AS Email, V.HomeAdress_State AS State, V.HomeAdress_Street AS Street,"_
@@ -354,6 +378,7 @@
 <FormalSpec>vacid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+	
 	set vacQuery = "SELECT Count(*) "_
 				   "FROM Vacancy.VacancyResponse AS V "_
 				   "WHERE V.Vacancy="_vacid
@@ -368,7 +393,7 @@
 <FormalSpec>vacid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-		
+	
 		
 	set addToQuery = ""
 	
@@ -377,8 +402,8 @@
 	if (temp '= "") {
 		 // если задан ИД для вакансии - зададим условие выбора по ИД 
 		 set addToQuery = "WHERE V.Vacancy="_vacid
-	} 
-		
+ } 
+ 		
 				  
 	set vacQuery = "SELECT V.ID, VV.Name AS VacancyName, VK.Name AS CompanyName, VK.ID AS Company, V.FirstName, V.Skype, CM.Status, V.LastName, V.ResponseDate, V.ResponseText, From_Apartament AS Apartament,"_
 	               "From_Building AS Building, From_City AS City, From_Country AS Country, From_Email AS Email, "_
@@ -391,7 +416,8 @@
 
 	
 	do ##class(WEB.JSON).GetJSONData(vacQuery)
-	quit $$$OK
+
+ quit $$$OK
 ]]></Implementation>
 </Method>
 
@@ -463,6 +489,7 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 		   set st=$$$OK
+  
    try{
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
@@ -474,15 +501,17 @@
        set vacancy.Institution=$ZCONVERT(obj.Institution,"I","UTF8")
        set vacancy.StartSalary=$ZCONVERT(obj.StartSalary,"I","UTF8")
        set vacancy.EndSalary=$ZCONVERT(obj.EndSalary,"I","UTF8")
-       set vacancy.RegDate=$piece($H, ",")
+       set vacancy.RegDate=$ZDATETIME($NOW(),3,1,1)
        set vacancy.CityVacancy=$ZCONVERT(obj.CityVacancy,"I","UTF8")
        set vacancy.MainInfo=$ZCONVERT(obj.MainInfo,"I","UTF8")
        set vacancy.AddInfo=$ZCONVERT(obj.AddInfo,"I","UTF8")
        set vacancy.Seats=$ZCONVERT(obj.Seats,"I","UTF8")
        set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.comid)
-       set vacancy.Links.URL=obj.URL
+       set vacancy.Links.URL=$ZCONVERT(obj.URL,"I","UTF8")
+       set vacancy.VacancyCurrency=$ZCONVERT(obj.VacancyCurrency,"I","UTF8")
        set compimg=##class(Vacancy.Company).%OpenId(obj.comid)
        do vacancy.Img.CopyFromAndSave(compimg.Img)
+       
               
        $$$THROWONERROR(st,vacancy.%Save())
  
@@ -499,6 +528,7 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
    set st=$$$OK
+
    try{$$$THROWONERROR(st,##class(Vacancy.Vacancy).%DeleteId(compid))} 
    catch ex{set st=ex.AsStatus()}
    quit st
@@ -518,6 +548,7 @@
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
 	   set st=$$$OK
+  
    try{
 	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
        
@@ -530,14 +561,15 @@
        set vacancy.Institution=$ZCONVERT(obj.Institution,"I","UTF8")
        set vacancy.StartSalary=$ZCONVERT(obj.StartSalary,"I","UTF8")
        set vacancy.EndSalary=$ZCONVERT(obj.EndSalary,"I","UTF8")
-       set vacancy.RegDate=$piece($H, ",")
+       //set vacancy.RegDate=$piece($H, ",")
        set vacancy.CityVacancy=$ZCONVERT(obj.CityVacancy,"I","UTF8")
        set vacancy.MainInfo=$ZCONVERT(obj.MainInfo,"I","UTF8")
        set vacancy.AddInfo=$ZCONVERT(obj.AddInfo,"I","UTF8")
        set vacancy.Seats=$ZCONVERT(obj.Seats,"I","UTF8")
        set vacancy.Company=##class(Vacancy.Company).%OpenId(obj.compID)
+       set vacancy.VacancyCurrency=$ZCONVERT(obj.VacancyCurrency,"I","UTF8")
        
-       set vacancy.Links.URL=obj.URL
+       set vacancy.Links.URL=$ZCONVERT(obj.URL,"I","UTF8")
  /*
   заблокируем, пока, изменение картинки       
        set compimg=##class(Vacancy.Company).%OpenId(obj.compID)
@@ -578,7 +610,7 @@
 	if (isAdm){
 		// Админский запрос -[Этот жуткий запрос создан гуру SQL!]
 		set vacQuery = "SELECT V.name, V.IsActive, C.Name AS CompanyName, V.ID, nvl(SUM(d.cou_view),0) AS CountView, nvl(SUM(d.cou_resp),0) AS CountResp, "_
-					   "V.CityVacancy, V.VacancyType, V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_  
+					   "V.CityVacancy, V.VacancyType, V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, V.VacancyCurrency "_  
 					   "FROM "_
 					   "(SELECT  VV.Vacancy, Count(VV.ID) as cou_view,0 as cou_resp "_
 					   "FROM Vacancy.VacancyView AS VV GROUP BY VV.Vacancy "_
@@ -588,12 +620,12 @@
 					   "RIGHT OUTER JOIN  vacancy.vacancy V ON V.ID = d.Vacancy "_
 					   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_  
 					   "GROUP BY D.Vacancy, V.Name "_
-					   "ORDER BY V.Company"
+					   "ORDER BY V.RegDate DESC"
 	}
 	else{
 		// если это не админский запрос
 		set vacQuery = "SELECT  Count(VV.ID) AS CountView, Count(VR.ID) AS CountResp, C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
-					           "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
+					           "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, V.VacancyCurrency "_ 
 					   "FROM Vacancy.Vacancy AS V "_
 					   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
 					   "LEFT OUTER JOIN Vacancy.VacancyView AS VV  ON V.ID=VV.Vacancy  "_
@@ -611,7 +643,7 @@
 <Content><![CDATA[
 /*				   
 		set vacQuery = "SELECT  Count(VV.ID) AS CountView, Count(VR.ID) AS CountResp, C.Name AS CompanyName, V.CityVacancy, V.VacancyType, "_ 
-					           "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary "_ 
+					   "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, V.VacancyCurrency "_ 
 					   "FROM Vacancy.Vacancy AS V "_
 					   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
 					   "LEFT OUTER JOIN Vacancy.VacancyView AS VV  ON V.ID=VV.Vacancy  "_
@@ -629,13 +661,32 @@
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-			set vacQuery = "SELECT TOP 7 V.VacancyType, "_ 
+			&sql(SELECT MAX(ID) into:maxid FROM Vacancy.Vacancy)
+			&sql(SELECT COUNT(ID) into:rowcnt FROM Vacancy.Vacancy WHERE IsActive = 1 )
+			
+			set Str = "("
+			for i=1:1:rowcnt {
+					set rand = $RANDOM(maxid)
+					
+					if (i < rowcnt) {	
+						set Str = Str_rand_"," 
+					}
+					else{
+						set Str = Str_rand 	
+					}
+					
+			}
+			set Str = Str_")"
+			
+			set vacQuery = "SELECT TOP 6 V.VacancyType, "_ 
 					       "V.ID AS IDVac, V.Name AS VacancyName, V.RegDate "_ 
 					   "FROM Vacancy.Vacancy AS V "_
-					   "WHERE V.IsActive = 1 "_
-					   "ORDER BY V.RegDate DESC "	
-					   //w vacQuery 
-			/*set vacQuery = "SELECT TOP 1 *"_ 
+					   "WHERE V.IsActive = 1 AND "_
+					   		  "V.ID IN "_Str_  	
+					   " ORDER BY V.RegDate DESC"	
+					   
+					   w vacQuery 
+			/*set vacQuery = "SELECT TOP 1 *"_  
 					   "FROM Vacancy.Vacancy "_
 					   "WHERE  Vacancy.Vacancy.IsActive = 1 "_
 					   "ORDER BY  Vacancy.Vacancy.RegDate DESC "	
@@ -672,13 +723,35 @@
 <FormalSpec>compid:%String</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-  set vacQuery = "SELECT C.Name AS CompanyName, C.CompMainInfo, V.CityVacancy, V.Skills, V.Links_URL AS URL, "_ 
+	/*
+  set vacQuery = "SELECT C.Name AS CompanyName,  ,"_
+  						 " C.CompMainInfo, V.CityVacancy, V.Skills, V.Links_URL AS URL, "_ 
 					     "V.ID AS IDVac, V.VacancyType, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, "_ 
 					     "V.MainInfo, V.Institution, V.AddInfo,V.EduLevel, V.Company AS compID "_
 				   "FROM Vacancy.Vacancy AS V "_
 				   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_
+				   "LEFT OUTER JOIN Vacancy.VacancyResponse AS VR ON V.ID=VR.Vacancy "_
+				   "LEFT OUTER JOIN Vacancy.VacancyView AS VV ON V.ID= VV.Vacancy "_
 				   "WHERE V.ID="_compid_
-				   "ORDER BY V.Company"
+				   "GROUP BY V.ID "_
+				   "ORDER BY V.Company" */
+				   
+	set vacQuery = "SELECT C.Name AS CompanyName,nvl(SUM(d.cou_view),0) AS CountView,  nvl(SUM(d.cou_resp),0) AS CountResp,"_
+  						 " C.CompMainInfo, V.CityVacancy, V.Skills, V.Links_URL AS URL, V.VacancyCurrency, "_ 
+					     "V.ID AS IDVac, V.VacancyType, V.Name AS VacancyName, V.RegDate, V.StartSalary, V.EndSalary, "_ 
+					     "V.MainInfo, V.Institution, V.AddInfo,V.EduLevel, V.Company AS compID "_				   
+					   "FROM "_
+					   "(SELECT  VV.Vacancy, Count(VV.ID) as cou_view,0 as cou_resp "_
+					   "FROM Vacancy.VacancyView AS VV GROUP BY VV.Vacancy "_
+					   "UNION ALL "_
+					   "SELECT  VR.Vacancy, 0 as cou_view,Count(VR.ID)as cou_resp "_
+					   "FROM Vacancy.VacancyResponse AS VR GROUP BY VR.Vacancy) d "_
+					   "RIGHT OUTER JOIN  vacancy.vacancy V ON V.ID = d.Vacancy "_
+					   "INNER JOIN Vacancy.Company AS C ON V.Company=C.ID "_ 
+					   "WHERE V.ID="_compid_
+					   "GROUP BY D.Vacancy, V.Name "_
+					   "ORDER BY V.RegDate DESC"
+					   ///"ORDER BY V.Company"
   do ##class(WEB.JSON).GetJSONData(vacQuery)
   quit $$$OK
 ]]></Implementation>
@@ -716,6 +789,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 	}
 	else{
 		set v.IsActive = 1	
+		set v.RegDate=$ZDATETIME($NOW(),3,1,1)
 	}
  
 	do v.%Save()
@@ -723,6 +797,20 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 	// костыль для возврата значения
 	do ##class(WEB.JSON).GetJSONData("SELECT * FROM Vacancy.Vacancy WHERE ID="_vacid)
 	
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="VacancyUp">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>vacid:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+		// откроем вакансию по ИД
+	set v = ##class(Vacancy.Vacancy).%OpenId(vacid)
+	set v.RegDate=$ZDATETIME($NOW(),3,1,1)
+	w v.RegDate
+	do v.%Save()
 	quit $$$OK
 ]]></Implementation>
 </Method>
@@ -747,6 +835,7 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+	
   do ##class(WEB.JSON).GetJSONData("select *from Vacancy.SystemUser")
   quit $$$OK
 ]]></Implementation>
@@ -759,16 +848,55 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 <FormalSpec>login,pwd</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
-  set phash = $system.Encryption.MD5Hash(pwd)
- 
-  &sql(SELECT FirstName into:fname FROM Vacancy.SystemUser WHERE Login = :login AND Password = :phash)
-  do %response.SetCookie("yoyo","yes",$h+1000,"/csp/vacancy")
-  do %response.SetCookie("login",fname,$h+1000,"/csp/vacancy")
- // do %response.SetCookie("pwd",log,$h+1000,"/")
+  set phash =..MD5HEX(pwd)
+  set ip =%request.GetCgiEnv("REMOTE_ADDR")
+  if (..VerificationPassword(login, phash, ip)'="") {
+
  
   set query = "SELECT FirstName FROM Vacancy.SystemUser WHERE Login = '"_login_"' AND Password = '"_phash_"'"
   do ##class(WEB.JSON).GetJSONData(query)
+  }
   quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="AuthVerifyByCookie">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>cookie:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set ip =%request.GetCgiEnv("REMOTE_ADDR")
+	Set tProvider = ##class(%ZEN.Auxiliary.jsonSQLProvider).%New()
+	
+	//w ..VerificationSessions(cookie,"")
+	if (..VerificationSessions(cookie,ip)'=1){
+	do tProvider.%DrawJSON() //??????????????
+	}
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="LoginOut">
+<Description>
+Выходим </Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>session:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	// Убить куки ????????????
+	set ip =%request.GetCgiEnv("REMOTE_ADDR")
+	set ID =..GetUserIdBySessions(session, ip)
+	w ID
+	//set SU=##class(Vacancy.SystemUser).%OpenId(ID)
+	//set SU.Salt=$RANDOM(1000)
+	//do SU.%Save()
+	
+	do %response.SetCookie("login","",$h+1000,"/csp/vacancy")
+	Set tProvider = ##class(%ZEN.Auxiliary.jsonSQLProvider).%New()
+  	do tProvider.%DrawJSON() 
+  
+
+	Quit $$$OK
 ]]></Implementation>
 </Method>
 
@@ -828,30 +956,6 @@ Select V.Name, C.Name FROM Vacancy.Vacancy AS V INNER JOIN Vacancy.Company AS C 
 ]]></Implementation>
 </Method>
 
-<UDLText name="T">
-<Content><![CDATA[
-/*
-/// Обновить компанию
-ClassMethod UpdateCompany(compid As %String) As %Status
-{
-   set st=$$$OK
-   try{
-	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
-       set comp=##class(Data.Company).%OpenId(compid)
-       throw:comp=$$$NULLOREF ##class(%Exception.StatusException).CreateFromStatus($$$ERROR(5001,"Нэ нашёль компанию :("))
-       // здесь надо перечислить все поля... 
-       // или запомнить ID объекта и сохранить его целиком
-       // или тупо set comp=obj
-       set comp.Name=obj.Name
-       $$$THROWONERROR(st,comp.%Save())
- 
-   } catch ex{set st=ex.AsStatus()}
-    quit st
-}
-*/
-]]></Content>
-</UDLText>
-
 <Method name="CreateCompany">
 <Description>
 Добавить компанию в БД</Description>
@@ -877,66 +981,6 @@ ClassMethod UpdateCompany(compid As %String) As %Status
     ***НАЧАЛО***/
 ]]></Content>
 </UDLText>
-
-<Method name="UpdateObject">
-<Description>
-пока не придумал как сделать этот метод универсальным
-тупо set comp=obj не катит - надо пробежаться по всем полям объектов</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>compid:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
-   set st=$$$OK
-   
-   /*
-   try{
-	   $$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,,.obj,1))
-	   // пытаемся сделать обратное преобразование - из формата json в объект
-       set comp=##class(Data.Company).%OpenId(compid)
-       throw:comp=$$$NULLOREF ##class(%Exception.StatusException).CreateFromStatus($$$ERROR(5001,"Нэ нашёль компанию :("))
-       set comp.Name=obj.Name
-       $$$THROWONERROR(st,comp.%Save())
- 
-   } catch ex{
-	  &html<<h1>entering <b>CATCH</b> block</h1>>  
-	  set st=ex.AsStatus()
-    }*/
-    quit st
-]]></Implementation>
-</Method>
-
-<Method name="DeleteObject">
-<Description><![CDATA[
-Удалить из БД<br/>
-<var>compid</var>ID строка удаляемого объекта<br/>
-<var>bd</var>имя удаляемой базы например Data.Company<br/>]]></Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>compid,bd:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
-	// %CompiledClass %ClassDefinition
-   set st=$$$OK
-   // пока не знаю как передать сюда объект, потому все остальные делете будут без трай кэтч
- /*   try{$$$THROWONERROR(st,##class(Vacancy._bd_).%DeleteId(compid))} 
-   catch ex{set st=ex.AsStatus()}
-  */ quit st
-]]></Implementation>
-</Method>
-
-<Method name="CreateObject">
-<Description>
-Добавить ОБЪЕКТ в БД</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>bd:%String</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
-   set st=$$$OK
-   try{$$$THROWONERROR(st,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(%request.Content,bd,.obj,1))
-	   $$$THROWONERROR(st,obj.%Save())} 
-   catch ex{set st=ex.AsStatus()}
-   quit st
-]]></Implementation>
-</Method>
 
 <Method name="GetJSONData">
 <Description>
@@ -984,6 +1028,7 @@ SqlRequest - текстовый SQL запрос</Description>
 <ClassMethod>1</ClassMethod>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+  /*
    set st=$$$OK
  
    try{ 	     
@@ -1002,6 +1047,32 @@ SqlRequest - текстовый SQL запрос</Description>
    } catch ex{set st=ex.AsStatus()}
    
     quit st
+    */
+    set st=$$$OK
+   try{
+	   set idImage =%request.Get("id",,1)
+	   //w %request.Get("FileStream",,1)_"<br>"
+	     	     
+	 If (%request.Get("Type",,1)="Vacancy")
+	 
+	{
+	 set a=##class(Vacancy.Vacancy).%OpenId(%request.Get("id",,1))	
+	 
+     w "Upadate is Ok! on Vacancy "_a.Name_"<br> <img src='http://localhost:57772/csp/vacancy/WEB.Image.cls?id="_idImage_"'/>"
+	}
+	Else
+	{
+	 set a=##class(Vacancy.Company).%OpenId(%request.Get("id",,1))	
+     w "Upadate is Ok! On company "_a.Name_"<br> <img src='http://localhost:57772/csp/vacancy/WEB.CompanyImage.cls?id="_idImage_"'/>"
+	}
+	     
+      set a.Img=%request.GetMimeData("FileStream",1)
+      set ^test = %request.GetMimeData("FileStream",1)
+       $$$THROWONERROR(st,a.%Save())
+ 
+   } catch ex{set st=ex.AsStatus()}
+    //w "Upadate is Ok!"_%request.Get("id",,1)
+    quit st
 ]]></Implementation>
 </Method>
 
@@ -1012,34 +1083,18 @@ SqlRequest - текстовый SQL запрос</Description>
 ]]></Content>
 </UDLText>
 
-<UDLText name="T">
-<Content><![CDATA[
-// ПАРАМЕТРЫ - ИД объекта которому будет отнесена картинка, 
-
-]]></Content>
-</UDLText>
-
-<UDLText name="T">
-<Content><![CDATA[
-// 			   Тип объекта - компания или вакансия
-
-]]></Content>
-</UDLText>
-
-<UDLText name="T">
-<Content><![CDATA[
-// 			   Поток байт - картинка	
-
-]]></Content>
-</UDLText>
-
 <Method name="LoadImage">
 <ClassMethod>1</ClassMethod>
-<FormalSpec>objID:%Integer,objType:%String,objImg:%BinaryStream</FormalSpec>
 <ReturnType>%Status</ReturnType>
 <Implementation><![CDATA[
+  //objType As %String, objID As %Integer, objImg As %BinaryStream
    set st=$$$OK
- 
+   
+   set objID =  %request.Get("objID")
+   set objType = %request.Get("objType")
+   set objImg = %request.GetMimeData("objImg",1)
+  // set ^test = objImg 	
+   
    try{ 	     
 		
 		// Откроем объект по ИД
@@ -1049,15 +1104,114 @@ SqlRequest - текстовый SQL запрос</Description>
 		ElseIf (objType="Company") {
 		 	set a=##class(Vacancy.Company).%OpenId(objID)	
 		}
-    
+ 		
+ 			set ^test = objType
+ 			 
         // загрузим картинку для данного объекта
-	    set a.Img = objImg
-      
+	    set a.Img = objImg      	
+     
         $$$THROWONERROR(st,a.%Save())
 	 
    } catch ex{set st=ex.AsStatus()}
    
     quit st
+]]></Implementation>
+</Method>
+
+<Method name="GetCookies">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	
+	Quit %request.GetCookie("login",1,)
+]]></Implementation>
+</Method>
+
+<Method name="MD5HEX">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>str:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	set b =$system.Encryption.MD5Encode(str)
+	set docFileName="" f i=1:1:$L(b) set docFileName=docFileName_$J($ZHEX($A(b,i)),2)
+	set docFileName=$TR(docFileName," ","0")
+	Quit docFileName
+]]></Implementation>
+</Method>
+
+<Query name="GetSystemUsers">
+<Type>%SQLQuery</Type>
+<SqlQuery> SELECT %ID,Login,Password,Salt FROM Vacancy.SystemUser</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Query name="GetSystemUsersByID">
+<Type>%SQLQuery</Type>
+<FormalSpec>login:%String,pass:%String</FormalSpec>
+<SqlQuery> SELECT %ID,Login,Password,Salt,FirstName  FROM Vacancy.SystemUser
+ WHERE Login=:login AND Password =:pass</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Method name="VerificationSessions">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>session:%String,ip:%String</FormalSpec>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	set st=0
+	set result = ##class(%Library.ResultSet).%New("WEB.JSON:GetSystemUsers")
+ 	do result.%Execute()
+ 	while (result.Next() '=0){
+	 	if (..MD5HEX(result.Get("ID")_ip_result.Get("Salt")_result.Get("Login"))=session)
+	 	{
+	 	
+	 	set st=1
+	 	break
+	 	}}
+	Quit st
+]]></Implementation>
+</Method>
+
+<Method name="GetUserIdBySessions">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>session:%String,ip:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	set st=""
+	set result = ##class(%Library.ResultSet).%New("WEB.JSON:GetSystemUsers")
+ 	do result.%Execute()
+ 	while (result.Next() '=0){
+	 	if (..MD5HEX(result.Get("ID")_ip_result.Get("Salt")_result.Get("Login"))=session)
+	 	{
+	 	
+	 	set st=result.Get("ID")
+	 	break
+	 	}}
+	Quit st
+]]></Implementation>
+</Method>
+
+<Method name="VerificationPassword">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>login:%String,pass:%String,ip:%String</FormalSpec>
+<Implementation><![CDATA[
+	set result = ##class(%Library.ResultSet).%New("WEB.JSON:GetSystemUsersByID")
+ 	do result.%Execute(login,pass)
+ 	do result.Next()
+
+ 	if (result.Get("ID")'="")
+ 	{
+	 	do %response.SetCookie("login",result.Get("FirstName"),$h+1000,"/csp/vacancy")
+	 	set session =..MD5HEX(result.Get("ID")_ip_result.Get("Salt")_result.Get("Login"))
+  		do %response.SetCookie("CookieSession",session,$h+1000,"/") 
+	 	
+	 	}
+	 else
+	 	{
+		 // Ничего	
+		 }
+
+	Quit result.Get("ID")
 ]]></Implementation>
 </Method>
 
@@ -1072,6 +1226,135 @@ SqlRequest - текстовый SQL запрос</Description>
 <Data name="JSONDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>URL</Value>
+</Value>
+<Value name="3">
+<Value>PageName</Value>
+</Value>
+<Value name="4">
+<Value>URLPrefix</Value>
+</Value>
+<Value name="5">
+<Value>UserAgent</Value>
+</Value>
+<Value name="6">
+<Value>RequestId</Value>
+</Value>
+<Value name="7">
+<Value>ContentType</Value>
+</Value>
+<Value name="8">
+<Value>CharSet</Value>
+</Value>
+<Value name="9">
+<Value>Content</Value>
+</Value>
+<Value name="10">
+<Value>Method</Value>
+</Value>
+<Value name="11">
+<Value>Protocol</Value>
+</Value>
+<Value name="12">
+<Value>Secure</Value>
+</Value>
+<Value name="13">
+<Value>GatewayApplication</Value>
+</Value>
+<Value name="14">
+<Value>GatewayConnectionName</Value>
+</Value>
+<Value name="15">
+<Value>GatewayNewId</Value>
+</Value>
+<Value name="16">
+<Value>GatewayBuild</Value>
+</Value>
+<Value name="17">
+<Value>GatewayFunctions</Value>
+</Value>
+<Value name="18">
+<Value>GatewaySessionCookie</Value>
+</Value>
+<Value name="19">
+<Value>GatewayInstanceName</Value>
+</Value>
+<Value name="20">
+<Value>GatewayError</Value>
+</Value>
+<Value name="21">
+<Value>Application</Value>
+</Value>
+<Value name="22">
+<Value>CSPGatewayRequest</Value>
+</Value>
+<Value name="23">
+<Value>GatewayTimeout</Value>
+</Value>
+<Value name="24">
+<Value>AppData</Value>
+</Value>
+<Value name="25">
+<Value>AppMatch</Value>
+</Value>
+<Value name="26">
+<Value>HTTPVersion</Value>
+</Value>
+<Value name="27">
+<Value>Status</Value>
+</Value>
+<Value name="28">
+<Value>Redirect</Value>
+</Value>
+<Value name="29">
+<Value>ServerSideRedirect</Value>
+</Value>
+<Value name="30">
+<Value>CookiePath</Value>
+</Value>
+<Value name="31">
+<Value>HeaderCharSet</Value>
+</Value>
+<Value name="32">
+<Value>ContentLength</Value>
+</Value>
+<Value name="33">
+<Value>NoCharSetConvert</Value>
+</Value>
+<Value name="34">
+<Value>UseHttpOnly</Value>
+</Value>
+<Value name="35">
+<Value>InProgress</Value>
+</Value>
+<Value name="36">
+<Value>VaryByParam</Value>
+</Value>
+<Value name="37">
+<Value>TraceDump</Value>
+</Value>
+<Value name="38">
+<Value>OutputSessionToken</Value>
+</Value>
+<Value name="39">
+<Value>UseASPredirect</Value>
+</Value>
+<Value name="40">
+<Value>Timeout</Value>
+</Value>
+<Value name="41">
+<Value>Language</Value>
+</Value>
+<Value name="42">
+<Value>Domain</Value>
+</Value>
+<Value name="43">
+<Value>GzipOutput</Value>
+</Value>
+<Value name="44">
+<Value>CSPGatewayData</Value>
 </Value>
 </Data>
 </Storage>

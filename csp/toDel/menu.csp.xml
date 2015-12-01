@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="toDel/menu.CSP" application="/csp/vacancy/"><![CDATA[
+<h1 ng-model="alertzone"><font color=red>{{alertzone}} {{$scope.vacancy}} {{vacancy.Name}}</font></h1>
+<h1 ng-hide="true"><font color=red>ИДЁТ ЗАГРУЗКА ДАННЫХ. Пожалуйста ПОДОЖДИТЕ</font></h1>
+
+		<head>
+			<img src="../img/intersystems-header.gif">		
+		</head>
+		
+		<div class="navbar">
+		  <nav class="navbar-inner">	
+			<a class="brand" href="index.csp">&nbsp Вакансии</a>
+			<ul class="nav">
+				<li class="divider-vertical"></li>
+				<li><a href="#"><i class="icon-envelope"></i>&nbsp Обратная связь</a></li>
+				<li><a href="#"><i class="icon-thumbs-up"></i>&nbsp Наши партнеры</a></li>
+			</ul>
+			
+			<form class="navbar-form pull-right" >
+				<input name="login" type="text" class="span2" placeholder="логин">
+				<input name="pass" type="password" class="span2" placeholder="пароль">
+				<button type="submit" class="btn btn-mini" >Войти</button>
+			</form>
+		   </nav>	 
+		</div>
+]]></CSP>
+</Export>

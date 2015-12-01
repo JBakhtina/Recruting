@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<CSP name="soc.csp" application="/csp/vacancy/"><![CDATA[
+<!doctype html>
+
+<html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#">
+
+
+<script language="Cache" runat="Server">
+    set id=$piece($Get(%request.Data("id",1),1),"-")
+    set ref=$piece($Get(%request.Data("id",1),1),"-",*)
+   // w "ref= "_ref,!
+   // w "id= "_id
+	set a =##class(Vacancy.Vacancy).%OpenId(id)
+	w %request.GetCgiEnv("HTTP_REFERER") 
+</script>
+
+<head>
+
+ 
+    <title>#(a.Name)#</title>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+    <meta property="og:title" content="#(a.Name)#" />
+    
+    <meta property="og:description" content="#(a.AddInfo)#" />
+    
+   <meta property="og:image" content=#(##class(WEB.JSON).GetDataFromGlobal("URL"))#csp/vacancy/WEB.Image.cls?id=#(id)#&counter=0&ref=#(ref)#"  />
+    <meta property="og:type" content="website" />
+    
+    <meta property="og:site_name" content="супер сайт" />
+    
+  <!--  <meta property="fb:image" content="http://mdg777.zapto.org/csp/vacancy/WEB.Image.cls?id=#(id)#	" />  -->
+    <meta property="fb:admins" content="" />
+  <!-- <link rel="image_src" href="http://mdg777.zapto.org/csp/vacancy/WEB.Image.cls?id=#(id)#&counter=1&ref=#(ref)#" /> -->
+
+</head>
+
+<body>
+
+<!--
+<div class="text">#(a.MainInfo)#</div> 
+<div class="logo"> <img alt="CompLogo" src="/csp/vacancy/WEB.Image.cls?id=#(id)#&counter=0&ref=#(ref)#"> </div>
+<img alt="IS Logo" src="img/intersystems-header.gif">
+-->
+  <script type="text/javascript">
+     //document.location.href="#(##class(WEB.JSON).GetDataFromGlobal("URL"))#csp/vacancy/index.html#/vacancy/#(id)#"; 
+ </script>
+</body>
+</html>
+
+]]></CSP>
+</Export>

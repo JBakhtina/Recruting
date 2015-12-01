@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
 <CSP name="js/app.js" application="/csp/vacancy/"><![CDATA[
-'use strict'; 
+'use strict';
+var app = angular.module('recruting',['ngCookies','ngResource','ui.tinymce','jsonService','ui.bootstrap'])
+            .config(['$routeProvider', function($routeProvider) {
+                $routeProvider.
 
- 
-angular.module('recruting',['ngCookies']).
-    config(['$routeProvider',function($routeProvider) {
-        $routeProvider.
+                    when('/admin/responses',{templateUrl: 'partials/responses.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:vrShow}).
+                    when('/admin/settings',{templateUrl: 'Settings.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:vrShow}).
 
-            when('/admin/vacancyresp/:vacID',{templateUrl: 'partials/response.html', controller:vrShow}).
-            when('/admin',{templateUrl: 'partials/vacancies.html', controller:vacancyCtrl}).
+                    when('/admin/response/:vacID',{templateUrl: 'partials/responses.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:vrShow}).
+                    when('/admin/vacancies',{templateUrl: 'partials/admin_vacancies.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:adminVacanciesCtrl}).
 
-            when('/admin/users',{templateUrl: 'partials/admin_users.html', controller:SystemUserShow}).
-            when('/admin/adduser',{templateUrl: 'partials/admin_adduser.html', controller:SystemUserShow}).
-            when('/admin/user/:UID',{templateUrl: 'partials/admin_user.html', controller:SystemUserShow}).
+                    when('/admin/users',{templateUrl: 'partials/admin_users.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:SystemUserShow}).
+                    when('/admin/adduser',{templateUrl: 'partials/admin_adduser.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:SystemUserShow}).
+                    when('/admin/user/:UID',{templateUrl: 'partials/admin_user.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:SystemUserShow}).
 
-            when('/admin/companies',{templateUrl: 'partials/admin_companies.html', controller:CompanyShow}).
-            when('/admin/addcompany',{templateUrl: 'partials/admin_addcompany.html', controller:CompanyShow}).
-            when('/admin/company/:compID',{templateUrl: 'partials/admin_company.html', controller:CompanyShow}).
+                    when('/admin/companies',{templateUrl: 'partials/admin_companies.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:CompanyShow}).
+                    when('/admin/addcompany',{templateUrl: 'partials/admin_addcompany.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:CompanyShow}).
+                    when('/admin/company/:compID',{templateUrl: 'partials/admin_company.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:CompanyShow}).
 
-            when('/admin/vacancy/:vacID',{templateUrl: 'partials/admin_vacancy.html', controller:adminVacanciesCtrl}).
-            when('/admin/addvacancy/',{templateUrl: 'partials/admin_addvacancy.html', controller:adminVacanciesCtrl}).
+                    when('/admin/vacancy/:vacID',{templateUrl: 'partials/admin_vacancy.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:adminVacanciesCtrl}).
+                    when('/admin/addvacancy/',{templateUrl: 'partials/admin_addvacancy.html', redirectTo:function(routeParams, path, search){return adminCtrl(path);}, controller:adminVacanciesCtrl}).
 
-            when('/vacancies',{templateUrl: 'partials/vacancies.html', controller:vacancyCtrl}).
-            when('/vacancy/:vacID', {templateUrl: 'partials/vacancy.html', controller:vacancyShowCtrl}).
-            when('/company/:compID',{templateUrl: 'partials/company.html', controller:companyCtrl}).
-            otherwise({redirectTo: '/vacancies'});
-    }]);
+                    when('/about',{templateUrl: 'partials/about.html', controller:vacancyCtrl}).
+                    when('/vacancies',{templateUrl: 'partials/vacancies.html', controller:vacancyCtrl}).
+                    when('/vacancy/:vacID', {templateUrl: 'partials/vacancy.html', controller:vacancyShowCtrl}).
+                    when('/company/:compID',{templateUrl: 'partials/company.html', controller:companyCtrl}).
+                    when('/testimg',{templateUrl: 'partials/testImg.html'}).
+                    otherwise({redirectTo: '/vacancies'});
+
+            }])
+
 ]]></CSP>
 </Export>
