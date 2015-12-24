@@ -10,7 +10,6 @@ Web application of recruitment web-portal with REST backend.
   - Name: /csp/vacancy
   - Namespace: vacancy
   - Allowed Authentication Methods: Unauthenticated
-  - AllowedDispatch Class: WEB.Broker
   - Application Roles: %All
   - CSP Files Physical Path: проверить что он существует в ФС
 4. Import the project into vacancy namespace and compile
@@ -56,7 +55,6 @@ Recruting
   - Name: /csp/vacancy
   - Namespace: vacancy
   - Allowed Authentication Methods: Unauthenticated
-  - AllowedDispatch Class: WEB.Broker
   - Application Roles: %All
   - CSP Files Physical Path: проверить что он существует в ФС
 4. Импортировать проект, скомпилировать
